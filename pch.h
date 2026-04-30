@@ -4,12 +4,12 @@
 
 #include "Statistics.hpp"
 
-#include "BitOp.hpp"
-#include "StringHelper.hpp"
-#include "Exceptions.hpp"
+#include "FunctionHeaders/BitOp.hpp"
+#include "FunctionHeaders/StringHelper.hpp"
+#include "FunctionHeaders/Exceptions.hpp"
 
 #include "Vector2.hpp"
 #include "Vector3.hpp"
 #include "Vector4.hpp"
 
-#include "LuaHelper.hpp"
+#include "FunctionHeaders/LuaHelper.hpp"

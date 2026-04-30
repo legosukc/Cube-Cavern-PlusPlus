@@ -1,9 +1,9 @@
 
 local class = {}
 
-class.Name = "ItemBase"
-class.Description = "chuddy forgot to set the description"
-class.BookEntry = "chuddy forgot to set the book description"
+class.Name = "Backpack"
+class.Description = "Student Starterpack. Grants 3 extra inventory slots."
+class.BookEntry = "Back Equipment. Grants 3 extra inventory slots. It can be crafted with a 'Stick', 'Rope', and 'Cloth'."
 
 class.__index = class
 

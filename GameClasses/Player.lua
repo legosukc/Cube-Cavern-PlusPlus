@@ -42,7 +42,7 @@ function Player:Update()
 
 
 
-	self.Position += self.Velocity
+	self.Position = self.Position + self.Velocity
 end
 
 

@@ -13,6 +13,17 @@ function Game.HookToLoop(HookFunction)
 end
 
 function Game.Update()
+	local Game = Game
 	
+	Game.Items.Update()
+	Game.Player.Update()
+	Game.Enemies.Update()
+end
 
+function Game.Draw()
+	local Game = Game
+	
+	Game.Items.Draw()
+	Game.Player.Draw()
+	Game.Enemies.Draw()
 end

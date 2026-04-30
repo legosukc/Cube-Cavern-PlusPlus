@@ -22,20 +22,11 @@
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{f0926ba8-bf08-4f95-8451-f133eefbe07f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\FunctionHeaders">
-      <UniqueIdentifier>{fc233adb-e84c-4b37-b45e-ca613915adce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\BaseClasses">
       <UniqueIdentifier>{7d597f26-7cf7-475d-a7e1-5bfa073e84d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameClasses">
-      <UniqueIdentifier>{4f323cb3-e098-4a06-ad67-38d097c3f434}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\GameClasses">
       <UniqueIdentifier>{cec0a767-2e28-40e7-bd30-3da26d8e882d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\LuaLibraries">
-      <UniqueIdentifier>{b80108aa-24e3-4e0f-9e84-99b7a25afdf6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Scripts">
       <UniqueIdentifier>{00cac222-322d-445a-91b6-d0bdf15c4a23}</UniqueIdentifier>
@@ -43,121 +34,6 @@
     <Filter Include="Resource Files\MiscClasses">
       <UniqueIdentifier>{d1e19d05-fa6c-432f-9a6d-6c6fbb5f948a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\LuaLibraries\LuaGraphics_Classes">
-      <UniqueIdentifier>{00e455c8-6cf1-41e9-8acd-67673fadf77b}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LuaVector.cpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Game.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector4.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="File.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="define.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StringHelper.hpp">
-      <Filter>Header Files\FunctionHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="TypeHelper.hpp">
-      <Filter>Header Files\FunctionHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Exceptions.hpp">
-      <Filter>Header Files\FunctionHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="BitOp.hpp">
-      <Filter>Header Files\FunctionHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.hpp">
-      <Filter>Header Files\GameClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="Lua.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Statistics.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Memory.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaVector.hpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
-    <ClInclude Include="InputHandler.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Random.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaGraphics.hpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound.hpp">
-      <Filter>Header Files\GameClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="Collisions.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaHelper.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaInput.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaTypeHelper.hpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaGraphics_BufferBase.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaGraphics_ElementBuffer.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaGraphics_GLObjectBase.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaGraphics_Program.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaGraphics_Shader.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaGraphics_VertexArray.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaGraphics_VertexBuffer.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaBuffer.hpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaSound.hpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BaseClasses\EnemyBase.lua">

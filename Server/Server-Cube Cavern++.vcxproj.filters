@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{1acc8c15-f8d2-47d9-9a58-dcac5975fc77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FunctionHeaders">
+      <UniqueIdentifier>{96d421c6-d66a-458f-8a61-bf58dc019a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\BaseClasses">
+      <UniqueIdentifier>{a17ceaec-3d31-4d34-87b1-6d7071b331f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\EnemyClasses">
+      <UniqueIdentifier>{83c3db55-b065-47c9-b2a7-500f2425365c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\GameClasses">
+      <UniqueIdentifier>{cdb5955b-2ace-4e5a-bd72-5567b83ed415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ItemClasses">
+      <UniqueIdentifier>{d3fb4779-d231-4af6-a98e-b54bfa9fd170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ItemClasses\Weapon">
+      <UniqueIdentifier>{454e216d-b43c-4cde-8e9f-c8d95342e0fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ItemClasses\Equipment">
+      <UniqueIdentifier>{fb146c6c-2f6b-4a5f-a4f8-b6d82d2c1c4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ItemClasses\Utility">
+      <UniqueIdentifier>{b231091d-a1a1-400f-871a-7b109a82266f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ItemClasses\Material">
+      <UniqueIdentifier>{630de129-04ca-4bd0-ab38-499118157b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\MiscClasses">
+      <UniqueIdentifier>{da7e4f72-b286-4fdd-afc4-6141019a4d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Scripts">
+      <UniqueIdentifier>{b6591ab7-95bc-42f2-97fc-5be32b3dd3ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{b977a684-d5cf-4569-b86f-58acc0596b04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameHeaders">
+      <UniqueIdentifier>{f42e5a24-6a5f-4d3d-b504-e54f5ce50aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LuaLibraries">
+      <UniqueIdentifier>{87d5676a-63fa-4644-8224-21a2b76b6d5f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sound_Server.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Network_Server.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FunctionHeaders\BitOp.hpp">
+      <Filter>Header Files\FunctionHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FunctionHeaders\Exceptions.hpp">
+      <Filter>Header Files\FunctionHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FunctionHeaders\File.hpp">
+      <Filter>Header Files\FunctionHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FunctionHeaders\LuaHelper.hpp">
+      <Filter>Header Files\FunctionHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FunctionHeaders\Math.hpp">
+      <Filter>Header Files\FunctionHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FunctionHeaders\Random.hpp">
+      <Filter>Header Files\FunctionHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FunctionHeaders\StringHelper.hpp">
+      <Filter>Header Files\FunctionHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FunctionHeaders\TypeHelper.hpp">
+      <Filter>Header Files\FunctionHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vector4.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameHeaders\InputHandler.hpp">
+      <Filter>Header Files\GameHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Collisions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\define.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Memory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Statistics.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vector2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vector3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Client\LuaLibraries\LuaInput.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Client\LuaLibraries\LuaTypeHelper.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_Server.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lua_Server.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaLibraries\LuaSound_Server.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaVector.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaNetwork.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\IntTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaBuffer.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaTask.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\BaseClasses\EnemyBase.lua">
+      <Filter>Resource Files\BaseClasses</Filter>
+    </None>
+    <None Include="..\BaseClasses\ItemBase.lua">
+      <Filter>Resource Files\BaseClasses</Filter>
+    </None>
+    <None Include="..\EnemyClasses\Glass.lua">
+      <Filter>Resource Files\EnemyClasses</Filter>
+    </None>
+    <None Include="..\EnemyClasses\Poopie.lua">
+      <Filter>Resource Files\EnemyClasses</Filter>
+    </None>
+    <None Include="..\EnemyClasses\Chik.lua">
+      <Filter>Resource Files\EnemyClasses</Filter>
+    </None>
+    <None Include="..\EnemyClasses\Worm.lua">
+      <Filter>Resource Files\EnemyClasses</Filter>
+    </None>
+    <None Include="..\EnemyClasses\Hand.lua">
+      <Filter>Resource Files\EnemyClasses</Filter>
+    </None>
+    <None Include="..\GameClasses\Camera.lua">
+      <Filter>Resource Files\GameClasses</Filter>
+    </None>
+    <None Include="..\GameClasses\Enemies.lua">
+      <Filter>Resource Files\GameClasses</Filter>
+    </None>
+    <None Include="..\GameClasses\Items.lua">
+      <Filter>Resource Files\GameClasses</Filter>
+    </None>
+    <None Include="..\GameClasses\Player.lua">
+      <Filter>Resource Files\GameClasses</Filter>
+    </None>
+    <None Include="..\ItemClasses\Dagger.lua">
+      <Filter>Resource Files\ItemClasses\Weapon</Filter>
+    </None>
+    <None Include="..\ItemClasses\DaggerB.lua">
+      <Filter>Resource Files\ItemClasses\Weapon</Filter>
+    </None>
+    <None Include="..\ItemClasses\DaggerG.lua">
+      <Filter>Resource Files\ItemClasses\Weapon</Filter>
+    </None>
+    <None Include="..\ItemClasses\DaggerR.lua">
+      <Filter>Resource Files\ItemClasses\Weapon</Filter>
+    </None>
+    <None Include="..\ItemClasses\DaggerY.lua">
+      <Filter>Resource Files\ItemClasses\Weapon</Filter>
+    </None>
+    <None Include="..\ItemClasses\Backpack.lua">
+      <Filter>Resource Files\ItemClasses\Equipment</Filter>
+    </None>
+    <None Include="..\ItemClasses\Boots.lua">
+      <Filter>Resource Files\ItemClasses\Equipment</Filter>
+    </None>
+    <None Include="..\ItemClasses\Bottle.lua">
+      <Filter>Resource Files\ItemClasses\Utility</Filter>
+    </None>
+    <None Include="..\ItemClasses\WaterBottle.lua">
+      <Filter>Resource Files\ItemClasses\Utility</Filter>
+    </None>
+    <None Include="..\ItemClasses\Whip.lua">
+      <Filter>Resource Files\ItemClasses\Utility</Filter>
+    </None>
+    <None Include="..\ItemClasses\Rock.lua">
+      <Filter>Resource Files\ItemClasses\Material</Filter>
+    </None>
+    <None Include="..\ItemClasses\Stick.lua">
+      <Filter>Resource Files\ItemClasses\Material</Filter>
+    </None>
+    <None Include="..\ItemClasses\Leather.lua">
+      <Filter>Resource Files\ItemClasses\Material</Filter>
+    </None>
+    <None Include="..\MiscClasses\BindableEvent.lua">
+      <Filter>Resource Files\MiscClasses</Filter>
+    </None>
+    <None Include="..\Scripts\GameLoop.lua">
+      <Filter>Resource Files\Scripts</Filter>
+    </None>
+    <None Include="..\Shaders\ColorableShaded.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\Shaded3D.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\ShadedTextureless3D.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\TextureShaded.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>

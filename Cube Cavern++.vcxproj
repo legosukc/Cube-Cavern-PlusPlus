@@ -24,6 +24,7 @@
     <ProjectGuid>{3f41756a-5fca-459a-9ef5-4d1bd57fe73a}</ProjectGuid>
     <RootNamespace>CubeCavern</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Client-Cube Cavern++</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -84,7 +85,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\clib\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
@@ -103,7 +104,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\clib\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,7 +120,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
@@ -137,49 +138,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="LuaBuffer.hpp" />
-    <ClInclude Include="LuaGraphics_BufferBase.hpp" />
-    <ClInclude Include="LuaGraphics_ElementBuffer.hpp" />
-    <ClInclude Include="LuaGraphics_GLObjectBase.hpp" />
-    <ClInclude Include="LuaGraphics_Program.hpp" />
-    <ClInclude Include="LuaGraphics_Shader.hpp" />
-    <ClInclude Include="LuaGraphics_VertexArray.hpp" />
-    <ClInclude Include="LuaGraphics_VertexBuffer.hpp" />
-    <ClCompile Include="LuaVector.cpp" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BitOp.hpp" />
-    <ClInclude Include="Collisions.hpp" />
-    <ClInclude Include="define.h" />
-    <ClInclude Include="Exceptions.hpp" />
-    <ClInclude Include="File.hpp" />
-    <ClInclude Include="Game.hpp" />
-    <ClInclude Include="InputHandler.hpp" />
-    <ClInclude Include="Lua.hpp" />
-    <ClInclude Include="LuaHelper.hpp" />
-    <ClInclude Include="LuaInput.hpp" />
-    <ClInclude Include="LuaGraphics.hpp" />
-    <ClInclude Include="LuaSound.hpp" />
-    <ClInclude Include="LuaTypeHelper.hpp" />
-    <ClInclude Include="LuaVector.hpp" />
-    <ClInclude Include="Math.hpp" />
-    <ClInclude Include="Memory.hpp" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="Random.hpp" />
-    <ClInclude Include="Sound.hpp" />
-    <ClInclude Include="Statistics.hpp" />
-    <ClInclude Include="StringHelper.hpp" />
-    <ClInclude Include="TypeHelper.hpp" />
-    <ClInclude Include="Vector2.hpp" />
-    <ClInclude Include="Vector3.hpp" />
-    <ClInclude Include="Vector4.hpp" />
-    <ClInclude Include="Window.hpp" />
-  </ItemGroup>
   <ItemGroup>
     <None Include="BaseClasses\EnemyBase.lua" />
     <None Include="BaseClasses\ItemBase.lua" />

@@ -41,7 +41,7 @@ end
 
 function EventClass:Connect(Function)
 	
-	assert(typeid(Function) == 6, `Unexpected type while connecting to a BindableEvent. Expected 'function', got {typeof(Function)}`)
+	assert(typeid(Function) == 6, "Unexpected type while connecting to a BindableEvent. Expected 'function', got "..typeof(Function)) --`Unexpected type while connecting to a BindableEvent. Expected 'function', got {typeof(Function)}`)
 	
 	return newConnection(self._connections, Function)
 end
