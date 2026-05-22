@@ -2,7 +2,7 @@
 
 #include <map>
 
-#include <SDL2/SDL_stdinc.h>
+#include <SDL3/SDL_stdinc.h>
 
 
 #include "Memory.hpp"
@@ -27,7 +27,9 @@ namespace Game::ConsoleVars {
 		void* ReferenceVar;
 
 		virtual void Set(const char* Argument) {}
-		virtual const char* Get() {}
+		virtual const char* Get() {
+			return NULL;
+		}
 	};
 
 

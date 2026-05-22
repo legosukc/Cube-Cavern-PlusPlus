@@ -64,6 +64,12 @@
     <Filter Include="Header Files\LuaLibraries\LuaGraphics_Classes">
       <UniqueIdentifier>{91c948c8-75a4-42e4-8ca7-f168e6599605}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GraphicsClasses">
+      <UniqueIdentifier>{8d5c5739-fa13-4e03-99f6-f10ad11890c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MathClasses">
+      <UniqueIdentifier>{66c9dfcf-0f0d-43ea-a9b8-7b254686951d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main_client.cpp">
@@ -116,15 +122,6 @@
     <ClInclude Include="..\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Vector2.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Vector3.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Vector4.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Statistics.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -161,50 +158,11 @@
     <ClInclude Include="OpenGLClasses\VertexBuffer.hpp">
       <Filter>Header Files\OpenGLClasses</Filter>
     </ClInclude>
-    <ClInclude Include="LuaLibraries\LuaGraphics.hpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaLibraries\LuaInput.hpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaLibraries\LuaTypeHelper.hpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_BufferBase.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_ElementBuffer.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_GLObjectBase.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_Program.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_Shader.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_VertexArray.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_VertexBuffer.hpp">
-      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Game_Client.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Lua_Client.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LuaLibraries\LuaNetwork_Client.hpp">
       <Filter>Header Files\LuaLibraries</Filter>
     </ClInclude>
     <ClInclude Include="LuaLibraries\LuaSound_Client.hpp">
       <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
-    <ClInclude Include="..\IntTypes.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\LuaLibraries\LuaBuffer.hpp">
       <Filter>Header Files\LuaLibraries</Filter>
@@ -217,6 +175,75 @@
     </ClInclude>
     <ClInclude Include="..\ConsoleVars.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaEnums.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaTable.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Client.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsClasses\BaseClassDefinitions.hpp">
+      <Filter>Source Files\GraphicsClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsClasses\VertexArray_OpenGL.hpp">
+      <Filter>Source Files\GraphicsClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MathClasses\Mat4.hpp">
+      <Filter>Header Files\MathClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MathClasses\Vector2.hpp">
+      <Filter>Header Files\MathClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MathClasses\Vector3.hpp">
+      <Filter>Header Files\MathClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MathClasses\Vector4.hpp">
+      <Filter>Header Files\MathClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaMatrix.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaTypeHelper.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FunctionHeaders\MathTransform.hpp">
+      <Filter>Header Files\FunctionHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaGraphics.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaInput.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_BufferBase.hpp">
+      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_ElementBuffer.hpp">
+      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_GLObjectBase.hpp">
+      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_Program.hpp">
+      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_Shader.hpp">
+      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_UniformBuffer.hpp">
+      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_VertexArray.hpp">
+      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_VertexBuffer.hpp">
+      <Filter>Header Files\LuaLibraries\LuaGraphics_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua.hpp">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

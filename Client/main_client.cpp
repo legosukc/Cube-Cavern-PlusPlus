@@ -21,11 +21,6 @@
 
 #include <cmath>
 
-#include <sockpp/tcp6_acceptor.h>
-#include <sockpp/tcp6_connector.h>
-
-#include <sockpp/udp6_socket.h>
-
 #ifdef USE_SIMD_INTRINSICS
 #include <xmmintrin.h>
 #include <pmmintrin.h>
@@ -33,28 +28,67 @@
 #include <mmintrin.h>
 #endif
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
+
+#include <SDL3_net/SDL_net.h>
+#include <SDL3_mixer/SDL_mixer.h>
+
 
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alext.h>
 
-#include <lua-5.4.2/lua.hpp>
+#include <lua-5.5.0/lua.hpp>
 
+#include <glad/glad.h>
+#include <glad/glad.c>
+
+
+#include "../Memory.hpp"
 
 #include "../FunctionHeaders/TypeHelper.hpp"
 
 #include "../pch.h"
 
 
+namespace Game {
+	double DeltaTime = 1.0;
+}
+
 #include "SDLClasses/Window.hpp"
+namespace Game {
+	Game::Classes::Window Window;
+
+	inline void Update();
+	void Draw();
+}
 
 #include "Sound_Client.hpp"
 #include "Network_Client.hpp"
+#include "Graphics_Client.hpp"
 
-#include "Lua_Client.hpp"
-#include "Game_Client.hpp"
+#include "../Lua.hpp"
+
+
+
+
+
+void Game::Update() {
+
+	Game::Statistics::Update();
+
+	Game::Lua::Update();
+}
+
+void Game::Draw() {
+
+	Game::Graphics::SetClearColor(0.f, 0.f, 0.f, 1.f);
+	Game::Graphics::ClearBitfields(Game::Graphics::BufferBitfields.ColorBit | Game::Graphics::BufferBitfields.DepthBit | Game::Graphics::BufferBitfields.StencilBit);
+
+	Game::Graphics::Draw();
+	Game::Lua::Draw();
+}
 
 
 
@@ -89,22 +123,18 @@ int main()
 try
 #endif
 {
-	unlikely_branch
-	if (const int ErrorCode = SDL_Init(SDL_INIT_VIDEO); ErrorCode != 0) {
-		Exceptions::ThrowSDLError("Failed to initalize SDL2. ErrorCode: ", ErrorCode);
+	if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
+		Exceptions::ThrowSDLError("Failed to initalize SDL.");
 	}
-
-	Game::Sound::Init();
-	//Game::Network::Init();
 	
-
+	
+	Game::Sound::Init();
+	Game::Network::Init();
+	
 	Game::Window.Create("Cube Cavern++", 800, 600);
 
+	Game::Graphics::Init();
 	Game::Lua::Init();
-
-	//std::thread LuaLoaderThread(Game::Lua::Init);
-	
-	//LuaLoaderThread.join();
 
 
 	while (true) {
@@ -115,6 +145,8 @@ try
 		}
 
 		Game::Update();
+		
+		Game::Draw();
 
 		Game::Window.Present();
 	}
@@ -129,8 +161,8 @@ catch (const Exceptions::Exception& Exception) {
 
 	std::cerr << "::FATAL:: ::UNHANDLED EXCEPTION:: " << Exception.what() << std::endl;
 	::_CloseInitialisedItems();
-
-	const int ErrorCode = SDL_ShowSimpleMessageBox(
+	
+	if (!SDL_ShowSimpleMessageBox(
 		SDL_MESSAGEBOX_ERROR,
 		"Unhandled Exception",
 
@@ -140,11 +172,8 @@ catch (const Exceptions::Exception& Exception) {
 		).c_str(),
 
 		NULL
-	);
-	
-	if (ErrorCode != 0) {
-		std::cerr << "An error occurred when calling 'SDL_ShowSimpleMessageBox'. Error Code: " << ErrorCode
-			<< "\nSDL Error: " << SDL_GetError() << std::endl;
+	)) {
+		std::cerr << "An error occurred when calling 'SDL_ShowSimpleMessageBox'.\nSDL Error: " << SDL_GetError() << std::endl;
 	}
 
 	return EXIT_FAILURE;
@@ -154,16 +183,13 @@ catch (const Exceptions::Exception& Exception) {
 	std::cerr << "::FATAL:: ::UNHANDLED UNKNOWN EXCEPTION::" << std::endl;
 	::_CloseInitialisedItems();
 
-	const int ErrorCode = SDL_ShowSimpleMessageBox(
+	if (!SDL_ShowSimpleMessageBox(
 		SDL_MESSAGEBOX_ERROR,
 		"Unhandled Unknown Exception",
 		"An unhandled unknown exception occurred, causing the program to shit itself. We're NOT sorry!",
 		NULL
-	);
-
-	if (ErrorCode != 0) {
-		std::cerr << "An error occurred when calling 'SDL_ShowSimpleMessageBox'. Error Code: " << ErrorCode
-			<< "\nSDL Error: " << SDL_GetError() << std::endl;
+	)) {
+		std::cerr << "An error occurred when calling 'SDL_ShowSimpleMessageBox'.\nSDL Error: " << SDL_GetError() << std::endl;
 	}
 
 	return EXIT_FAILURE;

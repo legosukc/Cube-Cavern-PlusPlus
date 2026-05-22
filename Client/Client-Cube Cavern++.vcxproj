@@ -85,7 +85,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\clib\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sockpp.lib;SDL2.lib;SDL2_mixer.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL3_net.lib;;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
@@ -104,7 +104,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\clib\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sockpp.lib;SDL2.lib;SDL2_mixer.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL3_net.lib;;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -120,7 +120,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sockpp.lib;SDL2.lib;SDL2_mixer.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL3_net.lib;;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <AdditionalLibraryDirectories>C:\clib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
@@ -139,7 +139,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sockpp.lib;SDL2.lib;SDL2_mixer.lib;glew32.lib;OpenAL32.lib;lua54.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL3_net.lib;;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\clib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -155,34 +155,41 @@
     <ClInclude Include="..\FunctionHeaders\File.hpp" />
     <ClInclude Include="..\FunctionHeaders\LuaHelper.hpp" />
     <ClInclude Include="..\FunctionHeaders\Math.hpp" />
+    <ClInclude Include="..\FunctionHeaders\MathTransform.hpp" />
     <ClInclude Include="..\FunctionHeaders\Random.hpp" />
     <ClInclude Include="..\FunctionHeaders\StringHelper.hpp" />
     <ClInclude Include="..\FunctionHeaders\TypeHelper.hpp" />
     <ClInclude Include="..\GameHeaders\InputHandler.hpp" />
-    <ClInclude Include="..\IntTypes.h" />
+    <ClInclude Include="..\Lua.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaBuffer.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaEnums.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaGraphics.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_BufferBase.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_ElementBuffer.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_GLObjectBase.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_Program.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_Shader.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_UniformBuffer.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_VertexArray.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_VertexBuffer.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaInput.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaMatrix.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaTable.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaTask.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaTypeHelper.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaVector.hpp" />
+    <ClInclude Include="..\MathClasses\Mat4.hpp" />
+    <ClInclude Include="..\MathClasses\Vector2.hpp" />
+    <ClInclude Include="..\MathClasses\Vector3.hpp" />
+    <ClInclude Include="..\MathClasses\Vector4.hpp" />
     <ClInclude Include="..\Memory.hpp" />
     <ClInclude Include="..\pch.h" />
     <ClInclude Include="..\Statistics.hpp" />
-    <ClInclude Include="..\Vector2.hpp" />
-    <ClInclude Include="..\Vector3.hpp" />
-    <ClInclude Include="..\Vector4.hpp" />
-    <ClInclude Include="Game_Client.hpp" />
-    <ClInclude Include="LuaLibraries\LuaGraphics.hpp" />
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_BufferBase.hpp" />
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_ElementBuffer.hpp" />
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_GLObjectBase.hpp" />
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_Program.hpp" />
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_Shader.hpp" />
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_VertexArray.hpp" />
-    <ClInclude Include="LuaLibraries\LuaGraphics_Classes\LuaGraphics_VertexBuffer.hpp" />
-    <ClInclude Include="LuaLibraries\LuaInput.hpp" />
+    <ClInclude Include="GraphicsClasses\BaseClassDefinitions.hpp" />
+    <ClInclude Include="GraphicsClasses\VertexArray_OpenGL.hpp" />
+    <ClInclude Include="Graphics_Client.hpp" />
     <ClInclude Include="LuaLibraries\LuaNetwork_Client.hpp" />
     <ClInclude Include="LuaLibraries\LuaSound_Client.hpp" />
-    <ClInclude Include="LuaLibraries\LuaTypeHelper.hpp" />
-    <ClInclude Include="Lua_Client.hpp" />
     <ClInclude Include="Network_Client.hpp" />
     <ClInclude Include="OpenGLClasses\ElementBuffer.hpp" />
     <ClInclude Include="OpenGLClasses\Framebuffer.hpp" />

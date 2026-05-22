@@ -1,3 +1,7 @@
+#pragma once
+
+#include "../define.h"
+
 
 namespace StringHelper {
 

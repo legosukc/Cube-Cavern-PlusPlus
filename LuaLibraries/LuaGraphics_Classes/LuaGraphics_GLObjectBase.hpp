@@ -4,7 +4,7 @@
 
 #include <lua-5.5.0/lua.hpp>
 
-#include "../../../FunctionHeaders/LuaHelper.hpp"
+#include "../../FunctionHeaders/LuaHelper.hpp"
 
 
 namespace Game::Lua::CLibraries::Graphics::Classes {
@@ -15,7 +15,6 @@ namespace Game::Lua::CLibraries::Graphics::Classes {
 		GLuint GLObject;
 
 		static int __gc(lua_State* State);
-		static int __eq(lua_State* State);
 	};
 }
 
@@ -25,27 +24,13 @@ LuaHelper::StackTableReference Game::Lua::CLibraries::Graphics::Classes::GLObjec
 	LuaHelper::StackTableReference Metatable(State, MetatableName);
 
 	Metatable.SetKey(State, GLObjectBase::__gc, "__gc");
-	Metatable.SetKey(State, GLObjectBase::__eq, "__eq");
+	
+	Metatable.PushReference(State);
+	lua_setfield(State, Metatable.GetStackIndex(), "__index");
 
 	return Metatable;
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::GLObjectBase::__gc(lua_State* State) {
 	return 0;
-}
-
-int Game::Lua::CLibraries::Graphics::Classes::GLObjectBase::__eq(lua_State* State) {
-
-	lua_getmetatable(State, 1);
-	lua_getmetatable(State, 2);
-
-	bool Result;
-	if (lua_rawequal(State, -1, -2)) {
-		Result = static_cast<GLObjectBase*>(lua_touserdata(State, 1))->GLObject == static_cast<GLObjectBase*>(lua_touserdata(State, 2))->GLObject;
-	} else {
-		Result = false;
-	}
-	lua_settop(State, 0);
-	lua_pushboolean(State, static_cast<int>(Result));
-	return 1;
 }

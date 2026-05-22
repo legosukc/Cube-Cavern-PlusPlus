@@ -1,37 +1,26 @@
 #pragma once
 
-#include <SDL2/SDL_events.h>
+#include <SDL3/SDL_events.h>
 
 
 namespace Game {
 
-	inline void Update();
+	double DeltaTime = 1.0;
+
 	inline bool PollEvents();
-
-	void Draw();
 }
 
-
-namespace {
-	static SDL_Event Event;
-}
 
 bool Game::PollEvents() {
 
-	bool Quit = false;
-	while (SDL_PollEvent(&::Event)) {
+	SDL_Event Event;
+	while (SDL_PollEvent(&Event)) {
 
-		switch (::Event.type) {
-		case SDL_QUIT:
-			Quit = true;
-			break;
+		switch (Event.type) {
+		case SDL_EVENT_QUIT:
+			return true;
 		}
 	}
 
-	return Quit;
-}
-
-void Game::Draw() {
-
-	
+	return false;
 }

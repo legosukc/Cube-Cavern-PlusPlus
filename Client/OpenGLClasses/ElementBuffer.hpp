@@ -1,5 +1,4 @@
-#ifndef ELEMENTBUFFER_CLASS
-#define ELEMENTBUFFER_CLASS
+#pragma once
 
 #include <glad/glad.h>
 
@@ -43,5 +42,3 @@ void OpenGL::ElementBuffer::SendPointerData(GLintptr Offset, GLsizeiptr Size, co
 void OpenGL::ElementBuffer::Allocate(GLsizeiptr Size, GLenum Usage) {
 	OpenGL::ElementBuffer::SendData(Size, nullptr, Usage);
 }
-
-#endif

@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Client\LuaLibraries\LuaInput.hpp" />
     <ClInclude Include="..\Client\LuaLibraries\LuaTypeHelper.hpp" />
     <ClInclude Include="..\Collisions.hpp" />
     <ClInclude Include="..\define.h" />
@@ -32,20 +31,17 @@
     <ClInclude Include="..\FunctionHeaders\StringHelper.hpp" />
     <ClInclude Include="..\FunctionHeaders\TypeHelper.hpp" />
     <ClInclude Include="..\GameHeaders\InputHandler.hpp" />
-    <ClInclude Include="..\IntTypes.h" />
+    <ClInclude Include="..\Lua.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaBuffer.hpp" />
-    <ClInclude Include="..\LuaLibraries\LuaNetwork.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaInput.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaTask.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaVector.hpp" />
     <ClInclude Include="..\Memory.hpp" />
     <ClInclude Include="..\pch.h" />
     <ClInclude Include="..\Statistics.hpp" />
-    <ClInclude Include="..\Vector2.hpp" />
-    <ClInclude Include="..\Vector3.hpp" />
-    <ClInclude Include="..\Vector4.hpp" />
     <ClInclude Include="Game_Server.hpp" />
+    <ClInclude Include="LuaLibraries\LuaNetwork_Server.hpp" />
     <ClInclude Include="LuaLibraries\LuaSound_Server.hpp" />
-    <ClInclude Include="Lua_Server.hpp" />
     <ClInclude Include="Network_Server.hpp" />
     <ClInclude Include="Sound_Server.hpp" />
   </ItemGroup>
@@ -154,6 +150,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\clib\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3.lib;SDL3_net.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -171,6 +168,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\clib\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3.lib;SDL3_net.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -185,6 +183,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL3.lib;SDL3_net.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -201,6 +200,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL3.lib;SDL3_net.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

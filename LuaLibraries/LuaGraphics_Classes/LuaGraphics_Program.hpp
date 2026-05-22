@@ -1,25 +1,36 @@
+#pragma once
+
+#include "LuaGraphics_GLObjectBase.hpp"
+
+
+#include <lua-5.5.0/lua.hpp>
+
+
 
 namespace Game::Lua::CLibraries::Graphics {
 
 	namespace Classes {
 		struct Program : Game::Lua::CLibraries::Graphics::Classes::GLObjectBase {
-			static inline void InitMetatable(lua_State* State);
-
 			static int AttachShader(lua_State* State);
 			static int DetachShader(lua_State* State);
 
 			static int Link(lua_State* State);
 			static int Use(lua_State* State);
 
+			static int GetUniformIndex(lua_State* State);
+
+			static int SetUniformBlockBinding(lua_State* State);
+			static int GetUniformBlockIndex(lua_State* State);
+
 			static int __gc(lua_State* State);
-			static int __eq(lua_State* State);
+			//static int __eq(lua_State* State);
 		};
 	}
 
 	namespace Program {
-		static inline void Init(lua_State* State);
+		static inline void Init(lua_State* State, LuaHelper::StackTableReference& GraphicsTable);
 
-		static int Create(lua_State* State);
+		static int __new(lua_State* State);
 
 		static int SetUniformInt(lua_State* State);
 		static int SetUniformUint(lua_State* State);
@@ -39,45 +50,74 @@ namespace Game::Lua::CLibraries::Graphics {
 		static int SetUniformUvec4(lua_State* State);
 		static int SetUniformBvec4(lua_State* State);
 		static int SetUniformFvec4(lua_State* State);
+
+		static int SetUniformMat2(lua_State* State);
+		static int SetUniformMat3(lua_State* State);
+		static int SetUniformMat4(lua_State* State);
 	}
 }
 
-void Game::Lua::CLibraries::Graphics::Program::Init(lua_State* State) {
+void Game::Lua::CLibraries::Graphics::Program::Init(lua_State* State, LuaHelper::StackTableReference& GraphicsTable) {
+
+	LuaHelper::StackTableReference ProgramMetatable(State, "Program");
+
+	ProgramMetatable.SetKeyClosure(State, Classes::Program::__gc, "__gc");
+
+	ProgramMetatable.PushReference(State);
+	lua_setfield(State, ProgramMetatable.GetStackIndex(), "__index");
+
+	ProgramMetatable.SetKeyClosure(State, Classes::Program::SetUniformBlockBinding, "SetUniformBlockBinding");
+	ProgramMetatable.SetKeyClosure(State, Classes::Program::GetUniformBlockIndex, "GetUniformBlockIndex");
+
+	ProgramMetatable.SetKeyClosure(State, Classes::Program::AttachShader, "AttachShader");
+	ProgramMetatable.SetKeyClosure(State, Classes::Program::DetachShader, "DetachShader");
+
+	ProgramMetatable.SetKeyClosure(State, Classes::Program::Link, "Link");
+
+	ProgramMetatable.PushReference(State);
+	ProgramMetatable.SetKeyClosure(State, Classes::Program::Use, "Use", 1);
+
+	lua_settop(State, ProgramMetatable.GetStackIndex() - 1);
+
+
 
 	LuaHelper::StackTableReference ProgramTable(State, 0, 17); // OpenGL.Program
 
-	ProgramTable.SetKey(State, Program::Create, "Create");
+	ProgramTable.SetKeyClosure(State, Program::__new, "new");
 
-	ProgramTable.SetKey(State, Program::SetUniformInt, "SetUniformInt");
-	ProgramTable.SetKey(State, Program::SetUniformUint, "SetUniformUint");
-	ProgramTable.SetKey(State, Program::SetUniformInt, "SetUniformBool");
-	ProgramTable.SetKey(State, Program::SetUniformFloat, "SetUniformFloat");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformInt, "SetUniformInt");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformUint, "SetUniformUint");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformInt, "SetUniformBool");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformFloat, "SetUniformFloat");
 
-	ProgramTable.SetKey(State, Program::SetUniformIvec2, "SetUniformIvec2");
-	ProgramTable.SetKey(State, Program::SetUniformUvec2, "SetUniformUvec2");
-	ProgramTable.SetKey(State, Program::SetUniformBvec2, "SetUniformBvec2");
-	ProgramTable.SetKey(State, Program::SetUniformFvec2, "SetUniformVec2");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformIvec2, "SetUniformIvec2");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformUvec2, "SetUniformUvec2");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformBvec2, "SetUniformBvec2");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformFvec2, "SetUniformVec2");
 
-	ProgramTable.SetKey(State, Program::SetUniformIvec3, "SetUniformIvec3");
-	ProgramTable.SetKey(State, Program::SetUniformUvec3, "SetUniformUvec3");
-	ProgramTable.SetKey(State, Program::SetUniformBvec3, "SetUniformBvec3");
-	ProgramTable.SetKey(State, Program::SetUniformFvec3, "SetUniformVec3");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformIvec3, "SetUniformIvec3");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformUvec3, "SetUniformUvec3");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformBvec3, "SetUniformBvec3");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformFvec3, "SetUniformVec3");
 
-	ProgramTable.SetKey(State, Program::SetUniformIvec4, "SetUniformIvec4");
-	ProgramTable.SetKey(State, Program::SetUniformUvec4, "SetUniformUvec4");
-	ProgramTable.SetKey(State, Program::SetUniformBvec4, "SetUniformBvec4");
-	ProgramTable.SetKey(State, Program::SetUniformFvec4, "SetUniformVec4");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformIvec4, "SetUniformIvec4");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformUvec4, "SetUniformUvec4");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformBvec4, "SetUniformBvec4");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformFvec4, "SetUniformVec4");
 
-	lua_setfield(State, ProgramTable.GetStackIndex() - 1, "Program");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformMat2, "SetUniformMat2");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformMat3, "SetUniformMat3");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformMat4, "SetUniformMat4");
+
+	lua_setfield(State, GraphicsTable.GetStackIndex(), "Program");
 }
 
-int Game::Lua::CLibraries::Graphics::Program::Create(lua_State* State) {
+int Game::Lua::CLibraries::Graphics::Program::__new(lua_State* State) {
 
 	Classes::Program* ProgramUD = static_cast<Classes::Program*>(lua_newuserdata(State, sizeof(Classes::Program)));
 	ProgramUD->GLObject = glCreateProgram();
 
 	luaL_setmetatable(State, "Program");
-
 	return 1;
 }
 
@@ -323,69 +363,148 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	}
 }
 
+namespace Game::Lua::CLibraries::Graphics::Program {
 
+	int SetUniformMat2(lua_State* State) {
 
+		GLfloat MatArray[2 * 2];
+		const void* MatUD;
 
+		if (MatUD = luaL_testudata(State, 3, "Mat2"); MatUD == NULL) {
 
-void Game::Lua::CLibraries::Graphics::Classes::Program::InitMetatable(lua_State* State) {
+			for (int i = 3; i <= 2 + (2 * 2); ++i) {
+				MatArray[i - 3] = static_cast<GLfloat>(luaL_optnumber(State, i, 0.0));
+			}
+			MatUD = MatArray;
+		}
 
-	LuaHelper::StackTableReference ProgramMetatable(State, "Program");
+		glUniformMatrix2fv(static_cast<GLint>(luaL_checkinteger(State, 1)), 1, static_cast<GLboolean>(lua_toboolean(State, 2)), static_cast<const GLfloat*>(MatUD));
+		return 0;
+	}
 
-	ProgramMetatable.SetKey(State, Program::AttachShader, "AttachShader");
-	ProgramMetatable.SetKey(State, Program::DetachShader, "DetachShader");
+	int SetUniformMat3(lua_State* State) {
 
-	ProgramMetatable.SetKey(State, Program::Link, "Link");
-	ProgramMetatable.SetKey(State, Program::Use, "Use");
+		GLfloat MatArray[3 * 3];
+		const void* MatUD;
 
-	ProgramMetatable.SetKey(State, Program::__eq, "__eq");
-	ProgramMetatable.SetKey(State, Program::__gc, "__gc");
+		if (MatUD = luaL_testudata(State, 3, "Mat3"); MatUD == NULL) {
+
+			for (int i = 3; i <= 2 + (3 * 3); ++i) {
+				MatArray[i - 3] = static_cast<GLfloat>(luaL_optnumber(State, i, 0.0));
+			}
+			MatUD = MatArray;
+		}
+
+		glUniformMatrix3fv(static_cast<GLint>(luaL_checkinteger(State, 1)), 1, static_cast<GLboolean>(lua_toboolean(State, 2)), static_cast<const GLfloat*>(MatUD));
+		return 0;
+	}
+
+	int SetUniformMat4(lua_State* State) {
+
+		GLfloat MatArray[4 * 4];
+		const void* MatUD;
+
+		if (MatUD = luaL_testudata(State, 3, "Mat4"); MatUD == NULL) {
+
+			for (int i = 3; i <= 2 + (4 * 4); ++i) {
+				MatArray[i - 3] = static_cast<GLfloat>(luaL_optnumber(State, i, 0.0));
+			}
+			MatUD = MatArray;
+		}
+
+		glUniformMatrix4fv(static_cast<GLint>(luaL_checkinteger(State, 1)), 1, static_cast<GLboolean>(lua_toboolean(State, 2)), static_cast<const GLfloat*>(MatUD));
+		return 0;
+	}
 }
+
+
+
+
+
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::AttachShader(lua_State* State) {
 
-	const Shader* const ShaderUD = static_cast<Shader*>(luaL_testudata(State, 2, "Shader"));
-	unlikely_branch
-		if (ShaderUD == NULL) {
-			luaL_error(State, "Attempted to attach a non-shader object to a OpenGL program.");
-		}
+	const Classes::Shader* ShaderUD = static_cast<Classes::Shader*>(luaL_testudata(State, 2, "Shader"));
+	if (ShaderUD == NULL) {
+		luaL_error(State, "Attempted to attach a non-shader object to a OpenGL program.");
+	}
 
-	glAttachShader(static_cast<Program*>(lua_touserdata(State, 1))->GLObject, ShaderUD->ShaderObject);
+	glAttachShader(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject, ShaderUD->ShaderObject);
 	return 0;
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::DetachShader(lua_State* State) {
 
-	const Shader* const ShaderUD = static_cast<Shader*>(luaL_testudata(State, 2, "Shader"));
-	unlikely_branch
-		if (ShaderUD == NULL) {
-			luaL_error(State, "Attempted to detatch a non-shader object from a OpenGL program.");
-		}
+	const Classes::Shader* ShaderUD = static_cast<Classes::Shader*>(luaL_testudata(State, 2, "Shader"));
+	if (ShaderUD == NULL) {
+		luaL_error(State, "Attempted to detatch a non-shader object from a OpenGL program.");
+	}
 
-	glDetachShader(static_cast<Program*>(lua_touserdata(State, 1))->GLObject, ShaderUD->ShaderObject);
+	glDetachShader(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject, ShaderUD->ShaderObject);
 	return 0;
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::Link(lua_State* State) {
 
-	Program* const ProgramUD = static_cast<Program*>(lua_touserdata(State, 1));
+	const Classes::Program* ProgramUD = static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"));
 	glLinkProgram(ProgramUD->GLObject);
 	return 0;
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::Use(lua_State* State) {
-	glUseProgram(static_cast<Program*>(lua_touserdata(State, 1))->GLObject);
+	glUseProgram(
+		static_cast<Classes::Program*>(
+			LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1))
+		)->GLObject
+	);
 	return 0;
 }
+
+
+int Game::Lua::CLibraries::Graphics::Classes::Program::GetUniformIndex(lua_State* State) {
+	lua_pushinteger(State,
+		static_cast<lua_Integer>(
+			glGetUniformLocation(
+				static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject,
+				luaL_checkstring(State, 2)
+			)
+		)
+	);
+	return 1;
+}
+
+int Game::Lua::CLibraries::Graphics::Classes::Program::GetUniformBlockIndex(lua_State* State) {
+	lua_pushinteger(State, static_cast<lua_Integer>(
+			glGetUniformBlockIndex(
+				static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject,
+				luaL_checkstring(State, 2)
+			)
+		)
+	);
+	return 1;
+}
+
+int Game::Lua::CLibraries::Graphics::Classes::Program::SetUniformBlockBinding(lua_State* State) {
+	glUniformBlockBinding(
+		static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject,
+		luaL_checkinteger(State, 2),	// UniformBlock Index
+		luaL_checkinteger(State, 3)		// Bind To Index
+	);
+	return 0;
+}
+
+
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::__gc(lua_State* State) {
-	glDeleteProgram(static_cast<Program*>(lua_touserdata(State, 1))->GLObject);
+	glDeleteProgram(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject);
 	return 0;
 }
 
+/*
 int Game::Lua::CLibraries::Graphics::Classes::Program::__eq(lua_State* State) {
 	int Result;
-	if (const Program* const B = static_cast<Program*>(luaL_testudata(State, 2, "Program"))) {
-		Result = static_cast<int>(static_cast<Program*>(lua_touserdata(State, 1))->GLObject == B->GLObject);
+	if (const Classes::Program* B = static_cast<Classes::Program*>(luaL_testudata(State, 2, "Program"))) {
+		Result = static_cast<int>(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject == B->GLObject);
 	} else {
 		Result = static_cast<int>(false);
 	}
@@ -393,4 +512,4 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::__eq(lua_State* State) {
 	lua_settop(State, 0);
 	lua_pushboolean(State, Result);
 	return 1;
-}
+}*/

@@ -21,11 +21,6 @@
 
 #include <cmath>
 
-#include <sockpp/tcp6_acceptor.h>
-#include <sockpp/tcp6_connector.h>
-
-#include <sockpp/udp6_socket.h>
-
 #ifdef USE_SIMD_INTRINSICS
 #include <xmmintrin.h>
 #include <pmmintrin.h>
@@ -34,9 +29,10 @@
 #endif
 
 
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
+#include <SDL3_net/SDL_net.h>
 
-#include <lua-5.4.2/lua.hpp>
+#include <lua-5.5.0/lua.hpp>
 
 
 #include "../FunctionHeaders/TypeHelper.hpp"
@@ -47,15 +43,15 @@
 #include "Network_Server.hpp"
 #include "Sound_Server.hpp"
 
-#include "Lua_Server.hpp"
 #include "Game_Server.hpp"
+#include "../Lua.hpp"
 
 
 
 int main() {
 
-	if (const int ErrorCode = SDL_InitSubSystem(SDL_INIT_EVENTS); ErrorCode != NULL) {
-
+	if (!SDL_Init(SDL_INIT_EVENTS)) {
+		Exceptions::ThrowSDLError("Failed to initialize SDL.");
 	}
 	
 	Game::Network::Init();
@@ -66,9 +62,8 @@ int main() {
 	while (true) {
 		Start = std::chrono::high_resolution_clock::now();
 
-		Game::Update();
 		Game::Lua::Update();
-		Game::Network::Update();
+		Game::Network::SendPacket();
 
 		Delta = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - Start);
 

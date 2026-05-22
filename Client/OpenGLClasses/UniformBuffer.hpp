@@ -1,5 +1,4 @@
-#ifndef UNIFORMBUFFER_CLASS
-#define UNIFORMBUFFER_CLASS
+#pragma once
 
 #include <glad/glad.h>
 
@@ -61,5 +60,3 @@ void OpenGL::UniformBuffer::SendPointerData(GLintptr Offset, GLsizeiptr Size, co
 void OpenGL::UniformBuffer::Allocate(GLsizeiptr Size, GLenum Usage) {
 	OpenGL::UniformBuffer::SendData(Size, nullptr, Usage);
 }
-
-#endif

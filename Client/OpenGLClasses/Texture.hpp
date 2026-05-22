@@ -1,7 +1,6 @@
-#ifndef TEXTURE_CLASS
-#define TEXTURE_CLASS
+#pragma once
 
-#include <SDL2/SDL_surface.h>
+#include <SDL3/SDL_surface.h>
 
 #include <glad/glad.h>
 
@@ -232,5 +231,3 @@ std::unique_ptr<char[]> OpenGL::Texture2D::ReadPixels(GLsizei Width, GLsizei Hei
     OpenGL::Texture2D::ReadPixels(Pixels.get(), Width, Height, Format, ByteType);
     return Pixels;
 }
-
-#endif

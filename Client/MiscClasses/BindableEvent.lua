@@ -2,14 +2,27 @@
 local ConnectionClass = {}
 ConnectionClass.__index = ConnectionClass
 
-local function newConnection(Connections, Function)
 
+local table_insert = table.insert
+local table_clear = table.clear
+
+local assert = assert
+local typeof = typeof
+local typeid = typeid
+
+local setmetatable = setmetatable
+
+local spawn = spawn
+
+
+local function newConnection(Connections, Function)
+	
 	local new = {
 		_connectionsTable = Connections;
 		_index = 0;
 		_func = Function;
 	}
-	new._index = table.insert(Connections, new)
+	new._index = table_insert(Connections, new)
 	return setmetatable(new, ConnectionClass)
 end
 
@@ -47,13 +60,13 @@ function EventClass:Connect(Function)
 end
 
 function EventClass:ClearConnections()
-	self._connections = {}
+	table_clear(self._connections)
 end
 
 function EventClass:Fire(...)
 	
 	for _, Connection in ipairs(self._connections) do
-		Connection._func(...)
+		spawn(Connection._func, ...)
 	end
 end
 

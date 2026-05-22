@@ -27,7 +27,7 @@ namespace {
 
         unlikely_branch
         if (sz == 0) {
-           Exceptions::ThrowException<Exceptions::BadAllocation>("Attempted to allocate a block of memory with a size of 0.");
+           Exceptions::ThrowException<Exceptions::RangeError>("Attempted to allocate a block of memory with a size of 0.");
         }
 
         likely_branch
@@ -45,26 +45,25 @@ namespace {
             return reinterpret_cast<void*>(ptr + sizeof(size_t));
         }
 
-        Exceptions::ThrowException<Exceptions::BadAllocation>();
+        Exceptions::ThrowException<Exceptions::RuntimeError>("Memory allocation exception.");
     }
 
     static void _Free(void* ptr) {
 
         ::_StartTime = std::chrono::high_resolution_clock::now();
 
-        ::_MemoryAllocBlock<>* MemBlock = std::move(static_cast<::_MemoryAllocBlock<>*>(ptr));
-        MemBlock -= sizeof(size_t);
-
-        std::free(reinterpret_cast<void*>(MemBlock));
+        ::_MemoryAllocBlock<>* MemBlock = static_cast<::_MemoryAllocBlock<>*>(ptr) - sizeof(size_t);
 
         Game::Statistics::Memory::EngineAllocatedBytes -= MemBlock->AllocationBytes;
         ++Game::Statistics::Memory::EngineDeallocationsPerFrame;
+
+        std::free(reinterpret_cast<void*>(MemBlock));
 
         Game::Statistics::Memory::EngineMicrosecondsSpentOnHeapPerFrame += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - ::_StartTime).count();
     }
 }
 
-
+/*
 void* operator new(size_t sz) {
     return ::_Allocate(sz);
 }
@@ -83,7 +82,7 @@ void operator delete[](void* ptr) noexcept {
 }
 void operator delete[](void* ptr, size_t) noexcept {
     ::_Free(ptr);
-}
+}*/
 
 
 namespace Memory {

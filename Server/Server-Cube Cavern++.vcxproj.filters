@@ -86,9 +86,6 @@
     <ClInclude Include="..\FunctionHeaders\TypeHelper.hpp">
       <Filter>Header Files\FunctionHeaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\Vector4.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\GameHeaders\InputHandler.hpp">
       <Filter>Header Files\GameHeaders</Filter>
     </ClInclude>
@@ -107,23 +104,11 @@
     <ClInclude Include="..\Statistics.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Vector2.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Vector3.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Client\LuaLibraries\LuaInput.hpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
     <ClInclude Include="..\Client\LuaLibraries\LuaTypeHelper.hpp">
       <Filter>Header Files\LuaLibraries</Filter>
     </ClInclude>
     <ClInclude Include="Game_Server.hpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Lua_Server.hpp">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LuaLibraries\LuaSound_Server.hpp">
       <Filter>Header Files\LuaLibraries</Filter>
@@ -131,16 +116,19 @@
     <ClInclude Include="..\LuaLibraries\LuaVector.hpp">
       <Filter>Header Files\LuaLibraries</Filter>
     </ClInclude>
-    <ClInclude Include="..\LuaLibraries\LuaNetwork.hpp">
-      <Filter>Header Files\LuaLibraries</Filter>
-    </ClInclude>
-    <ClInclude Include="..\IntTypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\LuaLibraries\LuaBuffer.hpp">
       <Filter>Header Files\LuaLibraries</Filter>
     </ClInclude>
     <ClInclude Include="..\LuaLibraries\LuaTask.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaLibraries\LuaNetwork_Server.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaInput.hpp">
       <Filter>Header Files\LuaLibraries</Filter>
     </ClInclude>
   </ItemGroup>

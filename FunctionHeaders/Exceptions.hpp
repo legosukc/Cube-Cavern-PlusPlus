@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 * why are all the throws in functions??? fuck is wrong with you???
 
@@ -6,6 +8,8 @@
 */
 
 #include <stdexcept>
+
+#include <glad/glad.h>
 
 
 namespace Exceptions {
@@ -18,9 +22,6 @@ namespace Exceptions {
 
 	using OverflowError = std::overflow_error;
 	using UnderflowError = std::underflow_error;
-
-	using BadAllocation = std::bad_alloc;
-
 
 	using IOError = std::ios::failure;
 

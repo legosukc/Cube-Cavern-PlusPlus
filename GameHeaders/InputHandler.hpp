@@ -1,9 +1,9 @@
 #pragma once
 
-#include <SDL2/SDL_mouse.h>
-#include <SDL2/SDL_keyboard.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3/SDL_keyboard.h>
 
-#include "Vector2.hpp"
+#include "../MathClasses/Vector2.hpp"
 
 
 namespace {

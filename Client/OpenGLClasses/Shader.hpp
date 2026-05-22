@@ -1,14 +1,13 @@
-#ifndef SHADER_CLASS
-#define SHADER_CLASS
+#pragma once
 
 #include <glad/glad.h>
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 
 #include <memory>
 
 #include "OpenGLClassBase.hpp"
 
-#include "../File.hpp"
+#include "../../FunctionHeaders/File.hpp"
 
 
 namespace OpenGL {
@@ -86,5 +85,3 @@ namespace OpenGL {
 		
 	}
 }
-
-#endif

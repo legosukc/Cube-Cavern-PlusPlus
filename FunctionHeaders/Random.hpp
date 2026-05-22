@@ -1,27 +1,27 @@
-#ifndef _RANDOM_H
-#define _RANDOM_H
+#pragma once
 
 #include <random>
-#include <stdint.h>
 
-#include "Vector2.hpp"
-#include "Vector3.hpp"
+#include <SDL3/SDL_stdinc.h>
 
-#include "FunctionHeaders/BitOp.hpp"
+#include "../MathClasses/Vector2.hpp"
+#include "../MathClasses/Vector3.hpp"
+
+#include "BitOp.hpp"
 
 
 
-
-static thread_local uint64_t Seed = static_cast<uint64_t>(std::random_device()());
 
 namespace {
 
+	static thread_local Uint64 _Random_Seed = static_cast<Uint64>(std::random_device()());
+
 	// Algorithm "xor" from p. 4 of Marsaglia, "Xorshift RNGs"
-	static uint64_t xorshift() {
-		Seed ^= Seed << 13;
-		Seed ^= Seed >> 7;
-		Seed ^= Seed << 17;
-		return Seed;
+	static Uint64 xorshift() noexcept {
+		::_Random_Seed ^= ::_Random_Seed << 13;
+		::_Random_Seed ^= ::_Random_Seed >> 7;
+		::_Random_Seed ^= ::_Random_Seed << 17;
+		return ::_Random_Seed;
 	}
 
 	template<typename T>
@@ -49,38 +49,38 @@ namespace {
 
 namespace Random {
 
-	inline int8_t GenerateInt8(int8_t Minimum = INT8_MIN, int8_t Maximum = INT8_MAX) {
-		return GenerateInt<int8_t>(Minimum, Maximum);
+	inline Sint8 GenerateInt8(Sint8 Minimum = INT8_MIN, Sint8 Maximum = INT8_MAX) {
+		return GenerateInt<Sint8>(Minimum, Maximum);
 	}
 
-	inline int16_t GenerateInt16(int16_t Minimum = INT16_MIN, int16_t Maximum = INT16_MAX) {
-		return GenerateInt<int16_t>(Minimum, Maximum);
+	inline Sint16 GenerateInt16(Sint16 Minimum = INT16_MIN, Sint16 Maximum = INT16_MAX) {
+		return GenerateInt<Sint16>(Minimum, Maximum);
 	}
 
-	inline int32_t GenerateInt32(int32_t Minimum = INT32_MIN, int32_t Maximum = INT32_MAX) {
-		return GenerateInt<int32_t>(Minimum, Maximum);
+	inline Sint32 GenerateInt32(Sint32 Minimum = INT32_MIN, Sint32 Maximum = INT32_MAX) {
+		return GenerateInt<Sint32>(Minimum, Maximum);
 	}
 
-	inline int64_t GenerateInt64(int64_t Minimum = INT64_MIN, int64_t Maximum = INT64_MAX) {
-		return GenerateInt<int64_t>(Minimum, Maximum);
+	inline Sint64 GenerateInt64(Sint64 Minimum = INT64_MIN, Sint64 Maximum = INT64_MAX) {
+		return GenerateInt<Sint64>(Minimum, Maximum);
 	}
 
 
 
-	inline uint8_t GenerateUint8(uint8_t Minimum = 0, uint8_t Maximum = UINT8_MAX) {
-		return GenerateUint<uint8_t>(Minimum, Maximum);
+	inline Uint8 GenerateUint8(Uint8 Minimum = 0, Uint8 Maximum = UINT8_MAX) {
+		return GenerateUint<Uint8>(Minimum, Maximum);
 	}
 
-	inline uint16_t GenerateUint16(uint16_t Minimum = 0, uint16_t Maximum = UINT16_MAX) {
-		return GenerateUint<uint16_t>(Minimum, Maximum);
+	inline Uint16 GenerateUint16(Uint16 Minimum = 0, Uint16 Maximum = UINT16_MAX) {
+		return GenerateUint<Uint16>(Minimum, Maximum);
 	}
 
-	inline uint32_t GenerateUint32(uint32_t Minimum = 0, uint32_t Maximum = UINT32_MAX) {
-		return GenerateUint<uint32_t>(Minimum, Maximum);
+	inline Uint32 GenerateUint32(Uint32 Minimum = 0, Uint32 Maximum = UINT32_MAX) {
+		return GenerateUint<Uint32>(Minimum, Maximum);
 	}
 
-	inline uint64_t GenerateUint64(uint64_t Minimum = 0, uint64_t Maximum = UINT64_MAX) {
-		return GenerateUint<uint64_t>(Minimum, Maximum);
+	inline Uint64 GenerateUint64(Uint64 Minimum = 0, Uint64 Maximum = UINT64_MAX) {
+		return GenerateUint<Uint64>(Minimum, Maximum);
 	}
 
 
@@ -149,6 +149,3 @@ namespace Random {
 		}
 	}
 }
-
-
-#endif

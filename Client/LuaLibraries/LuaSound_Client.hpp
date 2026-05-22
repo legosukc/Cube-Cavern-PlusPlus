@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../../Vector3.hpp"
+#include <lua-5.5.0/lua.hpp>
+
+
+#include "../../MathClasses/Vector3.hpp"
 #include "../Sound_Client.hpp"
 
 
@@ -32,9 +35,9 @@ namespace Game::Lua::CLibraries::Sound {
 		Game::Sound::Buffer CppBuffer;
 
 		static int UploadSoundData(lua_State* State) {
-			using DataBuffer = Game::Lua::CLibraries::Buffer::Buffer;
+			using DataBuffer = Game::Lua::CLibraries::Buffer::Classes::Buffer;
 
-			const DataBuffer* DataBufferUD = static_cast<DataBuffer*>(luaL_checkudata(State, 2, "buffer"));
+			const DataBuffer* DataBufferUD = static_cast<DataBuffer*>(luaL_checkudata(State, 2, DataBuffer::MetatableName));
 			
 			static_cast<SoundBuffer*>(lua_touserdata(State, 1))->CppBuffer.UploadSoundData(
 				DataBufferUD->Data,
@@ -53,7 +56,6 @@ namespace Game::Lua::CLibraries::Sound {
 					static_cast<ALenum>(luaL_checkinteger(State, 3))
 				)
 			);
-			lua_rotate(State, 0, 1);
 			return 1;
 		}
 	};

@@ -1,14 +1,14 @@
 #pragma once
 
-#include "define.h"
+#include "../define.h"
 
 
-#include <SDL2/SDL_stdinc.h>
+#include <SDL3/SDL_stdinc.h>
 #include <type_traits>
 
 #include <xmmintrin.h>
 
-#include "FunctionHeaders/Math.hpp"
+#include "../FunctionHeaders/Math.hpp"
 
 
 namespace {
@@ -177,6 +177,18 @@ struct Math::Vector2 : ::_base_vector2<float, Math::Vector2> {
 
 	constexpr operator Math::IVector2() const;
 	constexpr operator Math::UVector2() const;
+
+	constexpr Math::Vector2 Floor() const {
+		return Math::Vector2(std::floor(this->X), std::floor(this->Y));
+	}
+
+	constexpr Math::Vector2 Round() const {
+		return Math::Vector2(std::round(this->X), std::round(this->Y));
+	}
+
+	constexpr Math::Vector2 Ceil() const {
+		return Math::Vector2(std::ceil(this->X), std::ceil(this->Y));
+	}
 
 	constexpr Math::Vector2 Normalize() const {
 

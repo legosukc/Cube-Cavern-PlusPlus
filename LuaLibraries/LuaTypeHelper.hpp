@@ -33,17 +33,13 @@ void Game::Lua::CLibraries::TypeHelper::Init(lua_State* State) {
 
 int Game::Lua::CLibraries::TypeHelper::_typeid(lua_State* State) {
 
-	const int TypeID = lua_type(State, 1);
-	lua_settop(State, 0);
-	lua_pushinteger(State, static_cast<lua_Integer>(TypeID));
+	lua_pushinteger(State, static_cast<lua_Integer>(lua_type(State, 1)));
 	return 1;
 }
 
 int Game::Lua::CLibraries::TypeHelper::_typename(lua_State* State) {
 
-	const char* Typename = lua_typename(State, luaL_checkinteger(State, 1));
-	lua_settop(State, 0);
-	lua_pushstring(State, Typename);
+	lua_pushstring(State, lua_typename(State, luaL_checkinteger(State, 1)));
 	return 1;
 }
 
@@ -62,13 +58,12 @@ int Game::Lua::CLibraries::TypeHelper::_typeof(lua_State* State) {
 		lua_pushstring(State, lua_typename(State, TypeID));
 	}
 
-	lua_rotate(State, 0, 1);
 	return 1;
 }
 
 int Game::Lua::CLibraries::TypeHelper::iscallable(lua_State* State) {
 	
-	bool Result;
+	int Result;
 	switch (lua_type(State, 1)) {
 	case LUA_TFUNCTION:
 		Result = true;
@@ -82,8 +77,6 @@ int Game::Lua::CLibraries::TypeHelper::iscallable(lua_State* State) {
 		Result = false;
 	}
 
-	lua_settop(State, 0);
-	lua_pushboolean(State, static_cast<int>(Result));
-	
+	lua_pushboolean(State, Result);
 	return 1;
 }

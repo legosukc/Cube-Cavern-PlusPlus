@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL2/SDL_stdinc.h>
+#include <SDL3/SDL_stdinc.h>
 
 
 namespace Game::Statistics {
@@ -27,14 +27,14 @@ namespace Game::Statistics {
 		volatile Uint64 EngineMicrosecondsSpentOnHeapPerFrame = 0;
 		volatile Uint64 LuaMicrosecondsSpentOnHeapPerFrame = 0;
 
-		void UpdateLuaStatsAllocation(Uint64 Bytes) {
+		void UpdateLuaStatsAllocation(Uint64 Bytes) noexcept {
 			Statistics::Memory::LuaAllocatedBytes += Bytes;
 			Statistics::Memory::LuaAllocationsBytesPerFrame += Bytes;
 			++Statistics::Memory::LuaAllocations;
 			++Statistics::Memory::LuaAllocationsPerFrame;
 		}
 
-		void UpdateLuaStatsDeallocation(Uint64 Bytes) {
+		void UpdateLuaStatsDeallocation(Uint64 Bytes) noexcept {
 			Statistics::Memory::LuaAllocatedBytes -= Bytes;
 			--Statistics::Memory::LuaAllocations;
 			++Statistics::Memory::LuaDeallocationsPerFrame;
@@ -49,11 +49,11 @@ namespace Game::Statistics {
 		Uint64 DrawCallsPerFrame = 0;
 	}
 
-	inline void Update();
+	inline void Update() noexcept;
 }
 
 
-void Game::Statistics::Update() {
+void Game::Statistics::Update() noexcept {
 	using namespace Game::Statistics;
 
 	Memory::EngineMicrosecondsSpentOnHeapPerFrame = 0;

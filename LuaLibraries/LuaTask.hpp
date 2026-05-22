@@ -4,10 +4,10 @@
 #include <list>
 #include <forward_list>
 
-#include <lua-5.4.2/lua.hpp>
+#include <lua-5.5.0/lua.hpp>
 
-#include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_timer.h>
+#include <SDL3/SDL_stdinc.h>
+#include <SDL3/SDL_timer.h>
 
 #include "../FunctionHeaders/LuaHelper.hpp"
 
@@ -68,6 +68,8 @@ namespace Game::Lua::CLibraries::Task {
 
 	static int spawn(lua_State* State);
 	static int defer(lua_State* State);
+
+	static int cancel(lua_State* State);
 }
 
 /*
@@ -115,12 +117,13 @@ void Game::Lua::CLibraries::Task::Init(lua_State* State) {
 	//::_ReadyThreads.
 
 	//std::thread(::_TaskScheduler).detach();
-	
 	LuaHelper::SetGlobal(State, Task::wait, "wait");
 	LuaHelper::SetGlobal(State, Task::delay, "delay");
 
 	LuaHelper::SetGlobal(State, Task::spawn, "spawn");
 	LuaHelper::SetGlobal(State, Task::defer, "defer");
+
+	LuaHelper::SetGlobal(State, Task::cancel, "cancel");
 }
 
 void Game::Lua::CLibraries::Task::Update(lua_State* State) {
@@ -181,15 +184,22 @@ int Continue(lua_State* State, int Status, lua_KContext ContinueContext) {
 
 int Game::Lua::CLibraries::Task::delay(lua_State* State) {
 
+	lua_State* NewThread;
+	lua_Number DelayFor;
+
 	luaL_checktype(State, 2, LUA_TFUNCTION);
 	
-	lua_State* NewThread = lua_newthread(State);
+	DelayFor = luaL_checknumber(State, 1);
+	lua_rotate(State, 1, -1);
+	lua_pop(State, 1);
+
+	NewThread = lua_newthread(State);
+	lua_rotate(State, 1, 1);
+
 	lua_xmove(State, NewThread, lua_gettop(State) - 1);
+	::_CreateYieldTask(NewThread, DelayFor);
 
-
-	::_CreateYieldTask(NewThread, luaL_optnumber(State, 1, 0.0));
-
-	return 0;
+	return 1;
 }
 
 int Game::Lua::CLibraries::Task::spawn(lua_State* State) {
@@ -199,23 +209,50 @@ int Game::Lua::CLibraries::Task::spawn(lua_State* State) {
 	luaL_checktype(State, 1, LUA_TFUNCTION);
 
 	NewThread = lua_newthread(State);
-	StackTop = lua_gettop(State);
+	StackTop = lua_gettop(State) - 1;
 
+	lua_rotate(State, 1, 1);
 	lua_xmove(State, NewThread, StackTop);
 
 	::_CreateYieldTask(NewThread, 0.0);
 	lua_resume(State, NewThread, StackTop, NULL);
 
-	return 0;
+	return 1;
 }
 
 int Game::Lua::CLibraries::Task::defer(lua_State* State) {
+
+	lua_State* NewThread;
+
 	luaL_checktype(State, 1, LUA_TFUNCTION);
 
-	lua_State* NewThread = lua_newthread(State);
-	lua_xmove(State, NewThread, lua_gettop(State));
+	NewThread = lua_newthread(State);
+
+	lua_rotate(State, 1, 1);
+	lua_xmove(State, NewThread, lua_gettop(State) - 1);
 
 	::_CreateYieldTask(NewThread, 0.0);
+
+	return 1;
+}
+
+int Game::Lua::CLibraries::Task::cancel(lua_State* State) {
+
+	lua_State* Thread = lua_tothread(State, 1);
+
+	unlikely_branch
+	if (Thread == NULL) {
+		luaL_argerror(State, 1, "expected type 'thread'");
+	}
+
+	for (Task::YieldInfo& YieldedThreadInfo : Task::YieldedThreads) {
+
+		if (YieldedThreadInfo.Thread == Thread) {
+			Task::YieldedThreads.remove(YieldedThreadInfo);
+			break;
+		}
+	}
+	lua_closethread(State, Thread);
 
 	return 0;
 }

@@ -1,11 +1,10 @@
 #pragma once
 
-#include "define.h"
+#include "../define.h"
 
-#include <xmmintrin.h>
-#include "FunctionHeaders/Math.hpp"
+#include "../FunctionHeaders/Math.hpp"
 
-#include <SDL2/SDL_stdinc.h>
+#include <SDL3/SDL_stdinc.h>
 
 
 namespace {
@@ -163,6 +162,14 @@ namespace {
 				return std::sqrt((this->X * this->X) + (this->Y * this->Y) + (this->Z * this->Z));
 			}
 		}
+
+		constexpr _DerivedType Cross(const _DerivedType& B) const {
+			return _DerivedType(
+				this->Y * B.Z - B.Y * this->Z,
+				this->Z * B.X - B.Z * this->X,
+				this->X * B.Y - B.X * this->Y
+			);
+		}
 	};
 }
 
@@ -179,6 +186,18 @@ struct Math::Vector3 : ::_base_vector3<float, Vector3> {
 	constexpr Vector3() : _base_vector3() {}
 	constexpr Vector3(float _X, float _Y, float _Z) : _base_vector3(_X, _Y, _Z) {}
 	constexpr explicit Vector3(float Value) : _base_vector3(Value) {}
+
+	constexpr Math::Vector3 Floor() const {
+		return Math::Vector3(std::floor(this->X), std::floor(this->Y), std::floor(this->Z));
+	}
+
+	constexpr Math::Vector3 Round() const {
+		return Math::Vector3(std::round(this->X), std::round(this->Y), std::round(this->Z));
+	}
+
+	constexpr Math::Vector3 Ceil() const {
+		return Math::Vector3(std::ceil(this->X), std::ceil(this->Y), std::ceil(this->Z));
+	}
 
 	SSE3_FUNCTION
 	constexpr Math::Vector3 Normalize() const {
@@ -207,7 +226,7 @@ constexpr Math::Vector3 operator*(Math::Vector3::ComponentType A, const Math::Ve
 }
 
 constexpr Math::Vector3 operator/(Math::Vector3::ComponentType A, const Math::Vector3& B) {
-	return Math::Vector3(A) / B;
+	return Math::Vector3(static_cast<Math::Vector3::ComponentType>(1) / A) * B;
 }
 
 constexpr Math::Vector3 operator%(Math::Vector3::ComponentType A, const Math::Vector3& B) {

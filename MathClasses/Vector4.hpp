@@ -1,11 +1,10 @@
 #pragma once
 
-#include "define.h"
+#include "../define.h"
 
-#include <xmmintrin.h>
 #include <cmath>
 
-#include <SDL2/SDL_stdinc.h>
+#include <SDL3/SDL_stdinc.h>
 
 
 namespace {
@@ -35,6 +34,7 @@ namespace {
 
 		template<typename IndexType>
 		constexpr ComponentType& operator[](IndexType Index) {
+			
 			return reinterpret_cast<ComponentType*>(this)[Index];
 		}
 
@@ -201,6 +201,18 @@ struct Math::Vector4 : ::_base_vector4<float, Vector4> {
 #else
 		return this->operator/(std::sqrt(this->Dot(*this)));
 #endif
+	}
+
+	constexpr Math::Vector4 Floor() const {
+		return Math::Vector4(std::floor(this->X), std::floor(this->Y), std::floor(this->Z), std::floor(this->W));
+	}
+
+	constexpr Math::Vector4 Round() const {
+		return Math::Vector4(std::round(this->X), std::round(this->Y), std::round(this->Z), std::round(this->W));
+	}
+
+	constexpr Math::Vector4 Ceil() const {
+		return Math::Vector4(std::ceil(this->X), std::ceil(this->Y), std::ceil(this->Z), std::ceil(this->W));
 	}
 
 	constexpr operator Math::IVector4() const;

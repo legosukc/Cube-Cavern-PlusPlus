@@ -1,3 +1,7 @@
+#pragma once
+
+#include <SDL3/SDL_stdinc.h>
+
 
 namespace {
 
@@ -7,41 +11,41 @@ namespace {
 	};
 
 	template<>
-	struct _ToBitBuffer_struct<int8_t> {
-		using _BitBuffer = uint8_t;
+	struct _ToBitBuffer_struct<Sint8> {
+		using _BitBuffer = Uint8;
 	};
 
 	template<>
-	struct _ToBitBuffer_struct<int16_t> {
-		using _BitBuffer = uint16_t;
+	struct _ToBitBuffer_struct<Sint16> {
+		using _BitBuffer = Uint16;
 	};
 
 	template<>
-	struct _ToBitBuffer_struct<int32_t> {
-		using _BitBuffer = uint32_t;
+	struct _ToBitBuffer_struct<Sint32> {
+		using _BitBuffer = Uint32;
 	};
 
 	template<>
-	struct _ToBitBuffer_struct<int64_t> {
-		using _BitBuffer = uint64_t;
+	struct _ToBitBuffer_struct<Sint64> {
+		using _BitBuffer = Uint64;
 	};
 
 	
 	template<>
 	struct _ToBitBuffer_struct<float> {
-		using _BitBuffer = uint32_t;
+		using _BitBuffer = Uint32;
 	};
 
 	template<>
 	struct _ToBitBuffer_struct<double> {
-		using _BitBuffer = uint64_t;
+		using _BitBuffer = Uint64;
 	};
 }
 
 namespace BitOp {
 
 	template<typename To_T, typename From_T>
-	constexpr inline To_T Bitcast(From_T CastValue) {
+	constexpr inline To_T Bitcast(From_T CastValue) noexcept {
 		return *reinterpret_cast<To_T*>(&CastValue);
 	}
 

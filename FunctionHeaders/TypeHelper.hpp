@@ -82,5 +82,5 @@ namespace TypeHelper {
     };
 
     template<typename... T>
-    constexpr INLINE_MEMBER_VARIABLE size_t sizeofTypes_v = sizeofTypes<T...>::size;
+    constexpr static INLINE_MEMBER_VARIABLE size_t sizeofTypes_v = sizeofTypes<T...>::size;
 }

@@ -1,13 +1,18 @@
 #pragma once
 
+#include <iostream>
+
+
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alext.h>
 
-#include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_mixer.h>
+#include <SDL3/SDL_stdinc.h>
+#include <SDL3_mixer/SDL_mixer.h>
 
-#include "../Vector3.hpp"
+#include "../FunctionHeaders/Exceptions.hpp"
+
+#include "../MathClasses/Vector3.hpp"
 
 
 namespace Game::Sound {
@@ -33,7 +38,7 @@ namespace Game::Sound {
 	inline Init_ErrorCodes Init();
 	inline void Destroy();
 
-	Mix_Chunk* DecodeAudioFile(const char* Path);
+	char* DecodeAudioFile(const char* Path, size_t* AudioSize);
 
 	struct Listener_Struct {
 
@@ -50,14 +55,15 @@ namespace Game::Sound {
 
 	class AudioChunk {
 
-		Mix_Chunk* Chunk = NULL;
+		char* Chunk = NULL;
+		size_t ChunkSize = 0;
 
 	public:
 		constexpr AudioChunk() = default;
 
 		// Loads the entire audio stream from the file at 'AudioPath'.
 		inline AudioChunk(const char* AudioPath) {
-			this->Chunk = Game::Sound::DecodeAudioFile(AudioPath);
+			this->Chunk = Game::Sound::DecodeAudioFile(AudioPath, &this->ChunkSize);
 		}
 
 		~AudioChunk() {
@@ -65,7 +71,8 @@ namespace Game::Sound {
 			if (this->Chunk == NULL) {
 				return;
 			}
-			Mix_FreeChunk(this->Chunk);
+			delete[] this->Chunk;
+			this->Chunk = NULL;
 		}
 	};
 
@@ -80,15 +87,49 @@ namespace Game::Sound {
 }
 
 
-Mix_Chunk* Game::Sound::DecodeAudioFile(const char* Path) {
+char* Game::Sound::DecodeAudioFile(const char* Path, size_t* AudioSize) {
+#warning "remember to change this function when SDL3_mixer decides to tell us the decoded size of an audio. what a shit library."
 
-	Mix_Chunk* const Chunk = Mix_LoadWAV(Path);
+	int DecodeInfo;
+	char* PCMData;
+	SDL_AudioSpec AudioSpec;
+	MIX_AudioDecoder* AudioDecoder;
+	SDL_IOStream* AudioFile;
 
-	unlikely_branch
-	if (Chunk == NULL) {
-		std::clog << "Failed to find audio: " << Path << "\nMix_Error: " << Mix_GetError() << std::endl;
+	AudioFile = SDL_IOFromFile(Path, "rb");
+	if (AudioFile == NULL) {
+		return NULL;
 	}
-	return Chunk;
+
+	*AudioSize = static_cast<size_t>(SDL_GetIOSize(AudioFile));
+
+	AudioDecoder = MIX_CreateAudioDecoder_IO(AudioFile, true, 0);
+
+	AudioSpec.format = SDL_AudioFormat::SDL_AUDIO_F32;
+	AudioSpec.channels = 1;
+	AudioSpec.freq = 441000;
+	
+	while (true) {
+
+		*AudioSize *= 2;
+		PCMData = new char[*AudioSize];
+
+		DecodeInfo = MIX_DecodeAudio(AudioDecoder, PCMData, *AudioSize, &AudioSpec);
+		
+		if (DecodeInfo == -1) {
+			delete[] PCMData;
+			MIX_DestroyAudioDecoder(AudioDecoder);
+			Exceptions::ThrowExceptionExpression<Exceptions::IOError, const char*, const char*>("Unrecoverable error while decoding audio: ", Path);
+		} else if (DecodeInfo == 0) {
+			break;
+		}
+
+		delete[] PCMData;
+	}
+
+	MIX_DestroyAudioDecoder(AudioDecoder);
+
+	return PCMData;
 }
 
 
@@ -218,13 +259,14 @@ void Game::Sound::Buffer::UploadSoundData(const void* SoundData, size_t SoundSiz
 
 bool Game::Sound::Buffer::LoadFile(const char* Path, ALenum Format) {
 
-	Mix_Chunk* Chunk = Game::Sound::DecodeAudioFile(Path);
+	size_t DecodedSize;
+	void* Audio = Game::Sound::DecodeAudioFile(Path, &DecodedSize);
 
 	unlikely_branch
-	if (Chunk == NULL) {
+	if (Audio == NULL) {
 		return false;
 	}
-	this->UploadSoundData(Chunk->abuf, Chunk->alen, Format);
+	this->UploadSoundData(Audio, DecodedSize, Format);
 
 	return true;
 }
@@ -240,7 +282,7 @@ Game::Sound::Source::~Source() {
 
 Game::Sound::Init_ErrorCodes Game::Sound::Init() {
 
-	std::cout << "Initalizing OpenAL.\n";
+	std::cout << "Initalizing OpenAL." << std::endl;
 	const auto Start = std::chrono::high_resolution_clock::now();
 
 	Game::Sound::Init_ErrorCodes ErrorCode;
