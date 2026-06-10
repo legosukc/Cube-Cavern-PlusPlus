@@ -10,8 +10,12 @@
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_keyboard.h>
 #include <SDL3/SDL_scancode.h>
+#include <SDL3/SDL_gamepad.h>
 
 #include <memory>
+
+
+#include "../MathClasses/Vector2.hpp"
 
 
 
@@ -33,7 +37,7 @@ namespace Game::Lua::CLibraries::Input {
 
 		const static inline size_t MaxScancodes = 24;
 
-		Uint16 SDLScancodes[MaxScancodes];
+		SDL_Scancode SDLScancodes[MaxScancodes];
 		char BindingName[];
 
 
@@ -47,13 +51,13 @@ namespace Game::Lua::CLibraries::Input {
 			int Result = false;
 			SDL_Scancode Scancode;
 			Uint8 i;
-			Uint16* SDLScancodes;
+			SDL_Scancode* SDLScancodes;
 
 			SDLScancodes = static_cast<Binding*>(LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))->SDLScancodes;
 
 			for (i = 0; i < 24; ++i) {
 
-				Scancode = static_cast<SDL_Scancode>(SDLScancodes[i]);
+				Scancode = SDLScancodes[i];
 				if (Scancode == SDL_SCANCODE_UNKNOWN) {
 					continue;
 				}
@@ -70,27 +74,26 @@ namespace Game::Lua::CLibraries::Input {
 
 		static int Held(lua_State* State) {
 
-			int Result = false;
 			SDL_Scancode Scancode;
 			Uint8 i;
-			Uint16* SDLScancodes;
+			SDL_Scancode* SDLScancodes;
 
 			SDLScancodes = static_cast<Binding*>(LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))->SDLScancodes;
 
 			for (i = 0; i < 24; ++i) {
 
-				Scancode = static_cast<SDL_Scancode>(SDLScancodes[i]);
+				Scancode = SDLScancodes[i];
 				if (Scancode == SDL_SCANCODE_UNKNOWN) {
 					continue;
 				}
 
 				if (Game::Window.ScancodeHeld(Scancode)) {
-					Result = true;
-					break;
+					lua_pushboolean(State, true);
+					return 1;
 				}
 			}
 
-			lua_pushboolean(State, Result);
+			lua_pushboolean(State, false);
 			return 1;
 		}
 
@@ -99,13 +102,13 @@ namespace Game::Lua::CLibraries::Input {
 			int Result = false;
 			SDL_Scancode Scancode;
 			Uint8 i;
-			Uint16* SDLScancodes;
+			SDL_Scancode* SDLScancodes;
 
 			SDLScancodes = static_cast<Binding*>(LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))->SDLScancodes;
 
 			for (i = 0; i < 24; ++i) {
 
-				Scancode = static_cast<SDL_Scancode>(SDLScancodes[i]);
+				Scancode = SDLScancodes[i];
 				if (Scancode == SDL_SCANCODE_UNKNOWN) {
 					continue;
 				}
@@ -124,7 +127,7 @@ namespace Game::Lua::CLibraries::Input {
 
 			int TableIndex = 0;
 			Uint8 ScancodeIndex = 0;
-			Uint16* SDLScancodes;
+			SDL_Scancode* SDLScancodes;
 
 			SDLScancodes = static_cast<Binding*>(LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))->SDLScancodes;
 
@@ -143,8 +146,8 @@ namespace Game::Lua::CLibraries::Input {
 		static int AddScancode(lua_State* State) {
 
 			Uint8 ScancodeIndex = 0;
-			Uint16* SDLScancodes;
-			Uint16 Scancode = luaL_checkinteger(State, 2);
+			SDL_Scancode* SDLScancodes;
+			SDL_Scancode Scancode = static_cast<SDL_Scancode>(luaL_checkinteger(State, 2));
 
 			SDLScancodes = static_cast<Binding*>(LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))->SDLScancodes;
 
@@ -175,8 +178,8 @@ namespace Game::Lua::CLibraries::Input {
 
 		static int RemoveScancode(lua_State* State) {
 			Uint8 ScancodeIndex;
-			Uint16* SDLScancodes;
-			Uint16 Scancode = luaL_checkinteger(State, 2);
+			SDL_Scancode* SDLScancodes;
+			SDL_Scancode Scancode = static_cast<SDL_Scancode>(luaL_checkinteger(State, 2));
 
 			SDLScancodes = static_cast<Binding*>(LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))->SDLScancodes;
 
@@ -243,65 +246,36 @@ void Game::Lua::CLibraries::Input::Init(lua_State* State) {
 		LetterIndex += 2;
 	}*/
 
-	//CLibraries::Enums::PushNewEnum(State, (int)SDL_SCANCODE_W);
-	lua_pushinteger(State, SDL_SCANCODE_W);
-	lua_setfield(State, EnumScancode.GetStackIndex(), "W");
 
-	//CLibraries::Enums::PushNewEnum(State, SDL_SCANCODE_A);
-	lua_pushinteger(State, SDL_SCANCODE_A);
-	lua_setfield(State, EnumScancode.GetStackIndex(), "A");
+	struct ScancodeEnumStruct {
+		const char* Name;
+		SDL_Scancode Scancode;
+	} constexpr static ScancodeEnums[] = {
 
-	//CLibraries::Enums::PushNewEnum(State, SDL_SCANCODE_S);
-	lua_pushinteger(State, SDL_SCANCODE_S);
-	lua_setfield(State, EnumScancode.GetStackIndex(), "S");
+		{"W", SDL_SCANCODE_W},
+		{"A", SDL_SCANCODE_A},
+		{"S", SDL_SCANCODE_S},
+		{"D", SDL_SCANCODE_D},
 
-	//CLibraries::Enums::PushNewEnum(State, SDL_SCANCODE_D);
-	lua_pushinteger(State, SDL_SCANCODE_D);
-	lua_setfield(State, EnumScancode.GetStackIndex(), "D");
+		{"C", SDL_SCANCODE_C},
 
+		{"Enter", SDL_SCANCODE_RETURN},
 
-	//CLibraries::Enums::PushNewEnum(State, SDL_SCANCODE_SPACE);
-	lua_pushinteger(State, SDL_SCANCODE_SPACE);
-	lua_setfield(State, EnumScancode.GetStackIndex(), "Space");
+		{"Space", SDL_SCANCODE_SPACE},
 
-	//CLibraries::Enums::PushNewEnum(State, SDL_SCANCODE_RETURN);
-	lua_pushinteger(State, SDL_SCANCODE_RETURN);
-	lua_setfield(State, EnumScancode.GetStackIndex(), "Enter");
+		{"LeftShift", SDL_SCANCODE_LSHIFT},
+		{"RightShift", SDL_SCANCODE_RSHIFT},
 
-	//CLibraries::Enums::PushNewEnum(State, SDL_SCANCODE_LSHIFT);
-	lua_pushinteger(State, SDL_SCANCODE_LSHIFT);
-	lua_setfield(State, EnumScancode.GetStackIndex(), "LeftShift");
+		{"LeftCtrl", SDL_SCANCODE_LCTRL},
+		{"RightCtrl", SDL_SCANCODE_RCTRL},
+	};
 
-	//CLibraries::Enums::PushNewEnum(State, SDL_SCANCODE_RSHIFT);
-	lua_pushinteger(State, SDL_SCANCODE_RSHIFT);
-	lua_setfield(State, EnumScancode.GetStackIndex(), "RightShift");
+	for (const ScancodeEnumStruct& ScancodeEnum : ScancodeEnums) {
+		EnumScancode.SetKey<lua_Integer>(State, static_cast<lua_Integer>(ScancodeEnum.Scancode), ScancodeEnum.Name);
+	}
 
 	lua_rawset(State, EnumScancode.GetStackIndex() - 2);
 
-	/*
-	char Key[2] = "A";
-	for (; Key[0] <= 'Z'; ++Key[0]) {
-		EnumScancode.SetKey(State, CLibraries::Enums::PushNewEnum(State), Key);
-	}
-		
-	for (Key[0] = '0'; Key[0] <= '9'; ++Key[0]) {
-		EnumScancode.SetKey(State, CLibraries::Enums::PushNewEnum(State), Key);
-	}
-	EnumScancode.SetKey(State, CLibraries::Enums::PushNewEnum(State), "Enter");
-	EnumScancode.SetKey(State, CLibraries::Enums::PushNewEnum(State), "LeftShift");
-	EnumScancode.SetKey(State, CLibraries::Enums::PushNewEnum(State), "RightShift");*/
-	
-	/*
-	for (lua_Integer Scancode = 0; Scancode < SDL_NUM_SCANCODES; ++Scancode) {
-
-		KeyName = SDL_GetKeyName(SDL_GetKeyFromScancode(static_cast<SDL_Scancode>(Scancode)));
-
-		if (*KeyName == '\0') {
-			continue;
-		}
-		std::cout << "Scancode: " << Scancode << " KeyCode name: " << KeyName << '\n';
-		EnumScancode.SetKey(State, Scancode, KeyName);
-	}*/
 
 #ifndef BUILD_SERVER
 	BindingMetatable = LuaHelper::StackTableReference(State, CLibraries::Input::Binding::MetatableName);
@@ -364,7 +338,7 @@ void Game::Lua::CLibraries::Input::Update(lua_State* State) {
 	int InputTableIndex;
 	Math::Vector2* VectorUD;
 
-	lua_getglobal(State, CLibraries::Input::LibraryName);
+	Game::Lua::GameTable.PushKey(State, CLibraries::Input::LibraryName);
 	InputTableIndex = lua_gettop(State);
 
 	lua_getfield(State, InputTableIndex, "MouseDelta");
@@ -418,7 +392,12 @@ int Game::Lua::CLibraries::Input::GetBinding(lua_State* State) {
 	if (lua_getfield(State, lua_upvalueindex(1), BindingName) != LUA_TUSERDATA) {
 		
 		BindingUD = static_cast<Input::Binding*>(lua_newuserdata(State, sizeof(Input::Binding) + BindingNameLen));
-		std::memset(&BindingUD->SDLScancodes, 0, sizeof(Input::Binding::SDLScancodes));
+
+		int i;
+		for (i = 0; i < Math::Min<int>(lua_gettop(State) - 3, Input::Binding::MaxScancodes); ++i) {
+			BindingUD->SDLScancodes[i] = static_cast<SDL_Scancode>(luaL_checkinteger(State, i + 2));
+		}
+		std::memset(&BindingUD->SDLScancodes[i], 0, sizeof(Input::Binding::SDLScancodes) - (sizeof(SDL_Scancode)) * i);
 		std::memcpy(&BindingUD->BindingName, BindingName, BindingNameLen);
 
 		luaL_setmetatable(State, CLibraries::Input::Binding::MetatableName);

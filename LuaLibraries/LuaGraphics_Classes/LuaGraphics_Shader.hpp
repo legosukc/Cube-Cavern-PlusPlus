@@ -1,6 +1,10 @@
 #pragma once
 
-#include <glad/glad.h>
+#include <SDL3/SDL_opengl.h>
+#include <SDL3/SDL_opengl_glext.h>
+
+#include <SDL3/SDL_timer.h>
+
 
 #include <lua-5.5.0/lua.hpp>
 #include "../../FunctionHeaders/LuaHelper.hpp"
@@ -70,7 +74,7 @@ int Game::Lua::CLibraries::Graphics::Shader::__new(lua_State* State) {
 
 	Classes::Shader* const ShaderUD = static_cast<Classes::Shader*>(lua_newuserdata(State, sizeof(Classes::Shader)));
 	ShaderUD->ShaderType = static_cast<GLenum>(luaL_checkinteger(State, 1));
-	ShaderUD->ShaderObject = glCreateShader(ShaderUD->ShaderType);
+	ShaderUD->ShaderObject = Game::Graphics::OpenGLFunctions::glCreateShader(ShaderUD->ShaderType);
 
 	luaL_setmetatable(State, "Shader");
 
@@ -94,7 +98,7 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::SetShaderSource(lua_State*
 		ShaderSources[i - 2] = lua_tostring(State, i);
 	}
 
-	glShaderSource(ShaderObject, StackTop - 1, ShaderSources, NULL);
+	Game::Graphics::OpenGLFunctions::glShaderSource(ShaderObject, StackTop - 1, ShaderSources, NULL);
 	delete[] ShaderSources;
 
 	return 0;
@@ -112,13 +116,13 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::GetShaderSource(lua_State*
 	char* ShaderSource;
 	GLint ShaderSourceLength;
 	GLuint ShaderObject;
-	std::chrono::high_resolution_clock::time_point StartTime;
+	Uint64 StartNS;
 
-	StartTime = std::chrono::high_resolution_clock::now();
+	StartNS = SDL_GetTicksNS();
 
 	ShaderObject = static_cast<Classes::Shader*>(luaL_checkudata(State, 1, "Shader"))->ShaderObject;
 
-	glGetShaderiv(ShaderObject, GL_SHADER_SOURCE_LENGTH, &ShaderSourceLength);
+	Game::Graphics::OpenGLFunctions::glGetShaderiv(ShaderObject, GL_SHADER_SOURCE_LENGTH, &ShaderSourceLength);
 
 	// directly call std::malloc to not update Game::Statistics::Memory stats.
 	ShaderSource = static_cast<char*>(std::malloc(ShaderSourceLength));
@@ -126,12 +130,12 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::GetShaderSource(lua_State*
 	++Game::Statistics::Memory::EngineAllocationsPerFrame;
 	Game::Statistics::Memory::EngineAllocationBytesPerFrame += ShaderSourceLength;
 
-	glGetShaderSource(ShaderObject, ShaderSourceLength, NULL, ShaderSource);
+	Game::Graphics::OpenGLFunctions::glGetShaderSource(ShaderObject, ShaderSourceLength, NULL, ShaderSource);
 	
 	LuaHelper::PushExternalString(State, ShaderSource, ShaderSourceLength);
 
 	//++Game::Statistics::Memory::EngineDeallocationsPerFrame;
-	Game::Statistics::Memory::EngineMicrosecondsSpentOnHeapPerFrame += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - StartTime).count();
+	Game::Statistics::Memory::EngineNSSpentOnHeapPerFrame += SDL_GetTicksNS() - StartNS;
 
 	return 1;
 }
@@ -146,17 +150,17 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::Compile(lua_State* State) 
 	ShaderObject = static_cast<Shader*>(luaL_checkudata(State, 1, "Shader"))->ShaderObject;
 	//lua_settop(State, 0);
 
-	glCompileShader(ShaderObject);
+	Game::Graphics::OpenGLFunctions::glCompileShader(ShaderObject);
 
-	glGetShaderiv(ShaderObject, GL_COMPILE_STATUS, &Success);
+	Game::Graphics::OpenGLFunctions::glGetShaderiv(ShaderObject, GL_COMPILE_STATUS, &Success);
 	if (!Success) {
 
-		glGetShaderiv(ShaderObject, GL_INFO_LOG_LENGTH, &InfoLogSize);
+		Game::Graphics::OpenGLFunctions::glGetShaderiv(ShaderObject, GL_INFO_LOG_LENGTH, &InfoLogSize);
 
 		InfoLog = static_cast<char*>(std::malloc(InfoLogSize));
 		++Game::Statistics::Memory::EngineAllocationsPerFrame;
 
-		glGetShaderInfoLog(ShaderObject, InfoLogSize, NULL, InfoLog);
+		Game::Graphics::OpenGLFunctions::glGetShaderInfoLog(ShaderObject, InfoLogSize, NULL, InfoLog);
 
 		LuaHelper::PushExternalString(State, InfoLog, InfoLogSize);
 		return 1;
@@ -166,6 +170,6 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::Compile(lua_State* State) 
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Shader::__gc(lua_State* State) {
-	glDeleteShader(static_cast<Shader*>(luaL_checkudata(State, 1, "Shader"))->ShaderObject);
+	Game::Graphics::OpenGLFunctions::glDeleteShader(static_cast<Shader*>(luaL_checkudata(State, 1, "Shader"))->ShaderObject);
 	return 0;
 }

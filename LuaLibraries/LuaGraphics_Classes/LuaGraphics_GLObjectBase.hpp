@@ -1,6 +1,8 @@
 #pragma once
 
-#include <glad/glad.h>
+#include "../../define.h"
+
+#include <SDL3/SDL_opengl.h>
 
 #include <lua-5.5.0/lua.hpp>
 

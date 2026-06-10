@@ -131,6 +131,9 @@
     <ClInclude Include="..\LuaLibraries\LuaInput.hpp">
       <Filter>Header Files\LuaLibraries</Filter>
     </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaConsole.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main_server.cpp">

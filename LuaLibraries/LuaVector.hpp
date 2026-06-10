@@ -3,6 +3,7 @@
 #include <lua-5.5.0/lua.hpp>
 
 #include <type_traits>
+#include <string>
 
 #include "../FunctionHeaders/LuaHelper.hpp"
 
@@ -26,32 +27,36 @@ namespace {
 			for (int i = 1; i <= VectorType::ComponentCount; ++i) {
 
 				if CONSTEXPR_IF(std::is_integral_v<typename VectorType::ComponentType>) {
-					(*NewVector)[i] = static_cast<typename VectorType::ComponentType>(luaL_optinteger(State, i, 0));
+					(*NewVector)[i - 1] = static_cast<typename VectorType::ComponentType>(luaL_optinteger(State, i, 0));
 				} else {
-					(*NewVector)[i] = static_cast<typename VectorType::ComponentType>(luaL_optnumber(State, i, 0.0));
+					(*NewVector)[i - 1] = static_cast<typename VectorType::ComponentType>(luaL_optnumber(State, i, 0.0));
 				}
 			}
 
 			return 1;
 		}
 
-
 		template<class VectorType>
 		static int __tostring(lua_State* State) {
 
-			const VectorType* Vector = static_cast<VectorType*>(LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)));
+			std::string ComponentString;
+			int i;
+			std::string VectorString;
+			const VectorType* Vector;
 
-			LuaHelper::Push<typename VectorType::ComponentType>(State, (*Vector)[VectorType::ComponentCount - 1]);
-			for (int i = VectorType::ComponentCount - 1; i > 0; --i) {
+			Vector = static_cast<VectorType*>(LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)));
+			
+			VectorString = std::to_string(Vector->X);
+			for (i = 1; i < VectorType::ComponentCount; ++i) {
 
-				//std::cout << i << std::endl;
-				lua_pushliteral(State, ", ");
-				LuaHelper::Push<typename VectorType::ComponentType>(State, (*Vector)[i]);
+				ComponentString = std::to_string(Vector->operator[](i));
+
+				VectorString.reserve(ComponentString.size() + 2);
+				VectorString.append(", ");
+				VectorString.append(ComponentString);
 			}
-			lua_concat(State, VectorType::ComponentCount);
-
-			//lua_settop(State, 0);
-			//lua_pushliteral(State, "hi");
+			
+			lua_pushstring(State, VectorString.c_str());
 			return 1;
 		}
 
@@ -74,20 +79,16 @@ namespace {
 
 				Index_Str = lua_tolstring(State, 2, &IndexLength_Str);
 				if (IndexLength_Str == 1) {
-
-					unlikely_branch
-						if (Index_Str[0] >= 'X' && Index_Str[0] <= 'X' + VectorType::ComponentCount - 1) {
-							luaL_error(State, "Cannot index Vector: Invalid component index: ", Index_Str);
-						}
-
-					LuaHelper::Push<typename VectorType::ComponentType>(State, (*VectorUD)[Index_Str[0] - 'X']);
-
-				} else {
-
-					//lua_getmetatable(State, 1);
-					lua_pushvalue(State, 2);
-					lua_gettable(State, lua_upvalueindex(1));
+					
+					likely_branch
+					if (*Index_Str >= 'X' && *Index_Str < 'X' + static_cast<char>(VectorType::ComponentCount)) {
+						LuaHelper::Push<typename VectorType::ComponentType>(State, (*VectorUD)[*Index_Str - 'X']);
+						break;
+					}
 				}
+
+				lua_pushvalue(State, 2);
+				lua_gettable(State, lua_upvalueindex(1));
 				break;
 
 			case LUA_TNUMBER:
@@ -140,7 +141,7 @@ namespace {
 
 				(*VectorUD)[Index_Str[0] - 'X'] = LuaHelper::ToTypename<typename VectorType::ComponentType>(State, 3);
 				//static_cast<float*>(lua_touserdata(State, 1))[Index_Str[0] - 'X'] = luaL_checknumber(State, 3);
-				return 0;
+				break;
 
 			case LUA_TNUMBER:
 
@@ -153,7 +154,7 @@ namespace {
 
 				(*VectorUD)[Index_Int] = LuaHelper::ToTypename<typename VectorType::ComponentType>(State, 3);
 				//static_cast<float*>(lua_touserdata(State, 1))[Index_Int] = luaL_checknumber(State, 3);
-				return 0;
+				break;
 
 			default:
 				luaL_error(State, "Cannot set component of Vector3: Invalid index type '", lua_typename(State, IndexType), "'.");
@@ -336,6 +337,20 @@ namespace {
 		}
 
 		template<class VectorType>
+		static int __Cross(lua_State* State) {
+
+			lua_settop(State, 2);
+			lua_pushvalue(State, lua_upvalueindex(1));
+
+			*static_cast<VectorType*>(lua_newuserdata(State, sizeof(VectorType)))
+				= static_cast<VectorType*>(LuaHelper::CheckMetatable(State, 1, 3))->Cross(*static_cast<VectorType*>(LuaHelper::CheckMetatable(State, 2, 3)));
+
+			lua_pushvalue(State, 3);
+			lua_setmetatable(State, 4);
+			return 1;
+		}
+
+		template<class VectorType>
 		static int __Normalize(lua_State* State) {
 
 			lua_settop(State, 1);
@@ -346,7 +361,6 @@ namespace {
 
 			lua_pushvalue(State, 2);
 			lua_setmetatable(State, 3);
-
 			return 1;
 		}
 
@@ -398,6 +412,11 @@ namespace {
 
 			VectorMetatable.PushReference(State);
 			VectorMetatable.SetKeyClosure(State, ::_LuaVector::__Dot<VectorType>, "Dot", 1);
+
+			if CONSTEXPR_IF(std::is_base_of_v<::_base_vector3<typename VectorType::ComponentType, VectorType>, VectorType>) {
+				VectorMetatable.PushReference(State);
+				VectorMetatable.SetKeyClosure(State, ::_LuaVector::__Cross<VectorType>, "Cross", 1);
+			}
 
 			if CONSTEXPR_IF(std::is_floating_point_v<typename VectorType::ComponentType>) {
 				VectorMetatable.PushReference(State);

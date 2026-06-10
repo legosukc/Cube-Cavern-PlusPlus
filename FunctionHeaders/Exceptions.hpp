@@ -8,8 +8,9 @@
 */
 
 #include <stdexcept>
+#include <ios>
 
-#include <glad/glad.h>
+#include <SDL3/SDL_opengl.h>
 
 
 namespace Exceptions {

@@ -2,7 +2,7 @@
 
 #include "define.h"
 
-#include <chrono>
+#include <SDL3/SDL_timer.h>
 
 
 #include "Statistics.hpp"
@@ -18,12 +18,9 @@ namespace {
 		T Allocation[];
 	};
 
-
-    static thread_local std::chrono::high_resolution_clock::time_point _StartTime;
-
     static void* _Allocate(size_t sz) {
 
-        ::_StartTime = std::chrono::high_resolution_clock::now();
+        const Uint64 StartNS = SDL_GetTicksNS();
 
         unlikely_branch
         if (sz == 0) {
@@ -40,7 +37,7 @@ namespace {
 
             *ptr = sz;
 
-            Game::Statistics::Memory::EngineMicrosecondsSpentOnHeapPerFrame += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - ::_StartTime).count();
+            Game::Statistics::Memory::EngineNSSpentOnHeapPerFrame += SDL_GetTicksNS() - StartNS;
 
             return reinterpret_cast<void*>(ptr + sizeof(size_t));
         }
@@ -50,7 +47,7 @@ namespace {
 
     static void _Free(void* ptr) {
 
-        ::_StartTime = std::chrono::high_resolution_clock::now();
+        const Uint64 StartNS = SDL_GetTicksNS();
 
         ::_MemoryAllocBlock<>* MemBlock = static_cast<::_MemoryAllocBlock<>*>(ptr) - sizeof(size_t);
 
@@ -59,7 +56,7 @@ namespace {
 
         std::free(reinterpret_cast<void*>(MemBlock));
 
-        Game::Statistics::Memory::EngineMicrosecondsSpentOnHeapPerFrame += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - ::_StartTime).count();
+        Game::Statistics::Memory::EngineNSSpentOnHeapPerFrame += SDL_GetTicksNS() - StartNS;
     }
 }
 

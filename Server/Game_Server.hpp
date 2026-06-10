@@ -4,9 +4,6 @@
 
 
 namespace Game {
-
-	double DeltaTime = 1.0;
-
 	inline bool PollEvents();
 }
 

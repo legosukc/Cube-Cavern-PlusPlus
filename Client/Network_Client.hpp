@@ -1,13 +1,17 @@
 #pragma once
 
+#include "../define.h"
+
+#include <iostream>
+#include <fstream>
+
 #include <map>
 #include <vector>
-#include <thread>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_thread.h>
 #include <SDL3_net/SDL_net.h>
 
-#include "../define.h"
+#include "../FunctionHeaders/Exceptions.hpp"
 
 
 namespace {
@@ -111,7 +115,7 @@ namespace {
 	namespace Network {
 		static volatile bool runboyrun = true;
 
-		static void _LANChecker() {
+		static void _LANChecker(void*) {
 
 			NET_Datagram* ServerMessage;
 			NET_DatagramSocket* LANChecker;
@@ -170,26 +174,108 @@ namespace {
 				}
 			}
 		}
-		static std::thread _LANCheckerThread;
+
+		static int _GlobalServerLocater(void*) {
+
+			enum ServerTrackerResponses {
+				NoServers,
+				InvalidPageIndex,
+				CannotRenewUnregisteredServer,
+				RenewedServer,
+				RegisteredServer,
+				DeletedServer,
+				BadRequest = 400
+			};
+
+			NET_Address* ServerTrackerAddress = NET_ResolveHostname("ccpp-server-tracker.superjackass64-e41.workers.dev");
+			switch (NET_WaitUntilResolved(ServerTrackerAddress, -1)) {
+			case NET_Status::NET_SUCCESS:
+				std::cout << "Successfully resolved global server tracker address." << std::endl;
+				break;
+
+			case NET_Status::NET_FAILURE:
+				std::cerr << "Failed to resolve global server tracker address, SDL_net error: " << SDL_GetError() << std::endl;
+				return EXIT_FAILURE;
+			}
+
+			NET_StreamSocket* ServerTrackerHTTPStream = NET_CreateClient(ServerTrackerAddress, 80, NULL);
+			if (ServerTrackerAddress == NULL) {
+				std::cerr << "Failed to establish connection to global server tracker, SDL_net error: " << SDL_GetError() << std::endl;
+				return EXIT_FAILURE;
+			}
+
+			static const char HTTPGetRequest[] = "GET / HTTP/1.1\r\nHost: ccpp-server-tracker.superjackass64-e41.workers.dev\r\nConnection: close\r\n\r\n";
+
+			std::ofstream output;
+			output.open("outputofhttpyay.txt");
+
+			std::vector<char> ResponseBuffer(4096);
+			while (::Network::runboyrun) {
+
+				SDL_Delay(500);
+				if (NET_WriteToStreamSocket(ServerTrackerHTTPStream, HTTPGetRequest, sizeof(HTTPGetRequest)) == -1) {
+					std::cout << "NET_WriteToStreamSocket error: failed to send HTTP Get packet to server tracker, retrying...\n" << SDL_GetError() << std::endl;
+					goto RestablishConnection;
+				}
+				if (NET_WaitUntilStreamSocketDrained(ServerTrackerHTTPStream, -1) == -1) {
+					std::cout << "failed to send HTTP Get packet to server tracker, retrying...\n" << SDL_GetError() << std::endl;
+					goto RestablishConnection;
+				}
+
+				NET_ReadFromStreamSocket(ServerTrackerHTTPStream, ResponseBuffer.data(), ResponseBuffer.size());
+				output << ResponseBuffer.data() << std::endl;
+			
+				std::cout << ResponseBuffer.data() << std::endl;
+
+				continue;
+
+			RestablishConnection:
+
+				NET_DestroyStreamSocket(ServerTrackerHTTPStream);
+				ServerTrackerHTTPStream = NET_CreateClient(ServerTrackerAddress, 80, NULL);
+				if (ServerTrackerAddress == NULL) {
+					std::cerr << "Failed to establish connection to global server tracker, SDL_net error: " << SDL_GetError() << std::endl;
+					break;
+				}
+			}
+			
+			NET_DestroyStreamSocket(ServerTrackerHTTPStream);
+			return EXIT_SUCCESS;
+		}
+
+		static SDL_Thread* _GlobalServerLocaterThread;
+		static SDL_Thread* _LANCheckerThread;
 	}
 }
 
 void Game::Network::Init() {
 
 	if (!NET_Init()) {
-		std::cerr << "::FATAL ERROR:: Failed to initalize SDL3_net. Game requires the ability to set up a connection, even if offline, to set up a local server and connect to it." << std::endl;
-		exit(EXIT_FAILURE);
+		std::cerr << "Failed to initalize SDL_net. Even if offline, game requires being able to set up a local server and connect to it." << std::endl;
+		Exceptions::ThrowSDLError("Failed to initalize SDL_net. Even if offline, game requires being able to set up a local server and connect to it.");
 	}
 
 	Game::Network::Address = NET_GetLocalAddresses(&Game::Network::AddressCount);
+	
+	SDL_PropertiesID GlobalServerLocaterThreadPrpties = SDL_CreateProperties();
+	SDL_SetNumberProperty(GlobalServerLocaterThreadPrpties, SDL_PROP_THREAD_CREATE_NAME_STRING, SDL_THREAD_PRIORITY_NORMAL);
+	
+	//SDL_SetStringProperty(GlobalServerLocaterThreadPrpties, SDL_PROP_THREAD_CREATE_NAME_STRING, "ccGBLFind");
+	//SDL_SetPointerProperty(GlobalServerLocaterThreadPrpties, SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER, (void*)::Network::_GlobalServerLocater);
+	//::Network::_GlobalServerLocaterThread = SDL_CreateThreadWithProperties(GlobalServerLocaterThreadPrpties);
 
-	::Network::_LANCheckerThread = std::thread(::Network::_LANChecker);
+	SDL_SetStringProperty(GlobalServerLocaterThreadPrpties, SDL_PROP_THREAD_CREATE_NAME_STRING, "ccLANFind");
+	SDL_SetPointerProperty(GlobalServerLocaterThreadPrpties, SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER, (void*)::Network::_LANChecker);
+	::Network::_LANCheckerThread = SDL_CreateThreadWithProperties(GlobalServerLocaterThreadPrpties);
+
+	SDL_DestroyProperties(GlobalServerLocaterThreadPrpties);
 }
 
 void Game::Network::Destroy() {
 
 	::Network::runboyrun = false;
-	::Network::_LANCheckerThread.join();
+	SDL_WaitThread(::Network::_LANCheckerThread, NULL);
+	//SDL_WaitThread(::Network::_GlobalServerLocaterThread, NULL);
 
 	NET_Quit();
 }

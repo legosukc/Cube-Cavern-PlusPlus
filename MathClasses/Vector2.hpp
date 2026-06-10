@@ -2,7 +2,6 @@
 
 #include "../define.h"
 
-
 #include <SDL3/SDL_stdinc.h>
 #include <type_traits>
 
@@ -13,7 +12,7 @@
 
 namespace {
 
-	template<typename _ComponentType, class _DerivedType>
+	template<typename _ComponentType, typename _DerivedType>
 	struct _base_vector2 {
 
 		static constexpr inline int ComponentCount = 2;
@@ -21,8 +20,7 @@ namespace {
 
 		static_assert(std::is_integral_v<ComponentType> || std::is_floating_point_v<ComponentType>, "Unexpected _base_vector2 template parameter. Expected floating point or integral.");
 
-
-		inline _base_vector2() {}
+		constexpr _base_vector2() : X(static_cast<_ComponentType>(0)), Y(static_cast<_ComponentType>(0)) {}
 		constexpr _base_vector2(ComponentType _X, ComponentType _Y) : X(_X), Y(_Y) {}
 		constexpr explicit _base_vector2(ComponentType Value) : X(Value), Y(Value) {}
 
@@ -44,24 +42,19 @@ namespace {
 		}
 
 
-
 		constexpr _DerivedType operator+(const _DerivedType& B) const {
 			return _DerivedType(this->X + B.X, this->Y + B.Y);
 		}
-
 		constexpr _DerivedType operator+(ComponentType B) const {
 			return _DerivedType(this->X + B, this->Y + B);
 		}
 
-
 		constexpr void operator+=(const _DerivedType& B) {
 			*this = this->operator+(B);
 		}
-
 		constexpr void operator+=(ComponentType B) {
 			*this = this->operator+(B);
 		}
-
 
 
 		constexpr _DerivedType operator-(const _DerivedType& B) const {
@@ -98,7 +91,6 @@ namespace {
 		constexpr void operator*=(const _DerivedType& B) {
 			*this = this->operator*(B);
 		}
-
 		constexpr void operator*=(ComponentType B) {
 			*this = this->operator*(B);
 		}
@@ -108,7 +100,6 @@ namespace {
 		constexpr _DerivedType operator/(const _DerivedType& B) const {
 			return _DerivedType(this->X / B.X, this->Y / B.Y);
 		}
-
 		constexpr _DerivedType operator/(ComponentType B) const {
 			return _DerivedType(this->X / B, this->Y / B);
 		}
@@ -117,10 +108,10 @@ namespace {
 		constexpr void operator/=(const _DerivedType& B) {
 			*this = this->operator/(B);
 		}
-
 		constexpr void operator/=(ComponentType B) {
 			*this = this->operator/(B);
 		}
+
 
 		constexpr _DerivedType operator%(const _DerivedType& B) const {
 			return _DerivedType(Math::Mod<ComponentType>(this->X, B.X), Math::Mod<ComponentType>(this->Y, B.Y));
@@ -145,8 +136,6 @@ namespace {
 			return this->X != B.X || this->Y != B.Y;
 		}
 
-
-
 		constexpr ComponentType Dot(const _DerivedType& B) const {
 			return (this->X * B.X) + (this->Y * B.Y);
 		}
@@ -170,10 +159,7 @@ namespace Math {
 
 struct Math::Vector2 : ::_base_vector2<float, Math::Vector2> {
 
-	inline Vector2() : _base_vector2() {}
-	constexpr Vector2(float _X, float _Y) : _base_vector2(_X, _Y) {}
-	constexpr explicit Vector2(float Value) : _base_vector2(Value) {}
-
+	using _base_vector2::_base_vector2;
 
 	constexpr operator Math::IVector2() const;
 	constexpr operator Math::UVector2() const;
@@ -192,14 +178,13 @@ struct Math::Vector2 : ::_base_vector2<float, Math::Vector2> {
 
 	constexpr Math::Vector2 Normalize() const {
 
-		return this->operator*(
+		return *this *
 
-		#ifdef USE_SIMD_INTRINSICS
-			_mm_rsqrt_ss(_mm_set_ss(this->Dot(*this)))[0]
-		#else
-			1.f / std::sqrt(this->Dot(*this))
-		#endif
-		);
+#ifdef USE_SIMD_INTRINSICS
+			_mm_rsqrt_ss(_mm_set_ss(this->Dot(*this)))[0];
+#else
+			1.f / std::sqrt(this->Dot(*this));
+#endif
 	}
 };
 
@@ -228,9 +213,7 @@ constexpr Math::Vector2 operator%(Math::Vector2::ComponentType A, const Math::Ve
 
 struct Math::IVector2 : ::_base_vector2<Sint32, Math::IVector2> {
 
-	inline IVector2() : _base_vector2() {}
-	constexpr IVector2(Sint32 _X, Sint32 _Y) : _base_vector2(_X, _Y) {}
-	constexpr explicit IVector2(Sint32 Value) : _base_vector2(Value) {}
+	using _base_vector2::_base_vector2;
 
 	constexpr operator Math::Vector2() const;
 	constexpr operator Math::UVector2() const;
@@ -262,9 +245,7 @@ constexpr Math::IVector2 operator%(Math::IVector2::ComponentType A, const Math::
 
 struct Math::UVector2 : ::_base_vector2<Uint32, Math::UVector2> {
 
-	inline UVector2() : _base_vector2() {}
-	constexpr UVector2(Uint32 _X, Uint32 _Y) : _base_vector2(_X, _Y) {}
-	constexpr explicit UVector2(Uint32 Value) : _base_vector2(Value) {}
+	using _base_vector2::_base_vector2;
 
 	constexpr operator Math::Vector2() const;
 	constexpr operator Math::IVector2() const;

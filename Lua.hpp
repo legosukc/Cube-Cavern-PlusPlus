@@ -1,29 +1,59 @@
 #pragma once
 
 #include <random>
-
 #include <fstream>
+
+#include <SDL3/SDL_timer.h>
+
+#ifndef BUILD_SERVER
+#include <SDL3/SDL_opengl.h>
+#include <SDL3/SDL_opengl_glext.h>
+#endif
 
 
 #include <lua-5.5.0/lua.hpp>
 
 #include "FunctionHeaders/LuaHelper.hpp"
 
+
+// uhh keep this for "ClientDownloadsLuaBytecode" config comment
+// If true, sends pre-compiled byte code for the client, no compilation on the client needed.
+	// If false, sends the entire lua source code from mods for the client to compile.
+	// Bytecode is often smaller than source code, however, all client code will have to be compiled on the server on start-up.
+	// After compilation, bytecode will be cached, you can configure cache settings in "GlobalCfg.json"
+
 namespace Game::Lua {
+
+	// Contains the correct directory paths depending on the build target (Client or Server)
+	struct LuaDirectories {
+#ifdef BUILD_CLIENT
+		static inline const char* MiscClasses = "MiscClassesClient";
+		static inline const char* GameClasses = "GameClassesClient";
+		static inline const char* BaseClasses = "BaseClassesClient";
+		static inline const char* ItemClasses = "ItemClassesClient";
+		static inline const char* EnemyClasses = "EnemyClassesClient";
+#else
+		static inline const char* MiscClasses = "MiscClassesServer";
+		static inline const char* GameClasses = "GameClassesServer";
+		static inline const char* BaseClasses = "BaseClassesServer";
+		static inline const char* ItemClasses = "ItemClassesServer";
+		static inline const char* EnemyClasses = "EnemyClassesServer";
+#endif
+	};
 
 	struct LuaThreadInfo {
 		LuaThreadInfo() {
 			
 #ifndef BUILD_SERVER
 			GLint MaxBoundTextures;
-			glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &MaxBoundTextures);
+			Game::Graphics::OpenGLFunctions::glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &MaxBoundTextures);
 			
 			this->ActiveTextures = static_cast<GLuint*>(std::calloc(0, MaxBoundTextures * sizeof(GLuint)));
 
 			//this->BoundVertexArray = glGetVertexArrayiv()
 			
-			this->DepthTest = glIsEnabled(GL_DEPTH_TEST);
-			this->StencilTest = glIsEnabled(GL_STENCIL_TEST);
+			this->DepthTest = Game::Graphics::OpenGLFunctions::glIsEnabled(GL_DEPTH_TEST);
+			this->StencilTest = Game::Graphics::OpenGLFunctions::glIsEnabled(GL_STENCIL_TEST);
 #endif
 		}
 
@@ -42,6 +72,12 @@ namespace Game::Lua {
 #endif
 	};
 
+	// If true, when lua code is compiled the bytecode will be stored to disk. Improves future loading times at the cost of disk space.
+	bool CacheLuaBytecode = false;
+
+	// Controls the max amount of storage space for lua bytecode caching.
+	Uint16 MaxTotalCacheSizeMB = 20;
+
 	void* LuaAllocationFunc(void*, void* ptr, size_t, size_t nsize);
 
 	inline void Init();
@@ -57,6 +93,7 @@ namespace Game::Lua {
 	LuaHelper::StackTableReference GameTable;
 }
 
+#include "LuaLibraries/LuaMath.hpp"
 #include "LuaLibraries/LuaTable.hpp"
 #include "LuaLibraries/LuaEnums.hpp"
 #include "LuaLibraries/LuaTask.hpp"
@@ -67,25 +104,30 @@ namespace Game::Lua {
 
 #include "LuaLibraries/LuaBuffer.hpp"
 
+#include "LuaLibraries/LuaModelLoader.hpp"
+
 #include "LuaLibraries/LuaGraphics.hpp"
 #include "LuaLibraries/LuaInput.hpp"
 
+#include "LuaLibraries/LuaConsole.hpp"
+
 #ifndef BUILD_SERVER
 
-#include "LuaLibraries/LuaNetwork_Client.hpp"
-#include "LuaLibraries/LuaSound_Client.hpp"
+#include "Client/LuaLibraries/LuaNetwork_Client.hpp"
+#include "Client/LuaLibraries/LuaSound_Client.hpp"
 #else
 
-#include "LuaLibraries/LuaNetwork_Server.hpp"
-#include "LuaLibraries/LuaSound_Server.hpp"
+#include "Server/LuaLibraries/LuaNetwork_Server.hpp"
+#include "Server/LuaLibraries/LuaSound_Server.hpp"
 #endif
 
 namespace {
 
 	static void _LoadLuaFileInTable(const std::filesystem::directory_entry& Entry, int TableIDX) {
 
+		const int StartingStackIndex = lua_gettop(Game::Lua::State);
+
 		const std::filesystem::path& Path = Entry.path();
-		const std::string StringPath = Path.generic_u8string();
 
 		unlikely_branch
 		if (Path.extension() != ".lua") {
@@ -99,23 +141,21 @@ namespace {
 		unlikely_branch
 		if (lua_rawget(Game::Lua::State, TableIDX) != LUA_TNIL) {
 			std::clog << Path << " already has an entry, skipping" << std::endl;
-			lua_pop(Game::Lua::State, 1);
-			return;
+			goto _Exit;
 		}
-		lua_pop(Game::Lua::State, 1);
+		lua_settop(Game::Lua::State, StartingStackIndex);
 
 		std::cout << "Loading " << Path.stem().generic_string().c_str() << std::endl;
 
 		unlikely_branch
-		if (LuaHelper::LoadFileLog(Game::Lua::State, StringPath.c_str()) != LUA_OK) {
+		if (LuaHelper::LoadFileLog(Game::Lua::State, Path.generic_string().c_str()) != LUA_OK) {
 			std::clog << "Failed to load " << Path << std::endl;
-			return;
+			goto _Exit;
 		}
 
 		unlikely_branch
 		if (LuaHelper::PCallLog(Game::Lua::State, 0, 1) != LUA_OK) {
-			lua_pop(Game::Lua::State, 1);
-			return;
+			goto _Exit;
 		}
 	
 		if (!lua_istable(Game::Lua::State, -1)) {
@@ -125,6 +165,9 @@ namespace {
 		}
 
 		lua_setfield(Game::Lua::State, TableIDX, Path.stem().generic_string().c_str());
+
+		_Exit:
+		lua_settop(Game::Lua::State, StartingStackIndex);
 	}
 
 	static void _LoadLuaAssetDirectoryInTable(const char* DirectoryPath, int TableIDX) {
@@ -182,9 +225,10 @@ namespace {
 		// METATABLE
 		lua_createtable(Game::Lua::State, 0, 1);
 
-		this->Path = StringHelper::Combine(_Name, '\\');
+		this->Path = _Name;
+		this->Path.push_back('\\');
 
-		lua_pushlstring(Game::Lua::State, this->Path.c_str(), this->Path.size());
+		lua_pushlstring(Game::Lua::State, this->Path.c_str(), this->Path.size() + 1);
 		lua_pushcclosure(Game::Lua::State, _LuaDirectoryLibrary::__index, 1);
 		lua_setfield(Game::Lua::State, -2, "__index");
 
@@ -231,10 +275,10 @@ namespace {
 
 
 //static std::ofstream _AllocLogFile;
-void* Game::Lua::LuaAllocationFunc(void*, void* ptr, size_t, size_t nsize) {
+void* Game::Lua::LuaAllocationFunc(void* ud, void* ptr, size_t osize, size_t nsize) {
 	using namespace Game::Statistics;
 
-	const auto StartTime = std::chrono::high_resolution_clock::now();
+	const Uint64 StartNS = SDL_GetTicksNS();
 
 	if (nsize == 0) {
 
@@ -247,7 +291,7 @@ void* Game::Lua::LuaAllocationFunc(void*, void* ptr, size_t, size_t nsize) {
 			std::free(ptr);
 		}
 
-		Statistics::Memory::LuaMicrosecondsSpentOnHeapPerFrame += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - StartTime).count();
+		Statistics::Memory::LuaNSSpentOnHeapPerFrame += SDL_GetTicksNS() - StartNS;
 		return NULL;
 	}
 
@@ -262,8 +306,7 @@ void* Game::Lua::LuaAllocationFunc(void*, void* ptr, size_t, size_t nsize) {
 	//::_AllocLogFile << "alloc: " << reinterpret_cast<void*>(static_cast<char*>(ptr) + sizeof(size_t)) << ", " << ptr << std::endl;
 
 	Statistics::Memory::UpdateLuaStatsAllocation(static_cast<Uint64>(nsize));
-
-	Statistics::Memory::LuaMicrosecondsSpentOnHeapPerFrame += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - StartTime).count();
+	Statistics::Memory::LuaNSSpentOnHeapPerFrame += SDL_GetTicksNS() - StartNS;
 
 	return static_cast<char*>(ptr) + sizeof(size_t);
 }
@@ -293,8 +336,9 @@ void Game::Lua::Init() {
 
 	luaopen_base(Game::Lua::State);
 
-	luaopen_math(Game::Lua::State);
-	lua_setglobal(Game::Lua::State, LUA_MATHLIBNAME);
+	Lua::CLibraries::math::Init(Game::Lua::State);
+
+	Lua::CLibraries::table::Init(Game::Lua::State);
 
 	luaopen_string(Game::Lua::State);
 	lua_setglobal(Game::Lua::State, LUA_STRLIBNAME);
@@ -315,8 +359,6 @@ void Game::Lua::Init() {
 	lua_setglobal(Game::Lua::State, "Game");
 
 
-	Lua::CLibraries::table::Init(Game::Lua::State);
-
 	Lua::CLibraries::Enums::Init(Game::Lua::State);
 
 	Lua::CLibraries::Task::Init(Game::Lua::State);
@@ -328,32 +370,35 @@ void Game::Lua::Init() {
 
 	Lua::CLibraries::Buffer::Init(Game::Lua::State);
 
+	Lua::CLibraries::ModelLoader::Init(Game::Lua::State);
+
 	Lua::CLibraries::Graphics::Init(Game::Lua::State);
 	Lua::CLibraries::Input::Init(Game::Lua::State);
 
 
-	::_LoadLuaAssetDirectoryInTable("GameClasses\\", Game::Lua::GameTable.GetStackIndex());
+	::_LoadLuaAssetDirectoryInTable(Game::Lua::LuaDirectories::GameClasses, Game::Lua::GameTable.GetStackIndex());
 
 	lua_createtable(Game::Lua::State, 0, 4); // Assets
 
-	{
-		int ParentTableIDX;
-		::_LuaDirectoryLibrary ItemClasses, EnemyClasses, MiscClasses, BaseClasses;
 
-		ParentTableIDX = lua_gettop(Game::Lua::State);
-		lua_pushvalue(Game::Lua::State, ParentTableIDX);
-		lua_setglobal(Game::Lua::State, "Assets");
+	::_LuaDirectoryLibrary ItemClasses, EnemyClasses, MiscClasses, BaseClasses;
+	int ParentTableIDX;
 
-		ItemClasses = ::_LuaDirectoryLibrary("ItemClasses", ParentTableIDX);
-		EnemyClasses = ::_LuaDirectoryLibrary("EnemyClasses", ParentTableIDX);
-		MiscClasses = ::_LuaDirectoryLibrary("MiscClasses", ParentTableIDX);
-		BaseClasses = ::_LuaDirectoryLibrary("BaseClasses", ParentTableIDX);
+	ParentTableIDX = lua_gettop(Game::Lua::State);
+	lua_pushvalue(Game::Lua::State, ParentTableIDX);
+	lua_setglobal(Game::Lua::State, "Assets");
 
-		MiscClasses.Load();
-		BaseClasses.Load();
-		EnemyClasses.Load();
-		ItemClasses.Load();
-	}
+	ItemClasses = ::_LuaDirectoryLibrary(Game::Lua::LuaDirectories::ItemClasses, ParentTableIDX);
+	EnemyClasses = ::_LuaDirectoryLibrary(Game::Lua::LuaDirectories::EnemyClasses, ParentTableIDX);
+	MiscClasses = ::_LuaDirectoryLibrary("MiscClassesGlobal", ParentTableIDX);
+	BaseClasses = ::_LuaDirectoryLibrary(Game::Lua::LuaDirectories::BaseClasses, ParentTableIDX);
+
+	MiscClasses.Load();
+	Lua::CLibraries::Console::PostMiscClassInit(Game::Lua::State);
+
+	BaseClasses.Load();
+	EnemyClasses.Load();
+	ItemClasses.Load();
 
 
 	std::cout << "Initalized Lua system, took "
@@ -366,15 +411,21 @@ void Game::Lua::Update() {
 
 	Game::Lua::GameTable.SetKey(Game::Lua::State, Game::DeltaTime, "DeltaTime");
 
+#ifndef BUILD_SERVER
+	CLibraries::Input::Update(Game::Lua::State);
+#endif
+
 	CLibraries::Task::Update(Game::Lua::State);
 
 	lua_pushnil(Game::Lua::State);
 	const int StackTop = lua_gettop(Game::Lua::State);
 	while (lua_next(Game::Lua::State, Game::Lua::GameTable.GetStackIndex()) != 0) {
 
-		if (lua_getfield(Game::Lua::State, -1, "Update") == LUA_TFUNCTION) {
-			lua_pushvalue(Game::Lua::State, -2);
-			LuaHelper::PCallLog(Game::Lua::State, 1, 0);
+		if (lua_istable(State, -1)) {
+			if (lua_getfield(Game::Lua::State, -1, "Update") == LUA_TFUNCTION) {
+				lua_pushvalue(Game::Lua::State, -2);
+				LuaHelper::PCallLog(Game::Lua::State, 1, 0);
+			}
 		}
 
 		lua_settop(Game::Lua::State, StackTop);
@@ -391,22 +442,16 @@ void Game::Lua::Draw() {
 	const int StackTop = lua_gettop(Game::Lua::State);
 	while (lua_next(Game::Lua::State, -2) != 0) {
 
-		if (lua_getfield(Game::Lua::State, -1, "Draw") == LUA_TFUNCTION) {
-			lua_pushvalue(Game::Lua::State, -2);
-			LuaHelper::PCallLog(Game::Lua::State, 1, 0);
+		if (lua_istable(State, -1)) {
+			if (lua_getfield(Game::Lua::State, -1, "Draw") == LUA_TFUNCTION) {
+				lua_pushvalue(Game::Lua::State, -2);
+				LuaHelper::PCallLog(Game::Lua::State, 1, 0);
+			}
 		}
 
 		lua_settop(Game::Lua::State, StackTop);
 	}
 	lua_settop(Game::Lua::State, StackTop - 2);
-	/*
-	lua_getglobal(Game::Lua::State, "Game");
-	lua_getfield(Game::Lua::State, -1, "Camera");
-	lua_getfield(Game::Lua::State, -1, "Draw");
-	lua_pushvalue(Game::Lua::State, -2);
-
-	LuaHelper::PCallLog(Game::Lua::State, 1, 0);
-	lua_pop(Game::Lua::State, 2);*/
 }
 #endif
 

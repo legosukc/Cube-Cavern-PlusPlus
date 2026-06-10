@@ -1,0 +1,61 @@
+{
+	"Main": {
+		"Gameplay": {
+			"ViewbobIntensity": 1,
+			"FOV": 90,
+			"ShowPlayerNames": true,
+			"Subtitles": true
+		},
+		"Input": {
+			"Mouse": {
+				"MouseSensitivity": 0.5
+			},
+			"Gamepad": {
+				"GamepadSensitivity": 1
+			},
+			"Binds": {
+				"Movement": {
+					"MoveForward": [ "W" ],
+					"MoveLeft": [ "A" ],
+					"MoveRight": [ "D" ],
+					"MoveBack": [ "S" ],
+					"Jump": [ "Space" ],
+					"Dash": [ "LeftShift" ],
+					"Crawl": [ "LeftCtrl" ]
+				},
+				"Actions": {
+					"UsePrimary": [ "LeftClick" ],
+					"UseSecondary": [ "RightClick", "LeftAlt" ],
+					"Dropkick": [ "C" ],
+					"QuickDrop": [ "G" ]
+				},
+				"UI": {
+					"Inventory": [ "Tab" ],
+					"Book": [ "H" ]
+				}
+			}
+		},
+		"Graphics": {
+			"WindowMode": 0,
+			"ResolutionW": 800,
+			"ResolutionH": 600,
+			"RenderingAPI": "OpenGL",
+			"ShowFPS": false,
+			"SmoothTextureEdges": true,
+			"AnisotropicFiltering": 1
+		},
+		"Sound": {
+			"AudioBackend": "OpenAL-Soft",
+			"AudioDevice": "Default",
+			"Master": 100,
+			"Music": 100,
+			"SFX": 100,
+			"Ambience": 100,
+			"DirectionalAudio": true
+		},
+		"Misc": {
+			"Language": "English",
+			"DiscordRichPresence": true
+		}
+	}
+}

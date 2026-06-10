@@ -1,0 +1,1 @@
+/usr/local/vitasdk/bin/arm-vita-eabi-g++  -Wl,-q -std=c++17 -Wl,-z,nocopyreloc CMakeFiles/hello_cpp_world.dir/Client/main_client.cpp.obj -o hello_cpp_world   -L"/mnt/c/Users/super/OneDrive/Documents/VS/C&C++/Cube Cavern++/build"  -lSceLibKernel_stub -lSceDisplay_stub -lstdc++ -lpthread

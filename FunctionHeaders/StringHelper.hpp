@@ -2,8 +2,29 @@
 
 #include "../define.h"
 
+#include <string>
+#include <cstring>
+
+#include <cmath>
+
+#include "TypeHelper.hpp"
+#include "BitOp.hpp"
+
 
 namespace StringHelper {
+
+	constexpr bool CharMatches(char Character) {
+		return false;
+	}
+
+	template<char CompareTo, char... Comparisons>
+	constexpr bool CharMatches(char Character) {
+		return Character == CompareTo || CharMatches<Comparisons...>(Character);
+	}
+
+	constexpr bool IsWhitespace(char Character) {
+		return CharMatches<' ', '	', '\n', '\0'>(Character);
+	}
 
 	template<typename T>
 	constexpr size_t Length(const T& X) {
@@ -46,7 +67,7 @@ namespace StringHelper {
 namespace {
 
 	template<typename T>
-	constexpr static inline size_t _GetStrTotalSize(size_t Size, const T& arg) {
+	constexpr static size_t _GetStrTotalSize(size_t Size, const T& arg) {
 
 		static_assert(
 			std::is_integral_v<T>
@@ -60,7 +81,7 @@ namespace {
 	}
 
 	template<typename T, typename... Args_T>
-	constexpr static inline size_t _GetStrTotalSize(size_t Size, const T& arg, const Args_T&... Strs) {
+	constexpr static size_t _GetStrTotalSize(size_t Size, const T& arg, const Args_T&... Strs) {
 
 		return _GetStrTotalSize<Args_T...>(_GetStrTotalSize<T>(Size, arg), Strs...);
 	}
@@ -68,13 +89,12 @@ namespace {
 
 
 	template<typename T>
-	constexpr static inline void _AppendString(std::string& Buffer, const T& Appendant) {
+	constexpr static void _AppendString(std::string& Buffer, const T& Appendant) {
 
 		static_assert(
 			std::is_integral_v<T> || std::is_floating_point_v<T>
 			|| TypeHelper::is_c_string_v<T>
 			|| std::is_same_v<TypeHelper::RemoveTypeQualifiers<T>, std::string>,
-
 			"Invalid Type"
 			);
 

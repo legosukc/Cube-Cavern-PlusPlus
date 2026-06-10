@@ -5,10 +5,6 @@
 #include "../define.h"
 
 #include <iostream>
-#include <filesystem>
-
-#include <thread>
-#include <chrono>
 
 #include <string>
 #include <vector>
@@ -40,6 +36,10 @@
 #include "../pch.h"
 
 
+namespace Game {
+	double DeltaTime = 1.0;
+}
+
 #include "Network_Server.hpp"
 #include "Sound_Server.hpp"
 
@@ -57,18 +57,19 @@ int main() {
 	Game::Network::Init();
 	Game::Lua::Init();
 
-	std::chrono::high_resolution_clock::time_point Start;
-	std::chrono::milliseconds Delta;
+	Uint64 Elasped, Start;
 	while (true) {
-		Start = std::chrono::high_resolution_clock::now();
+		
+		Start = SDL_GetTicksNS();
 
 		Game::Lua::Update();
 		Game::Network::SendPacket();
 
-		Delta = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - Start);
+		Elasped = SDL_GetTicksNS() - Start;
+		Game::DeltaTime = static_cast<double>(Elasped) / 1e+9;
 
-		if (Delta > std::chrono::milliseconds(0) && Delta < std::chrono::milliseconds(16)) {
-			std::this_thread::sleep_for(Delta);
+		if (Elasped < 16 * 1000) {
+			SDL_DelayNS(Elasped);
 		}
 	}
 

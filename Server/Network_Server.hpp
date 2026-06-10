@@ -1,13 +1,16 @@
 #pragma once
 
+#include "../define.h"
+
+#include <iostream>
+
 #include <map>
 #include <vector>
-#include <thread>
 
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_thread.h>
 #include <SDL3_net/SDL_net.h>
 
-#include "../define.h"
+#include "../FunctionHeaders/Exceptions.hpp"
 
 
 namespace {
@@ -152,26 +155,40 @@ namespace {
 				NET_SendDatagram(LANChecker, *Game::Network::Address, 2011, &ServerAnnouncePayload, sizeof(ServerAnnouncePayload_Struct));
 			}
 		}
-		static std::thread _LANCheckerThread;
+
+		static SDL_Thread* _GlobalServerLocaterThread;
+		static SDL_Thread* _LANCheckerThread;
 	}
 }
 
 void Game::Network::Init() {
 
 	if (!NET_Init()) {
-		std::cerr << "::FATAL ERROR:: Failed to initalize SDL_net. Game requires the ability to set up a connection, even if offline, to set up a local server and connect to it." << std::endl;
-		exit(EXIT_FAILURE);
+		std::cerr << "Failed to initalize SDL_net." << std::endl;
+		Exceptions::ThrowSDLError("Failed to initalize SDL_net.");
 	}
 
 	Game::Network::Address = NET_GetLocalAddresses(&Game::Network::AddressCount);
 
-	::Network::_LANCheckerThread = std::thread(::Network::_LANChecker);
+	SDL_PropertiesID ConnectionThreadProp = SDL_CreateProperties();
+	SDL_SetNumberProperty(ConnectionThreadProp, SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER, 4096);
+
+	//SDL_SetStringProperty(GlobalServerLocaterThreadPrpties, SDL_PROP_THREAD_CREATE_NAME_STRING, "ccGBLFind");
+	//SDL_SetPointerProperty(GlobalServerLocaterThreadPrpties, SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER, (void*)::Network::_GlobalServerLocater);
+	//::Network::_GlobalServerLocaterThread = SDL_CreateThreadWithProperties(GlobalServerLocaterThreadPrpties);
+
+	SDL_SetStringProperty(ConnectionThreadProp, SDL_PROP_THREAD_CREATE_NAME_STRING, "ccLANFind");
+	SDL_SetPointerProperty(ConnectionThreadProp, SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER, (void*)::Network::_LANChecker);
+	::Network::_LANCheckerThread = SDL_CreateThreadWithProperties(ConnectionThreadProp);
+
+	SDL_DestroyProperties(ConnectionThreadProp);
 }
 
 void Game::Network::Destroy() {
 
 	::Network::runboyrun = false;
-	::Network::_LANCheckerThread.join();
+	SDL_WaitThread(::Network::_LANCheckerThread, NULL);
+	//SDL_WaitThread(::Network::_GlobalServerLocaterThread, NULL);
 
 	NET_Quit();
 }

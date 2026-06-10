@@ -85,7 +85,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\clib\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL3_net.lib;;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;SDL3_net.lib;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
@@ -104,7 +104,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\clib\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL3_net.lib;;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;SDL3_net.lib;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -120,7 +120,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL3_net.lib;;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;SDL3_net.lib;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <AdditionalLibraryDirectories>C:\clib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
@@ -139,7 +139,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL3_net.lib;;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;SDL3_net.lib;SDL3.lib;SDL3_mixer.lib;glew32.lib;OpenAL32.lib;lua55.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\clib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -148,9 +148,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Collisions.hpp" />
+    <ClInclude Include="..\Color.hpp" />
     <ClInclude Include="..\ConsoleVars.hpp" />
     <ClInclude Include="..\define.h" />
     <ClInclude Include="..\FunctionHeaders\BitOp.hpp" />
+    <ClInclude Include="..\FunctionHeaders\ConfigHandler.hpp" />
     <ClInclude Include="..\FunctionHeaders\Exceptions.hpp" />
     <ClInclude Include="..\FunctionHeaders\File.hpp" />
     <ClInclude Include="..\FunctionHeaders\LuaHelper.hpp" />
@@ -162,6 +164,7 @@
     <ClInclude Include="..\GameHeaders\InputHandler.hpp" />
     <ClInclude Include="..\Lua.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaBuffer.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaConsole.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaEnums.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaGraphics.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_BufferBase.hpp" />
@@ -169,16 +172,21 @@
     <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_GLObjectBase.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_Program.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_Shader.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_Texture.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_UniformBuffer.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_VertexArray.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaGraphics_Classes\LuaGraphics_VertexBuffer.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaInput.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaMath.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaMatrix.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaModelLoader.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaSurface.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaTable.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaTask.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaTypeHelper.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaVector.hpp" />
-    <ClInclude Include="..\MathClasses\Mat4.hpp" />
+    <ClInclude Include="..\MathClasses\Matrix.hpp" />
+    <ClInclude Include="..\MathClasses\Vector.hpp" />
     <ClInclude Include="..\MathClasses\Vector2.hpp" />
     <ClInclude Include="..\MathClasses\Vector3.hpp" />
     <ClInclude Include="..\MathClasses\Vector4.hpp" />
@@ -186,57 +194,66 @@
     <ClInclude Include="..\pch.h" />
     <ClInclude Include="..\Statistics.hpp" />
     <ClInclude Include="GraphicsClasses\BaseClassDefinitions.hpp" />
-    <ClInclude Include="GraphicsClasses\VertexArray_OpenGL.hpp" />
+    <ClInclude Include="GraphicsClasses\BufferBase.hpp" />
+    <ClInclude Include="GraphicsClasses\FragmentShader.hpp" />
+    <ClInclude Include="GraphicsClasses\Framebuffer.hpp" />
+    <ClInclude Include="GraphicsClasses\IndexBuffer.hpp" />
+    <ClInclude Include="GraphicsClasses\Program.hpp" />
+    <ClInclude Include="GraphicsClasses\ShaderBase.hpp" />
+    <ClInclude Include="GraphicsClasses\VertexShader.hpp" />
+    <ClInclude Include="GraphicsClasses\Texture.hpp" />
+    <ClInclude Include="GraphicsClasses\UniformBuffer.hpp" />
+    <ClInclude Include="GraphicsClasses\VertexArray.hpp" />
+    <ClInclude Include="GraphicsClasses\VertexBuffer.hpp" />
     <ClInclude Include="Graphics_Client.hpp" />
     <ClInclude Include="LuaLibraries\LuaNetwork_Client.hpp" />
     <ClInclude Include="LuaLibraries\LuaSound_Client.hpp" />
     <ClInclude Include="Network_Client.hpp" />
-    <ClInclude Include="OpenGLClasses\ElementBuffer.hpp" />
-    <ClInclude Include="OpenGLClasses\Framebuffer.hpp" />
-    <ClInclude Include="OpenGLClasses\GeneralBufferBase.hpp" />
-    <ClInclude Include="OpenGLClasses\OpenGLClassBase.hpp" />
-    <ClInclude Include="OpenGLClasses\Program.hpp" />
-    <ClInclude Include="OpenGLClasses\Shader.hpp" />
-    <ClInclude Include="OpenGLClasses\Texture.hpp" />
-    <ClInclude Include="OpenGLClasses\UniformBuffer.hpp" />
-    <ClInclude Include="OpenGLClasses\VertexArray.hpp" />
-    <ClInclude Include="OpenGLClasses\VertexBuffer.hpp" />
     <ClInclude Include="SDLClasses\Window.hpp" />
     <ClInclude Include="Sound_Client.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\BaseClasses\EnemyBase.lua" />
-    <None Include="..\BaseClasses\ItemBase.lua" />
-    <None Include="..\EnemyClasses\Chik.lua" />
-    <None Include="..\EnemyClasses\Glass.lua" />
-    <None Include="..\EnemyClasses\Hand.lua" />
-    <None Include="..\EnemyClasses\Poopie.lua" />
-    <None Include="..\EnemyClasses\Worm.lua" />
-    <None Include="..\GameClasses\Camera.lua" />
-    <None Include="..\GameClasses\Enemies.lua" />
-    <None Include="..\GameClasses\Items.lua" />
-    <None Include="..\GameClasses\Player.lua" />
-    <None Include="..\ItemClasses\Backpack.lua" />
-    <None Include="..\ItemClasses\Boots.lua" />
-    <None Include="..\ItemClasses\Bottle.lua" />
-    <None Include="..\ItemClasses\Dagger.lua" />
-    <None Include="..\ItemClasses\DaggerB.lua" />
-    <None Include="..\ItemClasses\DaggerG.lua" />
-    <None Include="..\ItemClasses\DaggerR.lua" />
-    <None Include="..\ItemClasses\DaggerY.lua" />
-    <None Include="..\ItemClasses\Leather.lua" />
-    <None Include="..\ItemClasses\Rock.lua" />
-    <None Include="..\ItemClasses\Stick.lua" />
-    <None Include="..\ItemClasses\WaterBottle.lua" />
-    <None Include="..\ItemClasses\Whip.lua" />
-    <None Include="..\MiscClasses\BindableEvent.lua" />
-    <None Include="..\Scripts\GameLoop.lua" />
+    <None Include="..\BaseClassesClient\EnemyBase.lua" />
+    <None Include="..\BaseClassesClient\ItemBase.lua" />
+    <None Include="..\defaultClientCfg.json" />
+    <None Include="..\EnemyClassesClient\Chik.lua" />
+    <None Include="..\EnemyClassesClient\Glass.lua" />
+    <None Include="..\EnemyClassesClient\Hand.lua" />
+    <None Include="..\EnemyClassesClient\Poopie.lua" />
+    <None Include="..\EnemyClassesClient\Worm.lua" />
+    <None Include="..\GameClassesClient\Camera.lua" />
+    <None Include="..\GameClassesClient\Enemies.lua" />
+    <None Include="..\GameClassesClient\Items.lua" />
+    <None Include="..\GameClassesClient\Player.lua" />
+    <None Include="..\defaultGlobalCfg.json" />
+    <None Include="..\ItemClassesClient\Backpack.lua" />
+    <None Include="..\ItemClassesClient\Boots.lua" />
+    <None Include="..\ItemClassesClient\Bottle.lua" />
+    <None Include="..\ItemClassesClient\Dagger.lua" />
+    <None Include="..\ItemClassesClient\DaggerB.lua" />
+    <None Include="..\ItemClassesClient\DaggerG.lua" />
+    <None Include="..\ItemClassesClient\DaggerR.lua" />
+    <None Include="..\ItemClassesClient\DaggerY.lua" />
+    <None Include="..\ItemClassesClient\Leather.lua" />
+    <None Include="..\ItemClassesClient\MacNoCheese.lua" />
+    <None Include="..\ItemClassesClient\MetalKicks.lua" />
+    <None Include="..\ItemClassesClient\Rock.lua" />
+    <None Include="..\ItemClassesClient\Stick.lua" />
+    <None Include="..\ItemClassesClient\WaterBottle.lua" />
+    <None Include="..\ItemClassesClient\Whip.lua" />
+    <None Include="..\ItemClassesClient\Yoyo.lua" />
+    <None Include="..\MiscClassesGlobal\BindableEvent.lua" />
+    <None Include="..\ScriptsClient\GameLoop.lua" />
+    <None Include="..\defaultServerCfg.json" />
     <None Include="..\Shaders\ColorableShaded.frag" />
     <None Include="..\Shaders\HelloTriangle.frag" />
     <None Include="..\Shaders\HelloTriangle.vert" />
+    <None Include="..\Shaders\LavaShader.frag" />
     <None Include="..\Shaders\Shaded3D.vert" />
     <None Include="..\Shaders\ShadedTextureless3D.vert" />
     <None Include="..\Shaders\TextureShaded.frag" />
+    <None Include="..\Shaders\YoyoThrown.frag" />
+    <None Include="..\Shaders\YoyoThrown.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

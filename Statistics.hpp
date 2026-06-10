@@ -23,9 +23,9 @@ namespace Game::Statistics {
 		volatile Uint64 LuaAllocatedBytes = 0;
 
 
-		// Microseconds spent on allocations/deallocations.
-		volatile Uint64 EngineMicrosecondsSpentOnHeapPerFrame = 0;
-		volatile Uint64 LuaMicrosecondsSpentOnHeapPerFrame = 0;
+		// Nanoseconds spent on allocations/deallocations.
+		volatile Uint64 EngineNSSpentOnHeapPerFrame = 0;
+		volatile Uint64 LuaNSSpentOnHeapPerFrame = 0;
 
 		void UpdateLuaStatsAllocation(Uint64 Bytes) noexcept {
 			Statistics::Memory::LuaAllocatedBytes += Bytes;
@@ -42,11 +42,11 @@ namespace Game::Statistics {
 	}
 
 	namespace Lua {
-		Uint64 CppCallsOnLuaFunctionsPerSecond = 0;
+		volatile Uint64 CppCallsOnLuaFunctionsPerSecond = 0;
 	}
 
 	namespace Rendering {
-		Uint64 DrawCallsPerFrame = 0;
+		volatile Uint64 DrawCallsPerFrame = 0;
 	}
 
 	inline void Update() noexcept;
@@ -56,13 +56,13 @@ namespace Game::Statistics {
 void Game::Statistics::Update() noexcept {
 	using namespace Game::Statistics;
 
-	Memory::EngineMicrosecondsSpentOnHeapPerFrame = 0;
+	Memory::EngineNSSpentOnHeapPerFrame = 0;
 	Memory::EngineAllocationsPerFrame = 0;
 	Memory::EngineAllocationBytesPerFrame = 0;
 	Memory::EngineDeallocationsPerFrame = 0;
 
 
-	Memory::LuaMicrosecondsSpentOnHeapPerFrame = 0;
+	Memory::LuaNSSpentOnHeapPerFrame = 0;
 	Memory::LuaAllocationsPerFrame = 0;
 	Memory::LuaAllocationsBytesPerFrame = 0;
 	Memory::LuaDeallocationsPerFrame = 0;

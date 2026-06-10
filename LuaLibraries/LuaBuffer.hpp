@@ -1,11 +1,8 @@
 #pragma once
 
-
-#include <memory>
-
-
 #include "../define.h"
 
+#include <memory>
 
 #include <lua-5.5.0/lua.hpp>
 #include "../FunctionHeaders/LuaHelper.hpp"

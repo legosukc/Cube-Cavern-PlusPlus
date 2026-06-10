@@ -1,8 +1,22 @@
 #pragma once
 
 #include <tuple>
+#include <algorithm>
 
 namespace TypeHelper {
+
+    template<std::size_t N>
+    struct fixed_string {
+        constexpr fixed_string(const char(&str)[N]) {
+            std::copy_n(str, N, data);
+        }
+        char data[N];
+    };
+
+    // Deduction guide
+    template<std::size_t N>
+    fixed_string(const char(&)[N]) -> fixed_string<N - 1>; // Drop null terminator
+
 
     template<typename T>
     struct FunctionTraits;

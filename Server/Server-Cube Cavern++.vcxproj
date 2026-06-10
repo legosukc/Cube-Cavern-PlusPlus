@@ -33,6 +33,7 @@
     <ClInclude Include="..\GameHeaders\InputHandler.hpp" />
     <ClInclude Include="..\Lua.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaBuffer.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaConsole.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaInput.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaTask.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaVector.hpp" />

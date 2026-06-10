@@ -1,13 +1,30 @@
 #pragma once
 
-#include <glad/glad.h>
+#include "../define.h"
 
+#include <SDL3/SDL_video.h>
+
+#include <SDL3/SDL_opengl.h>
+#include <SDL3/SDL_opengl_glext.h>
+#include <SDL3/SDL_opengles2_gl2ext.h>
 
 #include "../Statistics.hpp"
 
 
 namespace Game::Graphics {
 	inline void Init();
+
+	enum class WindowMode : Uint8 {
+		Windowed, Borderless, Fullscreen
+	};
+
+	Uint8 AnisotropicFilteringLevel = 1;
+
+	namespace OpenGL {
+		int MajorVersion;
+		int MinorVersion;
+		int Profile;
+	}
 
 	enum class GraphicsAPIEnum : Uint8 {
 		OpenGL, Vulkan,
@@ -17,8 +34,18 @@ namespace Game::Graphics {
 
 	GraphicsAPIEnum ActiveAPI;
 
-	void(*SetClearColor)(float R, float G, float B, float A);
-	void(*ClearBitfields)(unsigned int Bitfields);
+	namespace {
+		static void(*_SetClearColor)(float R, float G, float B, float A);
+		static void(*_ClearBitfields)(unsigned int Bitfields);
+	}
+
+	SDL_FORCE_INLINE void SetClearColor(float R, float G, float B, float A) {
+		_SetClearColor(R, G, B, A);
+	}
+
+	SDL_FORCE_INLINE void ClearBitfields(unsigned int Bitfields) {
+		_ClearBitfields(Bitfields);
+	}
 
 
 	inline void Update();
@@ -40,7 +67,7 @@ namespace {
 			, ElementBuffer(_ElementBuffer)
 			, UniformBuffer(_UniformBuffer) {}
 
-		friend inline void Game::Graphics::Init();
+		friend inline void ::Game::Graphics::Init();
 	};
 
 
@@ -57,7 +84,7 @@ namespace {
 			, Drawing(_Drawing)
 			, Reading(_Reading) {}
 
-		friend inline void Game::Graphics::Init();
+		friend inline void ::Game::Graphics::Init();
 	};
 
 
@@ -74,7 +101,7 @@ namespace {
 			, DepthBit(_DepthBit)
 			, StencilBit(_StencilBit) {}
 
-		friend inline void Game::Graphics::Init();
+		friend inline void ::Game::Graphics::Init();
 	};
 
 
@@ -90,215 +117,161 @@ namespace Game::Graphics {
 	::_Enums_BindTargets BindTargets;
 	::_Enums_AllocationTypes AllocationTypes;
 	::_Enums_BufferBitfields BufferBitfields;
-
-	::_Namespace_Buffer Buffer;
 }
 
 
+namespace Game::Graphics::OpenGLFunctions {
+	static PFNGLCLEARCOLORPROC glClearColor;
+	static PFNGLCLEARPROC glClear;
+
+	static PFNGLGETINTEGERVPROC glGetIntegerv;
+	static PFNGLISENABLEDPROC glIsEnabled;
+
+	static PFNGLDRAWARRAYSPROC glDrawArrays;
+	static PFNGLDRAWARRAYSINSTANCEDPROC glDrawArraysInstanced;
+
+	static PFNGLDRAWELEMENTSPROC glDrawElements;
+	static PFNGLDRAWELEMENTSINSTANCEDPROC glDrawElementsInstanced;
+}
+
 namespace {
-
-
-	struct _Namespace_Buffer_OpenGL : ::_Namespace_Buffer {
-
-		virtual void CopyToBuffer(_Enums_BindTargets::IntType BindTarget, size_t Size, const void* Data, _Enums_AllocationTypes::IntType AllocateFor) override {
-			glBufferData(BindTarget, Size, Data, AllocateFor);
-		}
-
-		virtual void CopyToBufferPointer(_Enums_BindTargets::IntType BindTarget, int Offset, size_t Size, const void* Data) override {
-			glBufferSubData(BindTarget, Offset, Size, Data);
-		}
-
-		virtual void AllocateBuffer(_Enums_BindTargets::IntType BindTarget, size_t Size, _Enums_AllocationTypes::IntType AllocateFor) override {
-			glBufferData(BindTarget, Size, NULL, AllocateFor);
-		}
-	};
-
 
 	namespace _BasicFunctions {
 
 		static inline void _SetClearColor_OpenGL(float R, float G, float B, float A) {
-			glClearColor(R, G, B, A);
+			Game::Graphics::OpenGLFunctions::glClearColor(R, G, B, A);
 		}
 
 		static inline void _ClearBitfields_OpenGL(unsigned int Bitfields) {
-			glClear(Bitfields);
+			Game::Graphics::OpenGLFunctions::glClear(Bitfields);
 		}
 	}
 }
 
 
-#include "GraphicsClasses/VertexArray_OpenGL.hpp"
+#define LOAD_OPENGL_FUNCTION(FunctionName)(Game::Graphics::OpenGLFunctions:: FunctionName = (decltype(Game::Graphics::OpenGLFunctions:: FunctionName))SDL_GL_GetProcAddress(#FunctionName))
 
-/*
-namespace Game::Graphics::Classes {
+#include "GraphicsClasses/BaseClassDefinitions.hpp"
+#include "GraphicsClasses/BufferBase.hpp"
 
-	struct OpenGLClassBase {
-		GLuint GLObject = 0;
+#include "GraphicsClasses/VertexArray.hpp"
+#include "GraphicsClasses/VertexBuffer.hpp"
+#include "GraphicsClasses/IndexBuffer.hpp"
 
-		constexpr bool operator==(const OpenGLClassBase& B) const {
-			return this->GLObject == B.GLObject;
-		}
-	};
+#include "GraphicsClasses/UniformBuffer.hpp"
 
-	template<GLenum BufferType>
-	class BufferBase : public Game::Graphics::Classes::OpenGLClassBase {
-	public:
-		inline ~BufferBase() {
+#include "GraphicsClasses/ShaderBase.hpp"
+#include "GraphicsClasses/VertexShader.hpp"
+#include "GraphicsClasses/FragmentShader.hpp"
 
-#ifdef DEBUG_BUILD
-			if (this->GLObject == 0) {
-				std::cerr << "Attempted to free a unallocated OpenGL Buffer." << std::endl;
-				__debugbreak();
-			}
-#endif
-			glDeleteBuffers(1, &this->GLObject);
-		}
+#include "GraphicsClasses/Program.hpp"
 
-		inline void Create() {
-			glGenBuffers(1, &this->GLObject);
-		}
+#include "GraphicsClasses/Texture.hpp"
+#include "GraphicsClasses/Framebuffer.hpp"
 
-		inline void Bind(GLenum BindTarget = BufferType) {
-			glBindBuffer(BindTarget, this->GLObject);
-		}
-
-		inline bool IsBound(GLenum BindTarget = BufferType) const {
-			return;
-		}
-	};
-
-
-	class VertexArray;
-	class VertexBuffer : public BufferBase<GL_ARRAY_BUFFER> {};
-	class ElementBuffer : public BufferBase<GL_ELEMENT_ARRAY_BUFFER> {};
-	class UniformBuffer;
-
-	class Program;
-	class Shader;
-
-	class Texture;
-}
-
-
-class Game::Graphics::Classes::VertexArray : public Game::Graphics::Classes::OpenGLClassBase {
-public:
-
-	inline ~VertexArray() {
-
-#ifdef DEBUG_BUILD
-		if (this->GLObject == 0) {
-			std::cerr << "Attempted to free a unallocated OpenGL VertexArray." << std::endl;
-			__debugbreak();
-		}
-#endif
-		glDeleteVertexArrays(1, &this->GLObject);
-	}
-
-	inline void Create() {
-		glGenVertexArrays(1, &this->GLObject);
-	}
-
-	inline void Bind() {
-		glBindVertexArray(this->GLObject);
-	}
-
-	constexpr bool IsBound() const {
-		return this->operator==(Game::Graphics::BoundObjects.VertexArray);
-	}
-};
-
-
-class Game::Graphics::Classes::UniformBuffer : public Game::Graphics::Classes::BufferBase<GL_UNIFORM_BUFFER> {
-public:
-};
-
-
-
-
-class Game::Graphics::Classes::Program : public Game::Graphics::Classes::OpenGLClassBase {
-public:
-	inline ~Program() {
-		glDeleteProgram(this->GLObject);
-	}
-
-	inline void Create() {
-		this->GLObject = glCreateProgram();
-	}
-};
-
-
-class Game::Graphics::Classes::Shader {
-public:
-	inline ~Shader() {
-		glDeleteShader(this->GLObject);
-	}
-
-	inline void Create(GLenum ShaderType) {
-		this->GLObject = glCreateShader(ShaderType);
-	}
-
-	GLint GLObject;
-};
-
-
-
-
-class Game::Graphics::Classes::Texture : public Game::Graphics::Classes::OpenGLClassBase {
-public:
-	inline ~Texture() {
-		glDeleteTextures(1, &this->GLObject);
-	}
-
-	inline void Create() {
-		glGenTextures(1, &this->GLObject);
-	}
-};*/
 
 namespace Game::Graphics {
 
 	struct BoundObjectsStruct {
-		Classes::VertexArray VertexArray;
-		Classes::VertexBuffer VertexBuffer;
-		Classes::ElementBuffer ElementBuffer;
-		Classes::UniformBuffer UniformBuffer;
+		Classes::VertexArray* VertexArray;
+		Classes::VertexBuffer* VertexBuffer;
+		Classes::IndexBuffer* IndexBuffer;
+		Classes::UniformBuffer* UniformBuffer;
 
-		Classes::Program Program;
-		Classes::Texture Texture;
+		Classes::Program* Program;
+		Classes::Texture* Texture;
 	} BoundObjects;
+
+	struct {
+		Classes::Texture* Position, *Normal, *Albedo, *Specular;
+	} GBuffer;
 }
 
 
 void Game::Graphics::Init() {
 
-	Game::Graphics::ActiveAPI = Game::Graphics::GraphicsAPIEnum::OpenGL;
+	Graphics::ActiveAPI = Game::Graphics::GraphicsAPIEnum::OpenGL;
 
-	switch (Game::Graphics::ActiveAPI) {
+	switch (Graphics::ActiveAPI) {
+	case Graphics::GraphicsAPIEnum::OpenGL:
+		
+		SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &Graphics::OpenGL::MajorVersion);
+		SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &Graphics::OpenGL::MinorVersion);
+		SDL_GL_GetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, &Graphics::OpenGL::Profile);
 
-	case Game::Graphics::GraphicsAPIEnum::OpenGL:
+		if (Graphics::OpenGL::MajorVersion < 3) {
 
+			static const char* Extensions[] = {
+				"GL_EXT_draw_buffers"
+			};
+			
+			//PFNGLGENVERTEXARRAYSOESPROC
+			for (const char* Extension : Extensions) {
+				if (!SDL_GL_ExtensionSupported(Extension)) {
+					std::cerr << "" << std::endl;
+				}
+			}
+		}
 
-		Game::Graphics::SetClearColor = ::_BasicFunctions::_SetClearColor_OpenGL;
-		Game::Graphics::ClearBitfields = ::_BasicFunctions::_ClearBitfields_OpenGL;
+		LOAD_OPENGL_FUNCTION(glClear);
+		LOAD_OPENGL_FUNCTION(glClearColor);
 
-		Graphics::BindTargets = ::_Enums_BindTargets(GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER, GL_UNIFORM_BUFFER);
+		LOAD_OPENGL_FUNCTION(glDrawArrays);
+		LOAD_OPENGL_FUNCTION(glDrawArraysInstanced);
 
-		Graphics::AllocationTypes = ::_Enums_AllocationTypes(GL_STREAM_DRAW, GL_STATIC_DRAW, GL_STATIC_READ);
-		Graphics::BufferBitfields = ::_Enums_BufferBitfields(GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_STENCIL_BUFFER_BIT);
+		LOAD_OPENGL_FUNCTION(glDrawElements);
+		LOAD_OPENGL_FUNCTION(glDrawElementsInstanced);
 
-		Graphics::Buffer = ::_Namespace_Buffer_OpenGL();
+		LOAD_OPENGL_FUNCTION(glGetIntegerv);
+		LOAD_OPENGL_FUNCTION(glIsEnabled);
 
+		::Game::Graphics::_SetClearColor = ::_BasicFunctions::_SetClearColor_OpenGL;
+		::Game::Graphics::_ClearBitfields = ::_BasicFunctions::_ClearBitfields_OpenGL;
+
+		::Game::Graphics::BindTargets = ::_Enums_BindTargets(GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER, GL_UNIFORM_BUFFER);
+
+		::Game::Graphics::AllocationTypes = ::_Enums_AllocationTypes(GL_STREAM_DRAW, GL_STATIC_DRAW, GL_STATIC_READ);
+		::Game::Graphics::BufferBitfields = ::_Enums_BufferBitfields(GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_STENCIL_BUFFER_BIT);
 
 		break;
 
-	case Game::Graphics::GraphicsAPIEnum::Vulkan:
-	case Game::Graphics::GraphicsAPIEnum::Direct3D11:
-	case Game::Graphics::GraphicsAPIEnum::Direct3D12:
-	case Game::Graphics::GraphicsAPIEnum::Metal:
+	case GraphicsAPIEnum::Vulkan:
+		break;
+	case GraphicsAPIEnum::Direct3D11:
+		break;
+	case GraphicsAPIEnum::Direct3D12:
+		break;
+	case GraphicsAPIEnum::Metal:
 		break;
 	};
 
 	
-	Game::Graphics::VertexArray::Init();
+	Graphics::BufferBase::Init();
+
+	Graphics::VertexArray::Init();
+	Graphics::VertexBuffer::Init();
+	Graphics::IndexBuffer::Init();
+
+	Graphics::UniformBuffer::Init();
+
+	Graphics::ShaderBase::Init();
+	Graphics::VertexShader::Init();
+	Graphics::FragmentShader::Init();
+
+	Graphics::Program::Init();
+
+	Graphics::Texture::Init();
+
+	using Game::Graphics::GBuffer;
+	Graphics::Texture::CreateBulk(4, reinterpret_cast<Classes::Texture**>(&GBuffer));
+
+	const Math::IVector2 WindowSize = Game::Window.GetSize();
+
+	for (int i = 0; i < 4; ++i) {
+		reinterpret_cast<Classes::Texture**>(&GBuffer)[i]->Bind();
+		Graphics::Texture::UploadPixelData(WindowSize.X, WindowSize.Y, GL_RGB, GL_FLOAT, NULL);
+		Graphics::Texture::AttachToFramebuffer(GL_COLOR_ATTACHMENT0 + i, reinterpret_cast<Classes::Texture**>(&GBuffer)[i]);
+	}
 }
 
 

@@ -49,6 +49,9 @@ namespace LuaHelper {
 	inline void PushExternalString(lua_State* State, const char* String, size_t StringLength) {
 		PushExternalString(State, String, StringLength, ::_PushExternalString_DefaultDeallocator);
 	}
+	inline char* AllocateExternalString(size_t StringLength) {
+		return static_cast<char*>(std::malloc(StringLength));
+	}
 
 	template<typename T>
 	constexpr T ToTypename(lua_State* State, int StackIndex);

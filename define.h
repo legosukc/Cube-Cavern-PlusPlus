@@ -1,4 +1,11 @@
 
+#define GL_GLES_PROTOTYPES 0
+
+#define SDL_OPENGL_1_NO_PROTOTYPES 0
+#define SDL_OPENGL_1_FUNCTION_TYPEDEFS 0
+
+#define GL_APIENTRYP *
+
 
 #if defined(DEBUG) && !defined(_DEBUG)
 #define _DEBUG
@@ -62,7 +69,7 @@
 Determines whether to use SIMD intrinsics to speed up certain functions.
 Comment out to use regular math operations. (The compiler can slot in SIMD instructions if it sees fit.)
 */
-#define USE_SIMD_INTRINSICS
+//#define USE_SIMD_INTRINSICS
 
 #ifdef USE_SIMD_INTRINSICS
 

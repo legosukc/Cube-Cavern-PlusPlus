@@ -8,6 +8,8 @@
 #include <AL/alext.h>
 
 #include <SDL3/SDL_stdinc.h>
+#include <SDL3/SDL_timer.h>
+
 #include <SDL3_mixer/SDL_mixer.h>
 
 #include "../FunctionHeaders/Exceptions.hpp"
@@ -16,6 +18,13 @@
 
 
 namespace Game::Sound {
+
+	enum class AudioBackendEnum : Uint8 {
+		OpenAL,
+		SDL_Mixer,
+		Cubeb,
+		NoAudio,
+	};
 
 	namespace NoAudioClasses {
 		class NoAudioSource;
@@ -283,7 +292,7 @@ Game::Sound::Source::~Source() {
 Game::Sound::Init_ErrorCodes Game::Sound::Init() {
 
 	std::cout << "Initalizing OpenAL." << std::endl;
-	const auto Start = std::chrono::high_resolution_clock::now();
+	const Uint64 StartNS = SDL_GetTicksNS();
 
 	Game::Sound::Init_ErrorCodes ErrorCode;
 
@@ -313,14 +322,14 @@ Game::Sound::Init_ErrorCodes Game::Sound::Init() {
 		goto _Failure;
 	}
 
-	std::cout << "Initialized OpenAL, took " << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - Start).count() << " milliseconds." << std::endl;
+	std::cout << "Initialized OpenAL, took " << static_cast<double>(SDL_GetTicks() - StartNS) / 1000.0 << " milliseconds." << std::endl;
 
 	return Game::Sound::Init_ErrorCodes::Success;
 
 _Failure:
 	Game::Sound::AudioEnabled = false;
 	Game::Sound::Destroy();
-	std::clog << ".\nFailed to initalize OpenAL, audio has been disabled. Took " << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - Start).count() << " milliseconds." << std::endl;
+	std::clog << ".\nFailed to initalize OpenAL, audio has been disabled. Took " << static_cast<double>(SDL_GetTicks() - StartNS) / 1000.0 << " milliseconds." << std::endl;
 
 	return ErrorCode;
 }

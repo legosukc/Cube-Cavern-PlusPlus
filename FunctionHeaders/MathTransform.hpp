@@ -2,10 +2,9 @@
 
 #include <cmath>
 
-
 #include "../MathClasses/Vector3.hpp"
+#include "../MathClasses/Matrix.hpp"
 
-#include "../MathClasses/Mat4.hpp"
 
 namespace Math::Transform {
 
@@ -41,10 +40,8 @@ namespace Math::Transform {
 
 		//assert(abs(aspect - std::numeric_limits<T>::epsilon()) > static_cast<T>(0));
 
-		float tanHalfFovy;
 		Math::Mat4 Result(0.f);
-
-		tanHalfFovy = std::tan(FOV / 2.f);
+		const float tanHalfFovy = std::tan(FOV / 2.f);
 
 		Result[0][0] = 1.f / (aspect * tanHalfFovy);
 		Result[1][1] = 1.f / (tanHalfFovy);
@@ -58,14 +55,12 @@ namespace Math::Transform {
 	constexpr Math::Mat4 Rotate(const Math::Mat4& Matrix, float Angle, const Math::Vector3& V) {
 
 		Math::Mat4 Result, Rotate;
-		Math::Vector3 Axis, Temp;
-		float AngleSine, AngleCosine;
 
-		AngleCosine = std::cos(Angle);
-		AngleSine = std::sin(Angle);
+		const float AngleCosine = std::cos(Angle);
+		const float AngleSine = std::sin(Angle);
 
-		Axis = V.Normalize();
-		Temp = (1.f - AngleCosine) * Axis;
+		const Math::Vector3 Axis = V.Normalize();
+		const Math::Vector3 Temp = (1.f - AngleCosine) * Axis;
 
 		Rotate[0].X = AngleCosine + Temp.X * Axis.X;
 		Rotate[0].Y = Temp.X * Axis.Y + AngleSine * Axis.Z;

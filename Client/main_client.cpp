@@ -5,10 +5,6 @@
 #include "../define.h"
 
 #include <iostream>
-#include <filesystem>
-
-#include <thread>
-#include <chrono>
 
 #include <string>
 #include <vector>
@@ -28,8 +24,16 @@
 #include <mmintrin.h>
 #endif
 
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+
+#include <SDL3/SDL_opengl.h>
+#include <SDL3/SDL_opengl_glext.h>
+#include <SDL3/SDL_opengles2_gl2ext.h>
 
 #include <SDL3_net/SDL_net.h>
 #include <SDL3_mixer/SDL_mixer.h>
@@ -41,9 +45,9 @@
 
 #include <lua-5.5.0/lua.hpp>
 
-#include <glad/glad.h>
-#include <glad/glad.c>
 
+#include "../FunctionHeaders/File.hpp"
+#include "../FunctionHeaders/ConfigHandler.hpp"
 
 #include "../Memory.hpp"
 
@@ -102,7 +106,6 @@ namespace {
 		}
 		::_Closed = true;
 
-
 		Game::Lua::Destroy();
 		Game::Sound::Destroy();
 
@@ -123,11 +126,28 @@ int main()
 try
 #endif
 {
+
+#ifdef SDL_PLATFORM_VITA
+
+	SDL_SetHint(SDL_HINT_VITA_ENABLE_BACK_TOUCH, "0");
+
+	SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "1");
+	SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
+#endif
+
 	if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
 		Exceptions::ThrowSDLError("Failed to initalize SDL.");
 	}
 	
-	
+	Utils::File::Init("DribbleCo", "CubeCavernPlus");
+
+	Game::Config::Init();
+#ifdef BUILD_CLIENT
+	Game::Config::OpenConfig("ClientCfg.json", "defaultClientCfg.json");
+#else
+	Game::Config::OpenConfig("ServerCfg.json", "defaultServerCfg.json");
+#endif
+
 	Game::Sound::Init();
 	Game::Network::Init();
 	

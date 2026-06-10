@@ -20,7 +20,7 @@ namespace Game::Lua::CLibraries::Graphics::Classes {
 		}
 
 		static int BindToUniformBlockIndex(lua_State* State) {
-			glBindBufferBase(
+			Game::Graphics::OpenGLFunctions::glBindBufferBase(
 				GL_UNIFORM_BUFFER,
 				static_cast<GLuint>(luaL_checkinteger(State, 2)),	// UniformBlockIndex
 				static_cast<UniformBuffer*>(luaL_checkudata(State, 1, "UniformBuffer"))->GLObject
@@ -29,7 +29,7 @@ namespace Game::Lua::CLibraries::Graphics::Classes {
 		}
 
 		static int BindToUniformBlockIndexRange(lua_State* State) {
-			glBindBufferRange(
+			Game::Graphics::OpenGLFunctions::glBindBufferRange(
 				GL_UNIFORM_BUFFER,
 				static_cast<GLuint>(luaL_checkinteger(State, 2)),		// UniformBlockIndex
 				static_cast<UniformBuffer*>(luaL_checkudata(State, 1, "UniformBuffer"))->GLObject,

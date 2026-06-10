@@ -1,7 +1,10 @@
 #pragma once
 
+#include "../../define.h"
+
 #include "LuaGraphics_GLObjectBase.hpp"
 
+#include <SDL3/SDL_opengl_glext.h>
 
 #include <lua-5.5.0/lua.hpp>
 
@@ -13,6 +16,7 @@ namespace Game::Lua::CLibraries::Graphics {
 		struct Program : Game::Lua::CLibraries::Graphics::Classes::GLObjectBase {
 			static int AttachShader(lua_State* State);
 			static int DetachShader(lua_State* State);
+			static int DetachAllShaders(lua_State* State);
 
 			static int Link(lua_State* State);
 			static int Use(lua_State* State);
@@ -23,7 +27,6 @@ namespace Game::Lua::CLibraries::Graphics {
 			static int GetUniformBlockIndex(lua_State* State);
 
 			static int __gc(lua_State* State);
-			//static int __eq(lua_State* State);
 		};
 	}
 
@@ -32,8 +35,8 @@ namespace Game::Lua::CLibraries::Graphics {
 
 		static int __new(lua_State* State);
 
-		static int SetUniformInt(lua_State* State);
-		static int SetUniformUint(lua_State* State);
+		static int SetUniformSint32(lua_State* State);
+		static int SetUniformUint32(lua_State* State);
 		static int SetUniformFloat(lua_State* State);
 
 		static int SetUniformIvec2(lua_State* State);
@@ -66,11 +69,14 @@ void Game::Lua::CLibraries::Graphics::Program::Init(lua_State* State, LuaHelper:
 	ProgramMetatable.PushReference(State);
 	lua_setfield(State, ProgramMetatable.GetStackIndex(), "__index");
 
+	ProgramMetatable.SetKeyClosure(State, Classes::Program::GetUniformIndex, "GetUniformIndex");
+
 	ProgramMetatable.SetKeyClosure(State, Classes::Program::SetUniformBlockBinding, "SetUniformBlockBinding");
 	ProgramMetatable.SetKeyClosure(State, Classes::Program::GetUniformBlockIndex, "GetUniformBlockIndex");
 
 	ProgramMetatable.SetKeyClosure(State, Classes::Program::AttachShader, "AttachShader");
 	ProgramMetatable.SetKeyClosure(State, Classes::Program::DetachShader, "DetachShader");
+	ProgramMetatable.SetKeyClosure(State, Classes::Program::DetachAllShaders, "DetachAllShaders");
 
 	ProgramMetatable.SetKeyClosure(State, Classes::Program::Link, "Link");
 
@@ -85,9 +91,11 @@ void Game::Lua::CLibraries::Graphics::Program::Init(lua_State* State, LuaHelper:
 
 	ProgramTable.SetKeyClosure(State, Program::__new, "new");
 
-	ProgramTable.SetKeyClosure(State, Program::SetUniformInt, "SetUniformInt");
-	ProgramTable.SetKeyClosure(State, Program::SetUniformUint, "SetUniformUint");
-	ProgramTable.SetKeyClosure(State, Program::SetUniformInt, "SetUniformBool");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformSint32, "SetUniformSint32");
+	ProgramTable.SetKeyClosure(State, Program::SetUniformUint32, "SetUniformUint32");
+	
+	// TODO: change this to use a SetUniformBool thing
+	ProgramTable.SetKeyClosure(State, Program::SetUniformSint32, "SetUniformBool");
 	ProgramTable.SetKeyClosure(State, Program::SetUniformFloat, "SetUniformFloat");
 
 	ProgramTable.SetKeyClosure(State, Program::SetUniformIvec2, "SetUniformIvec2");
@@ -115,7 +123,7 @@ void Game::Lua::CLibraries::Graphics::Program::Init(lua_State* State, LuaHelper:
 int Game::Lua::CLibraries::Graphics::Program::__new(lua_State* State) {
 
 	Classes::Program* ProgramUD = static_cast<Classes::Program*>(lua_newuserdata(State, sizeof(Classes::Program)));
-	ProgramUD->GLObject = glCreateProgram();
+	ProgramUD->GLObject = Game::Graphics::OpenGLFunctions::glCreateProgram();
 
 	luaL_setmetatable(State, "Program");
 	return 1;
@@ -125,26 +133,26 @@ int Game::Lua::CLibraries::Graphics::Program::__new(lua_State* State) {
 
 namespace Game::Lua::CLibraries::Graphics::Program {
 
-	int SetUniformInt(lua_State* State) {
-		glUniform1i(
-			static_cast<GLint>(luaL_checkinteger(State, 1)),
-			static_cast<GLint>(luaL_checkinteger(State, 2))
+	int SetUniformSint32(lua_State* State) {
+		Game::Graphics::Program::SetUniformSint32(
+			static_cast<Sint32>(luaL_checkinteger(State, 1)),
+			static_cast<Sint32>(luaL_checkinteger(State, 2))
 		);
 		return 0;
 	}
 
-	int SetUniformUint(lua_State* State) {
-		glUniform1ui(
-			static_cast<GLint>(luaL_checkinteger(State, 1)),
-			static_cast<GLuint>(luaL_checkinteger(State, 2))
+	int SetUniformUint32(lua_State* State) {
+		Game::Graphics::Program::SetUniformUint32(
+			static_cast<Sint32>(luaL_checkinteger(State, 1)),
+			static_cast<Uint32>(luaL_checkinteger(State, 2))
 		);
 		return 0;
 	}
 
 	int SetUniformFloat(lua_State* State) {
-		glUniform1f(
-			static_cast<GLint>(luaL_checkinteger(State, 1)),
-			static_cast<GLfloat>(luaL_checknumber(State, 2))
+		Game::Graphics::Program::SetUniformFloat(
+			static_cast<Sint32>(luaL_checkinteger(State, 1)),
+			static_cast<float>(luaL_checknumber(State, 2))
 		);
 		return 0;
 	}
@@ -155,16 +163,17 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	int SetUniformIvec2(lua_State* State) {
 
 		if (const void* VecUD = luaL_testudata(State, 2, "IVector2"); VecUD == NULL) {
-			glUniform2i(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				static_cast<GLint>(luaL_checkinteger(State, 2)),
-				static_cast<GLint>(luaL_checkinteger(State, 3))
+			Game::Graphics::Program::SetUniformIvec2(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				Math::IVector2(
+					static_cast<Sint32>(luaL_checkinteger(State, 2)),
+					static_cast<Sint32>(luaL_checkinteger(State, 3))
+				)
 			);
 		} else {
-			glUniform1iv(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				2,
-				static_cast<const GLint*>(VecUD)
+			Game::Graphics::Program::SetUniformIvec2(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				*static_cast<const Math::IVector2*>(VecUD)
 			);
 		}
 
@@ -172,17 +181,19 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	}
 
 	int SetUniformUvec2(lua_State* State) {
+
 		if (const void* VecUD = luaL_testudata(State, 2, "UVector2"); VecUD == NULL) {
-			glUniform2ui(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				static_cast<GLuint>(luaL_checkinteger(State, 2)),
-				static_cast<GLuint>(luaL_checkinteger(State, 3))
+			Game::Graphics::Program::SetUniformUvec2(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				Math::UVector2(
+					static_cast<Uint32>(luaL_checkinteger(State, 2)),
+					static_cast<Uint32>(luaL_checkinteger(State, 3))
+				)
 			);
 		} else {
-			glUniform1uiv(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				2,
-				static_cast<const GLuint*>(VecUD)
+			Game::Graphics::Program::SetUniformUvec2(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				*static_cast<const Math::UVector2*>(VecUD)
 			);
 		}
 
@@ -190,10 +201,12 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	}
 
 	int SetUniformBvec2(lua_State* State) {
-		glUniform2i(
-			static_cast<GLint>(luaL_checkinteger(State, 1)),
-			static_cast<GLint>(luaL_checkinteger(State, 2)),
-			static_cast<GLint>(luaL_checkinteger(State, 3))
+		Game::Graphics::Program::SetUniformIvec2(
+			static_cast<Sint32>(luaL_checkinteger(State, 1)),
+			Math::IVector2(
+				static_cast<Sint32>(luaL_checkinteger(State, 2)),
+				static_cast<Sint32>(luaL_checkinteger(State, 3))
+			)
 		);
 
 		return 0;
@@ -202,16 +215,17 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	int SetUniformFvec2(lua_State* State) {
 
 		if (const void* VecUD = luaL_testudata(State, 2, "Vector2"); VecUD == NULL) {
-			glUniform2f(
+			Game::Graphics::Program::SetUniformFvec2(
 				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				static_cast<GLfloat>(luaL_checknumber(State, 2)),
-				static_cast<GLfloat>(luaL_checknumber(State, 3))
+				Math::Vector2(
+					static_cast<float>(luaL_checknumber(State, 2)),
+					static_cast<float>(luaL_checknumber(State, 3))
+				)
 			);
 		} else {
-			glUniform1fv(
+			Game::Graphics::Program::SetUniformFvec2(
 				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				2,
-				static_cast<const GLfloat*>(VecUD)
+				*static_cast<const Math::Vector2*>(VecUD)
 			);
 		}
 
@@ -224,17 +238,18 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	int SetUniformIvec3(lua_State* State) {
 
 		if (const void* VecUD = luaL_testudata(State, 2, "IVector3"); VecUD == NULL) {
-			glUniform3i(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				static_cast<GLint>(luaL_checkinteger(State, 2)),
-				static_cast<GLint>(luaL_checkinteger(State, 3)),
-				static_cast<GLint>(luaL_checkinteger(State, 4))
+			Game::Graphics::Program::SetUniformIvec3(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				Math::IVector3(
+					static_cast<Sint32>(luaL_checkinteger(State, 2)),
+					static_cast<Sint32>(luaL_checkinteger(State, 3)),
+					static_cast<Sint32>(luaL_checkinteger(State, 4))
+				)
 			);
 		} else {
-			glUniform1iv(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				3,
-				static_cast<const GLint*>(VecUD)
+			Game::Graphics::Program::SetUniformIvec3(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				*static_cast<const Math::IVector3*>(VecUD)
 			);
 		}
 		return 0;
@@ -243,28 +258,31 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	int SetUniformUvec3(lua_State* State) {
 
 		if (const void* VecUD = luaL_testudata(State, 2, "UVector3"); VecUD == NULL) {
-			glUniform3ui(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				static_cast<GLuint>(luaL_checkinteger(State, 2)),
-				static_cast<GLuint>(luaL_checkinteger(State, 3)),
-				static_cast<GLuint>(luaL_checkinteger(State, 4))
+			Game::Graphics::Program::SetUniformUvec3(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				Math::UVector3(
+					static_cast<Uint32>(luaL_checkinteger(State, 2)),
+					static_cast<Uint32>(luaL_checkinteger(State, 3)),
+					static_cast<Uint32>(luaL_checkinteger(State, 4))
+				)
 			);
 		} else {
-			glUniform1uiv(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				3,
-				static_cast<const GLuint*>(VecUD)
+			Game::Graphics::Program::SetUniformUvec3(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				*static_cast<const Math::UVector3*>(VecUD)
 			);
 		}
 		return 0;
 	}
 
 	int SetUniformBvec3(lua_State* State) {
-		glUniform3i(
-			static_cast<GLint>(luaL_checkinteger(State, 1)),
-			static_cast<GLint>(luaL_checkinteger(State, 2)),
-			static_cast<GLint>(luaL_checkinteger(State, 3)),
-			static_cast<GLint>(luaL_checkinteger(State, 4))
+		Game::Graphics::Program::SetUniformBvec3(
+			static_cast<Sint32>(luaL_checkinteger(State, 1)),
+			Math::IVector3(
+				static_cast<GLint>(luaL_checkinteger(State, 2)),
+				static_cast<GLint>(luaL_checkinteger(State, 3)),
+				static_cast<GLint>(luaL_checkinteger(State, 4))
+			)
 		);
 		return 0;
 	}
@@ -272,17 +290,18 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	int SetUniformFvec3(lua_State* State) {
 
 		if (const void* VecUD = luaL_testudata(State, 2, "Vector3"); VecUD == NULL) {
-			glUniform3f(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				static_cast<GLfloat>(luaL_checknumber(State, 2)),
-				static_cast<GLfloat>(luaL_checknumber(State, 3)),
-				static_cast<GLfloat>(luaL_checknumber(State, 4))
+			Game::Graphics::Program::SetUniformFvec3(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				Math::Vector3(
+					static_cast<float>(luaL_checknumber(State, 2)),
+					static_cast<float>(luaL_checknumber(State, 3)),
+					static_cast<float>(luaL_checknumber(State, 4))
+				)
 			);
 		} else {
-			glUniform1fv(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				3,
-				static_cast<const GLfloat*>(VecUD)
+			Game::Graphics::Program::SetUniformFvec3(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				*static_cast<const Math::Vector3*>(VecUD)
 			);
 		}
 		return 0;
@@ -294,18 +313,19 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	int SetUniformIvec4(lua_State* State) {
 
 		if (const void* VecUD = luaL_testudata(State, 2, "IVector4"); VecUD == NULL) {
-			glUniform4i(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				static_cast<GLint>(luaL_checkinteger(State, 2)),
-				static_cast<GLint>(luaL_checkinteger(State, 3)),
-				static_cast<GLint>(luaL_checkinteger(State, 4)),
-				static_cast<GLint>(luaL_checkinteger(State, 5))
+			Game::Graphics::Program::SetUniformIvec4(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				Math::IVector4(
+					static_cast<Sint32>(luaL_checkinteger(State, 2)),
+					static_cast<Sint32>(luaL_checkinteger(State, 3)),
+					static_cast<Sint32>(luaL_checkinteger(State, 4)),
+					static_cast<Sint32>(luaL_checkinteger(State, 5))
+				)
 			);
 		} else {
-			glUniform1iv(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				4,
-				static_cast<const GLint*>(VecUD)
+			Game::Graphics::Program::SetUniformIvec4(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				*static_cast<const Math::IVector4*>(VecUD)
 			);
 		}
 		return 0;
@@ -314,30 +334,34 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	int SetUniformUvec4(lua_State* State) {
 
 		if (const void* VecUD = luaL_testudata(State, 2, "UVector4"); VecUD == NULL) {
-			glUniform4ui(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				static_cast<GLuint>(luaL_checkinteger(State, 2)),
-				static_cast<GLuint>(luaL_checkinteger(State, 3)),
-				static_cast<GLuint>(luaL_checkinteger(State, 4)),
-				static_cast<GLuint>(luaL_checkinteger(State, 5))
+			Game::Graphics::Program::SetUniformUvec4(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				Math::UVector4(
+					static_cast<Uint32>(luaL_checkinteger(State, 2)),
+					static_cast<Uint32>(luaL_checkinteger(State, 3)),
+					static_cast<Uint32>(luaL_checkinteger(State, 4)),
+					static_cast<Uint32>(luaL_checkinteger(State, 5))
+				)
 			);
 		} else {
-			glUniform1uiv(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				4,
-				static_cast<const GLuint*>(VecUD)
+			Game::Graphics::Program::SetUniformUvec4(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				*static_cast<const Math::UVector4*>(VecUD)
 			);
 		}
 		return 0;
 	}
 
 	int SetUniformBvec4(lua_State* State) {
-		glUniform4i(
-			static_cast<GLint>(luaL_checkinteger(State, 1)),
-			static_cast<GLint>(luaL_checkinteger(State, 2)),
-			static_cast<GLint>(luaL_checkinteger(State, 3)),
-			static_cast<GLint>(luaL_checkinteger(State, 4)),
-			static_cast<GLint>(luaL_checkinteger(State, 5))
+
+		Game::Graphics::Program::SetUniformBvec4(
+			static_cast<Sint32>(luaL_checkinteger(State, 1)),
+			Math::IVector4(
+				static_cast<Sint32>(luaL_checkinteger(State, 2)),
+				static_cast<Sint32>(luaL_checkinteger(State, 3)),
+				static_cast<Sint32>(luaL_checkinteger(State, 4)),
+				static_cast<Sint32>(luaL_checkinteger(State, 5))
+			)
 		);
 		return 0;
 	}
@@ -345,18 +369,19 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 	int SetUniformFvec4(lua_State* State) {
 
 		if (const void* VecUD = luaL_testudata(State, 2, "Vector4"); VecUD == NULL) {
-			glUniform4f(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				static_cast<GLfloat>(luaL_checknumber(State, 2)),
-				static_cast<GLfloat>(luaL_checknumber(State, 3)),
-				static_cast<GLfloat>(luaL_checknumber(State, 4)),
-				static_cast<GLfloat>(luaL_checknumber(State, 5))
+			Game::Graphics::Program::SetUniformFvec4(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				Math::Vector4(
+					static_cast<float>(luaL_checknumber(State, 2)),
+					static_cast<float>(luaL_checknumber(State, 3)),
+					static_cast<float>(luaL_checknumber(State, 4)),
+					static_cast<float>(luaL_checknumber(State, 5))
+				)
 			);
 		} else {
-			glUniform1fv(
-				static_cast<GLint>(luaL_checkinteger(State, 1)),
-				4,
-				static_cast<const GLfloat*>(VecUD)
+			Game::Graphics::Program::SetUniformFvec4(
+				static_cast<Sint32>(luaL_checkinteger(State, 1)),
+				*static_cast<const Math::Vector4*>(VecUD)
 			);
 		}
 		return 0;
@@ -367,52 +392,61 @@ namespace Game::Lua::CLibraries::Graphics::Program {
 
 	int SetUniformMat2(lua_State* State) {
 
-		GLfloat MatArray[2 * 2];
-		const void* MatUD;
+		Math::Mat2 Mat2;
+		const Math::Mat2* Mat2UD;
 
-		if (MatUD = luaL_testudata(State, 3, "Mat2"); MatUD == NULL) {
+		if (Mat2UD = static_cast<Math::Mat2*>(luaL_testudata(State, 2, "Mat2")); Mat2UD == NULL) {
 
 			for (int i = 3; i <= 2 + (2 * 2); ++i) {
-				MatArray[i - 3] = static_cast<GLfloat>(luaL_optnumber(State, i, 0.0));
+				Mat2.IndexElement(i - 3) = static_cast<float>(luaL_optnumber(State, i, 0.0));
 			}
-			MatUD = MatArray;
+			Mat2UD = &Mat2;
 		}
 
-		glUniformMatrix2fv(static_cast<GLint>(luaL_checkinteger(State, 1)), 1, static_cast<GLboolean>(lua_toboolean(State, 2)), static_cast<const GLfloat*>(MatUD));
+		Game::Graphics::Program::SetUniformMat2(
+			static_cast<Sint32>(luaL_checkinteger(State, 1)),
+			*Mat2UD
+		);
 		return 0;
 	}
 
 	int SetUniformMat3(lua_State* State) {
 
-		GLfloat MatArray[3 * 3];
-		const void* MatUD;
+		Math::Mat3 Mat3;
+		const Math::Mat3* Mat3UD;
 
-		if (MatUD = luaL_testudata(State, 3, "Mat3"); MatUD == NULL) {
+		if (Mat3UD = static_cast<Math::Mat3*>(luaL_testudata(State, 2, "Mat3")); Mat3UD == NULL) {
 
 			for (int i = 3; i <= 2 + (3 * 3); ++i) {
-				MatArray[i - 3] = static_cast<GLfloat>(luaL_optnumber(State, i, 0.0));
+				Mat3.IndexElement(i - 3) = static_cast<float>(luaL_optnumber(State, i, 0.0));
 			}
-			MatUD = MatArray;
+			Mat3UD = &Mat3;
 		}
 
-		glUniformMatrix3fv(static_cast<GLint>(luaL_checkinteger(State, 1)), 1, static_cast<GLboolean>(lua_toboolean(State, 2)), static_cast<const GLfloat*>(MatUD));
+		Game::Graphics::Program::SetUniformMat3(
+			static_cast<Sint32>(luaL_checkinteger(State, 1)),
+			*Mat3UD
+		);
 		return 0;
 	}
 
 	int SetUniformMat4(lua_State* State) {
 
-		GLfloat MatArray[4 * 4];
-		const void* MatUD;
+		Math::Mat4 Mat4;
+		const Math::Mat4* Mat4UD;
 
-		if (MatUD = luaL_testudata(State, 3, "Mat4"); MatUD == NULL) {
+		if (Mat4UD = static_cast<Math::Mat4*>(luaL_testudata(State, 3, "Mat4")); Mat4UD == NULL) {
 
 			for (int i = 3; i <= 2 + (4 * 4); ++i) {
-				MatArray[i - 3] = static_cast<GLfloat>(luaL_optnumber(State, i, 0.0));
+				Mat4.IndexElement(i - 3) = static_cast<float>(luaL_optnumber(State, i, 0.0));
 			}
-			MatUD = MatArray;
+			Mat4UD = &Mat4;
 		}
 
-		glUniformMatrix4fv(static_cast<GLint>(luaL_checkinteger(State, 1)), 1, static_cast<GLboolean>(lua_toboolean(State, 2)), static_cast<const GLfloat*>(MatUD));
+		Game::Graphics::Program::SetUniformMat4(
+			static_cast<Sint32>(luaL_checkinteger(State, 1)),
+			*Mat4UD
+		);
 		return 0;
 	}
 }
@@ -429,7 +463,7 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::AttachShader(lua_State* S
 		luaL_error(State, "Attempted to attach a non-shader object to a OpenGL program.");
 	}
 
-	glAttachShader(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject, ShaderUD->ShaderObject);
+	Game::Graphics::OpenGLFunctions::glAttachShader(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject, ShaderUD->ShaderObject);
 	return 0;
 }
 
@@ -440,19 +474,40 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::DetachShader(lua_State* S
 		luaL_error(State, "Attempted to detatch a non-shader object from a OpenGL program.");
 	}
 
-	glDetachShader(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject, ShaderUD->ShaderObject);
+	Game::Graphics::OpenGLFunctions::glDetachShader(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject, ShaderUD->ShaderObject);
 	return 0;
 }
+
+int Game::Lua::CLibraries::Graphics::Classes::Program::DetachAllShaders(lua_State* State) {
+
+	GLuint* AttachedShaders;
+	GLint AttachedShaderCount;
+	GLuint ProgramObject;
+
+	ProgramObject = static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject;
+
+	Game::Graphics::OpenGLFunctions::glGetProgramiv(ProgramObject, GL_ATTACHED_SHADERS, &AttachedShaderCount);
+
+	AttachedShaders = new GLuint[AttachedShaderCount];
+	Game::Graphics::OpenGLFunctions::glGetAttachedShaders(ProgramObject, AttachedShaderCount, NULL, AttachedShaders);
+
+	for (; AttachedShaderCount > 0; --AttachedShaderCount) {
+		Game::Graphics::OpenGLFunctions::glDetachShader(ProgramObject, AttachedShaders[AttachedShaderCount - 1]);
+	}
+	return 0;
+}
+
+
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::Link(lua_State* State) {
 
 	const Classes::Program* ProgramUD = static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"));
-	glLinkProgram(ProgramUD->GLObject);
+	Game::Graphics::OpenGLFunctions::glLinkProgram(ProgramUD->GLObject);
 	return 0;
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::Use(lua_State* State) {
-	glUseProgram(
+	Game::Graphics::OpenGLFunctions::glUseProgram(
 		static_cast<Classes::Program*>(
 			LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1))
 		)->GLObject
@@ -464,7 +519,7 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::Use(lua_State* State) {
 int Game::Lua::CLibraries::Graphics::Classes::Program::GetUniformIndex(lua_State* State) {
 	lua_pushinteger(State,
 		static_cast<lua_Integer>(
-			glGetUniformLocation(
+			Game::Graphics::OpenGLFunctions::glGetUniformLocation(
 				static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject,
 				luaL_checkstring(State, 2)
 			)
@@ -475,7 +530,7 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::GetUniformIndex(lua_State
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::GetUniformBlockIndex(lua_State* State) {
 	lua_pushinteger(State, static_cast<lua_Integer>(
-			glGetUniformBlockIndex(
+		Game::Graphics::OpenGLFunctions::glGetUniformBlockIndex(
 				static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject,
 				luaL_checkstring(State, 2)
 			)
@@ -485,7 +540,7 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::GetUniformBlockIndex(lua_
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::SetUniformBlockBinding(lua_State* State) {
-	glUniformBlockBinding(
+	Game::Graphics::OpenGLFunctions::glUniformBlockBinding(
 		static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject,
 		luaL_checkinteger(State, 2),	// UniformBlock Index
 		luaL_checkinteger(State, 3)		// Bind To Index
@@ -496,20 +551,6 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::SetUniformBlockBinding(lu
 
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::__gc(lua_State* State) {
-	glDeleteProgram(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject);
+	Game::Graphics::OpenGLFunctions::glDeleteProgram(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject);
 	return 0;
 }
-
-/*
-int Game::Lua::CLibraries::Graphics::Classes::Program::__eq(lua_State* State) {
-	int Result;
-	if (const Classes::Program* B = static_cast<Classes::Program*>(luaL_testudata(State, 2, "Program"))) {
-		Result = static_cast<int>(static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))->GLObject == B->GLObject);
-	} else {
-		Result = static_cast<int>(false);
-	}
-
-	lua_settop(State, 0);
-	lua_pushboolean(State, Result);
-	return 1;
-}*/
