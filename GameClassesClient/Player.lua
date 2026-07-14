@@ -8,28 +8,40 @@ local Player = {
 	Position = Vector3.new();
 	Velocity = Vector3.new();
 
-	-- States
 	Grounded = false;
 	Crawling = false;
+
 	Dropkicking = false;
+	BaseDropkickVelocityMul = 6;
+	DropkickVelocityMul = SyncedModifier.new();
 
 	ThirdPerson = false;
 
 	DropkickChain = 0;
-	MaxDropkickChain = 3;
+	BaseMaxDropkickChain = 3;
+	MaxDropkickChain = SyncedModifier.new();
 
 	JumpTimer = 0;
 
-	StopSpeed = 0.01;
-	Gravity = 0.05;
-	GroundFriction = 0.075;
-	AirFriction = 0.01;
+	StopSpeed = SyncedModifier.new();
+	BaseStopSpeed = 0.01;
+
+	Gravity = SyncedModifier.new();
+	BaseGravity = 0.05;
+
+	GroundFriction = SyncedModifier.new();
+	BaseGroundFriction = 0.075;
+
+	AirFriction = SyncedModifier.new();
+	BaseAirFriction = 0.01;
 
 	Health = 5;
-	MaxHealth = 5;
+	MaxHealth = SyncedModifier.new();
+	BaseMaxHealth = 5;
 
 	Mana = 2;
-	MaxMana = 2;
+	MaxMana = SyncedModifier.new();
+	BaseMaxMana = 2;
 }
 
 do
@@ -41,7 +53,7 @@ do
 	ViewportArmVBO:Bind()
 	ViewportArmEBO:Bind()
 
-	local ViewportArmModel = ModelLoader.LoadFile("Models\ViewportArm.obj")
+	local ViewportArmModel = ModelLoader.LoadFile("Models\\ViewportArm.obj")
 
 	Graphics.VertexBuffer.CopyFromBuffer(ViewportArmModel.VertexData)
 	Graphics.ElementBuffer.CopyFromBuffer(ViewportArmModel.IndexData)
@@ -77,7 +89,7 @@ do
 			uniform mat4 Projection;
 		
 			void main() {
-				gl_Position = Projection * Model * vec4(aPos, 1.0);
+				gl_Position = Projection * mat4(1.0) * vec4(aPos + vec3(-0.4, -0.1, 0.2), 1.0);
 				Normal = aNormal;
 				Texcoord = aTexcoord;
 			}
@@ -90,23 +102,24 @@ do
 
 		FragmentShader:SetShaderSource([[
 
-			uniform sampler2D ArmTexture;
+			//uniform sampler2D ArmTexture;
 			
 			varying vec3 Normal;
 			varying vec2 Texcoord;
 
 			void main() {
-  	
+  				/*
 				vec3 norm = normalize(Normal);
 				vec3 lightDir = normalize(lightPos - FragPos);
-
+				
 				gl_FragColor = vec4(
 					(
 						vec3(0.1)	// ambient
 						+ max(dot(norm, lightDir), 0.0) * lightColor	// diffuse
 						+ (0.5 * pow(max(dot(normalize(viewPos - FragPos), reflect(-lightDir, norm)), 0.0), 32) * lightColor)	// specular
 					) * texture2D(ArmTexture, Texcoord).rgb, 1.0
-				);
+				);*/
+				gl_FragColor = vec4(1.0); //texture2D(ArmTexture, Texcoord);
 			}
 		]])
 
@@ -126,6 +139,10 @@ do
 		ViewportArmProgram:DetachAllShaders()
 	end
 
+	ViewportArmProgram:Use()
+	local ViewportArmModelUniform = Graphics.Program.GetUniformLocation(ViewportArmProgram, "Model")
+	local ViewportArmProjectionUniform = Graphics.Program.GetUniformLocation(ViewportArmProgram, "Projection")
+
 	Player.GraphicsObjects = {
 		ViewportLeftArmVAO = ViewportArmVAO;
 		ViewportLeftArmVBO = ViewportArmVBO;
@@ -136,7 +153,12 @@ do
 		ViewportRightArmEBO = ViewportArmEBO;
 
 		ViewportLeftArmProgram = ViewportArmProgram;
+		ViewportLeftArmModelUniform = ViewportArmModelUniform;
+		ViewportLeftArmProjectionUniform = ViewportArmProjectionUniform;
+
 		ViewportRightArmProgram = ViewportArmProgram;
+		ViewportRightArmModelUniform = ViewportArmModelUniform;
+		ViewportRightArmProjectionUniform = ViewportArmProjectionUniform;
 	}
 end
 
@@ -164,13 +186,13 @@ function Player:Update()
 
 	local Velocity = self.Velocity
 	if Velocity.X ~= 0 then
-		self.Velocity.X = Velocity.X > 0 and -Friction or Friction
+		Velocity.X = Velocity.X > 0 and -Friction or Friction
 	end
 
-	self.Velocity.Y = Velocity.Y - self.Gravity;
+	Velocity.Y = Velocity.Y - self.Gravity;
 
 	if Velocity.Z ~= 0 then
-		self.Velocity.Z = Velocity.Z > 0 and -Friction or Friction
+		Velocity.Z = Velocity.Z > 0 and -Friction or Friction
 	end
 	
 	self.Crawling = CrawlInput:Held()
@@ -178,16 +200,22 @@ function Player:Update()
 		-- TODO: implement rolling
 	end
 
+	if DropkickInput:Pressed() and not self.Dropkicking then
+		self.Dropkicking = true
+		print("dropkicked")
+		Velocity = Velocity + Game.Camera.LookDirection * (self.BaseDropkickVelocityMul + self.DropkickVelocityMul:GetResult())
+	end
+
 	if JumpInput:Held() and self.Grounded and not self.Crawling then
 
 		self.Grounded = false
-		self.Velocity.Y = 5
+		Velocity.Y = 3
 	end
 
-	self.Velocity = self.Velocity + Game.Camera.LookDirection * ((ForwardInput:Held() and 1 or 0) - (BackInput:Held() and 1 or 0))
+	Velocity = Velocity + Game.Camera.LookDirection * ((ForwardInput:Held() and 1 or 0) - (BackInput:Held() and 1 or 0))
 
-
-	self.Position = self.Position + self.Velocity
+	self.Velocity = Velocity
+	self.Position = self.Position + Velocity
 end
 
 
@@ -202,12 +230,16 @@ function Player:Draw()
 
 		GraphicsObjects.ViewportLeftArmProgram:Use()
 
+		--Graphics.Program.SetUniformMat4(Player.GraphicsObjects.ViewportLeftArmModelUniform, false, )
+		Graphics.Program.SetUniformMat4(Player.GraphicsObjects.ViewportLeftArmProjectionUniform, false, Camera.ProjectionMatrix)
+
 		Graphics.DrawElements(Graphics.DrawModes.Triangles, 3, Graphics.Types.Uint32)
 
 
 		GraphicsObjects.ViewportRightArmVAO:Bind()
 
 		GraphicsObjects.ViewportRightArmProgram:Use()
+		Graphics.Program.SetUniformMat4(Player.GraphicsObjects.ViewportRightArmProjectionUniform, false, Camera.ProjectionMatrix)
 
 		Graphics.DrawElements(Graphics.DrawModes.Triangles, 3, Graphics.Types.Uint32)
 

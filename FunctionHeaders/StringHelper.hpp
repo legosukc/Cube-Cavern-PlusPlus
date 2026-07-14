@@ -4,26 +4,25 @@
 
 #include <string>
 #include <cstring>
-
 #include <cmath>
 
 #include "TypeHelper.hpp"
 #include "BitOp.hpp"
 
-
 namespace StringHelper {
 
-	constexpr bool CharMatches(char Character) {
-		return false;
-	}
-
-	template<char CompareTo, char... Comparisons>
-	constexpr bool CharMatches(char Character) {
-		return Character == CompareTo || CharMatches<Comparisons...>(Character);
-	}
-
 	constexpr bool IsWhitespace(char Character) {
-		return CharMatches<' ', '	', '\n', '\0'>(Character);
+
+		constexpr char WhitespaceCharacters[] = {
+			' ', '	', '\n', '\0'
+		};
+
+		for (char WhitepspaceChar : WhitespaceCharacters) {
+			if (WhitepspaceChar == Character) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	template<typename T>

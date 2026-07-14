@@ -162,12 +162,16 @@ function Camera:Update()
     UpVector    = RightVector:Cross(LookDirection):Normalize()
 
 	Position = Position + LookDirection * ((ForwardInput:Held() and 0.1 or 0) - (BackInput:Held() and 0.1 or 0))
+	Position = Position + RightVector * ((RightInput:Held() and 0.1 or 0) - (LeftInput:Held() and 0.1 or 0))
 
 	
 	--CameraTransformationUniformBuffer:Bind()
 	--Graphics.UniformBuffer.CopyToPointer(Mat4.LookAt(Position, Position + LookDirection, UpVector), 0)
 	--Graphics.UniformBuffer.CopyToPointer(Mat4.Perspective(math.rad(self.FOV), 800 / 600, 0.1, 1000), Mat4.ByteSize)
 	--Graphics.UniformBuffer.Unbind()
+
+	self.ProjectionMatrix = Mat4.Perspective(math.rad(self.FOV), 800 / 600, 0.1, 1000)
+	self.ViewMatrix = Mat4.LookAt(self.Position, self.Position + self.LookDirection, self.UpVector)
 
 	self.Yaw = Yaw
 	self.Pitch = Pitch
@@ -185,8 +189,8 @@ function Camera:Draw()
 
 	QuadProgram:Use()
 	
-	Graphics.Program.SetUniformMat4(ProjectionUniformID, false, Mat4.Perspective(math.rad(self.FOV), 800 / 600, 0.1, 1000))
-	Graphics.Program.SetUniformMat4(ViewUniformID, false, Mat4.LookAt(self.Position, self.Position + self.LookDirection, self.UpVector))
+	Graphics.Program.SetUniformMat4(ProjectionUniformID, false, self.ProjectionMatrix)
+	Graphics.Program.SetUniformMat4(ViewUniformID, false, self.ViewMatrix)
 
 	Graphics.DrawElements(Graphics.DrawModes.Triangles, 3, Graphics.Types.Uint8)
 

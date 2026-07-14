@@ -73,7 +73,18 @@ namespace {
 	}
 
 	static void _Texture_CreateBulk_OpenGL(size_t CreateAmount, Game::Graphics::Classes::Texture* Textures[]) {
-		Game::Graphics::OpenGLFunctions::glGenTextures(CreateAmount, reinterpret_cast<GLuint*>(Textures));
+
+		GLuint* TextureObjects = SDL_stack_alloc(GLuint, CreateAmount);
+		Game::Graphics::Classes::Texture_OpenGL* TempTexture;
+
+		Game::Graphics::OpenGLFunctions::glGenTextures(CreateAmount, TextureObjects);
+		for (int i = 0; i < CreateAmount; ++i) {
+
+			TempTexture = new Game::Graphics::Classes::Texture_OpenGL;
+			TempTexture->GLObject = TextureObjects[i];
+			Textures[i] = TempTexture;
+		}
+		SDL_stack_free(TextureObjects);
 	}
 
 	static void _Texture_Unbind_OpenGL() {

@@ -67,6 +67,12 @@
     <Filter Include="Resource Files\ScriptsClient">
       <UniqueIdentifier>{00cac222-322d-445a-91b6-d0bdf15c4a23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\ItemClassesClient\Soul">
+      <UniqueIdentifier>{e845d730-a580-4ee6-a5a4-f12ba235b876}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SoundClasses">
+      <UniqueIdentifier>{69ec49b6-9582-474a-898c-748eaa9303d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main_client.cpp">
@@ -266,6 +272,42 @@
     <ClInclude Include="GraphicsClasses\Framebuffer.hpp">
       <Filter>Source Files\GraphicsClasses</Filter>
     </ClInclude>
+    <ClInclude Include="LuaLibraries\LuaPlayers_Client.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FunctionHeaders\Event.hpp">
+      <Filter>Header Files\FunctionHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LuaLibraries\LuaPatching.hpp">
+      <Filter>Header Files\LuaLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenAL_Sound.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundClasses\AudioSource_OpenAL.hpp">
+      <Filter>Source Files\SoundClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundClasses\AudioSource_SDLMixer.hpp">
+      <Filter>Source Files\SoundClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundClasses\Speaker_OpenAL.hpp">
+      <Filter>Source Files\SoundClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundClasses\Speaker_SDLMixer.hpp">
+      <Filter>Source Files\SoundClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundClasses\Speaker.hpp">
+      <Filter>Source Files\SoundClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundClasses\AudioSource.hpp">
+      <Filter>Source Files\SoundClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundClasses\Listener.hpp">
+      <Filter>Source Files\SoundClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLMixer_Sound.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Shaders\ColorableShaded.frag">
@@ -390,6 +432,21 @@
     </None>
     <None Include="..\ItemClassesClient\MetalKicks.lua">
       <Filter>Resource Files\ItemClassesClient\Equipment</Filter>
+    </None>
+    <None Include="..\ItemClassesClient\Jetpack.lua">
+      <Filter>Resource Files\ItemClassesClient\Equipment</Filter>
+    </None>
+    <None Include="..\ItemClassesClient\ConfidenceSoul.lua">
+      <Filter>Resource Files\ItemClassesClient\Soul</Filter>
+    </None>
+    <None Include="..\ItemClassesClient\YoyoR.lua">
+      <Filter>Resource Files\ItemClassesClient\Weapon</Filter>
+    </None>
+    <None Include="..\MiscClassesGlobal\SyncedModifierCollection.lua">
+      <Filter>Resource Files\MiscClassesGlobal</Filter>
+    </None>
+    <None Include="..\MiscClassesGlobal\LocalModifierCollection.lua">
+      <Filter>Resource Files\MiscClassesGlobal</Filter>
     </None>
   </ItemGroup>
 </Project>

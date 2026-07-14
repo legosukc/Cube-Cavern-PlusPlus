@@ -182,7 +182,7 @@ namespace Game::Graphics {
 		Classes::Texture* Texture;
 	} BoundObjects;
 
-	struct {
+	struct GBufferStruct {
 		Classes::Texture* Position, *Normal, *Albedo, *Specular;
 	} GBuffer;
 }
@@ -267,7 +267,7 @@ void Game::Graphics::Init() {
 
 	const Math::IVector2 WindowSize = Game::Window.GetSize();
 
-	for (int i = 0; i < 4; ++i) {
+	for (int i = 0; i < 3; ++i) {
 		reinterpret_cast<Classes::Texture**>(&GBuffer)[i]->Bind();
 		Graphics::Texture::UploadPixelData(WindowSize.X, WindowSize.Y, GL_RGB, GL_FLOAT, NULL);
 		Graphics::Texture::AttachToFramebuffer(GL_COLOR_ATTACHMENT0 + i, reinterpret_cast<Classes::Texture**>(&GBuffer)[i]);

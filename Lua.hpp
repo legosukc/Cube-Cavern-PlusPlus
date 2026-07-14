@@ -4,6 +4,7 @@
 #include <fstream>
 
 #include <SDL3/SDL_timer.h>
+#include <SDL3/SDL_filesystem.h>
 
 #ifndef BUILD_SERVER
 #include <SDL3/SDL_opengl.h>
@@ -12,15 +13,6 @@
 
 
 #include <lua-5.5.0/lua.hpp>
-
-#include "FunctionHeaders/LuaHelper.hpp"
-
-
-// uhh keep this for "ClientDownloadsLuaBytecode" config comment
-// If true, sends pre-compiled byte code for the client, no compilation on the client needed.
-	// If false, sends the entire lua source code from mods for the client to compile.
-	// Bytecode is often smaller than source code, however, all client code will have to be compiled on the server on start-up.
-	// After compilation, bytecode will be cached, you can configure cache settings in "GlobalCfg.json"
 
 namespace Game::Lua {
 
@@ -41,17 +33,19 @@ namespace Game::Lua {
 #endif
 	};
 
+	int CompileToLuaFunction(lua_State* State, const char* SourcePath);
+
 	struct LuaThreadInfo {
 		LuaThreadInfo() {
-			
+
 #ifndef BUILD_SERVER
 			GLint MaxBoundTextures;
 			Game::Graphics::OpenGLFunctions::glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &MaxBoundTextures);
-			
+
 			this->ActiveTextures = static_cast<GLuint*>(std::calloc(0, MaxBoundTextures * sizeof(GLuint)));
 
 			//this->BoundVertexArray = glGetVertexArrayiv()
-			
+
 			this->DepthTest = Game::Graphics::OpenGLFunctions::glIsEnabled(GL_DEPTH_TEST);
 			this->StencilTest = Game::Graphics::OpenGLFunctions::glIsEnabled(GL_STENCIL_TEST);
 #endif
@@ -89,7 +83,19 @@ namespace Game::Lua {
 #endif
 
 	lua_State* State = NULL;
+}
 
+#include "FunctionHeaders/LuaHelper.hpp"
+#include "FunctionHeaders/ConfigHandler.hpp"
+
+
+// uhh keep this for "ClientDownloadsLuaBytecode" config comment
+// If true, sends pre-compiled byte code for the client, no compilation on the client needed.
+	// If false, sends the entire lua source code from mods for the client to compile.
+	// Bytecode is often smaller than source code, however, all client code will have to be compiled on the server on start-up.
+	// After compilation, bytecode will be cached, you can configure cache settings in "GlobalCfg.json"
+
+namespace Game::Lua {
 	LuaHelper::StackTableReference GameTable;
 }
 
@@ -128,6 +134,7 @@ namespace {
 		const int StartingStackIndex = lua_gettop(Game::Lua::State);
 
 		const std::filesystem::path& Path = Entry.path();
+
 
 		unlikely_branch
 		if (Path.extension() != ".lua") {
@@ -172,32 +179,40 @@ namespace {
 
 	static void _LoadLuaAssetDirectoryInTable(const char* DirectoryPath, int TableIDX) {
 
-		std::filesystem::path FilesystemPath;
-		FilesystemPath = DirectoryPath;
+		SDL_PathInfo DirectoryInfo;
+		
+		unlikely_branch
+		if (!SDL_GetPathInfo(DirectoryPath, &DirectoryInfo)) {
+
+			char* WorkingDir = SDL_GetCurrentDirectory();
+
+			std::string ErrorMsg = StringHelper::Combine("Directory ", DirectoryPath, " doesn't exist.\nWorking directory: ", WorkingDir);
+			SDL_free(WorkingDir);
+
+			std::cerr << ErrorMsg << std::endl;
+
+			Exceptions::ThrowExceptionExpression<Exceptions::IOError>(ErrorMsg);
+		}
 
 		unlikely_branch
-		if (!std::filesystem::exists(FilesystemPath)) {
-			std::cerr << "Directory " << FilesystemPath.generic_string() << " doesn't exist.\nWorking directory: "
-				<< std::filesystem::current_path().generic_string().c_str() << std::endl;
+		if (DirectoryInfo.type != SDL_PATHTYPE_DIRECTORY) {
 
-			Exceptions::ThrowExceptionExpression<Exceptions::IOError>("Directory ", FilesystemPath.generic_string(), " doesn't exist.\nWorking directory: ",
-				std::filesystem::current_path().generic_string().c_str()
-			);
+			char* WorkingDir = SDL_GetCurrentDirectory();
+
+			std::string ErrorMsg = StringHelper::Combine("Path ", DirectoryPath, " isn't a directory.\nWorking directory: ", WorkingDir);
+			SDL_free(WorkingDir);
+
+			std::cerr << ErrorMsg << std::endl;
+
+			Exceptions::ThrowExceptionExpression<Exceptions::IOError>(ErrorMsg);
 		}
 
-		unlikely_branch
-		if (!std::filesystem::is_directory(FilesystemPath)) {
-			std::cerr << "Path " << FilesystemPath.generic_string() << " isn't a directory.\nWorking directory: "
-				<< std::filesystem::current_path().generic_string().c_str() << std::endl;
-
-			Exceptions::ThrowExceptionExpression<Exceptions::IOError>("Path ", FilesystemPath.generic_string(), " isn't a directory.\nWorking directory: ",
-				std::filesystem::current_path().generic_string().c_str()
-			);
-		}
-
-		for (const auto& Entry : std::filesystem::directory_iterator(FilesystemPath)) {
-			::_LoadLuaFileInTable(Entry, TableIDX);
-		}
+		SDL_EnumerateDirectory(DirectoryPath, [](void* Userdata, const char* DirectoryPath, const char* FileName) -> SDL_EnumerationResult {
+			//std::cout << "dir: " << DirectoryPath << std::endl;
+			::_LoadLuaFileInTable(std::filesystem::directory_entry(std::string(DirectoryPath) + FileName), *(int*)Userdata);
+			return SDL_EnumerationResult::SDL_ENUM_CONTINUE;
+			}, &TableIDX
+		);
 	}
 
 
@@ -253,12 +268,13 @@ namespace {
 			const std::string Path = StringHelper::Combine(lua_tostring(State, lua_upvalueindex(1)), luaL_checkstring(State, 2), ".lua");
 
 			unlikely_branch
-			if (!std::filesystem::exists(Path)) {
+			if (!SDL_GetPathInfo(Path.c_str(), NULL)) {
 				luaL_error(State, "Attempted to index a non-existant entry '", lua_tostring(State, 2), "' in table ", lua_tostring(State, lua_upvalueindex(1)));
 			}
 
 			unlikely_branch
-			if (luaL_loadfile(State, Path.c_str()) != LUA_OK) {
+			//if (luaL_loadfile(State, Path.c_str()) != LUA_OK) {
+			if (Game::Lua::CompileToLuaFunction(State, Path.c_str()) != LUA_OK) {
 				lua_error(State);
 			}
 
@@ -268,7 +284,7 @@ namespace {
 			lua_rawset(State, 1);
 		}
 
-		lua_rotate(State, 1, 1);
+		//lua_rotate(State, 1, 1);
 		return 1;
 	}
 }
@@ -314,8 +330,13 @@ void* Game::Lua::LuaAllocationFunc(void* ud, void* ptr, size_t osize, size_t nsi
 
 void Game::Lua::Init() {
 
-	auto Start = std::chrono::high_resolution_clock::now();
+	const Uint64 StartMS = SDL_GetTicks();
 	std::cout << "Initializing Lua." << std::endl;
+
+	{
+		const auto CacheLuaBytecodeValue = Game::Config::GlobalConfigJSON["Main"]["Lua"]["CacheLuaBytecode"];
+		Game::Lua::CacheLuaBytecode = CacheLuaBytecodeValue.is_boolean() && CacheLuaBytecodeValue.get<bool>();
+	}
 
 	//::_AllocLogFile.open("alloclog.txt");
 
@@ -400,10 +421,117 @@ void Game::Lua::Init() {
 	EnemyClasses.Load();
 	ItemClasses.Load();
 
+	std::cout << "Initalized Lua system, took " << SDL_GetTicks() - StartMS << " milliseconds." << std::endl;
+}
 
-	std::cout << "Initalized Lua system, took "
-		<< std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - Start).count()
-		<< " milliseconds." << std::endl;
+
+int Game::Lua::CompileToLuaFunction(lua_State* State, const char* SourcePath) {
+
+	struct BytecodeCacheStruct {
+		char Header[14] = "BYTECODECACHE";
+		Uint32 SourceCRC;
+		size_t SourceSize;
+		char Bytecode[];
+	};
+
+	SDL_PathInfo PathInfo;
+
+	Uint32 SourceCodeCRC;
+	size_t SourceCodeSize;
+	char* SourceCode = static_cast<char*>(SDL_LoadFile(SourcePath, &SourceCodeSize));
+	if (SourceCode == NULL) {
+		return LUA_ERRFILE;
+	}
+	/*
+	bool DoCache;
+	{
+		if (Game::Lua::CacheLuaBytecode) {
+			SDL_GetPathInfo((Utils::File::PreferredPath + "LuaCache\\").c_str(), &PathInfo);
+			
+		}
+	}*/
+
+	std::string BytecodeCachePath;
+	if (Game::Lua::CacheLuaBytecode) {
+
+		SourceCodeCRC = SDL_murmur3_32(SourceCode, SourceCodeSize, 420);
+
+		std::string TempPath;
+
+		BytecodeCachePath = Utils::File::PreferredPath;
+		BytecodeCachePath.append("LuaCache\\");
+
+		if (!SDL_GetPathInfo(BytecodeCachePath.c_str(), &PathInfo) || PathInfo.type != SDL_PathType::SDL_PATHTYPE_DIRECTORY) {
+			SDL_CreateDirectory(BytecodeCachePath.c_str());
+			goto CheckForCacheBytecodeFail;
+		}
+
+		BytecodeCachePath.append(SourcePath);
+
+		TempPath = std::filesystem::path(BytecodeCachePath).remove_filename().u8string();
+		if (!SDL_GetPathInfo(TempPath.c_str(), &PathInfo) || PathInfo.type != SDL_PathType::SDL_PATHTYPE_FILE) {
+			SDL_CreateDirectory(TempPath.c_str());
+			goto CheckForCacheBytecodeFail;
+		}
+
+		size_t BytecodeCacheSize;
+		BytecodeCacheStruct* BytecodeCache = static_cast<BytecodeCacheStruct*>(SDL_LoadFile(SourcePath, &BytecodeCacheSize));
+
+		if (BytecodeCache == NULL) {
+			goto CheckForCacheBytecodeFail;
+		}
+
+		if (strcmp(BytecodeCache->Header, "BYTECODECACHE") != 0 || SourceCodeCRC != BytecodeCache->SourceCRC) {
+			goto CheckForCacheBytecodeFail_FreeBytecodeCache;
+		}
+		SDL_free(SourceCode);
+
+		luaL_loadbuffer(State, BytecodeCache->Bytecode, BytecodeCacheSize - sizeof(Uint32), SourcePath);
+		SDL_free(BytecodeCache);
+		
+		return LUA_OK;
+
+	CheckForCacheBytecodeFail_FreeBytecodeCache:
+		SDL_free(BytecodeCache);
+	}
+CheckForCacheBytecodeFail:
+
+	//luaL_loadstring(State, SourceCode);
+	
+	//lua_getinfo
+	const int CompileStatus = luaL_loadfile(State, SourcePath);
+	if (CompileStatus != LUA_OK) {
+		return CompileStatus;
+	}
+
+	SDL_free(SourceCode);
+
+	if (Game::Lua::CacheLuaBytecode) {
+		SDL_IOStream* BytecodeCacheIO = SDL_IOFromFile(BytecodeCachePath.c_str(), "wb");
+		if (BytecodeCacheIO == NULL) {
+			std::clog << "Failed to open lua bytecode cache file: " << BytecodeCachePath << " for writing." << std::endl;
+			return LUA_OK;
+		}
+		BytecodeCacheStruct CacheInfo;
+		CacheInfo.SourceCRC = SourceCodeCRC;
+		CacheInfo.SourceSize = SourceCodeSize;
+		SDL_WriteIO(BytecodeCacheIO, &CacheInfo, sizeof(CacheInfo.Header) + sizeof(CacheInfo.SourceCRC) + sizeof(CacheInfo.SourceSize));
+		SDL_SeekIO(BytecodeCacheIO, sizeof(CacheInfo.Header) + sizeof(CacheInfo.SourceCRC) + sizeof(CacheInfo.SourceSize), SDL_IOWhence::SDL_IO_SEEK_SET);
+
+
+		lua_dump(State, [](lua_State* State, const void* Chunk, size_t ChunkSize, void* BytecodeCacheIO) -> int {
+			SDL_WriteIO(static_cast<SDL_IOStream*>(BytecodeCacheIO), Chunk, ChunkSize);
+			SDL_SeekIO(static_cast<SDL_IOStream*>(BytecodeCacheIO), ChunkSize, SDL_IOWhence::SDL_IO_SEEK_CUR);
+			return 0;
+			},
+			BytecodeCacheIO,
+			false
+		);
+
+		SDL_CloseIO(BytecodeCacheIO);
+	}
+
+	return LUA_OK;
 }
 
 

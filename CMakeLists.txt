@@ -15,7 +15,7 @@ endif()
 
 ## Define project parameters here
 # Name of the project
-project(hello_cpp_world)
+project(CubeCavernClient)
 # This line adds Vita helper macros, must go after project definition in order
 # to build Vita specific artifacts (self/vpk).
 include("${VITASDK}/share/vita.cmake" REQUIRED)
@@ -61,6 +61,13 @@ target_link_libraries(${PROJECT_NAME}
   SceDisplay_stub   # This used by debugScreenPrintf()
   stdc++
   pthread
+  SDL3
+  SDL3_mixer
+  SDL3_image
+  SDL3_ttf
+  SDL3_net
+  openal-soft
+  glew32
 )
 
 ## Create Vita files

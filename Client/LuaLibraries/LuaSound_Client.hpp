@@ -29,39 +29,72 @@ namespace Game::Lua::CLibraries::Sound {
 	}
 
 
-	struct SoundBuffer {
-		static inline void InitMetatable(lua_State* State);
+	static int CreateAudioSource(lua_State* State) {
 
-		Game::Sound::Buffer CppBuffer;
+		Game::Sound::Classes::AudioSource** AudioSourceUD = static_cast<Game::Sound::Classes::AudioSource**>(lua_newuserdata(State, sizeof(Game::Sound::Classes::AudioSource*)));
+		*AudioSourceUD = Game::Sound::CreateAudioSource();
 
-		static int UploadSoundData(lua_State* State) {
-			using DataBuffer = Game::Lua::CLibraries::Buffer::Classes::Buffer;
+		luaL_setmetatable(State, "AudioSource");
 
-			const DataBuffer* DataBufferUD = static_cast<DataBuffer*>(luaL_checkudata(State, 2, DataBuffer::MetatableName));
-			
-			static_cast<SoundBuffer*>(lua_touserdata(State, 1))->CppBuffer.UploadSoundData(
-				DataBufferUD->Data,
-				DataBufferUD->Size,
-				static_cast<ALenum>(luaL_checkinteger(State, 3)),
-				static_cast<ALsizei>(luaL_checkinteger(State, 4))
-			);
+		return 1;
+	}
+
+	static int CreateSpeaker(lua_State* State) {
+
+		Game::Sound::Classes::Speaker** SpeakerUD = static_cast<Game::Sound::Classes::Speaker**>(lua_newuserdata(State, sizeof(Game::Sound::Classes::Speaker*)));
+		*SpeakerUD = Game::Sound::CreateSpeaker();
+
+		luaL_setmetatable(State, "Speaker");
+
+		return 1;
+	}
+
+	struct AudioSourceMetatable {
+		
+		
+	};
+
+	struct SpeakerMetatable {
+
+		static int Play(lua_State* State) {
+			(*static_cast<Game::Sound::Classes::Speaker**>(luaL_checkudata(State, 1, "Speaker")))->Play();
 			return 0;
 		}
-
-		static int LoadFile(lua_State* State) {
-
-			lua_pushboolean(State,
-				static_cast<SoundBuffer*>(lua_touserdata(State, 1))->CppBuffer.LoadFile(
-					luaL_checkstring(State, 2),
-					static_cast<ALenum>(luaL_checkinteger(State, 3))
-				)
-			);
-			return 1;
+		static int Stop(lua_State* State) {
+			(*static_cast<Game::Sound::Classes::Speaker**>(luaL_checkudata(State, 1, "Speaker")))->Stop();
+			return 0;
+		}
+		static int Pause(lua_State* State) {
+			(*static_cast<Game::Sound::Classes::Speaker**>(luaL_checkudata(State, 1, "Speaker")))->Pause();
+			return 0;
 		}
 	};
 }
 
 void Game::Lua::CLibraries::Sound::Init(lua_State* State) {
 
-	
+	LuaHelper::StackTableReference AudioSourceMetatable(State, "AudioSource");
+
+	AudioSourceMetatable.SetKeyClosure(State, CLibraries::Sound::SetListenerPosition, "SetListenerPosition");
+
+
+	LuaHelper::StackTableReference SpeakerMetatable(State, "Speaker");
+
+	SpeakerMetatable.SetKeyClosure(State, CLibraries::Sound::SpeakerMetatable::Play, "Play");
+	SpeakerMetatable.SetKeyClosure(State, CLibraries::Sound::SpeakerMetatable::Pause, "Pause");
+	SpeakerMetatable.SetKeyClosure(State, CLibraries::Sound::SpeakerMetatable::Stop, "Stop");
+
+	lua_settop(State, AudioSourceMetatable.GetStackIndex() - 1);
+
+
+	lua_createtable(State, 0, 5);
+
+	LuaHelper::SetKeyClosure(State, -2, CLibraries::Sound::SetListenerPosition, "SetListenerPosition");
+	LuaHelper::SetKeyClosure(State, -2, CLibraries::Sound::SetListenerVelocity, "SetListenerVelocity");
+	LuaHelper::SetKeyClosure(State, -2, CLibraries::Sound::SetListenerOrientation, "SetListenerOrientation");
+
+	LuaHelper::SetKeyClosure(State, -2, CLibraries::Sound::CreateAudioSource, "CreateAudioSource");
+	LuaHelper::SetKeyClosure(State, -2, CLibraries::Sound::CreateSpeaker, "CreateSpeaker");
+
+	lua_setfield(State, Game::Lua::GameTable.GetStackIndex(), "Sound");
 }

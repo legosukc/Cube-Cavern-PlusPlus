@@ -1,7 +1,69 @@
 #pragma once
 
+#include "../define.h"
+
+#include <type_traits>
 #include <tuple>
 #include <algorithm>
+
+#ifndef DEPRECATE
+
+#if defined(__GNUC__)
+#define DEPRECATE(foo, msg) foo __attribute__((deprecated(msg)))
+#elif defined(_MSC_VER)
+#define DEPRECATE(foo, msg) __declspec(deprecated(msg)) foo
+#else
+#error This compiler is not supported
+#endif
+
+#else
+#warning Macro DEPRECATE isnt defined by FunctionHeaders\TypeHelper.hpp.
+#endif
+
+#ifndef PP_CAT
+#define PP_CAT(x,y) PP_CAT1(x,y)
+#else
+#warning Macro PP_CAT isnt defined by FunctionHeaders\TypeHelper.hpp.
+#endif
+
+#ifndef PP_CAT1
+#define PP_CAT1(x,y) x##y
+#else
+#warning Macro PP_CAT1 isnt defined by FunctionHeaders\TypeHelper.hpp.
+#endif
+
+
+namespace TypeHelper::detail {
+    template<int test>
+    struct converter : public std::true_type {};
+
+    template<>
+    struct converter<0> : public std::false_type {};
+}
+
+#ifndef STATIC_WARNING
+#define STATIC_WARNING(cond, msg) \
+struct PP_CAT(static_warning,__LINE__) { \
+  DEPRECATE(void _(std::false_type const& ),msg) {}; \
+  void _(std::true_type const& ) {}; \
+  PP_CAT(static_warning,__LINE__)() {_(TypeHelper::detail::converter<(cond)>());} \
+}
+#else
+#warning Macro STATIC_WARNING isnt defined by FunctionHeaders\TypeHelper.hpp.
+#endif
+
+#ifndef STATIC_WARNING_TEMPLATE
+// Note: using STATIC_WARNING_TEMPLATE changes the meaning of a program in a small way.
+// It introduces a member/variable declaration.  This means at least one byte of space
+// in each structure/class instantiation.  STATIC_WARNING should be preferred in any 
+// non-template situation.
+//  'token' must be a program-wide unique identifier.
+#define STATIC_WARNING_TEMPLATE(token, cond, msg) \
+    STATIC_WARNING(cond, msg) PP_CAT(PP_CAT(_localvar_, token),__LINE__)
+#else
+#warning Macro STATIC_WARNING_TEMPLATE isnt defined by FunctionHeaders\TypeHelper.hpp.
+#endif
+
 
 namespace TypeHelper {
 
@@ -72,11 +134,11 @@ namespace TypeHelper {
 
     // Helper variable template (C++14+)
     template <typename T>
-    constexpr INLINE_MEMBER_VARIABLE bool is_c_string_v = is_c_string<std::remove_reference_t<RemoveTypeQualifiers<T>>>::value;
+    constexpr bool is_c_string_v = is_c_string<std::remove_reference_t<RemoveTypeQualifiers<T>>>::value;
 
 
     template <typename T>
-    constexpr INLINE_MEMBER_VARIABLE bool is_literal_v = is_literal<T>::value;
+    constexpr bool is_literal_v = is_literal<T>::value;
 
     
     template<typename T>
@@ -87,14 +149,14 @@ namespace TypeHelper {
     
     template<>
     struct sizeofTypes<> {
-        constexpr static INLINE_MEMBER_VARIABLE size_t size = 0;
+        constexpr static size_t size = 0;
     };
 
     template<typename T, typename... Rest>
     struct sizeofTypes<T, Rest...> {
-        constexpr static INLINE_MEMBER_VARIABLE size_t size = sizeofTypes<Rest...>::size + sizeof(T);
+        constexpr static size_t size = sizeofTypes<Rest...>::size + sizeof(T);
     };
 
     template<typename... T>
-    constexpr static INLINE_MEMBER_VARIABLE size_t sizeofTypes_v = sizeofTypes<T...>::size;
+    constexpr size_t sizeofTypes_v = sizeofTypes<T...>::size;
 }

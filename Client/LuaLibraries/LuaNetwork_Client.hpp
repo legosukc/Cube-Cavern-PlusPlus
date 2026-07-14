@@ -1,6 +1,12 @@
 #pragma once
 
+#include <vector>
+#include <algorithm>
+
 #include <lua-5.5.0/lua.hpp>
+#include "../../FunctionHeaders/LuaHelper.hpp"
+
+#include <SDL3_net/SDL_net.h>
 
 
 namespace Game::Lua::CLibraries::Network {

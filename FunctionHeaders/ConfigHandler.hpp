@@ -1,29 +1,53 @@
 #pragma once
 
+#include <iostream>
+
 #include <SDL3/SDL_filesystem.h>
 #include <SDL3/SDL_iostream.h>
 
-#include <json.hpp>
+#include "../nlohmann/json.hpp"
 
 #include "File.hpp"
 
 
 namespace {
 
+	nlohmann::json _ParseConfig(const char* JSONText, bool UseDefaultConfig, const char* DefaultConfigPath) {
+		nlohmann::json NewJSON;
+		try {
+			NewJSON = nlohmann::json::parse(JSONText);
+		} catch (std::exception Exception) {
+			std::cerr << "Caught exception while parsing JSON: " << Exception.what() << '\n';
+			if (UseDefaultConfig) {
+				std::cerr << "Default config: " << DefaultConfigPath << " is probably corrupted. (yikes!)" << std::endl;
+			} else {
+				std::cerr << "Trying default config: " << DefaultConfigPath << std::endl;
+
+				char* DefaultJSONText = static_cast<char*>(SDL_LoadFile(DefaultConfigPath, NULL));
+				NewJSON = ::_ParseConfig(DefaultJSONText, true, DefaultConfigPath);
+				SDL_free(DefaultJSONText);
+
+				return NewJSON;
+			}
+		}
+		return NewJSON;
+	}
+
 	nlohmann::json _OpenConfig(const char* ConfigPath, const char* DefaultConfigPath) {
 
 		const std::string FullConfigPath = Utils::File::PreferredPath + ConfigPath;
 
-		if (!SDL_GetPathInfo(FullConfigPath.c_str(), NULL)) {
+		const bool UseDefaultConfig = !SDL_GetPathInfo(FullConfigPath.c_str(), NULL);
+
+		if (UseDefaultConfig) {
 			SDL_CopyFile(DefaultConfigPath, FullConfigPath.c_str());
 		}
 
 		char* JSONText = static_cast<char*>(SDL_LoadFile(FullConfigPath.c_str(), NULL));
 
-		nlohmann::json NewJSON = nlohmann::json::parse(JSONText);
+		nlohmann::json NewJSON = ::_ParseConfig(JSONText, UseDefaultConfig, DefaultConfigPath);
 
 		SDL_free(JSONText);
-
 		return NewJSON;
 	}
 }

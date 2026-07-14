@@ -56,8 +56,8 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::FragmentShader {
 
-	Game::Graphics::Classes::FragmentShader(*Create)();
-	void(*CreateBulk)(size_t CreateAmount, Game::Graphics::Classes::FragmentShader* FragmentShaders);
+	Game::Graphics::Classes::FragmentShader*(*Create)();
+	void(*CreateBulk)(size_t CreateAmount, Game::Graphics::Classes::FragmentShader* FragmentShaders[]);
 
 	inline void Init() {
 

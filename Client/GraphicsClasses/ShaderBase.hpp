@@ -85,11 +85,12 @@ namespace Game::Graphics::ShaderBase {
 		template<class ShaderClass, class OpenGLShaderClass>
 		void CreateBulk_OpenGL(size_t CreateAmount, ShaderClass* Shaders[]) {
 
-			OpenGLShaderClass TempShader;
+			OpenGLShaderClass* TempShader;
 			size_t i;
 
 			for (i = 0; i < CreateAmount; ++i) {
-				TempShader.GLObject = Game::Graphics::OpenGLFunctions::glCreateShader(OpenGLShaderClass::OpenGLShaderType);
+				TempShader = new OpenGLShaderClass;
+				TempShader->GLObject = Game::Graphics::OpenGLFunctions::glCreateShader(OpenGLShaderClass::OpenGLShaderType);
 				Shaders[i] = TempShader;
 			}
 		}

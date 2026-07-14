@@ -2,7 +2,7 @@
 local class = {}
 
 class.Name = "DaggerG"
-class.Description = "chuddy forgot to set the description"
+class.Description = "Alt move: "
 class.BookEntry = "chuddy forgot to set the book description"
 
 class.__index = class

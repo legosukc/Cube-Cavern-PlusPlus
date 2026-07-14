@@ -15,6 +15,3 @@
 #include "MathClasses/Matrix.hpp"
 
 #include "FunctionHeaders/MathTransform.hpp"
-
-
-#include "FunctionHeaders/LuaHelper.hpp"

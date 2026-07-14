@@ -13,6 +13,8 @@
 
 #include "../FunctionHeaders/Exceptions.hpp"
 
+#include "../FunctionHeaders/Event.hpp"
+
 
 namespace {
 	static std::vector<char> _Packet;

@@ -279,7 +279,7 @@ int LuaHelper::PCallLog(lua_State* State, int ArgumentsPassed, int ReturnValues)
 
 int LuaHelper::LoadFileLog(lua_State* State, const char* Path) {
 
-	const int ErrorCode = luaL_loadfile(State, Path);
+	const int ErrorCode = Game::Lua::CompileToLuaFunction(State, Path); //luaL_loadfile(State, Path);
 	if (ErrorCode != LUA_OK) {
 		std::cerr << lua_tostring(State, -1) << std::endl;
 		lua_pop(State, 1);

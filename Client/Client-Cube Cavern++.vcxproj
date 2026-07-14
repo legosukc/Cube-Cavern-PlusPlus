@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main_client.cpp" />
+    <ClInclude Include="SDLMixer_Sound.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Collisions.hpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="..\define.h" />
     <ClInclude Include="..\FunctionHeaders\BitOp.hpp" />
     <ClInclude Include="..\FunctionHeaders\ConfigHandler.hpp" />
+    <ClInclude Include="..\FunctionHeaders\Event.hpp" />
     <ClInclude Include="..\FunctionHeaders\Exceptions.hpp" />
     <ClInclude Include="..\FunctionHeaders\File.hpp" />
     <ClInclude Include="..\FunctionHeaders\LuaHelper.hpp" />
@@ -180,6 +182,7 @@
     <ClInclude Include="..\LuaLibraries\LuaMath.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaMatrix.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaModelLoader.hpp" />
+    <ClInclude Include="..\LuaLibraries\LuaPatching.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaSurface.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaTable.hpp" />
     <ClInclude Include="..\LuaLibraries\LuaTask.hpp" />
@@ -207,9 +210,18 @@
     <ClInclude Include="GraphicsClasses\VertexBuffer.hpp" />
     <ClInclude Include="Graphics_Client.hpp" />
     <ClInclude Include="LuaLibraries\LuaNetwork_Client.hpp" />
+    <ClInclude Include="LuaLibraries\LuaPlayers_Client.hpp" />
     <ClInclude Include="LuaLibraries\LuaSound_Client.hpp" />
     <ClInclude Include="Network_Client.hpp" />
+    <ClInclude Include="OpenAL_Sound.hpp" />
     <ClInclude Include="SDLClasses\Window.hpp" />
+    <ClInclude Include="SoundClasses\AudioSource.hpp" />
+    <ClInclude Include="SoundClasses\AudioSource_OpenAL.hpp" />
+    <ClInclude Include="SoundClasses\AudioSource_SDLMixer.hpp" />
+    <ClInclude Include="SoundClasses\Listener.hpp" />
+    <ClInclude Include="SoundClasses\Speaker.hpp" />
+    <ClInclude Include="SoundClasses\Speaker_OpenAL.hpp" />
+    <ClInclude Include="SoundClasses\Speaker_SDLMixer.hpp" />
     <ClInclude Include="Sound_Client.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -229,11 +241,13 @@
     <None Include="..\ItemClassesClient\Backpack.lua" />
     <None Include="..\ItemClassesClient\Boots.lua" />
     <None Include="..\ItemClassesClient\Bottle.lua" />
+    <None Include="..\ItemClassesClient\ConfidenceSoul.lua" />
     <None Include="..\ItemClassesClient\Dagger.lua" />
     <None Include="..\ItemClassesClient\DaggerB.lua" />
     <None Include="..\ItemClassesClient\DaggerG.lua" />
     <None Include="..\ItemClassesClient\DaggerR.lua" />
     <None Include="..\ItemClassesClient\DaggerY.lua" />
+    <None Include="..\ItemClassesClient\Jetpack.lua" />
     <None Include="..\ItemClassesClient\Leather.lua" />
     <None Include="..\ItemClassesClient\MacNoCheese.lua" />
     <None Include="..\ItemClassesClient\MetalKicks.lua" />
@@ -242,7 +256,10 @@
     <None Include="..\ItemClassesClient\WaterBottle.lua" />
     <None Include="..\ItemClassesClient\Whip.lua" />
     <None Include="..\ItemClassesClient\Yoyo.lua" />
+    <None Include="..\ItemClassesClient\YoyoR.lua" />
     <None Include="..\MiscClassesGlobal\BindableEvent.lua" />
+    <None Include="..\MiscClassesGlobal\LocalModifierCollection.lua" />
+    <None Include="..\MiscClassesGlobal\SyncedModifierCollection.lua" />
     <None Include="..\ScriptsClient\GameLoop.lua" />
     <None Include="..\defaultServerCfg.json" />
     <None Include="..\Shaders\ColorableShaded.frag" />

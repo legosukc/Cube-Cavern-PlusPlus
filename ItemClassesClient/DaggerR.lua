@@ -2,7 +2,7 @@
 local class = {}
 
 class.Name = "DaggerR"
-class.Description = "chuddy forgot to set the description"
+class.Description = "Alt move: Slam into the ground and causes a shockwave of fire where you land, the damage, size, and speed it expands is increased by how fast you were going when you used the move."
 class.BookEntry = "chuddy forgot to set the book description"
 
 class.__index = class

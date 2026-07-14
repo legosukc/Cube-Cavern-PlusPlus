@@ -29,14 +29,13 @@
 #include <assimp/postprocess.h>
 
 #include <SDL3/SDL.h>
+#include <SDL3_net/SDL_net.h>
+#include <SDL3_mixer/SDL_mixer.h>
 #include <SDL3/SDL_main.h>
 
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
-
-#include <SDL3_net/SDL_net.h>
-#include <SDL3_mixer/SDL_mixer.h>
 
 
 #include <AL/al.h>
@@ -156,6 +155,12 @@ try
 	Game::Graphics::Init();
 	Game::Lua::Init();
 
+	Game::Sound::AudioSource* AudioSource = Game::Sound::CreateAudioSource();
+	Game::Sound::Speaker* Speaker = Game::Sound::CreateSpeaker();
+
+	AudioSource->LoadFile("SFX\\Kick.ogg");
+	Speaker->SetAudioSource(AudioSource);
+	Speaker->Play();
 
 	while (true) {
 
@@ -171,9 +176,12 @@ try
 		Game::Window.Present();
 	}
 
+	delete AudioSource;
+	delete Speaker;
+
 	::_CloseInitialisedItems();
 
-	return EXIT_SUCCESS;
+	return -1;
 }
 
 #ifndef DEBUG_BUILD

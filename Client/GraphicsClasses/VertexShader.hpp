@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../../define.h"
+
 #include <SDL3/SDL_opengl_glext.h>
 
 #include "ShaderBase.hpp"
@@ -14,8 +16,8 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::VertexShader {
 
-	Game::Graphics::Classes::VertexShader(*Create)();
-	void(*CreateBulk)(size_t CreateAmount, Game::Graphics::Classes::VertexShader* VertexShaders);
+	Game::Graphics::Classes::VertexShader*(*Create)();
+	void(*CreateBulk)(size_t CreateAmount, Game::Graphics::Classes::VertexShader* VertexShaders[]);
 
 	inline void Init() {
 

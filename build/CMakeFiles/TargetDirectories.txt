@@ -1,6 +1,0 @@
-/mnt/c/Users/super/OneDrive/Documents/VS/C&C++/Cube Cavern++/build/CMakeFiles/hello_cpp_world.dir
-/mnt/c/Users/super/OneDrive/Documents/VS/C&C++/Cube Cavern++/build/CMakeFiles/hello_cpp_world-velf.dir
-/mnt/c/Users/super/OneDrive/Documents/VS/C&C++/Cube Cavern++/build/CMakeFiles/hello_cpp_world.self-self.dir
-/mnt/c/Users/super/OneDrive/Documents/VS/C&C++/Cube Cavern++/build/CMakeFiles/hello_cpp_world.vpk-vpk.dir
-/mnt/c/Users/super/OneDrive/Documents/VS/C&C++/Cube Cavern++/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/super/OneDrive/Documents/VS/C&C++/Cube Cavern++/build/CMakeFiles/rebuild_cache.dir

@@ -97,17 +97,18 @@ void Game::Classes::Window::Create(const char* WindowTitle, int Width, int Heigh
 
 void Game::Classes::Window::Destroy() {
 
+	if (this->SDLWindow != NULL) {
+		SDL_GL_MakeCurrent(this->SDLWindow, NULL);
+		SDL_DestroyWindow(this->SDLWindow);
+		this->SDLWindow = NULL;
+	}
+
 	if (this->GLContext != NULL) {
 		if (SDL_GL_DestroyContext(this->GLContext)) {
 			this->GLContext = NULL;
 		} else {
 			std::clog << "Failed to destroy the OpenGL context." << std::endl;
 		}
-	}
-
-	if (this->SDLWindow != NULL) {
-		SDL_DestroyWindow(this->SDLWindow);
-		this->SDLWindow = NULL;
 	}
 }
 
@@ -204,7 +205,9 @@ bool Game::Classes::Window::ScancodeReleased(SDL_Scancode Scancode) const {
 	return this->ScancodeStates[Scancode] == ScancodeStatesEnum::Released;
 }
 
-
+namespace Game {
+	extern double DeltaTime;
+}
 void Game::Classes::Window::Present() const {
 
 	SDL_DelayPrecise(this->FrameNS - (SDL_GetTicksNS() - this->LastNS));
