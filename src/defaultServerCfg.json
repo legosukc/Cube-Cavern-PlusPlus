@@ -1,0 +1,9 @@
+{
+  "Main": {
+    "BannedIPs": [],
+    "AdminIPs": [],
+    "MaxPlayers": 32,
+    "ClientDownloadsLuaBytecode": true,
+    "ServersidedPlayerSaves": false
+  }
+}

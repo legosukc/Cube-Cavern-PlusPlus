@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++17 -Wl,--dependency-file=CMakeFiles/CubeCavernApp.dir/link.d CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o -o CubeCavernApp  -lstdc++ -lassimp -lSDL3 -lSDL3_net -lSDL3_image -lSDL3_mixer -lSDL3_ttf -lOpenAL

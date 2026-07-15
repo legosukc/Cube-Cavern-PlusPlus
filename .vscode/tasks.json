@@ -4,23 +4,48 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "Build Client",
             "type": "shell",
-            "command": "msbuild",
+            "command": "cmake",
             "args": [
-                // Ask msbuild to generate full paths for file names.
-                "/property:GenerateFullPaths=true",
-                "/t:build",
-                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
-                "/consoleloggerparameters:NoSummary"
+                "-S.",
+                "-Bbuild",
+                "-DBUILD_TARGET=client"
             ],
             "group": "build",
             "presentation": {
                 // Reveal the output only if unrecognized errors occur.
                 "reveal": "silent"
             },
-            // Use the standard MS compiler pattern to detect errors, warnings and infos
-            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build Server",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S.",
+                "-Bbuild",
+                "-DBUILD_TARGET=server",
+            ],
+            "group": "build",
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
+        },
+        {
+            "label": "Compile",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build"
+            ],
+            "group": "build",
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
         }
     ]
 }
