@@ -10,7 +10,7 @@ trust me bro this engine is in goodddd hands
 
 This engine aims to have a flexible Lua modding api, multiplayer.
 
-Engine being used for the game Cube Cavern++ (not to be confused with this engine, I still need a name)
+Engine being used for the game Cube Cavern++ (i need a name for the game, so it is the same as the engine for now)
 
 Engine written in C++, Lua for all the game logic and scripting.
 
@@ -21,8 +21,10 @@ Lua API for modding, OpenGL knowledge is recommended. (You could probably get aw
 
 ## TODO:
 
-- goon
+- networkinggggggg
+- model loading
+- everything :(
 
 ## BUILDING:
 
-pissssss
+🖕
