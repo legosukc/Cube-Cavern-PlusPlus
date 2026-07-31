@@ -1,6 +1,6 @@
 #pragma once
 
-#include <lua.hpp>
+#include "../include/VM/lua.h"
 
 
 namespace Game::Lua::CLibraries::Network {

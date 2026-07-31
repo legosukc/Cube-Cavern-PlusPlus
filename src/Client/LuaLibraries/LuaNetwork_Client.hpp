@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cstring>
 
-#include <lua.hpp>
+#include "../../../include/VM/lua.h"
 #include "../../FunctionHeaders/LuaHelper.hpp"
 
 #include <SDL3_net/SDL_net.h>
@@ -36,6 +36,7 @@ namespace Game::Lua::CLibraries::Network {
 	struct RemoteEvent {
 		static inline void InitMetatable(lua_State* State);
 
+		// TODO: implement fully
 		static int Fire(lua_State* State) {
 
 			RemoteEvent* RemoteEventUD;
@@ -56,14 +57,14 @@ namespace Game::Lua::CLibraries::Network {
 
 					void* Userdata = lua_touserdata(State, i);
 					
-					
-					if (luaL_getmetafield(State, i, "__name") == LUA_TSTRING) {
+					lua_getmetatable(State, i);
+					if (lua_getfield(State, -1, "__name") == LUA_TSTRING) {
 						Typename = lua_tostring(State, -1);
 					} else {
 						Typename = "userdata";
 					}
 					lua_settop(State, StackTop);
-					std::find(UsedTypenames.begin(), UsedTypenames.end(), Typename);
+					//std::find(UsedTypenames.begin(), UsedTypenames.end(), Typename);
 					while (true) {
 						
 						if (std::strcmp(UsedTypenames[i], Typename)) {
@@ -77,6 +78,7 @@ namespace Game::Lua::CLibraries::Network {
 					}
 				}
 			}
+			return 0;
 		}
 	};
 }

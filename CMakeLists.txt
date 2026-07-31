@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10d)
 
 # include vita toolchain
 if(PLATFORM STREQUAL "vita" AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
@@ -9,6 +9,8 @@ if(PLATFORM STREQUAL "vita" AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
   endif()
 endif()
 
+
+project(CubeCavern LANGUAGES CXX)
 
 include(FetchContent)
 
@@ -27,7 +29,9 @@ set(LUAU_BUILD_TESTS OFF CACHE INTERNAL "")
 FetchContent_MakeAvailable(luau)
 
 
-project(CubeCavern LANGUAGES CXX)
+find_package(OpenAL REQUIRED)
+
+
 
 if(PLATFORM STREQUAL "vita")
   # This line adds Vita helper macros, must go after project definition in order
@@ -40,83 +44,46 @@ if(PLATFORM STREQUAL "vita")
   set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d PARENTAL_LEVEL=1")
 endif()
 
-## Flags and includes for building
-# Note that we make sure not to overwrite previous flags
-# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+
+add_executable(CubeCavernApp)
+
+
+target_link_libraries(CubeCavernApp PRIVATE stdc++)
+target_link_libraries(CubeCavernApp PRIVATE assimp)
+target_link_libraries(CubeCavernApp PRIVATE Luau.VM Luau.Compiler)
+target_link_libraries(CubeCavernApp PRIVATE SDL3 SDL3_net SDL3_image SDL3_mixer SDL3_ttf)
+target_link_libraries(CubeCavernApp PRIVATE OpenAL::OpenAL)
 
 if(BUILD_TARGET STREQUAL "client")
-    add_executable(CubeCavernApp
 
-      src/Client/main_client.cpp
+    message("building for client")
 
-      src/FunctionHeaders/File.cpp
-      src/FunctionHeaders/ConfigHandler.cpp
-      src/FunctionHeaders/LuaHelper.cpp
-
-      src/Client/SDLClasses/Window.cpp
-
-      src/Client/GraphicsClasses/BaseClassDefinitions.cpp
-      src/Client/GraphicsClasses/BufferBase.cpp
-
-      src/Client/GraphicsClasses/VertexArray.cpp
-      src/Client/GraphicsClasses/VertexBuffer.cpp
-      src/Client/GraphicsClasses/IndexBuffer.cpp
-
-      src/Client/GraphicsClasses/ShaderBase.cpp
-      src/Client/GraphicsClasses/VertexShader.cpp
-      src/Client/GraphicsClasses/FragmentShader.cpp
-
-      src/Client/GraphicsClasses/Program.cpp
-
-      src/Client/GraphicsClasses/Texture.cpp
-      src/Client/GraphicsClasses/Framebuffer.cpp
-
-      src/Game.cpp
-      src/Time.cpp
-      src/Statistics.cpp
-      src/Client/Graphics_Client.cpp
-      src/Lua.cpp
-    )
+    target_sources(CubeCavernApp PRIVATE src/Client/main_client.cpp)
     target_compile_definitions(CubeCavernApp PRIVATE BUILD_CLIENT)
 
-elseif(BUILD_TARGET STREQUAL "server")
-    add_executable(CubeCavernApp
-
-      src/Server/main_server.cpp
-
-      src/FunctionHeaders/File.cpp
-      src/FunctionHeaders/ConfigHandler.cpp
-      src/FunctionHeaders/LuaHelper.cpp
-
-      src/Game.cpp
-      src/Time.cpp
-      src/Statistics.cpp
-      src/Lua.cpp
+    set_target_properties(CubeCavernApp PROPERTIES
+      OUTPUT_NAME "CubeCavern"
     )
+
+elseif(BUILD_TARGET STREQUAL "server")
+
+    message("building for server")
+
+    target_sources(CubeCavernApp PRIVATE src/Server/main_server.cpp)
     target_compile_definitions(CubeCavernApp PRIVATE BUILD_SERVER)
+
+    set_target_properties(CubeCavernApp PROPERTIES
+      OUTPUT_NAME "CubeCavern-DedicatedServer"
+    )
 
 else()
     message(FATAL_ERROR, "'BUILD_TARGET' unspecified! Add '-DBUILD_TARGET=client|server'.")
 endif()
-
-target_link_libraries(CubeCavernApp PRIVATE stdc++)
-
-target_link_libraries(CubeCavernApp PRIVATE assimp)
-
-# 5. Link the specific modules your project requires
-# - Luau.VM: Core runtime engine
-# - Luau.Compiler: Compiles source text to bytecode
-target_link_libraries(CubeCavernApp PRIVATE Luau.VM Luau.Compiler)
-
-target_link_libraries(CubeCavernApp PRIVATE SDL3 SDL3_net SDL3_image SDL3_mixer SDL3_ttf)
-
-#target_link_libraries(CubeCavernApp PRIVATE OpenAL)
-
-target_include_directories(CubeCavernApp PRIVATE /include/ ${CMAKE_CURRENT_SOURCE_DIR}/include/)
 
 
 if(PLATFORM STREQUAL "vita")

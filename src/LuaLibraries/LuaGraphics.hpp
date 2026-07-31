@@ -2,7 +2,7 @@
 
 #include "../define.h"
 
-#include <lua.hpp>
+#include "../../include/VM/lua.h"
 
 #ifdef BUILD_CLIENT
 

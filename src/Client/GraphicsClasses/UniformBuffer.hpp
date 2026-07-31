@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GRAPHICS_UNIFORMBUFFER_H
+#define GRAPHICS_UNIFORMBUFFER_H
 
 #include "../../define.h"
 
@@ -8,8 +9,8 @@
 #include <SDL3/SDL_opengl_glext.h>
 
 namespace Game::Graphics::OpenGLFunctions {
-    extern PFNGLBINDBUFFERBASEPROC glBindBufferBase;
-    extern PFNGLBINDBUFFERRANGEPROC glBindBufferRange;
+    PFNGLBINDBUFFERBASEPROC glBindBufferBase;
+    PFNGLBINDBUFFERRANGEPROC glBindBufferRange;
 }
 
 namespace Game::Graphics::Classes {
@@ -47,3 +48,53 @@ namespace Game::Graphics::UniformBuffer {
     inline void Init_DirectX11();
     inline void Init_DirectX12();
 }
+
+Game::Graphics::Classes::UniformBuffer::UniformBuffer() = default;
+void Game::Graphics::Classes::UniformBuffer::BindBase(GLuint Index) {}
+
+void Game::Graphics::Classes::UniformBuffer_OpenGL::BindBase(GLuint Index) {
+    Game::Graphics::OpenGLFunctions::glBindBufferBase(GL_UNIFORM_BUFFER, Index,
+                                                      this->GLObject);
+}
+
+bool Game::Graphics::Classes::UniformBuffer_OpenGL::IsBound() const {
+    // TODO: FIX THIS!!!!
+    return true;
+}
+
+namespace Game::Graphics::UniformBuffer {
+
+    Game::Graphics::Classes::UniformBuffer* (*Create)();
+    void (*CreateBulk)(
+        size_t CreateAmount,
+        Game::Graphics::Classes::UniformBuffer* UniformBuffers[]);
+    void (*Unbind)();
+}
+
+void Game::Graphics::UniformBuffer::Init_OpenGL() {
+    LOAD_OPENGL_FUNCTION(glBindBufferBase);
+    LOAD_OPENGL_FUNCTION(glBindBufferRange);
+
+    using namespace Game::Graphics::BufferBase;
+    using UniformBuffer = Game::Graphics::Classes::UniformBuffer;
+    using UniformBuffer_OpenGL = Game::Graphics::Classes::UniformBuffer_OpenGL;
+
+    Game::Graphics::UniformBuffer::Create =
+        WrapperTemplates::Create_OpenGL<UniformBuffer, UniformBuffer_OpenGL>;
+    Game::Graphics::UniformBuffer::CreateBulk =
+        WrapperTemplates::CreateBulk_OpenGL<UniformBuffer,
+                                            UniformBuffer_OpenGL>;
+
+    Game::Graphics::UniformBuffer::Unbind =
+        WrapperTemplates::Unbind_OpenGL<UniformBuffer_OpenGL>;
+}
+
+void Game::Graphics::UniformBuffer::Init_Vulkan() {}
+
+void Game::Graphics::UniformBuffer::Init_Metal() {}
+
+void Game::Graphics::UniformBuffer::Init_DirectX11() {}
+
+void Game::Graphics::UniformBuffer::Init_DirectX12() {}
+
+#endif

@@ -6,10 +6,12 @@
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 
-#include <lua.hpp>
+#include "../../../include/VM/lua.h"
+#include "../../../include/VM/lualib.h"
 
 #include "../../FunctionHeaders/LuaHelper.hpp"
 
+#include "../../Client/Graphics_Client.hpp"
 
 namespace Game::Lua::CLibraries::Graphics {
 
@@ -92,7 +94,8 @@ int Game::Lua::CLibraries::Graphics::VertexArray::__new(lua_State* State) {
 
 	Classes::VertexArray* VertexArrayUD = static_cast<Classes::VertexArray*>(lua_newuserdata(State, sizeof(Classes::VertexArray)));
 	Game::Graphics::OpenGLFunctions::glGenVertexArrays(1, &VertexArrayUD->GLObject);
-	luaL_setmetatable(State, "VertexArray");
+	luaL_getmetatable(State, "VertexArray");
+	lua_setmetatable(State, -2);
 	return 1;
 }
 

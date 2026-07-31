@@ -8,16 +8,14 @@
 #include <SDL3/SDL_opengl_glext.h>
 
 #include <SDL3/SDL_timer.h>
-#include <lua.hpp>
 
-#ifdef BUILD_CLIENT
-#include "../../Client/GraphicsClasses/ShaderBase.hpp"
-#endif
+#include "../../../include/VM/lua.h"
+#include "../../../include/VM/lualib.h"
 
-#include <lua.hpp>
 #include "../../FunctionHeaders/LuaHelper.hpp"
-
 #include "../../Statistics.hpp"
+
+#include "../../Client/Graphics_Client.hpp"
 
 
 namespace Game::Lua::CLibraries::Graphics {
@@ -46,140 +44,157 @@ namespace Game::Lua::CLibraries::Graphics {
 	}
 }
 
-void Game::Lua::CLibraries::Graphics::Shader::Init(lua_State* State, LuaHelper::StackTableReference& GraphicsTable) {
+void Game::Lua::CLibraries::Graphics::Shader::Init(
+    lua_State* State,
+    LuaHelper::StackTableReference& GraphicsTable) {
+    LuaHelper::StackTableReference OpenGLShader, ShaderMetatable;
 
-	LuaHelper::StackTableReference OpenGLShader, ShaderMetatable;
+    ShaderMetatable = LuaHelper::StackTableReference(State, "Shader");
 
+    ShaderMetatable.SetKeyClosure(State, Classes::Shader::SetShaderSource,
+                                  "SetShaderSource");
+    ShaderMetatable.SetKeyClosure(State,
+                                  Classes::Shader::LoadShaderSourceFromFile,
+                                  "LoadShaderSourceFromFile");
 
-	ShaderMetatable = LuaHelper::StackTableReference(State, "Shader");
-	
-	ShaderMetatable.SetKeyClosure(State, Classes::Shader::SetShaderSource, "SetShaderSource");
-	ShaderMetatable.SetKeyClosure(State, Classes::Shader::LoadShaderSourceFromFile, "LoadShaderSourceFromFile");
+    ShaderMetatable.SetKeyClosure(State, Classes::Shader::GetShaderSource,
+                                  "GetShaderSource");
 
-	ShaderMetatable.SetKeyClosure(State, Classes::Shader::GetShaderSource, "GetShaderSource");
+    ShaderMetatable.SetKeyClosure(State, Classes::Shader::Compile, "Compile");
 
-	ShaderMetatable.SetKeyClosure(State, Classes::Shader::Compile, "Compile");
+    ShaderMetatable.SetKeyClosure(State, Classes::Shader::__gc, "__gc");
+    // ShaderMetatable.SetKeyClosure(State, Classes::Shader::__eq, "__eq");
 
-	ShaderMetatable.SetKeyClosure(State, Classes::Shader::__gc, "__gc");
-	//ShaderMetatable.SetKeyClosure(State, Classes::Shader::__eq, "__eq");
+    ShaderMetatable.PushReference(State);
+    lua_setfield(State, ShaderMetatable.GetStackIndex(), "__index");
 
-	ShaderMetatable.PushReference(State);
-	lua_setfield(State, ShaderMetatable.GetStackIndex(), "__index");
+    lua_settop(State, ShaderMetatable.GetStackIndex() - 1);
 
-	lua_settop(State, ShaderMetatable.GetStackIndex() - 1);
+    OpenGLShader = LuaHelper::StackTableReference(State, 0, 1);
 
+    OpenGLShader.SetKeyClosure(State, Shader::__new, "new");
 
-	OpenGLShader = LuaHelper::StackTableReference(State, 0, 1);
-
-	OpenGLShader.SetKeyClosure(State, Shader::__new, "new");
-
-	lua_setfield(State, GraphicsTable.GetStackIndex(), "Shader");
+    lua_setfield(State, GraphicsTable.GetStackIndex(), "Shader");
 }
 
 int Game::Lua::CLibraries::Graphics::Shader::__new(lua_State* State) {
+    lua_settop(State, 1);
 
-	lua_settop(State, 1);
+    Classes::Shader* const ShaderUD = static_cast<Classes::Shader*>(
+        lua_newuserdata(State, sizeof(Classes::Shader)));
+    ShaderUD->ShaderType = static_cast<GLenum>(luaL_checkinteger(State, 1));
+    ShaderUD->ShaderObject =
+        Game::Graphics::OpenGLFunctions::glCreateShader(ShaderUD->ShaderType);
 
-	Classes::Shader* const ShaderUD = static_cast<Classes::Shader*>(lua_newuserdata(State, sizeof(Classes::Shader)));
-	ShaderUD->ShaderType = static_cast<GLenum>(luaL_checkinteger(State, 1));
-	ShaderUD->ShaderObject = Game::Graphics::OpenGLFunctions::glCreateShader(ShaderUD->ShaderType);
+    luaL_getmetatable(State, "Shader");
+    lua_setmetatable(State, -2);
 
-	luaL_setmetatable(State, "Shader");
-
-	return 1;
+    return 1;
 }
 
+int Game::Lua::CLibraries::Graphics::Classes::Shader::SetShaderSource(
+    lua_State* State) {
+    const char** ShaderSources;
+    int StackTop;
+    GLuint ShaderObject;
 
+    ShaderObject =
+        static_cast<Classes::Shader*>(luaL_checkudata(State, 1, "Shader"))
+            ->ShaderObject;
 
-int Game::Lua::CLibraries::Graphics::Classes::Shader::SetShaderSource(lua_State* State) {
+    StackTop = lua_gettop(State);
+    ShaderSources = new const char*[StackTop - 1];
+    for (int i = 2; i <= StackTop; ++i) {
+        ShaderSources[i - 2] = lua_tostring(State, i);
+    }
 
-	const char** ShaderSources;
-	int StackTop;
-	GLuint ShaderObject;
+    Game::Graphics::OpenGLFunctions::glShaderSource(ShaderObject, StackTop - 1,
+                                                    ShaderSources, NULL);
+    delete[] ShaderSources;
 
-	ShaderObject = static_cast<Classes::Shader*>(luaL_checkudata(State, 1, "Shader"))->ShaderObject;
-
-
-	StackTop = lua_gettop(State);
-	ShaderSources = new const char*[StackTop - 1];
-	for (int i = 2; i <= StackTop; ++i) {
-		ShaderSources[i - 2] = lua_tostring(State, i);
-	}
-
-	Game::Graphics::OpenGLFunctions::glShaderSource(ShaderObject, StackTop - 1, ShaderSources, NULL);
-	delete[] ShaderSources;
-
-	return 0;
+    return 0;
 }
 
-int Game::Lua::CLibraries::Graphics::Classes::Shader::LoadShaderSourceFromFile(lua_State* State) {
+int Game::Lua::CLibraries::Graphics::Classes::Shader::LoadShaderSourceFromFile(
+    lua_State* State) {
+    std::cout << "'Game::Lua::CLibraries::Graphics::Classes::Shader::"
+                 "LoadShaderSourceFromFile' not implemented!"
+              << std::endl;
 
-	lua_warning(State, "not implemented!", true);
-
-	return 0;
+    return 0;
 }
 
-int Game::Lua::CLibraries::Graphics::Classes::Shader::GetShaderSource(lua_State* State) {
+int Game::Lua::CLibraries::Graphics::Classes::Shader::GetShaderSource(
+    lua_State* State) {
+    char* ShaderSource;
+    GLint ShaderSourceLength;
+    GLuint ShaderObject;
+    Uint64 StartNS;
 
-	char* ShaderSource;
-	GLint ShaderSourceLength;
-	GLuint ShaderObject;
-	Uint64 StartNS;
+    StartNS = SDL_GetTicksNS();
 
-	StartNS = SDL_GetTicksNS();
+    ShaderObject =
+        static_cast<Classes::Shader*>(luaL_checkudata(State, 1, "Shader"))
+            ->ShaderObject;
 
-	ShaderObject = static_cast<Classes::Shader*>(luaL_checkudata(State, 1, "Shader"))->ShaderObject;
+    Game::Graphics::OpenGLFunctions::glGetShaderiv(
+        ShaderObject, GL_SHADER_SOURCE_LENGTH, &ShaderSourceLength);
 
-	Game::Graphics::OpenGLFunctions::glGetShaderiv(ShaderObject, GL_SHADER_SOURCE_LENGTH, &ShaderSourceLength);
+    // directly call std::malloc to not update Game::Statistics::Memory stats.
+    ShaderSource = new char[ShaderSourceLength];
 
-	// directly call std::malloc to not update Game::Statistics::Memory stats.
-	ShaderSource = new char[ShaderSourceLength];
+    ++Game::Statistics::Memory::EngineAllocationsPerFrame;
+    Game::Statistics::Memory::EngineAllocationBytesPerFrame +=
+        ShaderSourceLength;
 
-	++Game::Statistics::Memory::EngineAllocationsPerFrame;
-	Game::Statistics::Memory::EngineAllocationBytesPerFrame += ShaderSourceLength;
-
-	Game::Graphics::OpenGLFunctions::glGetShaderSource(ShaderObject, ShaderSourceLength, NULL, ShaderSource);
+    Game::Graphics::OpenGLFunctions::glGetShaderSource(
+        ShaderObject, ShaderSourceLength, NULL, ShaderSource);
 
     lua_pushlstring(State, ShaderSource, ShaderSourceLength);
-	delete[] ShaderSource;
+    delete[] ShaderSource;
 
     //++Game::Statistics::Memory::EngineDeallocationsPerFrame;
-	Game::Statistics::Memory::EngineNSSpentOnHeapPerFrame += SDL_GetTicksNS() - StartNS;
+    Game::Statistics::Memory::EngineNSSpentOnHeapPerFrame +=
+        SDL_GetTicksNS() - StartNS;
 
-	return 1;
+    return 1;
 }
 
+int Game::Lua::CLibraries::Graphics::Classes::Shader::Compile(
+    lua_State* State) {
+    char* InfoLog;
+    GLint InfoLogSize, Success;
+    GLuint ShaderObject;
 
-int Game::Lua::CLibraries::Graphics::Classes::Shader::Compile(lua_State* State) {
+    ShaderObject =
+        static_cast<Shader*>(luaL_checkudata(State, 1, "Shader"))->ShaderObject;
+    // lua_settop(State, 0);
 
-	char* InfoLog;
-	GLint InfoLogSize, Success;
-	GLuint ShaderObject;
+    Game::Graphics::OpenGLFunctions::glCompileShader(ShaderObject);
 
-	ShaderObject = static_cast<Shader*>(luaL_checkudata(State, 1, "Shader"))->ShaderObject;
-	//lua_settop(State, 0);
+    Game::Graphics::OpenGLFunctions::glGetShaderiv(ShaderObject,
+                                                   GL_COMPILE_STATUS, &Success);
+    if (!Success) {
+        Game::Graphics::OpenGLFunctions::glGetShaderiv(
+            ShaderObject, GL_INFO_LOG_LENGTH, &InfoLogSize);
 
-	Game::Graphics::OpenGLFunctions::glCompileShader(ShaderObject);
+        InfoLog = new char[InfoLogSize];
+        ++Game::Statistics::Memory::EngineAllocationsPerFrame;
 
-	Game::Graphics::OpenGLFunctions::glGetShaderiv(ShaderObject, GL_COMPILE_STATUS, &Success);
-	if (!Success) {
+        Game::Graphics::OpenGLFunctions::glGetShaderInfoLog(
+            ShaderObject, InfoLogSize, NULL, InfoLog);
 
-		Game::Graphics::OpenGLFunctions::glGetShaderiv(ShaderObject, GL_INFO_LOG_LENGTH, &InfoLogSize);
+        lua_pushlstring(State, InfoLog, InfoLogSize);
+        delete[] InfoLog;
+        return 1;
+    }
 
-		InfoLog = new char[InfoLogSize];
-		++Game::Statistics::Memory::EngineAllocationsPerFrame;
-
-		Game::Graphics::OpenGLFunctions::glGetShaderInfoLog(ShaderObject, InfoLogSize, NULL, InfoLog);
-		
-		lua_pushlstring(State, InfoLog, InfoLogSize);
-		delete[] InfoLog;
-		return 1;
-	}
-
-	return 0;
+    return 0;
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Shader::__gc(lua_State* State) {
-	Game::Graphics::OpenGLFunctions::glDeleteShader(static_cast<Shader*>(luaL_checkudata(State, 1, "Shader"))->ShaderObject);
-	return 0;
+    Game::Graphics::OpenGLFunctions::glDeleteShader(
+        static_cast<Shader*>(luaL_checkudata(State, 1, "Shader"))
+            ->ShaderObject);
+    return 0;
 }

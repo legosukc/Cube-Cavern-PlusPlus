@@ -1,7 +1,9 @@
 #pragma once
 
-#include <lua.hpp>
+#include "../../include/VM/lua.h"
+#include "../../include/VM/lualib.h"
 
+#include "../FunctionHeaders/LuaHelper.hpp"
 
 namespace Game::Lua::CLibraries::table {
 	inline void Init(lua_State* State);

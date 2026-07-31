@@ -1,6 +1,6 @@
 #pragma once
 
-#include <lua.hpp>
+#include "../include/VM/lua.h"
 #include "../FunctionHeaders/LuaHelper.hpp"
 
 #include <SDL3/SDL_stdinc.h>

@@ -4,7 +4,7 @@
 #include <string>
 
 
-#include <lua.hpp>
+#include "../../include/VM/lua.h"
 #include "../FunctionHeaders/LuaHelper.hpp"
 
 #include <SDL3/SDL_thread.h>

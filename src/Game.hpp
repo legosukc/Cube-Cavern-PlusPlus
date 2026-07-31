@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef GAME_H
 #define GAME_H
 
@@ -9,9 +7,10 @@
 #include "Client/SDLClasses/Window.hpp"
 #endif
 
+
 namespace Game {
 #ifdef BUILD_CLIENT
-    extern Game::Classes::Window Window;
+    Game::Classes::Window Window;
 #endif
 
     inline void Update();

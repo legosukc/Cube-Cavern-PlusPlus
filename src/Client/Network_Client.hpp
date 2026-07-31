@@ -8,6 +8,7 @@
 #include <map>
 #include <vector>
 
+#include <SDL3/SDL_properties.h>
 #include <SDL3/SDL_thread.h>
 #include <SDL3_net/SDL_net.h>
 
@@ -91,8 +92,8 @@ namespace Game::Network {
 	inline void Init();
 	inline void Destroy();
 
-	int AddressCount;
-	NET_Address** Address;
+	int AddressCount = 0;
+	NET_Address** Address = NULL;
 
 	Classes::EventPool DefaultPool;
 	Classes::EventPool& GetPool(const char* PoolName);
@@ -191,6 +192,8 @@ namespace {
 
 			NET_Address* ServerTrackerAddress = NET_ResolveHostname("ccpp-server-tracker.superjackass64-e41.workers.dev");
 			switch (NET_WaitUntilResolved(ServerTrackerAddress, -1)) {
+			case NET_Status::NET_WAITING:
+				break;
 			case NET_Status::NET_SUCCESS:
 				std::cout << "Successfully resolved global server tracker address." << std::endl;
 				break;
@@ -200,7 +203,7 @@ namespace {
 				return EXIT_FAILURE;
 			}
 
-			NET_StreamSocket* ServerTrackerHTTPStream = NET_CreateClient(ServerTrackerAddress, 80, NULL);
+			NET_StreamSocket* ServerTrackerHTTPStream = NET_CreateClient(ServerTrackerAddress, 80, (SDL_PropertiesID)NULL);
 			if (ServerTrackerAddress == NULL) {
 				std::cerr << "Failed to establish connection to global server tracker, SDL_net error: " << SDL_GetError() << std::endl;
 				return EXIT_FAILURE;
@@ -234,7 +237,7 @@ namespace {
 			RestablishConnection:
 
 				NET_DestroyStreamSocket(ServerTrackerHTTPStream);
-				ServerTrackerHTTPStream = NET_CreateClient(ServerTrackerAddress, 80, NULL);
+				ServerTrackerHTTPStream = NET_CreateClient(ServerTrackerAddress, 80, (SDL_PropertiesID)NULL);
 				if (ServerTrackerAddress == NULL) {
 					std::cerr << "Failed to establish connection to global server tracker, SDL_net error: " << SDL_GetError() << std::endl;
 					break;
@@ -245,8 +248,8 @@ namespace {
 			return EXIT_SUCCESS;
 		}
 
-		static SDL_Thread* _GlobalServerLocaterThread;
-		static SDL_Thread* _LANCheckerThread;
+		static SDL_Thread* _GlobalServerLocaterThread = NULL;
+		static SDL_Thread* _LANCheckerThread = NULL;
 	}
 }
 

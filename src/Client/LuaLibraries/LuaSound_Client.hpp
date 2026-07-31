@@ -1,10 +1,14 @@
 #pragma once
 
-#include <lua.hpp>
+#include "../../../include/VM/lua.h"
+#include "../../../include/VM/lualib.h"
 
+#include "../../FunctionHeaders/LuaHelper.hpp"
 
 #include "../../MathClasses/Vector3.hpp"
-#include "../Sound_Client.hpp"
+#include "../Sound/Sound.hpp"
+
+#include "../../Lua.hpp"
 
 
 namespace Game::Lua::CLibraries::Sound {
@@ -34,7 +38,8 @@ namespace Game::Lua::CLibraries::Sound {
 		Game::Sound::Classes::AudioSource** AudioSourceUD = static_cast<Game::Sound::Classes::AudioSource**>(lua_newuserdata(State, sizeof(Game::Sound::Classes::AudioSource*)));
 		*AudioSourceUD = Game::Sound::CreateAudioSource();
 
-		luaL_setmetatable(State, "AudioSource");
+		luaL_getmetatable(State, "AudioSource");
+		lua_setmetatable(State, -2);
 
 		return 1;
 	}
@@ -44,7 +49,8 @@ namespace Game::Lua::CLibraries::Sound {
 		Game::Sound::Classes::Speaker** SpeakerUD = static_cast<Game::Sound::Classes::Speaker**>(lua_newuserdata(State, sizeof(Game::Sound::Classes::Speaker*)));
 		*SpeakerUD = Game::Sound::CreateSpeaker();
 
-		luaL_setmetatable(State, "Speaker");
+		luaL_getmetatable(State, "Speaker");
+		lua_setmetatable(State, -2);
 
 		return 1;
 	}

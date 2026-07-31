@@ -28,7 +28,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3_net/SDL_net.h>
 
-#include <lua.hpp>
+#include "../include/VM/lua.h"
 
 
 #include "../FunctionHeaders/TypeHelper.hpp"

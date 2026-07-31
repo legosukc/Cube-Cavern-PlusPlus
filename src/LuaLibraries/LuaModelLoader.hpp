@@ -1,12 +1,14 @@
 #pragma once
 
+// TODO
+
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include <lua.hpp>
+#include "../../include/VM/lua.h"
 
-#include "LuaBuffer.hpp"
+//#include "LuaBuffer.hpp"
 
 #include <SDL3/SDL_stdinc.h>
 
@@ -21,7 +23,7 @@ void Game::Lua::CLibraries::ModelLoader::Init(lua_State* State) {
 
     lua_createtable(State, 0, 2);
     
-    lua_pushcfunction(State, CLibraries::ModelLoader::LoadFile);
+    lua_pushcfunction(State, CLibraries::ModelLoader::LoadFile, "ModelLoader.LoadFile");
     lua_setfield(State, -2, "LoadFile");
 
     lua_setglobal(State, "ModelLoader");
@@ -30,7 +32,8 @@ void Game::Lua::CLibraries::ModelLoader::Init(lua_State* State) {
 
 int Game::Lua::CLibraries::ModelLoader::LoadFile(lua_State* State) {
     
-    using BufferUD = CLibraries::Buffer::Classes::Buffer;
+    
+    //using BufferUD = CLibraries::Buffer::Classes::Buffer;
     struct Vertex {
         aiVector3D Position;
         aiVector3D Normal;
@@ -40,7 +43,7 @@ int Game::Lua::CLibraries::ModelLoader::LoadFile(lua_State* State) {
     size_t VertexIndex;
     aiMesh* Mesh;
     size_t MeshIndex;
-    BufferUD* LuaBuffer;
+    char* LuaBuffer;
     /*
     Assimp::Importer importer;
     const aiScene* scene;

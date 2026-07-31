@@ -1,3 +1,9 @@
+#pragma once
+
+#include "../../include/VM/lua.h"
+
+#include "../FunctionHeaders/LuaHelper.hpp"
+
 
 namespace Game::Lua::CLibraries::Network {
 	inline void Init(lua_State* State);

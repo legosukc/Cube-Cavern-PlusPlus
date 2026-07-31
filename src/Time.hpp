@@ -1,5 +1,5 @@
 #pragma once
 
 namespace Game::Time {
-    extern double DeltaTime;
+    double DeltaTime = 1.0;
 }

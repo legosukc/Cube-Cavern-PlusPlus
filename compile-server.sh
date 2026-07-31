@@ -1,3 +1,4 @@
 #!/bin/bash
-cmake build/ -DBUILD_TARGET=server
-cmake --build build/
+mkdir build-server/
+cmake build-server/ -DBUILD_TARGET=server
+cmake --build build-server/

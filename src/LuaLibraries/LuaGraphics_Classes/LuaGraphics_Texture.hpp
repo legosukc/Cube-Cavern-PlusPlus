@@ -7,11 +7,11 @@
 
 #include "../../Client/Graphics_Client.hpp"
 
-
-#include <lua.hpp>
+#include "../../../include/VM/lua.h"
+#include "../../../include/VM/lualib.h"
 #include "../../FunctionHeaders/LuaHelper.hpp"
 
-#include "../LuaBuffer.hpp"
+//#include "../LuaBuffer.hpp"
 
 
 #include "../../Statistics.hpp"
@@ -93,15 +93,16 @@ int Game::Lua::CLibraries::Graphics::Texture::SetActiveTexture(lua_State* State)
 
 int Game::Lua::CLibraries::Graphics::Texture::SetTexImage2D(lua_State* State) {
 
-	using BufferClass = CLibraries::Buffer::Classes::Buffer;
+	//using BufferClass = CLibraries::Buffer::Classes::Buffer;
 
-	const BufferClass* BufferUD;
+	const char* Buffer;
+	size_t BufferSize;
 	lua_Integer Height, Width;
 	Width = luaL_checkinteger(State, 4);
 	Height = luaL_checkinteger(State, 5);
-	BufferUD = static_cast<BufferClass*>(luaL_checkudata(State, 9, BufferClass::MetatableName));
+	Buffer = static_cast<const char*>(luaL_checkbuffer(State, 9, &BufferSize));
 
-	if (Width * Height > static_cast<lua_Integer>(BufferUD->Size)) {
+	if (Width * Height > static_cast<lua_Integer>(BufferSize)) {
 		luaL_error(State, "insert error msg about width height of texture exceeding buffer size :P");
 	}
 
@@ -114,7 +115,7 @@ int Game::Lua::CLibraries::Graphics::Texture::SetTexImage2D(lua_State* State) {
 		static_cast<GLint>(luaL_optinteger(State, 6, 0)),	// Border
 		static_cast<GLenum>(luaL_checkinteger(State, 7)),	// Format
 		static_cast<GLenum>(luaL_checkinteger(State, 8)),	// Type
-		reinterpret_cast<const void*>(BufferUD->Data)		// Pixels
+		reinterpret_cast<const void*>(Buffer)		// Pixels
 	);
 	return 0;
 }
@@ -146,7 +147,8 @@ int Game::Lua::CLibraries::Graphics::Texture::__new(lua_State* State) {
 
 	TextureStruct* const TextureUD = static_cast<TextureStruct*>(lua_newuserdata(State, sizeof(TextureStruct)));
 	Game::Graphics::OpenGLFunctions::glGenTextures(1, &TextureUD->TextureObject);
-	luaL_setmetatable(State, TextureStruct::MetatableName);
+	luaL_getmetatable(State, TextureStruct::MetatableName);
+	lua_setmetatable(State, -2);
 
 	return 1;
 }

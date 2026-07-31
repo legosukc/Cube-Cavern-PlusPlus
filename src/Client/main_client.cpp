@@ -42,33 +42,27 @@
 
 #include "../Game.hpp"
 
-#include "Sound_Client.hpp"
+#include "Sound/Sound.hpp"
 #include "Network_Client.hpp"
 #include "Graphics_Client.hpp"
 
 #include "../Lua.hpp"
 
-
-
-
-
 void Game::Update() {
+    Game::Statistics::Update();
 
-	Game::Statistics::Update();
-
-	Game::Lua::Update();
+    Game::Lua::Update();
 }
 
 void Game::Draw() {
+    Game::Graphics::SetClearColor(0.f, 0.f, 0.f, 1.f);
+    Game::Graphics::ClearBitfields(Game::Graphics::BufferBitfields.ColorBit |
+                                   Game::Graphics::BufferBitfields.DepthBit |
+                                   Game::Graphics::BufferBitfields.StencilBit);
 
-	Game::Graphics::SetClearColor(0.f, 0.f, 0.f, 1.f);
-	Game::Graphics::ClearBitfields(Game::Graphics::BufferBitfields.ColorBit | Game::Graphics::BufferBitfields.DepthBit | Game::Graphics::BufferBitfields.StencilBit);
-
-	Game::Graphics::Draw();
-	Game::Lua::Draw();
+    Game::Graphics::Draw();
+    Game::Lua::Draw();
 }
-
-
 
 namespace {
 
