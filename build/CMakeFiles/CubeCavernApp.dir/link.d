@@ -3,13 +3,39 @@ CubeCavernApp: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o \
   CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o \
+  CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libassimp.so \
+  _deps/luau-build/libLuau.VM.a \
+  _deps/luau-build/libLuau.Compiler.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3.so \
   /usr/local/lib/libSDL3_net.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_image.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_mixer.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_ttf.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.a \
+  _deps/luau-build/libLuau.Ast.a \
+  _deps/luau-build/libLuau.Bytecode.a \
+  _deps/luau-build/libLuau.Common.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
@@ -24,7 +50,7 @@ CubeCavernApp: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so \
@@ -39,10 +65,9 @@ CubeCavernApp: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o \
+  /usr/lib/ld-linux-x86-64.so.2 \
   /usr/lib32/libz.so.1 \
   /usr/lib/libz.so.1 \
-  /usr/lib32/libstdc++.so.6 \
-  /usr/lib/libstdc++.so.6 \
   /usr/lib/libharfbuzz.so.0 \
   /usr/lib32/libfreetype.so.6 \
   /usr/lib/libfreetype.so.6 \
@@ -68,7 +93,53 @@ CubeCavernApp: \
 
 CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o:
+
+CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so:
+
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libassimp.so:
+
+_deps/luau-build/libLuau.VM.a:
+
+_deps/luau-build/libLuau.Compiler.a:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3.so:
 
@@ -80,7 +151,13 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_ttf.so:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.a:
+_deps/luau-build/libLuau.Ast.a:
+
+_deps/luau-build/libLuau.Bytecode.a:
+
+_deps/luau-build/libLuau.Common.a:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
 
@@ -110,7 +187,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so:
 
@@ -140,13 +217,11 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o:
 
+/usr/lib/ld-linux-x86-64.so.2:
+
 /usr/lib32/libz.so.1:
 
 /usr/lib/libz.so.1:
-
-/usr/lib32/libstdc++.so.6:
-
-/usr/lib/libstdc++.so.6:
 
 /usr/lib/libharfbuzz.so.0:
 

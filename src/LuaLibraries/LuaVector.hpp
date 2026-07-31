@@ -413,7 +413,7 @@ namespace {
 			VectorMetatable.PushReference(State);
 			VectorMetatable.SetKeyClosure(State, ::_LuaVector::__Dot<VectorType>, "Dot", 1);
 
-			if CONSTEXPR_IF(std::is_base_of_v<::_base_vector3<typename VectorType::ComponentType, VectorType>, VectorType>) {
+			if CONSTEXPR_IF(std::is_base_of_v<Math::etc::_base_vector3<typename VectorType::ComponentType, VectorType>, VectorType>) {
 				VectorMetatable.PushReference(State);
 				VectorMetatable.SetKeyClosure(State, ::_LuaVector::__Cross<VectorType>, "Cross", 1);
 			}

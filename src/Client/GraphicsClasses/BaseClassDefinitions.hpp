@@ -1,6 +1,8 @@
 #pragma once
 
-#include <SDL3/SDL_opengl_glext.h>
+#include "../../define.h"
+
+#include <SDL3/SDL_opengl.h>
 
 namespace Game::Graphics::Classes {
 		
@@ -8,8 +10,6 @@ namespace Game::Graphics::Classes {
 	public:
 		GLuint GLObject = 0;
 
-		constexpr bool operator==(const OpenGLClassBase& B) const {
-			return this->GLObject == B.GLObject;
-		}
+		constexpr bool operator==(const OpenGLClassBase B) const;
 	};
 }

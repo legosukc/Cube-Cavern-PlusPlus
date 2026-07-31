@@ -81,10 +81,11 @@ void operator delete[](void* ptr, size_t) noexcept {
     ::_Free(ptr);
 }*/
 
-
+// TODO: do
 namespace Memory {
 
     void* Reallocate(void* ptr, size_t NewSize) {
-
+        
+        return NULL;
     }
 }

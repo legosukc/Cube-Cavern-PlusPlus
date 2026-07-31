@@ -129,6 +129,474 @@ CubeCavernApp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/build
 .PHONY : CubeCavernApp/fast
 
+#=============================================================================
+# Target rules for targets named Luau.Common
+
+# Build rule for target.
+Luau.Common: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.Common
+.PHONY : Luau.Common
+
+# fast build rule for target.
+Luau.Common/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Common.dir/build.make _deps/luau-build/CMakeFiles/Luau.Common.dir/build
+.PHONY : Luau.Common/fast
+
+#=============================================================================
+# Target rules for targets named Luau.CLI.lib
+
+# Build rule for target.
+Luau.CLI.lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.CLI.lib
+.PHONY : Luau.CLI.lib
+
+# fast build rule for target.
+Luau.CLI.lib/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/build.make _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/build
+.PHONY : Luau.CLI.lib/fast
+
+#=============================================================================
+# Target rules for targets named Luau.Ast
+
+# Build rule for target.
+Luau.Ast: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.Ast
+.PHONY : Luau.Ast
+
+# fast build rule for target.
+Luau.Ast/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Ast.dir/build.make _deps/luau-build/CMakeFiles/Luau.Ast.dir/build
+.PHONY : Luau.Ast/fast
+
+#=============================================================================
+# Target rules for targets named Luau.Bytecode
+
+# Build rule for target.
+Luau.Bytecode: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.Bytecode
+.PHONY : Luau.Bytecode
+
+# fast build rule for target.
+Luau.Bytecode/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/build.make _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/build
+.PHONY : Luau.Bytecode/fast
+
+#=============================================================================
+# Target rules for targets named Luau.Inliner
+
+# Build rule for target.
+Luau.Inliner: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.Inliner
+.PHONY : Luau.Inliner
+
+# fast build rule for target.
+Luau.Inliner/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Inliner.dir/build.make _deps/luau-build/CMakeFiles/Luau.Inliner.dir/build
+.PHONY : Luau.Inliner/fast
+
+#=============================================================================
+# Target rules for targets named Luau.Compiler
+
+# Build rule for target.
+Luau.Compiler: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.Compiler
+.PHONY : Luau.Compiler
+
+# fast build rule for target.
+Luau.Compiler/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Compiler.dir/build.make _deps/luau-build/CMakeFiles/Luau.Compiler.dir/build
+.PHONY : Luau.Compiler/fast
+
+#=============================================================================
+# Target rules for targets named Luau.Config
+
+# Build rule for target.
+Luau.Config: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.Config
+.PHONY : Luau.Config
+
+# fast build rule for target.
+Luau.Config/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Config.dir/build.make _deps/luau-build/CMakeFiles/Luau.Config.dir/build
+.PHONY : Luau.Config/fast
+
+#=============================================================================
+# Target rules for targets named Luau.Analysis
+
+# Build rule for target.
+Luau.Analysis: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.Analysis
+.PHONY : Luau.Analysis
+
+# fast build rule for target.
+Luau.Analysis/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Analysis.dir/build.make _deps/luau-build/CMakeFiles/Luau.Analysis.dir/build
+.PHONY : Luau.Analysis/fast
+
+#=============================================================================
+# Target rules for targets named Luau.CodeGen
+
+# Build rule for target.
+Luau.CodeGen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.CodeGen
+.PHONY : Luau.CodeGen
+
+# fast build rule for target.
+Luau.CodeGen/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/build.make _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/build
+.PHONY : Luau.CodeGen/fast
+
+#=============================================================================
+# Target rules for targets named Luau.VM
+
+# Build rule for target.
+Luau.VM: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.VM
+.PHONY : Luau.VM
+
+# fast build rule for target.
+Luau.VM/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.VM.dir/build.make _deps/luau-build/CMakeFiles/Luau.VM.dir/build
+.PHONY : Luau.VM/fast
+
+#=============================================================================
+# Target rules for targets named Luau.Require
+
+# Build rule for target.
+Luau.Require: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Luau.Require
+.PHONY : Luau.Require
+
+# fast build rule for target.
+Luau.Require/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Require.dir/build.make _deps/luau-build/CMakeFiles/Luau.Require.dir/build
+.PHONY : Luau.Require/fast
+
+#=============================================================================
+# Target rules for targets named isocline
+
+# Build rule for target.
+isocline: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 isocline
+.PHONY : isocline
+
+# fast build rule for target.
+isocline/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/isocline.dir/build.make _deps/luau-build/CMakeFiles/isocline.dir/build
+.PHONY : isocline/fast
+
+src/Client/GraphicsClasses/BaseClassDefinitions.o: src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o
+.PHONY : src/Client/GraphicsClasses/BaseClassDefinitions.o
+
+# target to build an object file
+src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o
+.PHONY : src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o
+
+src/Client/GraphicsClasses/BaseClassDefinitions.i: src/Client/GraphicsClasses/BaseClassDefinitions.cpp.i
+.PHONY : src/Client/GraphicsClasses/BaseClassDefinitions.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/BaseClassDefinitions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.i
+.PHONY : src/Client/GraphicsClasses/BaseClassDefinitions.cpp.i
+
+src/Client/GraphicsClasses/BaseClassDefinitions.s: src/Client/GraphicsClasses/BaseClassDefinitions.cpp.s
+.PHONY : src/Client/GraphicsClasses/BaseClassDefinitions.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/BaseClassDefinitions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.s
+.PHONY : src/Client/GraphicsClasses/BaseClassDefinitions.cpp.s
+
+src/Client/GraphicsClasses/BufferBase.o: src/Client/GraphicsClasses/BufferBase.cpp.o
+.PHONY : src/Client/GraphicsClasses/BufferBase.o
+
+# target to build an object file
+src/Client/GraphicsClasses/BufferBase.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o
+.PHONY : src/Client/GraphicsClasses/BufferBase.cpp.o
+
+src/Client/GraphicsClasses/BufferBase.i: src/Client/GraphicsClasses/BufferBase.cpp.i
+.PHONY : src/Client/GraphicsClasses/BufferBase.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/BufferBase.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.i
+.PHONY : src/Client/GraphicsClasses/BufferBase.cpp.i
+
+src/Client/GraphicsClasses/BufferBase.s: src/Client/GraphicsClasses/BufferBase.cpp.s
+.PHONY : src/Client/GraphicsClasses/BufferBase.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/BufferBase.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.s
+.PHONY : src/Client/GraphicsClasses/BufferBase.cpp.s
+
+src/Client/GraphicsClasses/FragmentShader.o: src/Client/GraphicsClasses/FragmentShader.cpp.o
+.PHONY : src/Client/GraphicsClasses/FragmentShader.o
+
+# target to build an object file
+src/Client/GraphicsClasses/FragmentShader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o
+.PHONY : src/Client/GraphicsClasses/FragmentShader.cpp.o
+
+src/Client/GraphicsClasses/FragmentShader.i: src/Client/GraphicsClasses/FragmentShader.cpp.i
+.PHONY : src/Client/GraphicsClasses/FragmentShader.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/FragmentShader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.i
+.PHONY : src/Client/GraphicsClasses/FragmentShader.cpp.i
+
+src/Client/GraphicsClasses/FragmentShader.s: src/Client/GraphicsClasses/FragmentShader.cpp.s
+.PHONY : src/Client/GraphicsClasses/FragmentShader.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/FragmentShader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.s
+.PHONY : src/Client/GraphicsClasses/FragmentShader.cpp.s
+
+src/Client/GraphicsClasses/Framebuffer.o: src/Client/GraphicsClasses/Framebuffer.cpp.o
+.PHONY : src/Client/GraphicsClasses/Framebuffer.o
+
+# target to build an object file
+src/Client/GraphicsClasses/Framebuffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o
+.PHONY : src/Client/GraphicsClasses/Framebuffer.cpp.o
+
+src/Client/GraphicsClasses/Framebuffer.i: src/Client/GraphicsClasses/Framebuffer.cpp.i
+.PHONY : src/Client/GraphicsClasses/Framebuffer.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/Framebuffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.i
+.PHONY : src/Client/GraphicsClasses/Framebuffer.cpp.i
+
+src/Client/GraphicsClasses/Framebuffer.s: src/Client/GraphicsClasses/Framebuffer.cpp.s
+.PHONY : src/Client/GraphicsClasses/Framebuffer.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/Framebuffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.s
+.PHONY : src/Client/GraphicsClasses/Framebuffer.cpp.s
+
+src/Client/GraphicsClasses/IndexBuffer.o: src/Client/GraphicsClasses/IndexBuffer.cpp.o
+.PHONY : src/Client/GraphicsClasses/IndexBuffer.o
+
+# target to build an object file
+src/Client/GraphicsClasses/IndexBuffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o
+.PHONY : src/Client/GraphicsClasses/IndexBuffer.cpp.o
+
+src/Client/GraphicsClasses/IndexBuffer.i: src/Client/GraphicsClasses/IndexBuffer.cpp.i
+.PHONY : src/Client/GraphicsClasses/IndexBuffer.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/IndexBuffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.i
+.PHONY : src/Client/GraphicsClasses/IndexBuffer.cpp.i
+
+src/Client/GraphicsClasses/IndexBuffer.s: src/Client/GraphicsClasses/IndexBuffer.cpp.s
+.PHONY : src/Client/GraphicsClasses/IndexBuffer.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/IndexBuffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.s
+.PHONY : src/Client/GraphicsClasses/IndexBuffer.cpp.s
+
+src/Client/GraphicsClasses/Program.o: src/Client/GraphicsClasses/Program.cpp.o
+.PHONY : src/Client/GraphicsClasses/Program.o
+
+# target to build an object file
+src/Client/GraphicsClasses/Program.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o
+.PHONY : src/Client/GraphicsClasses/Program.cpp.o
+
+src/Client/GraphicsClasses/Program.i: src/Client/GraphicsClasses/Program.cpp.i
+.PHONY : src/Client/GraphicsClasses/Program.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/Program.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.i
+.PHONY : src/Client/GraphicsClasses/Program.cpp.i
+
+src/Client/GraphicsClasses/Program.s: src/Client/GraphicsClasses/Program.cpp.s
+.PHONY : src/Client/GraphicsClasses/Program.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/Program.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.s
+.PHONY : src/Client/GraphicsClasses/Program.cpp.s
+
+src/Client/GraphicsClasses/ShaderBase.o: src/Client/GraphicsClasses/ShaderBase.cpp.o
+.PHONY : src/Client/GraphicsClasses/ShaderBase.o
+
+# target to build an object file
+src/Client/GraphicsClasses/ShaderBase.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o
+.PHONY : src/Client/GraphicsClasses/ShaderBase.cpp.o
+
+src/Client/GraphicsClasses/ShaderBase.i: src/Client/GraphicsClasses/ShaderBase.cpp.i
+.PHONY : src/Client/GraphicsClasses/ShaderBase.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/ShaderBase.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.i
+.PHONY : src/Client/GraphicsClasses/ShaderBase.cpp.i
+
+src/Client/GraphicsClasses/ShaderBase.s: src/Client/GraphicsClasses/ShaderBase.cpp.s
+.PHONY : src/Client/GraphicsClasses/ShaderBase.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/ShaderBase.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.s
+.PHONY : src/Client/GraphicsClasses/ShaderBase.cpp.s
+
+src/Client/GraphicsClasses/Texture.o: src/Client/GraphicsClasses/Texture.cpp.o
+.PHONY : src/Client/GraphicsClasses/Texture.o
+
+# target to build an object file
+src/Client/GraphicsClasses/Texture.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o
+.PHONY : src/Client/GraphicsClasses/Texture.cpp.o
+
+src/Client/GraphicsClasses/Texture.i: src/Client/GraphicsClasses/Texture.cpp.i
+.PHONY : src/Client/GraphicsClasses/Texture.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/Texture.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.i
+.PHONY : src/Client/GraphicsClasses/Texture.cpp.i
+
+src/Client/GraphicsClasses/Texture.s: src/Client/GraphicsClasses/Texture.cpp.s
+.PHONY : src/Client/GraphicsClasses/Texture.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/Texture.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.s
+.PHONY : src/Client/GraphicsClasses/Texture.cpp.s
+
+src/Client/GraphicsClasses/VertexArray.o: src/Client/GraphicsClasses/VertexArray.cpp.o
+.PHONY : src/Client/GraphicsClasses/VertexArray.o
+
+# target to build an object file
+src/Client/GraphicsClasses/VertexArray.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o
+.PHONY : src/Client/GraphicsClasses/VertexArray.cpp.o
+
+src/Client/GraphicsClasses/VertexArray.i: src/Client/GraphicsClasses/VertexArray.cpp.i
+.PHONY : src/Client/GraphicsClasses/VertexArray.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/VertexArray.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.i
+.PHONY : src/Client/GraphicsClasses/VertexArray.cpp.i
+
+src/Client/GraphicsClasses/VertexArray.s: src/Client/GraphicsClasses/VertexArray.cpp.s
+.PHONY : src/Client/GraphicsClasses/VertexArray.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/VertexArray.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.s
+.PHONY : src/Client/GraphicsClasses/VertexArray.cpp.s
+
+src/Client/GraphicsClasses/VertexBuffer.o: src/Client/GraphicsClasses/VertexBuffer.cpp.o
+.PHONY : src/Client/GraphicsClasses/VertexBuffer.o
+
+# target to build an object file
+src/Client/GraphicsClasses/VertexBuffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o
+.PHONY : src/Client/GraphicsClasses/VertexBuffer.cpp.o
+
+src/Client/GraphicsClasses/VertexBuffer.i: src/Client/GraphicsClasses/VertexBuffer.cpp.i
+.PHONY : src/Client/GraphicsClasses/VertexBuffer.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/VertexBuffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.i
+.PHONY : src/Client/GraphicsClasses/VertexBuffer.cpp.i
+
+src/Client/GraphicsClasses/VertexBuffer.s: src/Client/GraphicsClasses/VertexBuffer.cpp.s
+.PHONY : src/Client/GraphicsClasses/VertexBuffer.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/VertexBuffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.s
+.PHONY : src/Client/GraphicsClasses/VertexBuffer.cpp.s
+
+src/Client/GraphicsClasses/VertexShader.o: src/Client/GraphicsClasses/VertexShader.cpp.o
+.PHONY : src/Client/GraphicsClasses/VertexShader.o
+
+# target to build an object file
+src/Client/GraphicsClasses/VertexShader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o
+.PHONY : src/Client/GraphicsClasses/VertexShader.cpp.o
+
+src/Client/GraphicsClasses/VertexShader.i: src/Client/GraphicsClasses/VertexShader.cpp.i
+.PHONY : src/Client/GraphicsClasses/VertexShader.i
+
+# target to preprocess a source file
+src/Client/GraphicsClasses/VertexShader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.i
+.PHONY : src/Client/GraphicsClasses/VertexShader.cpp.i
+
+src/Client/GraphicsClasses/VertexShader.s: src/Client/GraphicsClasses/VertexShader.cpp.s
+.PHONY : src/Client/GraphicsClasses/VertexShader.s
+
+# target to generate assembly for a file
+src/Client/GraphicsClasses/VertexShader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.s
+.PHONY : src/Client/GraphicsClasses/VertexShader.cpp.s
+
+src/Client/Graphics_Client.o: src/Client/Graphics_Client.cpp.o
+.PHONY : src/Client/Graphics_Client.o
+
+# target to build an object file
+src/Client/Graphics_Client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o
+.PHONY : src/Client/Graphics_Client.cpp.o
+
+src/Client/Graphics_Client.i: src/Client/Graphics_Client.cpp.i
+.PHONY : src/Client/Graphics_Client.i
+
+# target to preprocess a source file
+src/Client/Graphics_Client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.i
+.PHONY : src/Client/Graphics_Client.cpp.i
+
+src/Client/Graphics_Client.s: src/Client/Graphics_Client.cpp.s
+.PHONY : src/Client/Graphics_Client.s
+
+# target to generate assembly for a file
+src/Client/Graphics_Client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.s
+.PHONY : src/Client/Graphics_Client.cpp.s
+
+src/Client/SDLClasses/Window.o: src/Client/SDLClasses/Window.cpp.o
+.PHONY : src/Client/SDLClasses/Window.o
+
+# target to build an object file
+src/Client/SDLClasses/Window.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o
+.PHONY : src/Client/SDLClasses/Window.cpp.o
+
+src/Client/SDLClasses/Window.i: src/Client/SDLClasses/Window.cpp.i
+.PHONY : src/Client/SDLClasses/Window.i
+
+# target to preprocess a source file
+src/Client/SDLClasses/Window.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.i
+.PHONY : src/Client/SDLClasses/Window.cpp.i
+
+src/Client/SDLClasses/Window.s: src/Client/SDLClasses/Window.cpp.s
+.PHONY : src/Client/SDLClasses/Window.s
+
+# target to generate assembly for a file
+src/Client/SDLClasses/Window.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.s
+.PHONY : src/Client/SDLClasses/Window.cpp.s
+
 src/Client/main_client.o: src/Client/main_client.cpp.o
 .PHONY : src/Client/main_client.o
 
@@ -153,6 +621,174 @@ src/Client/main_client.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.s
 .PHONY : src/Client/main_client.cpp.s
 
+src/FunctionHeaders/ConfigHandler.o: src/FunctionHeaders/ConfigHandler.cpp.o
+.PHONY : src/FunctionHeaders/ConfigHandler.o
+
+# target to build an object file
+src/FunctionHeaders/ConfigHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o
+.PHONY : src/FunctionHeaders/ConfigHandler.cpp.o
+
+src/FunctionHeaders/ConfigHandler.i: src/FunctionHeaders/ConfigHandler.cpp.i
+.PHONY : src/FunctionHeaders/ConfigHandler.i
+
+# target to preprocess a source file
+src/FunctionHeaders/ConfigHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.i
+.PHONY : src/FunctionHeaders/ConfigHandler.cpp.i
+
+src/FunctionHeaders/ConfigHandler.s: src/FunctionHeaders/ConfigHandler.cpp.s
+.PHONY : src/FunctionHeaders/ConfigHandler.s
+
+# target to generate assembly for a file
+src/FunctionHeaders/ConfigHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.s
+.PHONY : src/FunctionHeaders/ConfigHandler.cpp.s
+
+src/FunctionHeaders/File.o: src/FunctionHeaders/File.cpp.o
+.PHONY : src/FunctionHeaders/File.o
+
+# target to build an object file
+src/FunctionHeaders/File.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o
+.PHONY : src/FunctionHeaders/File.cpp.o
+
+src/FunctionHeaders/File.i: src/FunctionHeaders/File.cpp.i
+.PHONY : src/FunctionHeaders/File.i
+
+# target to preprocess a source file
+src/FunctionHeaders/File.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.i
+.PHONY : src/FunctionHeaders/File.cpp.i
+
+src/FunctionHeaders/File.s: src/FunctionHeaders/File.cpp.s
+.PHONY : src/FunctionHeaders/File.s
+
+# target to generate assembly for a file
+src/FunctionHeaders/File.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.s
+.PHONY : src/FunctionHeaders/File.cpp.s
+
+src/FunctionHeaders/LuaHelper.o: src/FunctionHeaders/LuaHelper.cpp.o
+.PHONY : src/FunctionHeaders/LuaHelper.o
+
+# target to build an object file
+src/FunctionHeaders/LuaHelper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o
+.PHONY : src/FunctionHeaders/LuaHelper.cpp.o
+
+src/FunctionHeaders/LuaHelper.i: src/FunctionHeaders/LuaHelper.cpp.i
+.PHONY : src/FunctionHeaders/LuaHelper.i
+
+# target to preprocess a source file
+src/FunctionHeaders/LuaHelper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.i
+.PHONY : src/FunctionHeaders/LuaHelper.cpp.i
+
+src/FunctionHeaders/LuaHelper.s: src/FunctionHeaders/LuaHelper.cpp.s
+.PHONY : src/FunctionHeaders/LuaHelper.s
+
+# target to generate assembly for a file
+src/FunctionHeaders/LuaHelper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.s
+.PHONY : src/FunctionHeaders/LuaHelper.cpp.s
+
+src/Game.o: src/Game.cpp.o
+.PHONY : src/Game.o
+
+# target to build an object file
+src/Game.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o
+.PHONY : src/Game.cpp.o
+
+src/Game.i: src/Game.cpp.i
+.PHONY : src/Game.i
+
+# target to preprocess a source file
+src/Game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Game.cpp.i
+.PHONY : src/Game.cpp.i
+
+src/Game.s: src/Game.cpp.s
+.PHONY : src/Game.s
+
+# target to generate assembly for a file
+src/Game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Game.cpp.s
+.PHONY : src/Game.cpp.s
+
+src/Lua.o: src/Lua.cpp.o
+.PHONY : src/Lua.o
+
+# target to build an object file
+src/Lua.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o
+.PHONY : src/Lua.cpp.o
+
+src/Lua.i: src/Lua.cpp.i
+.PHONY : src/Lua.i
+
+# target to preprocess a source file
+src/Lua.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.i
+.PHONY : src/Lua.cpp.i
+
+src/Lua.s: src/Lua.cpp.s
+.PHONY : src/Lua.s
+
+# target to generate assembly for a file
+src/Lua.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.s
+.PHONY : src/Lua.cpp.s
+
+src/Statistics.o: src/Statistics.cpp.o
+.PHONY : src/Statistics.o
+
+# target to build an object file
+src/Statistics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o
+.PHONY : src/Statistics.cpp.o
+
+src/Statistics.i: src/Statistics.cpp.i
+.PHONY : src/Statistics.i
+
+# target to preprocess a source file
+src/Statistics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.i
+.PHONY : src/Statistics.cpp.i
+
+src/Statistics.s: src/Statistics.cpp.s
+.PHONY : src/Statistics.s
+
+# target to generate assembly for a file
+src/Statistics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.s
+.PHONY : src/Statistics.cpp.s
+
+src/Time.o: src/Time.cpp.o
+.PHONY : src/Time.o
+
+# target to build an object file
+src/Time.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o
+.PHONY : src/Time.cpp.o
+
+src/Time.i: src/Time.cpp.i
+.PHONY : src/Time.i
+
+# target to preprocess a source file
+src/Time.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Time.cpp.i
+.PHONY : src/Time.cpp.i
+
+src/Time.s: src/Time.cpp.s
+.PHONY : src/Time.s
+
+# target to generate assembly for a file
+src/Time.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Time.cpp.s
+.PHONY : src/Time.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +798,81 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... CubeCavernApp"
+	@echo "... Luau.Analysis"
+	@echo "... Luau.Ast"
+	@echo "... Luau.Bytecode"
+	@echo "... Luau.CLI.lib"
+	@echo "... Luau.CodeGen"
+	@echo "... Luau.Common"
+	@echo "... Luau.Compiler"
+	@echo "... Luau.Config"
+	@echo "... Luau.Inliner"
+	@echo "... Luau.Require"
+	@echo "... Luau.VM"
+	@echo "... isocline"
+	@echo "... src/Client/GraphicsClasses/BaseClassDefinitions.o"
+	@echo "... src/Client/GraphicsClasses/BaseClassDefinitions.i"
+	@echo "... src/Client/GraphicsClasses/BaseClassDefinitions.s"
+	@echo "... src/Client/GraphicsClasses/BufferBase.o"
+	@echo "... src/Client/GraphicsClasses/BufferBase.i"
+	@echo "... src/Client/GraphicsClasses/BufferBase.s"
+	@echo "... src/Client/GraphicsClasses/FragmentShader.o"
+	@echo "... src/Client/GraphicsClasses/FragmentShader.i"
+	@echo "... src/Client/GraphicsClasses/FragmentShader.s"
+	@echo "... src/Client/GraphicsClasses/Framebuffer.o"
+	@echo "... src/Client/GraphicsClasses/Framebuffer.i"
+	@echo "... src/Client/GraphicsClasses/Framebuffer.s"
+	@echo "... src/Client/GraphicsClasses/IndexBuffer.o"
+	@echo "... src/Client/GraphicsClasses/IndexBuffer.i"
+	@echo "... src/Client/GraphicsClasses/IndexBuffer.s"
+	@echo "... src/Client/GraphicsClasses/Program.o"
+	@echo "... src/Client/GraphicsClasses/Program.i"
+	@echo "... src/Client/GraphicsClasses/Program.s"
+	@echo "... src/Client/GraphicsClasses/ShaderBase.o"
+	@echo "... src/Client/GraphicsClasses/ShaderBase.i"
+	@echo "... src/Client/GraphicsClasses/ShaderBase.s"
+	@echo "... src/Client/GraphicsClasses/Texture.o"
+	@echo "... src/Client/GraphicsClasses/Texture.i"
+	@echo "... src/Client/GraphicsClasses/Texture.s"
+	@echo "... src/Client/GraphicsClasses/VertexArray.o"
+	@echo "... src/Client/GraphicsClasses/VertexArray.i"
+	@echo "... src/Client/GraphicsClasses/VertexArray.s"
+	@echo "... src/Client/GraphicsClasses/VertexBuffer.o"
+	@echo "... src/Client/GraphicsClasses/VertexBuffer.i"
+	@echo "... src/Client/GraphicsClasses/VertexBuffer.s"
+	@echo "... src/Client/GraphicsClasses/VertexShader.o"
+	@echo "... src/Client/GraphicsClasses/VertexShader.i"
+	@echo "... src/Client/GraphicsClasses/VertexShader.s"
+	@echo "... src/Client/Graphics_Client.o"
+	@echo "... src/Client/Graphics_Client.i"
+	@echo "... src/Client/Graphics_Client.s"
+	@echo "... src/Client/SDLClasses/Window.o"
+	@echo "... src/Client/SDLClasses/Window.i"
+	@echo "... src/Client/SDLClasses/Window.s"
 	@echo "... src/Client/main_client.o"
 	@echo "... src/Client/main_client.i"
 	@echo "... src/Client/main_client.s"
+	@echo "... src/FunctionHeaders/ConfigHandler.o"
+	@echo "... src/FunctionHeaders/ConfigHandler.i"
+	@echo "... src/FunctionHeaders/ConfigHandler.s"
+	@echo "... src/FunctionHeaders/File.o"
+	@echo "... src/FunctionHeaders/File.i"
+	@echo "... src/FunctionHeaders/File.s"
+	@echo "... src/FunctionHeaders/LuaHelper.o"
+	@echo "... src/FunctionHeaders/LuaHelper.i"
+	@echo "... src/FunctionHeaders/LuaHelper.s"
+	@echo "... src/Game.o"
+	@echo "... src/Game.i"
+	@echo "... src/Game.s"
+	@echo "... src/Lua.o"
+	@echo "... src/Lua.i"
+	@echo "... src/Lua.s"
+	@echo "... src/Statistics.o"
+	@echo "... src/Statistics.i"
+	@echo "... src/Statistics.s"
+	@echo "... src/Time.o"
+	@echo "... src/Time.i"
+	@echo "... src/Time.s"
 .PHONY : help
 
 

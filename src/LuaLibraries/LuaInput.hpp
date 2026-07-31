@@ -1,21 +1,25 @@
 #pragma once
 
+#include "../define.h"
+
 #include <lua.hpp>
 
 #include "../FunctionHeaders/LuaHelper.hpp"
 
 #include <iostream>
 
-
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_keyboard.h>
 #include <SDL3/SDL_scancode.h>
 #include <SDL3/SDL_gamepad.h>
 
-#include <memory>
+#include <cstring>
 
 
 #include "../MathClasses/Vector2.hpp"
+
+#include "../Game.hpp"
+#include "../Lua.hpp"	// e
 
 
 

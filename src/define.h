@@ -1,3 +1,12 @@
+#pragma once
+
+#ifndef DEFINE_H
+#define DEFINE_H 1
+
+// for linting
+#if !defined(BUILD_CLIENT) && !defined(BUILD_SERVER)
+#define BUILD_CLIENT
+#endif
 
 #define GL_GLES_PROTOTYPES 0
 
@@ -112,5 +121,16 @@ Comment out to use regular math operations. (The compiler can slot in SIMD instr
 
 #define CONSTEXPR_IF
 #define INLINE_MEMBER_VARIABLE
+
+#endif
+
+#ifndef LOAD_OPENGL_FUNCTION
+
+#define LOAD_OPENGL_FUNCTION(FunctionName)                         \
+    (Game::Graphics::OpenGLFunctions::FunctionName =               \
+         (decltype(Game::Graphics::OpenGLFunctions::FunctionName)) \
+             SDL_GL_GetProcAddress(#FunctionName))
+
+#endif
 
 #endif

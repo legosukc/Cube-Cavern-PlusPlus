@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../MathClasses/"
+#include "../MathClasses/Vector3.hpp"
 
 
 namespace Util::Color {

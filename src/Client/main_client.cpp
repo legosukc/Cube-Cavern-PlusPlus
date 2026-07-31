@@ -1,7 +1,5 @@
 #define SDL_MAIN_HANDLED
 
-#define BUILD_CLIENT
-
 #include "../define.h"
 
 #include <iostream>
@@ -41,12 +39,8 @@
 
 
 #include "SDLClasses/Window.hpp"
-namespace Game {
-	Game::Classes::Window Window;
 
-	inline void Update();
-	void Draw();
-}
+#include "../Game.hpp"
 
 #include "Sound_Client.hpp"
 #include "Network_Client.hpp"

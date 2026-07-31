@@ -21,8 +21,37 @@ Lua API for modding, OpenGL knowledge is recommended. (You could probably get aw
 
 ## TODO:
 
-- goon
+- multiplayer
+- colision
+- migrate to luau
+- poo
 
 ## BUILDING:
 
-pissssss
+You will need CMake, make sure you got that installed.
+
+### Linux:
+
+Run this command to install required packages (adapt to your package manager)
+
+todo: make this use codeblock
+
+sudo pacman -Syu assimp sdl3 sdl3_image sdl3_mixer sdl3_ttf openal luau
+
+SDL3_net doesn't seem to have a package, so you will need to compile and install it yerself.
+
+You might also need to compile Luau yourself. (when i install the luau package it only seems to include terminal tools)
+
+Run either "compile-(client|server).sh".
+
+There's also a tasks.json file in the ".vscode" folder that includes tasks for compiling for client/server for vscode.
+
+### Windows:
+
+todo: make guide
+
+use WSL and follow the linux guide ig
+
+probably won't spit out an .exe and instead whatever linux uses so
+
+🖕

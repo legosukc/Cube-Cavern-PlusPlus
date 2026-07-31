@@ -1,43 +1,35 @@
 #pragma once
 
+#include "../../define.h"
+
+#include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 
-#include "BaseClassDefinitions.hpp"
-
+#include "BufferBase.hpp"
 
 namespace Game::Graphics::Classes {
 
-	using IndexBuffer = Game::Graphics::Classes::BufferBase;
+    class IndexBuffer : public Game::Graphics::Classes::BufferBase {};
 
-	class IndexBuffer_OpenGL : public BufferBase_OpenGL<GL_ELEMENT_ARRAY_BUFFER> {
-	public:
-
-		virtual bool IsBound() const override {
-			// TODO: FIX THIS!!!!
-			return true;
-		}
-	};
+    class IndexBuffer_OpenGL
+        : public Game::Graphics::Classes::BufferBase_OpenGL<
+              GL_ELEMENT_ARRAY_BUFFER> {
+       public:
+        virtual bool IsBound() const override;
+    };
 }
-
 
 namespace Game::Graphics::IndexBuffer {
 
-	Game::Graphics::Classes::IndexBuffer*(*Create)();
-	void(*CreateBulk)(size_t CreateAmount, Game::Graphics::Classes::IndexBuffer* IndexBuffers[]);
-	void(*Unbind)();
+    extern Game::Graphics::Classes::IndexBuffer* (*Create)();
+    extern void (*CreateBulk)(
+        size_t CreateAmount,
+        Game::Graphics::Classes::IndexBuffer* IndexBuffers[]);
+    extern void (*Unbind)();
 
-	inline void Init() {
-
-		if (Game::Graphics::ActiveAPI == Game::Graphics::GraphicsAPIEnum::OpenGL) {
-
-			using namespace Game::Graphics::BufferBase;
-			using IndexBuffer = Game::Graphics::Classes::IndexBuffer;
-			using IndexBuffer_OpenGL = Game::Graphics::Classes::IndexBuffer_OpenGL;
-
-			Game::Graphics::IndexBuffer::Create = WrapperTemplates::Create_OpenGL<IndexBuffer, IndexBuffer_OpenGL>;
-			Game::Graphics::IndexBuffer::CreateBulk = WrapperTemplates::CreateBulk_OpenGL<IndexBuffer, IndexBuffer_OpenGL>;
-
-			Game::Graphics::IndexBuffer::Unbind = WrapperTemplates::Unbind_OpenGL<IndexBuffer_OpenGL>;
-		}
-	}
+    inline void Init_OpenGL();
+    inline void Init_Vulkan();
+    inline void Init_Metal();
+    inline void Init_DirectX11();
+    inline void Init_DirectX12();
 }

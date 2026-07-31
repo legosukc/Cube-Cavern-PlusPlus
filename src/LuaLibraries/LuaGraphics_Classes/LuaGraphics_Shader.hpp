@@ -1,10 +1,18 @@
 #pragma once
 
+#include "../../define.h"
+
+#include <stdlib.h>
+
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 
 #include <SDL3/SDL_timer.h>
+#include <lua.hpp>
 
+#ifdef BUILD_CLIENT
+#include "../../Client/GraphicsClasses/ShaderBase.hpp"
+#endif
 
 #include <lua.hpp>
 #include "../../FunctionHeaders/LuaHelper.hpp"
@@ -125,16 +133,17 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::GetShaderSource(lua_State*
 	Game::Graphics::OpenGLFunctions::glGetShaderiv(ShaderObject, GL_SHADER_SOURCE_LENGTH, &ShaderSourceLength);
 
 	// directly call std::malloc to not update Game::Statistics::Memory stats.
-	ShaderSource = static_cast<char*>(std::malloc(ShaderSourceLength));
+	ShaderSource = new char[ShaderSourceLength];
 
 	++Game::Statistics::Memory::EngineAllocationsPerFrame;
 	Game::Statistics::Memory::EngineAllocationBytesPerFrame += ShaderSourceLength;
 
 	Game::Graphics::OpenGLFunctions::glGetShaderSource(ShaderObject, ShaderSourceLength, NULL, ShaderSource);
-	
-	LuaHelper::PushExternalString(State, ShaderSource, ShaderSourceLength);
 
-	//++Game::Statistics::Memory::EngineDeallocationsPerFrame;
+    lua_pushlstring(State, ShaderSource, ShaderSourceLength);
+	delete[] ShaderSource;
+
+    //++Game::Statistics::Memory::EngineDeallocationsPerFrame;
 	Game::Statistics::Memory::EngineNSSpentOnHeapPerFrame += SDL_GetTicksNS() - StartNS;
 
 	return 1;
@@ -157,12 +166,13 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::Compile(lua_State* State) 
 
 		Game::Graphics::OpenGLFunctions::glGetShaderiv(ShaderObject, GL_INFO_LOG_LENGTH, &InfoLogSize);
 
-		InfoLog = static_cast<char*>(std::malloc(InfoLogSize));
+		InfoLog = new char[InfoLogSize];
 		++Game::Statistics::Memory::EngineAllocationsPerFrame;
 
 		Game::Graphics::OpenGLFunctions::glGetShaderInfoLog(ShaderObject, InfoLogSize, NULL, InfoLog);
-
-		LuaHelper::PushExternalString(State, InfoLog, InfoLogSize);
+		
+		lua_pushlstring(State, InfoLog, InfoLogSize);
+		delete[] InfoLog;
 		return 1;
 	}
 

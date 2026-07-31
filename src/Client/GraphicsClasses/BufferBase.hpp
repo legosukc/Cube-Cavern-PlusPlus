@@ -1,96 +1,58 @@
 #pragma once
 
-#include "BaseClassDefinitions.hpp"
+#include <cstddef>
 
+#include "BaseClassDefinitions.hpp"
 
 namespace Game::Graphics::OpenGLFunctions {
 
-	static PFNGLGENBUFFERSPROC glGenBuffers;
-	static PFNGLDELETEBUFFERSPROC glDeleteBuffers;
+    extern PFNGLGENBUFFERSPROC glGenBuffers;
+    extern PFNGLDELETEBUFFERSPROC glDeleteBuffers;
 
-	static PFNGLBUFFERDATAPROC glBufferData;
-	static PFNGLBUFFERSUBDATAPROC glBufferSubData;
+    extern PFNGLBUFFERDATAPROC glBufferData;
+    extern PFNGLBUFFERSUBDATAPROC glBufferSubData;
 
-	static PFNGLBINDBUFFERPROC glBindBuffer;
+    extern PFNGLBINDBUFFERPROC glBindBuffer;
 }
 
 namespace Game::Graphics::Classes {
 
-	class BufferBase : public Game::Graphics::Classes::OpenGLClassBase {
-	public:
-		virtual ~BufferBase() = default;
+    class BufferBase : public Game::Graphics::Classes::OpenGLClassBase {
+       public:
+        virtual ~BufferBase();
 
-		virtual void Bind() {}
-		virtual bool IsBound() const {
-			return false;
-		}
-	};
+        virtual void Bind();
+        virtual bool IsBound() const;
+    };
 
-	template<GLenum BufferTarget>
-	class BufferBase_OpenGL : virtual public BufferBase {
-	public:
-		virtual ~BufferBase_OpenGL() override {
+    template <GLenum BufferTarget>
+    class BufferBase_OpenGL : virtual public BufferBase {
+       public:
+        virtual ~BufferBase_OpenGL() override;
 
-			if (this->GLObject == 0) {
-#ifdef DEBUG_BUILD
-				std::cerr << "Attempted to free an unallocated OpenGL buffer." << std::endl;
-				__debugbreak();
-#else
-				return;
-#endif
-			}
-			Game::Graphics::OpenGLFunctions::glDeleteBuffers(1, &this->GLObject);
-		}
+        virtual void Bind() override;
 
-		virtual void Bind() override {
-			Game::Graphics::OpenGLFunctions::glBindBuffer(BufferTarget, this->GLObject);
-		}
-
-		constexpr static inline GLenum OpenGLBufferEnum = BufferTarget;
-	};
+        constexpr static inline GLenum OpenGLBufferEnum = BufferTarget;
+    };
 }
-
 
 namespace Game::Graphics::BufferBase {
 
-	namespace WrapperTemplates {
+    namespace WrapperTemplates {
 
-		template<class BufferClass, class BufferOpenGLClass>
-		BufferClass* Create_OpenGL() {
+        template <class BufferClass, class BufferOpenGLClass>
+        BufferClass* Create_OpenGL();
 
-			BufferOpenGLClass* NewBuffer = new BufferOpenGLClass;
-			Game::Graphics::OpenGLFunctions::glGenBuffers(1, &NewBuffer->GLObject);
+        template <class BufferClass, class BufferOpenGLClass>
+        void CreateBulk_OpenGL(size_t CreateAmount, BufferClass* Buffers[]);
 
-			return NewBuffer;
-		}
+        template <class BufferOpenGLClass>
+        inline void Unbind_OpenGL();
+    }
 
-		template<class BufferClass, class BufferOpenGLClass>
-		void CreateBulk_OpenGL(size_t CreateAmount, BufferClass* Buffers[]) {
-
-			for (size_t i = 0; i < CreateAmount; ++i) {
-
-				Buffers[i] = new BufferOpenGLClass();
-				Game::Graphics::OpenGLFunctions::glGenBuffers(1, &Buffers[i]->GLObject);
-			}
-		}
-
-		template<class BufferOpenGLClass>
-		inline void Unbind_OpenGL() {
-			Game::Graphics::OpenGLFunctions::glBindBuffer(BufferOpenGLClass::OpenGLBufferEnum, 0);
-		}
-	}
-
-	inline void Init() {
-
-		if (Game::Graphics::ActiveAPI == Game::Graphics::GraphicsAPIEnum::OpenGL) {
-
-			LOAD_OPENGL_FUNCTION(glGenBuffers);
-			LOAD_OPENGL_FUNCTION(glDeleteBuffers);
-
-			LOAD_OPENGL_FUNCTION(glBindBuffer);
-
-			LOAD_OPENGL_FUNCTION(glBufferData);
-			LOAD_OPENGL_FUNCTION(glBufferSubData);
-		}
-	}
+    inline void Init_OpenGL();
+    inline void Init_Vulkan();
+    inline void Init_Metal();
+    inline void Init_DirectX11();
+    inline void Init_DirectX12();
 }

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <cstring>
 
 #include <lua.hpp>
 #include "../../FunctionHeaders/LuaHelper.hpp"

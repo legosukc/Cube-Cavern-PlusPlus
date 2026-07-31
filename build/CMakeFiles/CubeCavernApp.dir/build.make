@@ -86,18 +86,343 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/main_client.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.s
 
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/File.cpp
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/File.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/File.cpp" > CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/File.cpp" -o CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/ConfigHandler.cpp
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/ConfigHandler.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/ConfigHandler.cpp" > CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/ConfigHandler.cpp" -o CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/LuaHelper.cpp
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/LuaHelper.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/LuaHelper.cpp" > CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/LuaHelper.cpp" -o CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/Window.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/SDLClasses/Window.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/SDLClasses/Window.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/SDLClasses/Window.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/BufferBase.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/BufferBase.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/BufferBase.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/VertexArray.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/VertexArray.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/VertexArray.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/VertexArray.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/VertexBuffer.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/VertexBuffer.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/VertexBuffer.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/VertexBuffer.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/IndexBuffer.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/IndexBuffer.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/IndexBuffer.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/IndexBuffer.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/ShaderBase.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/ShaderBase.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/ShaderBase.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/ShaderBase.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/VertexShader.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/VertexShader.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/VertexShader.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/VertexShader.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/FragmentShader.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/FragmentShader.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/FragmentShader.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/FragmentShader.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/Program.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/Program.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/Program.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/Program.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/Texture.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/Texture.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/Texture.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/Texture.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/Framebuffer.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/Framebuffer.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/Framebuffer.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/Framebuffer.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Game.cpp
+CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Game.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Game.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Game.cpp" > CMakeFiles/CubeCavernApp.dir/src/Game.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Game.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Game.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Game.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Time.cpp
+CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Time.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Time.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Time.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Time.cpp" > CMakeFiles/CubeCavernApp.dir/src/Time.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Time.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Time.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Time.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Time.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Statistics.cpp
+CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Statistics.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Statistics.cpp" > CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Statistics.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Graphics_Client.cpp
+CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Graphics_Client.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Graphics_Client.cpp" > CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Graphics_Client.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.s
+
+CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o: CMakeFiles/CubeCavernApp.dir/flags.make
+CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o: /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Lua.cpp
+CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o -MF CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o.d -o CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o -c "/home/savoury/Documents/C&C++/Cube Cavern++/src/Lua.cpp"
+
+CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/savoury/Documents/C&C++/Cube Cavern++/src/Lua.cpp" > CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.i
+
+CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/savoury/Documents/C&C++/Cube Cavern++/src/Lua.cpp" -o CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.s
+
 # Object files for target CubeCavernApp
 CubeCavernApp_OBJECTS = \
-"CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o"
+"CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o" \
+"CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o"
 
 # External object files for target CubeCavernApp
 CubeCavernApp_EXTERNAL_OBJECTS =
 
 CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/File.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/ConfigHandler.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/FunctionHeaders/LuaHelper.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/SDLClasses/Window.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BaseClassDefinitions.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/BufferBase.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexArray.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexBuffer.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/IndexBuffer.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/ShaderBase.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/VertexShader.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/FragmentShader.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Program.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Texture.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/GraphicsClasses/Framebuffer.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Game.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Time.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Statistics.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Client/Graphics_Client.cpp.o
+CubeCavernApp: CMakeFiles/CubeCavernApp.dir/src/Lua.cpp.o
 CubeCavernApp: CMakeFiles/CubeCavernApp.dir/build.make
 CubeCavernApp: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+CubeCavernApp: _deps/luau-build/libLuau.VM.a
+CubeCavernApp: _deps/luau-build/libLuau.Compiler.a
+CubeCavernApp: _deps/luau-build/libLuau.Ast.a
+CubeCavernApp: _deps/luau-build/libLuau.Bytecode.a
+CubeCavernApp: _deps/luau-build/libLuau.Common.a
 CubeCavernApp: CMakeFiles/CubeCavernApp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable CubeCavernApp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX executable CubeCavernApp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CubeCavernApp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
