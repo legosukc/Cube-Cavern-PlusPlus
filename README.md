@@ -29,4 +29,36 @@ Luau API for modding, OpenGL knowledge is recommended. (You could probably get a
 
 ## BUILDING:
 
-🖕
+You will need CMake SDL3, SDL3_net, SDL3_mixer, SDL3_ttf, SDL3_image, and OpenAL installed.
+
+### Windows:
+
+idk, maybe use wsl and follow the linux guide.
+
+### Linux:
+
+Install dependencies, adapt this command to whatever you're using.
+
+sudo pacman -Syu cmake sdl3 sdl3_mixer sdl3_ttf sdl3_image openal
+
+If it fails, try compiling them yourself and installing them.
+
+Can't seem to download the SDL3_net package, so install it manually through compiling it.
+
+You might need to move the SDL3_net library files from /usr/local/lib/ to /usr/lib/.
+
+After that, run compile-client.sh or compile-server.sh to spit out an executable.
+
+Has build tasks out of the box for VSCode, open up the root folder (the one above src/).
+
+Hit CTRL+SHIFT+B to build, and F5 to run or CTRL+F5 to run in debugging mode (these are the default VSCode binds, check your config if it doesn't work).
+
+If for some reason you want to compile it without the scripts, here:
+
+mkdir build
+cmake -S./ -Bbuild/ -DBUILD_TARGET=("client" or "server") (optional)PLATFORM=("vita", or can be left out entirely)
+cmake --build build/
+
+### Mac:
+
+idk 🖕
