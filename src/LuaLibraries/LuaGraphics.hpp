@@ -23,8 +23,8 @@
 
 #include "../ConsoleVars.hpp"
 
-#include "../Lua.hpp"
 #include "../FunctionHeaders/LuaHelper.hpp"
+#include "../Lua.hpp"
 
 namespace Game::ConsoleVars::ReferenceVars::Lua::Graphics {
 
@@ -44,6 +44,9 @@ namespace Game::Lua::CLibraries::Graphics {
 
     static int DrawArraysInstanced(lua_State* State);
     static int DrawElementsInstanced(lua_State* State);
+
+    static int SetClearColor(lua_State* State);
+    static int Clear(lua_State* State);
 #endif
 }
 
@@ -88,6 +91,22 @@ int Game::Lua::CLibraries::Graphics::DrawElementsInstanced(lua_State* State) {
     );
     return 0;
 }
+
+int Game::Lua::CLibraries::Graphics::SetClearColor(lua_State* State) {
+    Game::Graphics::SetClearColor(
+        static_cast<float>(luaL_optnumber(State, 1, 0.0)),
+        static_cast<float>(luaL_optnumber(State, 2, 0.0)),
+        static_cast<float>(luaL_optnumber(State, 3, 0.0)),
+        static_cast<float>(luaL_optnumber(State, 4, 0.0)));
+    return 0;
+}
+
+int Game::Lua::CLibraries::Graphics::Clear(lua_State* State) {
+    Game::Graphics::ClearBitfields(Game::Graphics::BufferBitfields.ColorBit |
+                                   Game::Graphics::BufferBitfields.DepthBit |
+                                   Game::Graphics::BufferBitfields.StencilBit);
+    return 0;
+}
 #endif
 
 void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
@@ -105,6 +124,10 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
                                 "DrawArraysInstanced");
     GraphicsTable.SetKeyClosure(State, Graphics::DrawElementsInstanced,
                                 "DrawElementsInstanced");
+
+    GraphicsTable.SetKeyClosure(State, Graphics::SetClearColor,
+                                "SetClearColor");
+    GraphicsTable.SetKeyClosure(State, Graphics::Clear, "Clear");
 #endif
 
     // DrawModes

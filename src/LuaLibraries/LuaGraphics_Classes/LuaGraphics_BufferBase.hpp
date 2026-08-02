@@ -33,22 +33,22 @@ namespace Game::Lua::CLibraries::Graphics {
                          LuaHelper::StackTableReference& GraphicsTable);
 
         template <GLenum BufferType>
-        static int __new(lua_State* State);
+        int __new(lua_State* State);
 
         template <GLenum BufferType>
-        static int CopyFromBuffer(lua_State* State);
+        int CopyFromBuffer(lua_State* State);
 
         template <GLenum BufferType>
-        static int AllocateBuffer(lua_State* State);
+        int AllocateBuffer(lua_State* State);
 
         template <GLenum BufferType>
-        static int CopyFromBufferToPointer(lua_State* State);
+        int CopyFromBufferToPointer(lua_State* State);
 
         template <GLenum BufferType>
-        static int CopyToPointer(lua_State* State);
+        int CopyToPointer(lua_State* State);
 
         template <GLenum BufferType>
-        static int Unbind(lua_State* State);
+        int Unbind(lua_State* State);
     }
 }
 
@@ -126,7 +126,7 @@ int Game::Lua::CLibraries::Graphics::BufferBase::CopyFromBuffer(
 
     if (!lua_isnoneornil(State, 2)) {
         const size_t SpecifiedUploadSize =
-            static_cast<size_t>(luaL_checkinteger64(State, 2));
+            static_cast<size_t>(luaL_checknumber(State, 2));
 
         unlikely_branch if (SpecifiedUploadSize > UploadSize) {
             luaL_error(State,
@@ -146,7 +146,7 @@ int Game::Lua::CLibraries::Graphics::BufferBase::AllocateBuffer(
     lua_State* State) {
     Game::Graphics::OpenGLFunctions::glBufferData(
         BufferType, luaL_checkinteger(State, 1), NULL,
-        luaL_optinteger(State, 2, GL_STATIC_DRAW));
+        static_cast<GLenum>(luaL_optnumber(State, 2, GL_STATIC_DRAW)));
     return 0;
 }
 

@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "/home/savoury/Documents/C&C++/Cube Cavern++/CMakeLists.txt"
-  "CMakeFiles/4.4.1/CMakeCCompiler.cmake"
-  "CMakeFiles/4.4.1/CMakeCXXCompiler.cmake"
-  "CMakeFiles/4.4.1/CMakeSystem.cmake"
+  "CMakeFiles/4.4.2/CMakeCCompiler.cmake"
+  "CMakeFiles/4.4.2/CMakeCXXCompiler.cmake"
+  "CMakeFiles/4.4.2/CMakeSystem.cmake"
   "_deps/luau-src/CMakeLists.txt"
   "_deps/luau-src/Sources.cmake"
   "/usr/share/cmake/Modules/CMakeCInformation.cmake"

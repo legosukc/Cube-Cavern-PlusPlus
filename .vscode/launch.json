@@ -5,10 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch",
+            "name": "Launch Client",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceRoot}/build/CubeCavernApp",
+            "program": "${workspaceRoot}/build/CubeCavern",
+            "args": [],
+            "cwd": "${workspaceRoot}/build/"
+        },
+        {
+            "name": "Launch Server",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/CubeCavern-DedicatedServer",
             "args": [],
             "cwd": "${workspaceRoot}/build/"
         }

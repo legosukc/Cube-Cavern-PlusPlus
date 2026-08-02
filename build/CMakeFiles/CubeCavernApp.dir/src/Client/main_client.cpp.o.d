@@ -180,6 +180,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/float.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/File.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/ConfigHandler.hpp \
+ /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/../define.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/../nlohmann/json.hpp \
  /usr/include/c++/16/algorithm /usr/include/c++/16/bits/stl_algo.h \
  /usr/include/c++/16/bits/algorithmfwd.h \
@@ -274,6 +275,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/Exceptions.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/Math.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Vector2.hpp \
+ /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/../define.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mmintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mm_malloc.h \
@@ -286,6 +288,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/Window.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/../../Time.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Game.hpp \
+ /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../define.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Client/SDLClasses/Window.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/Sound.hpp \
  /usr/include/SDL3_mixer/SDL_mixer.h \
@@ -303,6 +306,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/Speaker_OpenAL.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/Speaker.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/SDLMixer_Sound.hpp \
+ /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../../../define.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Network_Client.hpp \
  /usr/include/c++/16/fstream \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/basic_file.h \
@@ -312,6 +316,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/Event.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Graphics_Client.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/IndexBuffer.hpp \
+ /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/../../define.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/VertexArray.hpp \
@@ -352,31 +357,33 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaMatrix.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaVector.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaModelLoader.hpp \
- /usr/include/assimp/Importer.hpp /usr/include/assimp/types.h \
+ /usr/include/assimp/mesh.h /usr/include/assimp/aabb.h \
+ /usr/include/assimp/vector3.h /usr/include/assimp/defs.h \
+ /usr/include/assimp/config.h /usr/include/assimp/types.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
- /usr/include/bits/uio_lim.h /usr/include/assimp/defs.h \
- /usr/include/assimp/config.h /usr/include/assimp/vector2.h \
- /usr/include/assimp/vector3.h /usr/include/assimp/color4.h \
- /usr/include/assimp/matrix3x3.h /usr/include/assimp/matrix4x4.h \
- /usr/include/assimp/quaternion.h /usr/include/assimp/vector2.inl \
- /usr/include/assimp/vector3.inl /usr/include/assimp/color4.inl \
- /usr/include/assimp/matrix3x3.inl /usr/include/assimp/matrix4x4.inl \
- /usr/include/assimp/MathFunctions.h /usr/include/assimp/quaternion.inl \
- /usr/include/assimp/scene.h /usr/include/assimp/texture.h \
- /usr/include/assimp/Compiler/pushpack1.h \
- /usr/include/assimp/Compiler/poppack1.h /usr/include/assimp/mesh.h \
- /usr/include/assimp/aabb.h /usr/include/c++/16/unordered_set \
- /usr/include/c++/16/bits/unordered_set.h /usr/include/assimp/light.h \
+ /usr/include/bits/uio_lim.h /usr/include/assimp/vector2.h \
+ /usr/include/assimp/color4.h /usr/include/assimp/matrix3x3.h \
+ /usr/include/assimp/matrix4x4.h /usr/include/assimp/quaternion.h \
+ /usr/include/assimp/vector2.inl /usr/include/assimp/vector3.inl \
+ /usr/include/assimp/color4.inl /usr/include/assimp/matrix3x3.inl \
+ /usr/include/assimp/matrix4x4.inl /usr/include/assimp/MathFunctions.h \
+ /usr/include/assimp/quaternion.inl /usr/include/c++/16/unordered_set \
+ /usr/include/c++/16/bits/unordered_set.h \
+ /usr/include/assimp/postprocess.h /usr/include/assimp/scene.h \
+ /usr/include/assimp/texture.h /usr/include/assimp/Compiler/pushpack1.h \
+ /usr/include/assimp/Compiler/poppack1.h /usr/include/assimp/light.h \
  /usr/include/assimp/camera.h /usr/include/assimp/material.h \
  /usr/include/assimp/material.inl /usr/include/assimp/anim.h \
- /usr/include/assimp/metadata.h /usr/include/assimp/postprocess.h \
+ /usr/include/assimp/metadata.h /usr/include/assimp/Importer.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics.hpp \
+ /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/../define.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_BufferBase.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_GLObjectBase.hpp \
+ /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../define.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../FunctionHeaders/LuaHelper.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../Client/Graphics_Client.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_ElementBuffer.hpp \

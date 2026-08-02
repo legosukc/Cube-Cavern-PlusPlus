@@ -382,41 +382,31 @@ void Game::Lua::CLibraries::Input::Update(lua_State* State) {
 
         lua_cpcall(State, Game::Lua::CLibraries::Vector::__new<Math::Vector2>,
                    NULL);
-				   /*
+				   
         VectorUD = static_cast<Math::Vector2*>(
             lua_newuserdata(State, sizeof(Math::Vector2)));
-        luaL_setmetatable(State, "Vector2");*/
+        
+        luaL_getmetatable(State, "Vector2");
+        lua_setmetatable(State, -2);
 
         lua_setfield(State, InputTableIndex, "MouseDelta");
     }
     *VectorUD = Game::Window.MouseDelta;
 
+    // TODO: set vector ud value to mouse pos (add ways of getting mouse pos 🥺)
     lua_getfield(State, InputTableIndex, "MouseRelativePosition");
     unlikely_branch if (VectorUD = static_cast<Math::Vector2*>(
                             LuaHelper::TestMetatable(State, -1, "Vector2"));
                         VectorUD == NULL) {
         lua_cpcall(State, Game::Lua::CLibraries::Vector::__new<Math::Vector2>,
                    NULL);
-				   /*
+				   
         VectorUD = static_cast<Math::Vector2*>(
-            lua_newuserdata(State, sizeof(Math::Vector2)));
-        luaL_setmetatable(State, "Vector2");*/
+            lua_newuserdata(State, sizeof(Math::Vector2))
+        );
 
-        lua_setfield(State, InputTableIndex, "MouseRelativePosition");
-    }
-    *VectorUD = Game::Window.MouseDelta;
-
-    lua_getfield(State, InputTableIndex, "MouseRelativePosition");
-
-    unlikely_branch if (VectorUD = static_cast<Math::Vector2*>(
-                            LuaHelper::TestMetatable(State, -1, "Vector2"));
-                        VectorUD == NULL) {
-        lua_cpcall(State, Game::Lua::CLibraries::Vector::__new<Math::Vector2>,
-                   NULL);
-				   /*
-        VectorUD = static_cast<Math::Vector2*>(
-            lua_newuserdata(State, sizeof(Math::Vector2)));
-        luaL_setmetatable(State, "Vector2");*/
+        luaL_getmetatable(State, "Vector2");
+        lua_setmetatable(State, -2);
 
         lua_setfield(State, InputTableIndex, "MouseRelativePosition");
     }

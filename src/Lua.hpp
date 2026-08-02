@@ -26,7 +26,6 @@
 #include "Statistics.hpp"
 #include "Time.hpp"
 
-
 namespace Game::Lua {
 
     // Contains the correct directory paths depending on the build target
@@ -94,11 +93,6 @@ namespace Game::Lua {
 // client code will have to be compiled on the server on start-up. After
 // compilation, bytecode will be cached, you can configure cache settings in
 // "GlobalCfg.json"
-
-
-
-
-
 
 Game::Lua::LuaThreadInfo::LuaThreadInfo() {
 #ifdef BUILD_CLIENT
@@ -253,8 +247,8 @@ _LuaDirectoryLibrary::_LuaDirectoryLibrary(const char* _Name,
     lua_pushlstring(Game::Lua::State, this->Path.c_str(),
                     this->Path.size() + 1);
 
-    
-    lua_pushcclosure(Game::Lua::State, _LuaDirectoryLibrary::__index, "__index", 1);
+    lua_pushcclosure(Game::Lua::State, _LuaDirectoryLibrary::__index, "__index",
+                     1);
     lua_setfield(Game::Lua::State, -2, "__index");
 
     lua_setmetatable(Game::Lua::State, this->TableReferenceIndex);
@@ -273,14 +267,27 @@ int _LuaDirectoryLibrary::__index(lua_State* State) {
     lua_pushvalue(State, 2);
 
     unlikely_branch if (lua_rawget(State, 1) == LUA_TNIL) {
-        const std::string Path =
+        std::string Path =
             StringHelper::Combine(lua_tostring(State, lua_upvalueindex(1)),
-                                  luaL_checkstring(State, 2), ".lua");
+                                  luaL_checkstring(State, 2));
+        Path.push_back('.');
 
-        unlikely_branch if (!SDL_GetPathInfo(Path.c_str(), NULL)) {
-            luaL_error(State, "Attempted to index a non-existant entry '",
-                       lua_tostring(State, 2), "' in table ",
-                       lua_tostring(State, lua_upvalueindex(1)));
+        unlikely_branch if (!SDL_GetPathInfo((Path + "lua").c_str(), NULL)) {
+            unlikely_branch if (!SDL_GetPathInfo((Path + "luau").c_str(),
+                                                 NULL)) {
+                std::cout
+                    << "Loaded '" << Path
+                    << "luau', but having a '.luau' extension name is "
+                       "advised against for compatability for old ass "
+                       "filesystems, as some have a limit of 3 characters for "
+                       "the extension. I'm a compatability nut, alright?"
+                    << std::endl;
+            }
+            else {
+                luaL_error(State, "Attempted to index a non-existant entry '",
+                           lua_tostring(State, 2), "' in table ",
+                           lua_tostring(State, lua_upvalueindex(1)));
+            }
         }
 
         unlikely_branch
@@ -291,12 +298,14 @@ int _LuaDirectoryLibrary::__index(lua_State* State) {
         }
 
         lua_call(State, 0, 1);
+
         lua_pushvalue(State, 2);
         lua_pushvalue(State, -2);
         lua_rawset(State, 1);
     }
 
-    // lua_rotate(State, 1, 1);
+    // lua_insert(State, 1);
+    //  lua_rotate(State, 1, 1);
     return 1;
 }
 
@@ -348,7 +357,7 @@ void* Game::Lua::LuaAllocationFunc(void* ud,
 #include "LuaLibraries/LuaMatrix.hpp"
 #include "LuaLibraries/LuaVector.hpp"
 
-//#include "LuaLibraries/LuaBuffer.hpp"
+// #include "LuaLibraries/LuaBuffer.hpp"
 
 #include "LuaLibraries/LuaModelLoader.hpp"
 
@@ -372,7 +381,8 @@ void Game::Lua::Init() {
 
     Game::Lua::LuaThreadInfo* StateInfo = new Game::Lua::LuaThreadInfo;
 
-    Game::Lua::State = lua_newstate(Game::Lua::LuaAllocationFunc, (void*)StateInfo);
+    Game::Lua::State =
+        lua_newstate(Game::Lua::LuaAllocationFunc, (void*)StateInfo);
     if (Game::Lua::State == NULL) {
         std::cerr << "Failed to create the Lua state." << std::endl;
         Exceptions::ThrowException<Exceptions::RuntimeError>(
@@ -384,7 +394,7 @@ void Game::Lua::Init() {
 #endif
 
     //(*static_cast<Game::Lua::LuaThreadInfo**>(
-        //lua_getextraspace(Game::Lua::State))) = StateInfo;
+    // lua_getextraspace(Game::Lua::State))) = StateInfo;
 
     luaopen_base(Game::Lua::State);
 
@@ -416,10 +426,11 @@ void Game::Lua::Init() {
     luaopen_integer(Game::Lua::State);
     lua_setglobal(Game::Lua::State, LUA_INTLIBNAME);
 
-    //luaopen_buffer(Game)
+    // luaopen_buffer(Game)
 
     // Create global tables
-    Game::Lua::GameTable = LuaHelper::StackTableReference(Game::Lua::State, 0, 4);
+    Game::Lua::GameTable =
+        LuaHelper::StackTableReference(Game::Lua::State, 0, 4);
 
     Game::Lua::GameTable.PushReference(Game::Lua::State);
     lua_setglobal(Game::Lua::State, "Game");
@@ -433,15 +444,12 @@ void Game::Lua::Init() {
     Lua::CLibraries::Vector::Init(Game::Lua::State);
     Lua::CLibraries::Matrix::Init(Game::Lua::State);
 
-    //Lua::CLibraries::Buffer::Init(Game::Lua::State);
+    // Lua::CLibraries::Buffer::Init(Game::Lua::State);
 
     Lua::CLibraries::ModelLoader::Init(Game::Lua::State);
 
     Lua::CLibraries::Graphics::Init(Game::Lua::State);
     Lua::CLibraries::Input::Init(Game::Lua::State);
-
-    ::_LoadLuaAssetDirectoryInTable(Game::Lua::LuaDirectories::GameClasses,
-                                    Game::Lua::GameTable.GetStackIndex());
 
     lua_createtable(Game::Lua::State, 0, 4);  // Assets
 
@@ -459,6 +467,9 @@ void Game::Lua::Init() {
     MiscClasses = ::_LuaDirectoryLibrary("MiscClassesGlobal", ParentTableIDX);
     BaseClasses = ::_LuaDirectoryLibrary(Game::Lua::LuaDirectories::BaseClasses,
                                          ParentTableIDX);
+
+    ::_LoadLuaAssetDirectoryInTable(Game::Lua::LuaDirectories::GameClasses,
+                                    Game::Lua::GameTable.GetStackIndex());
 
     MiscClasses.Load();
     Lua::CLibraries::Console::PostMiscClassInit(Game::Lua::State);

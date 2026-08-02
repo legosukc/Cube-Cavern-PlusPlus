@@ -38,9 +38,14 @@ namespace Game::Lua::CLibraries::Graphics {
 	}
 
 	namespace Shader {
-		static inline void Init(lua_State* State, LuaHelper::StackTableReference& GraphicsTable);
 
-		static int __new(lua_State* State);
+            constexpr static const char* MetatableName = "Shader";
+
+            static inline void Init(
+                lua_State* State,
+                LuaHelper::StackTableReference& GraphicsTable);
+
+            static int __new(lua_State* State);
 	}
 }
 
@@ -49,7 +54,7 @@ void Game::Lua::CLibraries::Graphics::Shader::Init(
     LuaHelper::StackTableReference& GraphicsTable) {
     LuaHelper::StackTableReference OpenGLShader, ShaderMetatable;
 
-    ShaderMetatable = LuaHelper::StackTableReference(State, "Shader");
+    ShaderMetatable = LuaHelper::StackTableReference(State, CLibraries::Graphics::Shader::MetatableName);
 
     ShaderMetatable.SetKeyClosure(State, Classes::Shader::SetShaderSource,
                                   "SetShaderSource");
@@ -86,7 +91,7 @@ int Game::Lua::CLibraries::Graphics::Shader::__new(lua_State* State) {
     ShaderUD->ShaderObject =
         Game::Graphics::OpenGLFunctions::glCreateShader(ShaderUD->ShaderType);
 
-    luaL_getmetatable(State, "Shader");
+    luaL_getmetatable(State, CLibraries::Graphics::Shader::MetatableName);
     lua_setmetatable(State, -2);
 
     return 1;
@@ -99,7 +104,9 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::SetShaderSource(
     GLuint ShaderObject;
 
     ShaderObject =
-        static_cast<Classes::Shader*>(luaL_checkudata(State, 1, "Shader"))
+        static_cast<Classes::Shader*>(
+            luaL_checkudata(State, 1,
+                            CLibraries::Graphics::Shader::MetatableName))
             ->ShaderObject;
 
     StackTop = lua_gettop(State);
@@ -134,7 +141,9 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::GetShaderSource(
     StartNS = SDL_GetTicksNS();
 
     ShaderObject =
-        static_cast<Classes::Shader*>(luaL_checkudata(State, 1, "Shader"))
+        static_cast<Classes::Shader*>(
+            luaL_checkudata(State, 1,
+                            CLibraries::Graphics::Shader::MetatableName))
             ->ShaderObject;
 
     Game::Graphics::OpenGLFunctions::glGetShaderiv(
@@ -167,7 +176,10 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::Compile(
     GLuint ShaderObject;
 
     ShaderObject =
-        static_cast<Shader*>(luaL_checkudata(State, 1, "Shader"))->ShaderObject;
+        static_cast<Shader*>(
+            luaL_checkudata(State, 1,
+                            CLibraries::Graphics::Shader::MetatableName))
+            ->ShaderObject;
     // lua_settop(State, 0);
 
     Game::Graphics::OpenGLFunctions::glCompileShader(ShaderObject);
@@ -194,7 +206,9 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::Compile(
 
 int Game::Lua::CLibraries::Graphics::Classes::Shader::__gc(lua_State* State) {
     Game::Graphics::OpenGLFunctions::glDeleteShader(
-        static_cast<Shader*>(luaL_checkudata(State, 1, "Shader"))
+        static_cast<Shader*>(
+            luaL_checkudata(State, 1,
+                            CLibraries::Graphics::Shader::MetatableName))
             ->ShaderObject);
     return 0;
 }

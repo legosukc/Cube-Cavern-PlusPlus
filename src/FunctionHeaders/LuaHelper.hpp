@@ -250,6 +250,8 @@ namespace LuaHelper {
                         const char* MetatableName);
 
     void LockTable(lua_State* State, int TableIndex);
+
+    
 }
 
 static int __readonly_metatable_newindex(lua_State* State) {
@@ -608,9 +610,9 @@ Fail:
     return NULL;
 }
 
-void* LuaHelper::TestMetatable(lua_State* State,
-                               int UserdataIndex,
-                               int MetatableIndex) {
+inline void* LuaHelper::TestMetatable(lua_State* State,
+                                      int UserdataIndex,
+                                      int MetatableIndex) {
     void* Userdata;
     int StartingStack;
 
@@ -631,11 +633,20 @@ void* LuaHelper::TestMetatable(lua_State* State,
 void* LuaHelper::TestMetatable(lua_State* State,
                                int UserdataIndex,
                                const char* MetatableName) {
-    unlikely_branch if (strcmp(lua_getuserdataname(State, UserdataIndex),
-                               MetatableName) != 0) {
-        return NULL;
+
+    const int InitialStackTop = lua_gettop(State);
+    void* ReturnValue;
+
+    lua_getmetatable(State, UserdataIndex);
+    luaL_getmetatable(State, MetatableName);
+
+    if (lua_equal(State, -1, -2)) {
+        ReturnValue = lua_touserdata(State, UserdataIndex);
+    } else {
+        ReturnValue = NULL;
     }
-    return lua_touserdata(State, UserdataIndex);
+    lua_settop(State, InitialStackTop);
+    return ReturnValue;
 }
 
 void LuaHelper::LockTable(lua_State* State, int TableIndex) {

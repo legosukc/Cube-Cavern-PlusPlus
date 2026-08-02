@@ -485,7 +485,7 @@ int Game::Lua::CLibraries::Graphics::Program::SetUniformMat4(lua_State* State) {
 int Game::Lua::CLibraries::Graphics::Classes::Program::AttachShader(
     lua_State* State) {
     const Classes::Shader* ShaderUD = static_cast<Classes::Shader*>(
-        LuaHelper::TestMetatable(State, 2, "Shader"));
+        LuaHelper::TestMetatable(State, 2, CLibraries::Graphics::Shader::MetatableName));
     if (ShaderUD == NULL) {
         luaL_error(
             State,
