@@ -5,6 +5,7 @@
 #include "LuaGraphics_GLObjectBase.hpp"
 #include "LuaGraphics_Shader.hpp"
 
+#include <SDL3/SDL_joystick.h>
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 
@@ -17,6 +18,8 @@
 
 #include "../../../include/VM/lua.h"
 #include "../../../include/VM/lualib.h"
+
+#include "../../MathClasses/Vector3.hpp"
 
 namespace Game::Lua::CLibraries::Graphics {
 
@@ -41,7 +44,7 @@ namespace Game::Lua::CLibraries::Graphics {
 
     namespace Program {
         inline void Init(lua_State* State,
-                                LuaHelper::StackTableReference& GraphicsTable);
+                         LuaHelper::StackTableReference& GraphicsTable);
 
         int __new(lua_State* State);
 
@@ -69,7 +72,7 @@ namespace Game::Lua::CLibraries::Graphics {
         int SetUniformMat4(lua_State* State);
     }
 }
-
+/*
 namespace Game::Lua::CLibraries::Graphics::Program {
 
     int SetUniformSint32(lua_State* State);
@@ -95,8 +98,7 @@ namespace Game::Lua::CLibraries::Graphics::Program {
     int SetUniformMat3(lua_State* State);
     int SetUniformMat4(lua_State* State);
 }
-
-
+*/
 
 // implementation
 
@@ -345,18 +347,42 @@ int Game::Lua::CLibraries::Graphics::Program::SetUniformBvec3(
 
 int Game::Lua::CLibraries::Graphics::Program::SetUniformFvec3(
     lua_State* State) {
-    if (const void* VecUD = LuaHelper::TestMetatable(State, 2, "Vector3");
-        VecUD == NULL) {
-        Game::Graphics::Program::SetUniformFvec3(
-            static_cast<Sint32>(luaL_checkinteger(State, 1)),
-            Math::Vector3(static_cast<float>(luaL_checknumber(State, 2)),
-                          static_cast<float>(luaL_checknumber(State, 3)),
-                          static_cast<float>(luaL_checknumber(State, 4))));
-    } else {
-        Game::Graphics::Program::SetUniformFvec3(
-            static_cast<Sint32>(luaL_checkinteger(State, 1)),
-            *static_cast<const Math::Vector3*>(VecUD));
+    const Sint32 UniformIndex =
+        static_cast<Sint32>(luaL_checkinteger(State, 1));
+
+    switch (lua_type(State, 2)) {
+        default:
+        TypeError:
+            luaL_typeerror(State, 2, "Vector3 or number");
+            break;
+
+        case LUA_TNUMBER:
+            Game::Graphics::Program::SetUniformFvec3(
+                UniformIndex,
+                Math::Vector3(static_cast<Math::Vector3::ComponentType>(
+                                  lua_tonumber(State, 2)),
+                              static_cast<Math::Vector3::ComponentType>(
+                                  luaL_checknumber(State, 3)),
+                              static_cast<Math::Vector3::ComponentType>(
+                                  luaL_checknumber(State, 4))));
+            break;
+
+        case LUA_TUSERDATA:
+            lua_getmetatable(State, 2);
+            luaL_getmetatable(State, "Vector3");
+            if (!lua_equal(State, -1, -2)) {
+                goto TypeError;
+            }
+
+            const Math::Vector3* VecUD =
+                static_cast<const Math::Vector3*>(lua_touserdata(State, 2));
+            //std::cout << "fvec3 uniform " << VecUD->X << ", " << VecUD->Y << ", " << VecUD->Z << std::endl;
+
+            Game::Graphics::Program::SetUniformFvec3(
+                UniformIndex, *VecUD);
+            break;
     }
+
     return 0;
 }
 
@@ -484,8 +510,9 @@ int Game::Lua::CLibraries::Graphics::Program::SetUniformMat4(lua_State* State) {
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::AttachShader(
     lua_State* State) {
-    const Classes::Shader* ShaderUD = static_cast<Classes::Shader*>(
-        LuaHelper::TestMetatable(State, 2, CLibraries::Graphics::Shader::MetatableName));
+    const Classes::Shader* ShaderUD =
+        static_cast<Classes::Shader*>(LuaHelper::TestMetatable(
+            State, 2, CLibraries::Graphics::Shader::MetatableName));
     if (ShaderUD == NULL) {
         luaL_error(
             State,

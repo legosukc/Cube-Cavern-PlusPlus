@@ -29,7 +29,7 @@ Luau API for modding, OpenGL knowledge is recommended. (You could probably get a
 
 ## BUILDING:
 
-You will need CMake SDL3, SDL3_net, SDL3_mixer, SDL3_ttf, SDL3_image, and OpenAL installed.
+You will need CMake and a C++ compiler installed. (i use clang, so maybe use that)
 
 ### Windows:
 
@@ -37,27 +37,17 @@ idk, maybe use wsl and follow the linux guide.
 
 ### Linux:
 
-Install dependencies, adapt this command to whatever you're using.
+Dependencies are all installed in the CMake script.
 
-sudo pacman -Syu cmake sdl3 sdl3_mixer sdl3_ttf sdl3_image openal
+Run the compile-(environment)-(platform).sh scripts to compile.
 
-If it fails, try compiling them yourself and installing them.
+The compile-(environment).sh scripts compile for your local platform.
 
-Can't seem to download the SDL3_net package, so install it manually through compiling it.
+When you build for the first time **IT WILL TAKE A WHILE.**
 
-You might need to move the SDL3_net library files from /usr/local/lib/ to /usr/lib/.
+It how long it takes depends on your internet connection and your CPU power, as it is compiling all the dependenices. (SDL3 library family and Luau)
 
-After that, run compile-client.sh or compile-server.sh to spit out an executable.
-
-Has build tasks out of the box for VSCode, open up the root folder (the one above src/).
-
-Hit CTRL+SHIFT+B to build, and F5 to run or CTRL+F5 to run in debugging mode (these are the default VSCode binds, check your config if it doesn't work).
-
-If for some reason you want to compile it without the scripts, here:
-
-mkdir build
-cmake -S./ -Bbuild/ -DBUILD_TARGET=("client" or "server") (optional)PLATFORM=("vita", or can be left out entirely)
-cmake --build build/
+**It's normal for there to be not much console output for some time**, *this is CMake downloading dependencies.*
 
 ### Mac:
 

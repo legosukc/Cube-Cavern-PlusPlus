@@ -1,3 +1,4 @@
+#include <SDL3/SDL_video.h>
 #define SDL_MAIN_HANDLED
 
 #include "../define.h"
@@ -119,7 +120,7 @@ try
 	Game::Sound::Init();
 	Game::Network::Init();
 	
-	Game::Window.Create("Cube Cavern++", 800, 600);
+	Game::Window.Create("Cube Cavern++", 800, 600, SDL_WINDOW_RESIZABLE);
 
 	Game::Graphics::Init();
 	Game::Lua::Init();
@@ -127,7 +128,7 @@ try
 	Game::Sound::AudioSource* AudioSource = Game::Sound::CreateAudioSource();
 	Game::Sound::Speaker* Speaker = Game::Sound::CreateSpeaker();
 
-	AudioSource->LoadFile("SFX\\Kick.ogg");
+	AudioSource->LoadFile("SFX/Kick.ogg");
 	Speaker->SetAudioSource(AudioSource);
 	Speaker->Play();
 

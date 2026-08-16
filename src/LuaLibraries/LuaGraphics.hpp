@@ -109,6 +109,33 @@ int Game::Lua::CLibraries::Graphics::Clear(lua_State* State) {
 }
 #endif
 
+#ifdef BUILD_CLIENT
+namespace {
+
+    static void _lua_graphics_updateScreenSize(int TableIndex,
+                                               const Math::IVector2& Size) {
+        lua_pushinteger(Game::Lua::State, Size.X);
+        lua_setfield(Game::Lua::State, TableIndex, "ResolutionX");
+
+        lua_pushinteger(Game::Lua::State, Size.Y);
+        lua_setfield(Game::Lua::State, TableIndex, "ResolutionY");
+
+        lua_pushnumber(Game::Lua::State, static_cast<double>(Size.X) /
+                                             static_cast<double>(Size.Y));
+        lua_setfield(Game::Lua::State, TableIndex, "AspectRation");
+    }
+
+    static void _lua_graphics_WindowResizedEvent_updateLuaSize(
+        const Math::IVector2& Size) {
+        Game::Lua::GameTable.PushKey(Game::Lua::State, "Graphics");
+
+        _lua_graphics_updateScreenSize(-2, Size);
+
+        lua_pop(Game::Lua::State, 1);
+    }
+}
+#endif
+
 void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     LuaHelper::StackTableReference GraphicsTable, SubtableCache;
 
@@ -313,6 +340,12 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     lua_setfield(State, GraphicsTable.GetStackIndex(), "TexFormats");
 
 #ifdef BUILD_CLIENT
+
+    Game::Window.WindowResizedEvent.Connect(
+        ::_lua_graphics_WindowResizedEvent_updateLuaSize);
+
+    ::_lua_graphics_updateScreenSize(GraphicsTable.GetStackIndex(),
+                                     Game::Window.Size);
 
     lua_createtable(State, 0, 4);
 

@@ -31,7 +31,7 @@ namespace Game::Graphics {
         OpenGL,
         Vulkan,
         Metal,
-		Direct3D11,
+        Direct3D11,
         Direct3D12
     };
 
@@ -115,6 +115,8 @@ namespace Game::Graphics {
 }
 
 namespace Game::Graphics::OpenGLFunctions {
+    extern PFNGLVIEWPORTPROC glViewport;
+
     extern PFNGLCLEARCOLORPROC glClearColor;
     extern PFNGLCLEARPROC glClear;
 
@@ -219,17 +221,20 @@ namespace Game::Graphics {
 }
 
 namespace Game::Graphics::OpenGLFunctions {
-    PFNGLCLEARCOLORPROC glClearColor;
-    PFNGLCLEARPROC glClear;
 
-    PFNGLGETINTEGERVPROC glGetIntegerv;
-    PFNGLISENABLEDPROC glIsEnabled;
+    PFNGLVIEWPORTPROC glViewport = NULL;
 
-    PFNGLDRAWARRAYSPROC glDrawArrays;
-    PFNGLDRAWARRAYSINSTANCEDPROC glDrawArraysInstanced;
+    PFNGLCLEARCOLORPROC glClearColor = NULL;
+    PFNGLCLEARPROC glClear = NULL;
 
-    PFNGLDRAWELEMENTSPROC glDrawElements;
-    PFNGLDRAWELEMENTSINSTANCEDPROC glDrawElementsInstanced;
+    PFNGLGETINTEGERVPROC glGetIntegerv = NULL;
+    PFNGLISENABLEDPROC glIsEnabled = NULL;
+
+    PFNGLDRAWARRAYSPROC glDrawArrays = NULL;
+    PFNGLDRAWARRAYSINSTANCEDPROC glDrawArraysInstanced = NULL;
+
+    PFNGLDRAWELEMENTSPROC glDrawElements = NULL;
+    PFNGLDRAWELEMENTSINSTANCEDPROC glDrawElementsInstanced = NULL;
 }
 
 static void _SetClearColor_OpenGL(float R, float G, float B, float A) {
@@ -263,6 +268,13 @@ namespace Game::Graphics {
     Game::Graphics::GBufferStruct GBuffer;
 }
 
+namespace {
+    static void _graphics_WindowResizedEvent_updateGLViewport(
+        const Math::IVector2& Size) {
+        Game::Graphics::OpenGLFunctions::glViewport(0, 0, Size.X, Size.Y);
+    }
+}
+
 void Game::Graphics::Init() {
     Graphics::ActiveAPI = Game::Graphics::GraphicsAPIEnum::OpenGL;
 
@@ -287,6 +299,8 @@ void Game::Graphics::Init() {
                     }
                 }
             }
+
+            LOAD_OPENGL_FUNCTION(glViewport);
 
             LOAD_OPENGL_FUNCTION(glClear);
             LOAD_OPENGL_FUNCTION(glClearColor);
@@ -331,6 +345,8 @@ void Game::Graphics::Init() {
             Graphics::Program::Init_OpenGL();
 
             Graphics::Texture::Init_OpenGL();
+
+            Game::Window.WindowResizedEvent.Connect(::_graphics_WindowResizedEvent_updateGLViewport);
 
             break;
 

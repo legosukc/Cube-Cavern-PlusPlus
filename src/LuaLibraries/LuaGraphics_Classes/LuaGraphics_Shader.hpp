@@ -17,36 +17,33 @@
 
 #include "../../Client/Graphics_Client.hpp"
 
-
 namespace Game::Lua::CLibraries::Graphics {
 
-	namespace Classes {
-		struct Shader {
+    namespace Classes {
+        struct Shader {
+            GLint ShaderObject;
+            GLenum ShaderType;
 
-			GLint ShaderObject;
-			GLenum ShaderType;
+            static int SetShaderSource(lua_State* State);
+            static int LoadShaderSourceFromFile(lua_State* State);
 
-			static int SetShaderSource(lua_State* State);
-			static int LoadShaderSourceFromFile(lua_State* State);
+            static int GetShaderSource(lua_State* State);
 
-			static int GetShaderSource(lua_State* State);
+            static int Compile(lua_State* State);
 
-			static int Compile(lua_State* State);
+            static int __gc(lua_State* State);
+        };
+    }
 
-			static int __gc(lua_State* State);
-		};
-	}
+    namespace Shader {
 
-	namespace Shader {
+        constexpr static const char* MetatableName = "Shader";
 
-            constexpr static const char* MetatableName = "Shader";
+        static inline void Init(lua_State* State,
+                                LuaHelper::StackTableReference& GraphicsTable);
 
-            static inline void Init(
-                lua_State* State,
-                LuaHelper::StackTableReference& GraphicsTable);
-
-            static int __new(lua_State* State);
-	}
+        static int __new(lua_State* State);
+    }
 }
 
 void Game::Lua::CLibraries::Graphics::Shader::Init(
@@ -54,7 +51,8 @@ void Game::Lua::CLibraries::Graphics::Shader::Init(
     LuaHelper::StackTableReference& GraphicsTable) {
     LuaHelper::StackTableReference OpenGLShader, ShaderMetatable;
 
-    ShaderMetatable = LuaHelper::StackTableReference(State, CLibraries::Graphics::Shader::MetatableName);
+    ShaderMetatable = LuaHelper::StackTableReference(
+        State, CLibraries::Graphics::Shader::MetatableName);
 
     ShaderMetatable.SetKeyClosure(State, Classes::Shader::SetShaderSource,
                                   "SetShaderSource");
@@ -124,10 +122,26 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::SetShaderSource(
 
 int Game::Lua::CLibraries::Graphics::Classes::Shader::LoadShaderSourceFromFile(
     lua_State* State) {
-    std::cout << "'Game::Lua::CLibraries::Graphics::Classes::Shader::"
-                 "LoadShaderSourceFromFile' not implemented!"
-              << std::endl;
+    size_t ShaderSourceSize;
+    char* ShaderSource =
+        (char*)SDL_LoadFile(luaL_checkstring(State, 2), &ShaderSourceSize);
+    if (ShaderSource == NULL) {
+        luaL_error(State, "Shader.LoadShaderSourceFromFile error. File '",
+                   lua_tostring(State, 2), "' doesn't exist!");
+        return 0;
+    }
 
+    Classes::Shader* ShaderUD = (Classes::Shader*)LuaHelper::TestMetatable(State, 1,
+                             CLibraries::Graphics::Shader::MetatableName);
+    if (ShaderUD == NULL) {
+        SDL_free(ShaderSource);
+        luaL_typeerrorL(State, 1, CLibraries::Graphics::Shader::MetatableName);
+        return 0;
+    }
+
+    Game::Graphics::OpenGLFunctions::glShaderSource(ShaderUD->ShaderObject, 1,
+                                                    &ShaderSource, NULL);
+    SDL_free(ShaderSource);
     return 0;
 }
 

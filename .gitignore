@@ -33,6 +33,10 @@ bld/
 [Ll]og/
 [Ll]ogs/
 build/
+build-server/
+build-vita/
+build-win64/
+build-win32/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

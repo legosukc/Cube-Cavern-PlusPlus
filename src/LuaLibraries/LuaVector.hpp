@@ -3,9 +3,9 @@
 #include "../../include/VM/lua.h"
 #include "../../include/VM/lualib.h"
 
+#include <cmath>
 #include <string>
 #include <type_traits>
-
 
 #include "../FunctionHeaders/LuaHelper.hpp"
 
@@ -430,6 +430,47 @@ namespace Game::Lua::CLibraries::Vector {
     }
 
     template <class VectorType>
+    static int __StripNaN(lua_State* State) {
+        lua_settop(State, 1);
+        lua_pushvalue(State, lua_upvalueindex(1));
+
+        const VectorType BaseVector =
+            *static_cast<VectorType*>(LuaHelper::CheckMetatable(State, 1, 2));
+
+        VectorType* NewVector = static_cast<VectorType*>(
+            lua_newuserdata(State, sizeof(VectorType)));
+
+        for (Uint8 i = 0; i < VectorType::ComponentCount; ++i) {
+            (*NewVector)[i] =
+                std::isnan(BaseVector[i])
+                    ? static_cast<typename VectorType::ComponentType>(0)
+                    : BaseVector[i];
+        }
+
+        lua_pushvalue(State, 2);
+        lua_setmetatable(State, 3);
+        return 1;
+    }
+
+    // Returns a new vector with the Y component set to 0.
+    template <class VectorType>
+    static int __StripY(lua_State* State) {
+        lua_settop(State, 1);
+
+        VectorType* NewVector = static_cast<VectorType*>(
+            lua_newuserdata(State, sizeof(VectorType)));
+
+        lua_pushvalue(State, lua_upvalueindex(1));
+
+        *NewVector =
+            *static_cast<VectorType*>(LuaHelper::CheckMetatable(State, 1, 3));
+        NewVector->Y = static_cast<typename VectorType::ComponentType>(0);
+
+        lua_setmetatable(State, 2);
+        return 1;
+    }
+
+    template <class VectorType>
     static inline void SetupVector(lua_State* State, const char* VectorName) {
         LuaHelper::StackTableReference VectorTable, VectorMetatable;
 
@@ -441,28 +482,23 @@ namespace Game::Lua::CLibraries::Vector {
         // VectorMetatable.PushReference(State);
         //}
         VectorMetatable.PushReference(State);
-        VectorMetatable.SetKeyClosure(
-            State, __tostring<VectorType>, "__tostring", 1);
+        VectorMetatable.SetKeyClosure(State, __tostring<VectorType>,
+                                      "__tostring", 1);
 
         VectorMetatable.PushReference(State);
-        VectorMetatable.SetKeyClosure(State, __add<VectorType>,
-                                      "__add", 1);
+        VectorMetatable.SetKeyClosure(State, __add<VectorType>, "__add", 1);
 
         VectorMetatable.PushReference(State);
-        VectorMetatable.SetKeyClosure(State, __sub<VectorType>,
-                                      "__sub", 1);
+        VectorMetatable.SetKeyClosure(State, __sub<VectorType>, "__sub", 1);
 
         VectorMetatable.PushReference(State);
-        VectorMetatable.SetKeyClosure(State, __unm<VectorType>,
-                                      "__unm", 1);
+        VectorMetatable.SetKeyClosure(State, __unm<VectorType>, "__unm", 1);
 
         VectorMetatable.PushReference(State);
-        VectorMetatable.SetKeyClosure(State, __mul<VectorType>,
-                                      "__mul", 1);
+        VectorMetatable.SetKeyClosure(State, __mul<VectorType>, "__mul", 1);
 
         VectorMetatable.PushReference(State);
-        VectorMetatable.SetKeyClosure(State, __div<VectorType>,
-                                      "__div", 1);
+        VectorMetatable.SetKeyClosure(State, __div<VectorType>, "__div", 1);
 
         VectorMetatable.PushReference(State);
         VectorMetatable.SetKeyClosure(State, __idiv<VectorType>, "__idiv", 1);
@@ -495,7 +531,15 @@ namespace Game::Lua::CLibraries::Vector {
             VectorMetatable.PushReference(State);
             VectorMetatable.SetKeyClosure(State, __Normalize<VectorType>,
                                           "Normalize", 1);
+
+            VectorMetatable.PushReference(State);
+            VectorMetatable.SetKeyClosure(State, __StripNaN<VectorType>,
+                                          "StripNaN", 1);
         }
+
+        VectorMetatable.PushReference(State);
+        VectorMetatable.SetKeyClosure(State, __StripY<VectorType>, "StripY",
+                                      1);
 
         VectorMetatable.PushReference(State);
         VectorMetatable.SetKeyClosure(State, __index<VectorType>, "__index", 1);

@@ -18,21 +18,25 @@
 
 namespace LuaHelper {
 
-    int CompileToLuaFunction(lua_State* State, const char* SourcePath);
+    lua_Status CompileToLuaFunction(lua_State* State, const char* SourcePath);
 
-    int PCallLog(lua_State* State,
-                 int ArgumentsPassed = 0,
-                 int ReturnValues = 0);
+    lua_Status PCallLog(lua_State* State,
+                        int ArgumentsPassed = 0,
+                        int ReturnValues = 0);
 
-    int LoadFileLog(lua_State* State, const char* Path);
+    lua_Status LoadFileLog(lua_State* State, const char* Path);
 
     // Loads a lua file and runs it unprotected. Only automatically prints any
     // caught Lua errors from file compilation.
-    int CallFileLog(lua_State* State, const char* Path, int ReturnValues = 1);
+    lua_Status CallFileLog(lua_State* State,
+                           const char* Path,
+                           int ReturnValues = 1);
 
     // Loads a lua file and runs it with a pcall, automatically printing any
     // caught Lua errors.
-    int PCallFileLog(lua_State* State, const char* Path, int ReturnValues = 1);
+    lua_Status PCallFileLog(lua_State* State,
+                            const char* Path,
+                            int ReturnValues = 1);
 
     template <typename T>
     constexpr void Push(lua_State* State, T Value) {
@@ -80,6 +84,7 @@ namespace LuaHelper {
 
     inline void PushClosure(lua_State* State,
                             lua_CFunction Closure,
+                            const char* Name,
                             int Upvalues = 0);
 
     template <typename Arg_T>
@@ -151,20 +156,31 @@ namespace LuaHelper {
     inline void SetTableClosure(lua_State* State,
                                 int TableIndex,
                                 lua_CFunction Closure,
+                                const char* ClosureName,
                                 Index_T Index,
                                 int Upvalues = 0) {
-        LuaHelper::PushClosure(State, Closure, Upvalues);
+        LuaHelper::PushClosure(State, Closure, ClosureName, Upvalues);
         lua_settable(State, TableIndex);
     }
 
     inline void SetKeyClosure(lua_State* State,
                               int TableIndex,
                               lua_CFunction Closure,
+                              const char* ClosureName,
                               const char* Key,
                               int Upvalues = 0);
+
+    // Uses argument "Key" for the closure name.
+    inline void SetKeyClosure(lua_State* State,
+                              int TableIndex,
+                              lua_CFunction Closure,
+                              const char* Key,
+                              int Upvalues = 0);
+
     inline void SetIndexClosure(lua_State* State,
                                 int TableIndex,
                                 lua_CFunction Closure,
+                                const char* ClosureName,
                                 lua_Integer Index,
                                 int Upvalues = 0);
 
@@ -217,6 +233,7 @@ namespace LuaHelper {
         template <typename Index_T>
         inline void SetTableClosure(lua_State* State,
                                     lua_CFunction Closure,
+                                    const char* ClosureName,
                                     Index_T Index,
                                     int Upvalues = 0) {
             LuaHelper::SetTableClosure<Index_T>(State, this->TableIndex,
@@ -225,10 +242,19 @@ namespace LuaHelper {
 
         inline void SetKeyClosure(lua_State* State,
                                   lua_CFunction Closure,
+                                  const char* ClosureName,
                                   const char* Key,
                                   int Upvalues = 0);
+
+        // Uses argument "Key" for the name of the closure.
+        inline void SetKeyClosure(lua_State* State,
+                                  lua_CFunction Closure,
+                                  const char* Key,
+                                  int Upvalues = 0);
+
         inline void SetIndexClosure(lua_State* State,
                                     lua_CFunction Closure,
+                                    const char* ClosureName,
                                     lua_Integer Index,
                                     int Upvalues = 0);
 
@@ -251,7 +277,6 @@ namespace LuaHelper {
 
     void LockTable(lua_State* State, int TableIndex);
 
-    
 }
 
 static int __readonly_metatable_newindex(lua_State* State) {
@@ -259,8 +284,8 @@ static int __readonly_metatable_newindex(lua_State* State) {
     return 0;
 }
 
-inline int LuaHelper::CompileToLuaFunction(lua_State* State,
-                                           const char* SourcePath) {
+inline lua_Status LuaHelper::CompileToLuaFunction(lua_State* State,
+                                                  const char* SourcePath) {
     struct BytecodeCacheStruct {
         char Header[14] = "BYTECODECACHE";
         Uint32 SourceCRC;
@@ -371,8 +396,8 @@ CheckForCacheBytecodeFail:
         luau_compile(LuaSource, LuaSourceSize, NULL, &BytecodeSize);
     SDL_free(LuaSource);
 
-    const int CompileStatus =
-        luau_load(State, SourcePath, Bytecode, BytecodeSize, 0);
+    const lua_Status CompileStatus =
+        (lua_Status)luau_load(State, SourcePath, Bytecode, BytecodeSize, 0);
     free(Bytecode);
 
     // lua_getinfo(lua_State *L, int level, const char *what, lua_Debug *ar)
@@ -425,47 +450,81 @@ CheckForCacheBytecodeFail:
     return LUA_OK;
 }
 
-int LuaHelper::PCallLog(lua_State* State,
-                        int ArgumentsPassed,
-                        int ReturnValues) {
-    const int ErrorCode = lua_pcall(State, ArgumentsPassed, ReturnValues, 0);
+lua_Status LuaHelper::PCallLog(lua_State* State,
+                               int ArgumentsPassed,
+                               int ReturnValues) {
+    const lua_Status ErrorCode =
+        (lua_Status)lua_pcall(State, ArgumentsPassed, ReturnValues, 0);
 
-    likely_branch if (ErrorCode == LUA_OK) {
-        return LUA_OK;
-    }
-
-    std::clog << "Caught a ";
-
+    const char* ErrorTypeString;
     switch (ErrorCode) {
-        case LUA_ERRRUN:  // runtime error
-            std::clog << "runtime";
+    likely_branch case lua_Status::LUA_OK:
+        return LUA_OK;
+
+    case lua_Status::LUA_ERRRUN:  // runtime error
+        ErrorTypeString = "runtime";
+        break;
+
+        case lua_Status::LUA_ERRMEM:  // memory allocation error. For such
+                                      // errors, Lua does not call the message
+                                      // handler.
+            ErrorTypeString = "memory allocation";
             break;
 
-        case LUA_ERRMEM:  // memory allocation error. For such errors, Lua does
-                          // not call the message handler.
-            std::clog << "memory allocation";
+        case lua_Status::LUA_ERRERR:  // error while running the message
+                                      // handler.
+            ErrorTypeString = "message handler";
             break;
 
-        case LUA_ERRERR:  // error while running the message handler.
-            std::clog << "message handler";
+        // TODO: handle
+        case lua_Status::LUA_BREAK:
             break;
-            // case LUA_ERRGCMM: // error while running a __gc metamethod. For
-            // such errors, Lua does not call the message handler (as this kind
-            // of error typically has no relation with the function being
-            // called).
+
+        // TODO: handle
+        case lua_Status::LUA_YIELD:
+            break;
+
+        // should never be executed, here just to shush a warning about not
+        // handling every case.
+        case lua_Status::LUA_ERRSYNTAX:
+            return ErrorCode;
     }
 
-    std::clog << " error from PCall:\n" << lua_tostring(State, -1) << std::endl;
+    std::clog << "Caught a " << ErrorTypeString << " error from PCall.\n";
+
+    if (lua_type(State, -1) != LUA_TSTRING) {
+        std::clog << "PCall error object has type: "
+                  << luaL_typename(State, -1);
+    } else {
+        std::clog << lua_tostring(State, -1);
+    }
+    std::clog << '\n' << std::endl;
     return ErrorCode;
 }
 
-int LuaHelper::LoadFileLog(lua_State* State, const char* Path) {
-    const int ErrorCode = LuaHelper::CompileToLuaFunction(
+lua_Status LuaHelper::LoadFileLog(lua_State* State, const char* Path) {
+    const lua_Status ErrorCode = LuaHelper::CompileToLuaFunction(
         State, Path);  // luaL_loadfile(State, Path);
-    if (ErrorCode != LUA_OK) {
-        std::cerr << lua_tostring(State, -1) << std::endl;
-        lua_pop(State, 1);
+
+    switch (ErrorCode) {
+        case LUA_OK:
+            return LUA_OK;
+        case LUA_BREAK:
+            std::cerr << "Encountered a debug break while compiling '" << Path
+                      << "'. (what the hell?)";
+            break;
+        case LUA_ERRSYNTAX:
+            std::cerr << "Syntax error whilst compiling '" << Path << "'.";
+            break;
+        case LUA_YIELD:
+            std::cerr << "Yielded while compiling '" << Path
+                      << "'. (what the hell?)\nkilling process bc something "
+                         "bad might've happened";
+            exit(EXIT_FAILURE);
     }
+    std::cerr << '\n'
+              << "ErrorString: " << lua_tostring(State, -1) << std::endl;
+    lua_pop(State, 1);
     return ErrorCode;
 
     /*
@@ -486,10 +545,10 @@ int LuaHelper::LoadFileLog(lua_State* State, const char* Path) {
 
 // Loads a lua file and runs it unprotected. Only automatically prints any
 // caught Lua errors from file compilation.
-int LuaHelper::CallFileLog(lua_State* State,
-                           const char* Path,
-                           int ReturnValues) {
-    int Error = LuaHelper::LoadFileLog(State, Path);
+lua_Status LuaHelper::CallFileLog(lua_State* State,
+                                  const char* Path,
+                                  int ReturnValues) {
+    const lua_Status Error = LuaHelper::LoadFileLog(State, Path);
 
     likely_branch if (Error == LUA_OK) {
         lua_call(State, 0, ReturnValues);
@@ -499,21 +558,32 @@ int LuaHelper::CallFileLog(lua_State* State,
 
 // Loads a lua file and runs it with a pcall, automatically printing any caught
 // Lua errors.
-int LuaHelper::PCallFileLog(lua_State* State,
-                            const char* Path,
-                            int ReturnValues) {
-    int Error = LuaHelper::LoadFileLog(State, Path);
+lua_Status LuaHelper::PCallFileLog(lua_State* State,
+                                   const char* Path,
+                                   int ReturnValues) {
+    lua_Status Error = LuaHelper::LoadFileLog(State, Path);
 
     likely_branch if (Error == LUA_OK) {
-        Error = LuaHelper::PCallLog(State, 0, ReturnValues);
+        return LuaHelper::PCallLog(State, 0, ReturnValues);
     }
     return Error;
 }
 
 void LuaHelper::PushClosure(lua_State* State,
                             lua_CFunction Closure,
+                            const char* Name,
                             int Upvalues) {
-    lua_pushcclosure(State, Closure, "rah", Upvalues);
+    lua_pushcclosure(State, Closure, Name, Upvalues);
+}
+
+void LuaHelper::SetKeyClosure(lua_State* State,
+                              int TableIndex,
+                              lua_CFunction Closure,
+                              const char* ClosureName,
+                              const char* Key,
+                              int Upvalues) {
+    LuaHelper::PushClosure(State, Closure, ClosureName, Upvalues);
+    lua_setfield(State, TableIndex, Key);
 }
 
 void LuaHelper::SetKeyClosure(lua_State* State,
@@ -521,17 +591,18 @@ void LuaHelper::SetKeyClosure(lua_State* State,
                               lua_CFunction Closure,
                               const char* Key,
                               int Upvalues) {
-    LuaHelper::PushClosure(State, Closure, Upvalues);
+    LuaHelper::PushClosure(State, Closure, Key, Upvalues);
     lua_setfield(State, TableIndex, Key);
 }
 
 void LuaHelper::SetIndexClosure(lua_State* State,
                                 int TableIndex,
                                 lua_CFunction Closure,
+                                const char* ClosureName,
                                 lua_Integer Index,
                                 int Upvalues) {
     lua_pushinteger(State, Index);
-    LuaHelper::PushClosure(State, Closure, Upvalues);
+    LuaHelper::PushClosure(State, Closure, ClosureName, Upvalues);
     lua_settable(State, TableIndex);
 }
 
@@ -568,16 +639,26 @@ void LuaHelper::StackTableReference::PushReference(lua_State* State) {
 
 void LuaHelper::StackTableReference::SetKeyClosure(lua_State* State,
                                                    lua_CFunction Closure,
+                                                   const char* ClosureName,
                                                    const char* Key,
                                                    int Upvalues) {
-    LuaHelper::SetKeyClosure(State, this->TableIndex, Closure, Key, Upvalues);
+    LuaHelper::SetKeyClosure(State, this->TableIndex, Closure, ClosureName, Key, Upvalues);
+}
+
+void LuaHelper::StackTableReference::SetKeyClosure(lua_State* State,
+                                                   lua_CFunction Closure,
+                                                   const char* Key,
+                                                   int Upvalues) {
+    LuaHelper::SetKeyClosure(State, this->TableIndex, Closure, Key, Key,
+                             Upvalues);
 }
 
 void LuaHelper::StackTableReference::SetIndexClosure(lua_State* State,
                                                      lua_CFunction Closure,
+                                                     const char* ClosureName,
                                                      lua_Integer Index,
                                                      int Upvalues) {
-    LuaHelper::SetIndexClosure(State, this->TableIndex, Closure, Index,
+    LuaHelper::SetIndexClosure(State, this->TableIndex, Closure, ClosureName, Index,
                                Upvalues);
 }
 
@@ -633,7 +714,6 @@ inline void* LuaHelper::TestMetatable(lua_State* State,
 void* LuaHelper::TestMetatable(lua_State* State,
                                int UserdataIndex,
                                const char* MetatableName) {
-
     const int InitialStackTop = lua_gettop(State);
     void* ReturnValue;
 
@@ -659,8 +739,7 @@ void LuaHelper::LockTable(lua_State* State, int TableIndex) {
         lua_setmetatable(State, -2);
     }
 
-    LuaHelper::SetKeyClosure(State, -2, ::__readonly_metatable_newindex,
-                             "__newindex");
+    LuaHelper::SetKeyClosure(State, -2, ::__readonly_metatable_newindex, "readonly_metatable_error_yeller", "__newindex");
 
     lua_setmetatable(State, TableIndex);
 }

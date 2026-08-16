@@ -423,15 +423,15 @@ void Game::Lua::Init() {
     luaopen_debug(Game::Lua::State);
     lua_setglobal(Game::Lua::State, LUA_DBLIBNAME);
 
-    luaopen_integer(Game::Lua::State);
-    lua_setglobal(Game::Lua::State, LUA_INTLIBNAME);
+    //luaopen_integer(Game::Lua::State);
+    //lua_setglobal(Game::Lua::State, LUA_INTLIBNAME);
 
     // luaopen_buffer(Game)
 
     // Create global tables
     Game::Lua::GameTable =
         LuaHelper::StackTableReference(Game::Lua::State, 0, 4);
-
+    
     Game::Lua::GameTable.PushReference(Game::Lua::State);
     lua_setglobal(Game::Lua::State, "Game");
 
@@ -468,10 +468,11 @@ void Game::Lua::Init() {
     BaseClasses = ::_LuaDirectoryLibrary(Game::Lua::LuaDirectories::BaseClasses,
                                          ParentTableIDX);
 
+    MiscClasses.Load();
+
     ::_LoadLuaAssetDirectoryInTable(Game::Lua::LuaDirectories::GameClasses,
                                     Game::Lua::GameTable.GetStackIndex());
 
-    MiscClasses.Load();
     Lua::CLibraries::Console::PostMiscClassInit(Game::Lua::State);
 
     BaseClasses.Load();

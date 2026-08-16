@@ -44,6 +44,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+  include("/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/sdl3-build/cmake_install.cmake")
+  include("/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/sdl3_image-build/cmake_install.cmake")
+  include("/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/sdl3_mixer-build/cmake_install.cmake")
+  include("/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/sdl3_ttf-build/cmake_install.cmake")
+  include("/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/sdl3_net-build/cmake_install.cmake")
   include("/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/luau-build/cmake_install.cmake")
 
 endif()

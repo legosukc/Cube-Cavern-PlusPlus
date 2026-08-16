@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.10d)
+cmake_minimum_required(VERSION 3.10)
 
 # include vita toolchain
 if(PLATFORM STREQUAL "vita" AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+  message("Platform: PSVita")
   if(DEFINED ENV{VITASDK})
     set(CMAKE_TOOLCHAIN_FILE "$ENV{VITASDK}/share/vita.toolchain.cmake" CACHE PATH "toolchain file")
   else()
@@ -14,29 +15,65 @@ project(CubeCavern LANGUAGES CXX)
 
 include(FetchContent)
 
-# 1. Declare the Luau repository and release tag
+FetchContent_Declare(
+    sdl3
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+    GIT_TAG        release-3.4.14
+)
+
+FetchContent_Declare(
+    sdl3_image
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
+    GIT_TAG        release-3.4.4
+)
+
+FetchContent_Declare(
+    sdl3_mixer
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_mixer.git
+    GIT_TAG        release-3.2.4
+)
+
+FetchContent_Declare(
+    sdl3_ttf
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
+    GIT_TAG        release-3.2.2
+)
+
+FetchContent_Declare(
+    sdl3_net
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_net.git
+    GIT_TAG        release-3.2.0
+)
+
+FetchContent_MakeAvailable(sdl3)
+FetchContent_MakeAvailable(sdl3_image)
+FetchContent_MakeAvailable(sdl3_mixer)
+FetchContent_MakeAvailable(sdl3_ttf)
+FetchContent_MakeAvailable(sdl3_net)
+
+
+
 FetchContent_Declare(
     luau
     GIT_REPOSITORY https://github.com/luau-lang/luau.git
-    GIT_TAG        0.729 # Replace with the latest stable version tag
+    GIT_TAG        0.733
 )
 
-# 2. Prevent Luau from compiling its standalone CLI binaries and test suites
+# ai told me to put this here... ()
+# Prevent Luau from compiling its standalone CLI binaries and test suites
 set(LUAU_BUILD_CLI OFF CACHE INTERNAL "")
 set(LUAU_BUILD_TESTS OFF CACHE INTERNAL "")
 
-# 3. Make Luau targets available to your project
 FetchContent_MakeAvailable(luau)
 
 
 find_package(OpenAL REQUIRED)
 
 
-
+# ps vita shtuff (taken from documentation)
 if(PLATFORM STREQUAL "vita")
-  # This line adds Vita helper macros, must go after project definition in order
-  # to build Vita specific artifacts (self/vpk).
-  include("${VITASDK}/share/vita.cmake" REQUIRED)
+  # add vita helper macros
+  include("$ENV{VITASDK}/share/vita.cmake" REQUIRED)
 
   set(VITA_APP_NAME "Cube Cavern++ CLIENT")
 

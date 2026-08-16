@@ -47,7 +47,7 @@ namespace Game::Lua::CLibraries::Graphics {
 				static_cast<GLenum>(luaL_checkinteger(State, 3)),		// Type
 				static_cast<GLboolean>(lua_toboolean(State, 4)),		// Normalized
 				static_cast<GLsizei>(luaL_checkinteger(State, 5)),		// Stride Size
-				reinterpret_cast<void*>(luaL_optinteger(State, 6, 0))	// Offset
+				reinterpret_cast<void*>(luaL_checkinteger(State, 6))	// Offset
 			);
 			return 0;
 		}

@@ -1,30 +1,43 @@
 CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/main_client.cpp \
- /usr/include/stdc-predef.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../define.h \
- /usr/include/c++/16/iostream /usr/include/c++/16/bits/requires_hosted.h \
- /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h \
- /usr/include/c++/16/x86_64-pc-linux-gnu/bits/os_defines.h \
+ /usr/include/stdc-predef.h /usr/include/SDL3/SDL_video.h \
+ /usr/include/SDL3/SDL_stdinc.h /usr/include/SDL3/SDL_platform_defines.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h \
+ /usr/include/string.h /usr/include/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/bits/wordsize.h /usr/include/bits/timesize.h \
  /usr/include/sys/cdefs.h /usr/include/bits/long-double.h \
  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
+ /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
+ /usr/include/strings.h /usr/include/wchar.h /usr/include/bits/floatn.h \
+ /usr/include/bits/floatn-common.h /usr/include/bits/wchar.h \
+ /usr/include/bits/types/wint_t.h /usr/include/bits/types/mbstate_t.h \
+ /usr/include/bits/types/__mbstate_t.h /usr/include/bits/types/__FILE.h \
+ /usr/include/bits/types/FILE.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/time64.h \
+ /usr/include/bits/stdint-intn.h /usr/include/bits/stdint-uintn.h \
+ /usr/include/bits/stdint-least.h /usr/include/SDL3/SDL_begin_code.h \
+ /usr/include/SDL3/SDL_close_code.h /usr/include/SDL3/SDL_error.h \
+ /usr/include/SDL3/SDL_pixels.h /usr/include/SDL3/SDL_endian.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/endianness.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/uintn-identity.h /usr/include/SDL3/SDL_properties.h \
+ /usr/include/SDL3/SDL_rect.h /usr/include/SDL3/SDL_surface.h \
+ /usr/include/SDL3/SDL_blendmode.h /usr/include/SDL3/SDL_iostream.h \
+ /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../define.h \
+ /usr/include/c++/16/iostream /usr/include/c++/16/bits/requires_hosted.h \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/os_defines.h \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/cpu_defines.h \
  /usr/include/c++/16/pstl/pstl_config.h /usr/include/c++/16/ostream \
  /usr/include/c++/16/bits/ostream.h /usr/include/c++/16/ios \
  /usr/include/c++/16/iosfwd /usr/include/c++/16/bits/stringfwd.h \
  /usr/include/c++/16/bits/memoryfwd.h /usr/include/c++/16/bits/version.h \
  /usr/include/c++/16/bits/postypes.h /usr/include/c++/16/cwchar \
- /usr/include/wchar.h /usr/include/bits/libc-header-start.h \
- /usr/include/bits/floatn.h /usr/include/bits/floatn-common.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h \
- /usr/include/bits/wchar.h /usr/include/bits/types/wint_t.h \
- /usr/include/bits/types/mbstate_t.h \
- /usr/include/bits/types/__mbstate_t.h /usr/include/bits/types/__FILE.h \
- /usr/include/bits/types/FILE.h /usr/include/bits/types/locale_t.h \
- /usr/include/bits/types/__locale_t.h /usr/include/c++/16/exception \
- /usr/include/c++/16/bits/exception.h \
+ /usr/include/c++/16/exception /usr/include/c++/16/bits/exception.h \
  /usr/include/c++/16/bits/exception_ptr.h \
  /usr/include/c++/16/bits/exception_defines.h \
  /usr/include/c++/16/bits/cxxabi_init_exception.h \
@@ -37,10 +50,8 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++locale.h \
  /usr/include/c++/16/clocale /usr/include/locale.h \
  /usr/include/bits/locale.h /usr/include/c++/16/cctype \
- /usr/include/ctype.h /usr/include/bits/types.h \
- /usr/include/bits/typesizes.h /usr/include/bits/time64.h \
- /usr/include/bits/endian.h /usr/include/bits/endianness.h \
- /usr/include/c++/16/bits/ios_base.h /usr/include/c++/16/ext/atomicity.h \
+ /usr/include/ctype.h /usr/include/c++/16/bits/ios_base.h \
+ /usr/include/c++/16/ext/atomicity.h \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr.h \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr-default.h \
  /usr/include/pthread.h /usr/include/sched.h \
@@ -103,8 +114,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /usr/include/c++/16/ext/string_conversions.h /usr/include/c++/16/cstdlib \
  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
  /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
- /usr/include/bits/stdint-intn.h /usr/include/endian.h \
- /usr/include/bits/byteswap.h /usr/include/bits/uintn-identity.h \
  /usr/include/sys/select.h /usr/include/bits/select.h \
  /usr/include/bits/types/sigset_t.h /usr/include/alloca.h \
  /usr/include/bits/stdlib-float.h /usr/include/c++/16/bits/std_abs.h \
@@ -139,22 +148,12 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /usr/include/c++/16/bits/ostream_print.h \
  /usr/include/c++/16/bits/ostream.tcc /usr/include/c++/16/istream \
  /usr/include/c++/16/bits/istream.tcc /usr/include/SDL3/SDL.h \
- /usr/include/SDL3/SDL_stdinc.h /usr/include/SDL3/SDL_platform_defines.h \
- /usr/include/string.h /usr/include/strings.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/stdint-least.h /usr/include/SDL3/SDL_begin_code.h \
- /usr/include/SDL3/SDL_close_code.h /usr/include/SDL3/SDL_assert.h \
- /usr/include/SDL3/SDL_asyncio.h /usr/include/SDL3/SDL_atomic.h \
- /usr/include/SDL3/SDL_audio.h /usr/include/SDL3/SDL_endian.h \
- /usr/include/SDL3/SDL_error.h /usr/include/SDL3/SDL_mutex.h \
- /usr/include/SDL3/SDL_thread.h /usr/include/SDL3/SDL_properties.h \
- /usr/include/SDL3/SDL_iostream.h /usr/include/SDL3/SDL_bits.h \
- /usr/include/SDL3/SDL_blendmode.h /usr/include/SDL3/SDL_camera.h \
- /usr/include/SDL3/SDL_pixels.h /usr/include/SDL3/SDL_surface.h \
- /usr/include/SDL3/SDL_rect.h /usr/include/SDL3/SDL_clipboard.h \
- /usr/include/SDL3/SDL_cpuinfo.h /usr/include/SDL3/SDL_dialog.h \
- /usr/include/SDL3/SDL_video.h /usr/include/SDL3/SDL_dlopennote.h \
+ /usr/include/SDL3/SDL_assert.h /usr/include/SDL3/SDL_asyncio.h \
+ /usr/include/SDL3/SDL_atomic.h /usr/include/SDL3/SDL_audio.h \
+ /usr/include/SDL3/SDL_mutex.h /usr/include/SDL3/SDL_thread.h \
+ /usr/include/SDL3/SDL_bits.h /usr/include/SDL3/SDL_camera.h \
+ /usr/include/SDL3/SDL_clipboard.h /usr/include/SDL3/SDL_cpuinfo.h \
+ /usr/include/SDL3/SDL_dialog.h /usr/include/SDL3/SDL_dlopennote.h \
  /usr/include/SDL3/SDL_events.h /usr/include/SDL3/SDL_gamepad.h \
  /usr/include/SDL3/SDL_guid.h /usr/include/SDL3/SDL_joystick.h \
  /usr/include/SDL3/SDL_power.h /usr/include/SDL3/SDL_sensor.h \
@@ -276,17 +275,14 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/Math.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Vector2.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/../define.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xmmintrin.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mmintrin.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mm_malloc.h \
- /usr/include/c++/16/stdlib.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/emmintrin.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Vector3.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Vector4.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Matrix.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/MathTransform.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/Window.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/../../Time.hpp \
+ /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/../../FunctionHeaders/Event.hpp \
+ /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/../../FunctionHeaders/../define.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Game.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../define.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Client/SDLClasses/Window.hpp \
@@ -313,7 +309,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++io.h \
  /usr/include/c++/16/bits/fstream.tcc \
  /usr/local/include/SDL3_net/SDL_net.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/Event.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Graphics_Client.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/IndexBuffer.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/../../define.h \
@@ -392,6 +387,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_UniformBuffer.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_Program.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_Shader.hpp \
+ /usr/include/c++/16/stdlib.h \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../Statistics.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../Client/GraphicsClasses/Program.hpp \
  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.hpp \

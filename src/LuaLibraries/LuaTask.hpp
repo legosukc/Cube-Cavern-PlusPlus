@@ -40,7 +40,7 @@ namespace Game::Lua::CLibraries::Task {
 
     int CallUnderThread(lua_State* State, lua_CFunction Main) {
         lua_State* Thread = lua_newthread(State);
-        LuaHelper::PushClosure(Thread, Main);
+        LuaHelper::PushClosure(Thread, Main, "main");
         return CallUnderThread(State, Thread, 1);
     }
 

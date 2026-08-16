@@ -7,6 +7,7 @@
 
 #include "../FunctionHeaders/LuaHelper.hpp"
 
+#include <algorithm>
 #include <iostream>
 
 #include <SDL3/SDL_gamepad.h>
@@ -14,8 +15,8 @@
 #include <SDL3/SDL_scancode.h>
 #include <SDL3/SDL_stdinc.h>
 
-
 #include <cstring>
+#include <vector>
 
 #include "LuaVector.hpp"
 
@@ -38,9 +39,7 @@ namespace Game::Lua::CLibraries::Input {
     struct Binding {
         static inline const char* const MetatableName = "Binding";
 
-        const static inline size_t MaxScancodes = 24;
-
-        SDL_Scancode SDLScancodes[MaxScancodes];
+        std::vector<SDL_Scancode> SDLScancodes;
         char BindingName[];
 
         static int GetBindingName(lua_State* State) {
@@ -53,17 +52,14 @@ namespace Game::Lua::CLibraries::Input {
 
         static int Pressed(lua_State* State) {
             int Result = false;
-            SDL_Scancode Scancode;
             Uint8 i;
-            SDL_Scancode* SDLScancodes;
 
-            SDLScancodes =
+            std::vector<SDL_Scancode>& SDLScancodes =
                 static_cast<Binding*>(
                     LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
                     ->SDLScancodes;
 
-            for (i = 0; i < 24; ++i) {
-                Scancode = SDLScancodes[i];
+            for (const auto& Scancode : SDLScancodes) {
                 if (Scancode == SDL_SCANCODE_UNKNOWN) {
                     continue;
                 }
@@ -79,17 +75,14 @@ namespace Game::Lua::CLibraries::Input {
         }
 
         static int Held(lua_State* State) {
-            SDL_Scancode Scancode;
             Uint8 i;
-            SDL_Scancode* SDLScancodes;
 
-            SDLScancodes =
+            std::vector<SDL_Scancode>& SDLScancodes =
                 static_cast<Binding*>(
                     LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
                     ->SDLScancodes;
 
-            for (i = 0; i < 24; ++i) {
-                Scancode = SDLScancodes[i];
+            for (const SDL_Scancode Scancode : SDLScancodes) {
                 if (Scancode == SDL_SCANCODE_UNKNOWN) {
                     continue;
                 }
@@ -106,17 +99,13 @@ namespace Game::Lua::CLibraries::Input {
 
         static int Released(lua_State* State) {
             int Result = false;
-            SDL_Scancode Scancode;
-            Uint8 i;
-            SDL_Scancode* SDLScancodes;
 
-            SDLScancodes =
+            const std::vector<SDL_Scancode>& SDLScancodes =
                 static_cast<Binding*>(
                     LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
                     ->SDLScancodes;
 
-            for (i = 0; i < 24; ++i) {
-                Scancode = SDLScancodes[i];
+            for (const auto& Scancode : SDLScancodes) {
                 if (Scancode == SDL_SCANCODE_UNKNOWN) {
                     continue;
                 }
@@ -133,22 +122,19 @@ namespace Game::Lua::CLibraries::Input {
 
         static int GetScancodes(lua_State* State) {
             int TableIndex = 0;
-            Uint8 ScancodeIndex = 0;
-            SDL_Scancode* SDLScancodes;
 
-            SDLScancodes =
+            const std::vector<SDL_Scancode>& SDLScancodes =
                 static_cast<Binding*>(
                     LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
                     ->SDLScancodes;
 
-            lua_createtable(State, 0, MaxScancodes);
-            for (; ScancodeIndex < MaxScancodes; ++ScancodeIndex) {
-                if (SDLScancodes[ScancodeIndex] != SDL_SCANCODE_UNKNOWN) {
-
+            lua_createtable(State, 0, SDLScancodes.size());
+            for (const auto Scancode : SDLScancodes) {
+                if (Scancode != SDL_SCANCODE_UNKNOWN) {
                     // sub by one bc function doesn't account for pseudo indexes
-                    LuaHelper::SetIndex<lua_Integer>(State, -2 - 1,
-                                        static_cast<lua_Integer>(SDLScancodes[ScancodeIndex]),
-                                        ++TableIndex);
+                    LuaHelper::SetIndex<lua_Integer>(
+                        State, -2 - 1, static_cast<lua_Integer>(Scancode),
+                        ++TableIndex);
                 }
             }
 
@@ -157,36 +143,37 @@ namespace Game::Lua::CLibraries::Input {
 
         static int AddScancode(lua_State* State) {
             Uint8 ScancodeIndex = 0;
-            SDL_Scancode* SDLScancodes;
-            SDL_Scancode Scancode =
-                static_cast<SDL_Scancode>(luaL_checkinteger(State, 2));
-
-            SDLScancodes =
+            std::vector<SDL_Scancode>& SDLScancodes =
                 static_cast<Binding*>(
                     LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
                     ->SDLScancodes;
 
+            SDL_Scancode Scancode =
+                static_cast<SDL_Scancode>(luaL_checkinteger(State, 2));
+
             while (true) {
-                if (ScancodeIndex >= MaxScancodes) {
-                    luaL_error(State,
-                               "Cannot add scancode to class 'Binding'. Max "
-                               "scancodes reached.");
+                if (ScancodeIndex >= SDLScancodes.size()) {
+                    SDLScancodes.push_back(Scancode);
+                    break;
                 }
 
                 if (SDLScancodes[ScancodeIndex] == SDL_SCANCODE_UNKNOWN) {
-                    for (; ScancodeIndex < MaxScancodes; ++ScancodeIndex) {
+                    for (; ScancodeIndex < SDLScancodes.size();
+                         ++ScancodeIndex) {
                         unlikely_branch if (SDLScancodes[ScancodeIndex] ==
                                             Scancode) {
-                            std::cout
-                                << "Attempted to add a scancode to class "
-                                   "'Binding' despite it already being added."
-                                << std::endl;
+                            std::cout << "Attempted to add a scancode: '"
+                                      << SDL_GetScancodeName(Scancode)
+                                      << "' to class "
+                                         "'Binding' despite it already being "
+                                         "added."
+                                      << std::endl;
                             return 0;
                         }
                     }
 
                     SDLScancodes[ScancodeIndex] = Scancode;
-                    return 0;
+                    break;
                 }
                 ++ScancodeIndex;
             }
@@ -195,29 +182,26 @@ namespace Game::Lua::CLibraries::Input {
 
         static int RemoveScancode(lua_State* State) {
             Uint8 ScancodeIndex;
-            SDL_Scancode* SDLScancodes;
-            SDL_Scancode Scancode =
+            SDL_Scancode RemoveScancode =
                 static_cast<SDL_Scancode>(luaL_checkinteger(State, 2));
 
-            SDLScancodes =
+            std::vector<SDL_Scancode>& SDLScancodes =
                 static_cast<Binding*>(
                     LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
                     ->SDLScancodes;
 
-            for (ScancodeIndex = 0; ScancodeIndex < MaxScancodes;
-                 ++ScancodeIndex) {
-                if (SDLScancodes[ScancodeIndex] == Scancode) {
-                    SDLScancodes[ScancodeIndex] = SDL_SCANCODE_UNKNOWN;
+            for (SDL_Scancode& Scancode : SDLScancodes) {
+                if (Scancode == RemoveScancode) {
+                    *(&Scancode) = SDL_SCANCODE_UNKNOWN;
                 }
             }
             return 0;
         }
 
         static int ClearScancodes(lua_State* State) {
-            std::memset(static_cast<Binding*>(
-                            luaL_checkudata(State, 1, Binding::MetatableName))
-                            ->SDLScancodes,
-                        0, sizeof(Binding::SDLScancodes));
+            static_cast<Binding*>(
+                luaL_checkudata(State, 1, Binding::MetatableName))
+                ->SDLScancodes.clear();
             return 0;
         }
 
@@ -344,16 +328,25 @@ void Game::Lua::CLibraries::Input::Init(lua_State* State) {
     // std::memset(lua_newuserdata(State, sizeof(Math::Vector2)), 0,
     // sizeof(Math::Vector2)); luaL_setmetatable(State, "Vector2");
 
-    lua_cpcall(State, Game::Lua::CLibraries::Vector::__new<Math::Vector2>,
-               NULL);
-    lua_setfield(State, BindingsTable.GetStackIndex(), "MouseDelta");
+    BindingsTable.SetKey<lua_Number>(
+        State, static_cast<lua_Number>(Game::Window.MouseDelta.X),
+        "MouseDeltaX");
+
+    BindingsTable.SetKey<lua_Number>(
+        State, static_cast<lua_Number>(Game::Window.MouseDelta.Y),
+        "MouseDeltaY");
+
+    // TODO: get mouse pos
+    BindingsTable.SetKey<lua_Number>(
+        State, static_cast<lua_Number>(Game::Window.MouseDelta.X),
+        "MouseRelativePositionX");
+
+    BindingsTable.SetKey<lua_Number>(
+        State, static_cast<lua_Number>(Game::Window.MouseDelta.Y),
+        "MouseRelativePositionY");
 
     // std::memset(lua_newuserdata(State, sizeof(Math::Vector2)), 0,
     // sizeof(Math::Vector2)); luaL_setmetatable(State, "Vector2");
-
-    lua_cpcall(State, Game::Lua::CLibraries::Vector::__new<Math::Vector2>,
-               NULL);
-    lua_setfield(State, BindingsTable.GetStackIndex(), "MouseRelativePosition");
 
     lua_createtable(State, 0, 8);
     BindingsTable.SetKeyClosure(State, Input::GetBinding, "GetBinding", 1);
@@ -374,43 +367,22 @@ void Game::Lua::CLibraries::Input::Update(lua_State* State) {
     Game::Lua::GameTable.PushKey(State, CLibraries::Input::LibraryName);
     InputTableIndex = lua_gettop(State);
 
-    lua_getfield(State, InputTableIndex, "MouseDelta");
-	
-    unlikely_branch if (VectorUD = static_cast<Math::Vector2*>(
-                            LuaHelper::TestMetatable(State, -1, "Vector2"));
-                        VectorUD == NULL) {
+    lua_pushliteral(State, "MouseDeltaX");
+    lua_pushnumber(State, static_cast<lua_Number>(Game::Window.MouseDelta.X));
+    lua_rawset(State, InputTableIndex);
 
-        lua_cpcall(State, Game::Lua::CLibraries::Vector::__new<Math::Vector2>,
-                   NULL);
-				   
-        VectorUD = static_cast<Math::Vector2*>(
-            lua_newuserdata(State, sizeof(Math::Vector2)));
-        
-        luaL_getmetatable(State, "Vector2");
-        lua_setmetatable(State, -2);
+    lua_pushliteral(State, "MouseDeltaY");
+    lua_pushnumber(State, static_cast<lua_Number>(Game::Window.MouseDelta.Y));
+    lua_rawset(State, InputTableIndex);
 
-        lua_setfield(State, InputTableIndex, "MouseDelta");
-    }
-    *VectorUD = Game::Window.MouseDelta;
+    // TODO: get mouse pos
+    lua_pushliteral(State, "MouseRelativePositionX");
+    lua_pushnumber(State, static_cast<lua_Number>(Game::Window.MouseDelta.X));
+    lua_rawset(State, InputTableIndex);
 
-    // TODO: set vector ud value to mouse pos (add ways of getting mouse pos 🥺)
-    lua_getfield(State, InputTableIndex, "MouseRelativePosition");
-    unlikely_branch if (VectorUD = static_cast<Math::Vector2*>(
-                            LuaHelper::TestMetatable(State, -1, "Vector2"));
-                        VectorUD == NULL) {
-        lua_cpcall(State, Game::Lua::CLibraries::Vector::__new<Math::Vector2>,
-                   NULL);
-				   
-        VectorUD = static_cast<Math::Vector2*>(
-            lua_newuserdata(State, sizeof(Math::Vector2))
-        );
-
-        luaL_getmetatable(State, "Vector2");
-        lua_setmetatable(State, -2);
-
-        lua_setfield(State, InputTableIndex, "MouseRelativePosition");
-    }
-    *VectorUD = Game::Window.MouseDelta;
+    lua_pushliteral(State, "MouseRelativePositionY");
+    lua_pushnumber(State, static_cast<lua_Number>(Game::Window.MouseDelta.Y));
+    lua_rawset(State, InputTableIndex);
 
     lua_settop(State, InputTableIndex - 1);
 }
@@ -426,16 +398,27 @@ int Game::Lua::CLibraries::Input::GetBinding(lua_State* State) {
         BindingUD = static_cast<Input::Binding*>(
             lua_newuserdata(State, sizeof(Input::Binding) + BindingNameLen));
 
+        unlikely_branch if (lua_gettop(State) < 3) {
+            luaL_error(
+                State,
+                "Not enough arguments for 'Game.Input.GetBinding'. Need "
+                "atleast 3 arguments to create a new binding. (only passed ",
+                lua_gettop(State), "!)");
+            return 0;
+        }
+
+        BindingUD->SDLScancodes = std::vector<SDL_Scancode>(
+            lua_gettop(State) - 3, SDL_Scancode::SDL_SCANCODE_UNKNOWN);
+
         int i;
-        for (i = 0; i < Math::Min<int>(lua_gettop(State) - 3,
-                                       Input::Binding::MaxScancodes);
-             ++i) {
+        for (i = 0; i < lua_gettop(State) - 3; ++i) {
             BindingUD->SDLScancodes[i] =
                 static_cast<SDL_Scancode>(luaL_checkinteger(State, i + 2));
-        }
-        std::memset(
-            &BindingUD->SDLScancodes[i], 0,
-            sizeof(Input::Binding::SDLScancodes) - (sizeof(SDL_Scancode)) * i);
+        } /*
+         std::memset(
+             &BindingUD->SDLScancodes[i], 0,
+             sizeof(Input::Binding::SDLScancodes) - (sizeof(SDL_Scancode)) *
+         i);*/
         std::memcpy(&BindingUD->BindingName, BindingName, BindingNameLen);
 
         luaL_getmetatable(State, CLibraries::Input::Binding::MetatableName);

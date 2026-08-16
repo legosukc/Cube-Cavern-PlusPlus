@@ -67,7 +67,7 @@ int Game::Lua::CLibraries::ModelLoader::LoadFile(lua_State* State) {
     }
 
     lua_pushnumber(State, BufferSize);
-    lua_setfield(State, -2, "VerticeCount");
+    lua_setfield(State, -2, "VertexCount");
     BufferSize *= sizeof(Vertex);
 
     char* LuaBuffer = (char*)lua_newbuffer(State, BufferSize);
@@ -97,8 +97,8 @@ int Game::Lua::CLibraries::ModelLoader::LoadFile(lua_State* State) {
                     ? aiVector2D(Mesh->mTextureCoords[0][VertexIndex].x,
                                  Mesh->mTextureCoords[0][VertexIndex].y)
                     : aiVector2D(0.f, 0.f);
+            LuaBuffer += sizeof(Vertex);
         };
-        LuaBuffer += sizeof(Vertex);
     }
 
     lua_setfield(State, -2, "VertexData");

@@ -13,13 +13,23 @@ namespace Game::Lua::CLibraries::Matrix {
     inline void Init(lua_State* State);
 
     namespace ClassFuncs {
+
         template <class MatrixType>
         static int __new(lua_State* State) {
-            MatrixType* NewMatrix;
             typename MatrixType::ColumnType* Row1;
+            MatrixType* NewMatrix;
 
             NewMatrix = static_cast<MatrixType*>(
                 lua_newuserdata(State, sizeof(MatrixType)));
+
+            lua_pushvalue(State, lua_upvalueindex(1));
+            lua_setmetatable(State, -2);
+
+            if (lua_gettop(State) == 2) {
+
+                *NewMatrix = MatrixType(LuaHelper::ToTypename<typename MatrixType::ComponentType>(State, 1));
+                return 1;
+            }
             lua_insert(State, 1);
 
             if (Row1 = static_cast<typename MatrixType::ColumnType*>(
@@ -56,22 +66,30 @@ namespace Game::Lua::CLibraries::Matrix {
         static int __tostring(lua_State* State) {
             const MatrixType* MatrixUD = static_cast<MatrixType*>(
                 LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)));
-            /*
-            LuaHelper::Push<typename
-            MatrixType::ColumnType::ComponentType>(State,
-            (*MatrixUD)[MatrixType::ColumnType]); for (int i =
-            VectorType::ComponentCount - 1; i > 0; --i) {
 
-                    //std::cout << i << std::endl;
-                    lua_pushliteral(State, ", ");
-                    LuaHelper::Push<typename
-            MatrixType::ColumnType::ComponentType>(State, (*Vector)[i]);
+            for (int Column = 0; Column < MatrixType::ColumnCount; ++Column) {
+                for (int Row = 0; Row < MatrixType::RowCount; ++Row) {
+                    LuaHelper::Push<typename MatrixType::ComponentType>(State, MatrixUD->IndexElement(Row * Column));
+                }
+                lua_pushstring(State, "\n");
             }
-            lua_concat(State, VectorType::ComponentCount);
+            lua_concat(State, MatrixType::RowCount * MatrixType::ColumnCount);
+                /*
+                LuaHelper::Push<typename
+                MatrixType::ColumnType::ComponentType>(State,
+                (*MatrixUD)[MatrixType::ColumnType]); for (int i =
+                VectorType::ComponentCount - 1; i > 0; --i) {
 
-            lua_rotate(State, 1, 1);*/
+                        //std::cout << i << std::endl;
+                        lua_pushliteral(State, ", ");
+                        LuaHelper::Push<typename
+                MatrixType::ColumnType::ComponentType>(State, (*Vector)[i]);
+                }
+                lua_concat(State, VectorType::ComponentCount);
 
-            return 1;
+                lua_rotate(State, 1, 1);*/
+
+                return 1;
         }
 
         template <class MatrixType>

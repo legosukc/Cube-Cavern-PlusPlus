@@ -63,6 +63,8 @@ namespace {
 	struct _MatrixBase : _MatrixBase_ColumnMembers<_ColumnCount, _ColumnType> {
 
 		using ColumnType = _ColumnType;
+		using ComponentType = typename _ColumnType::ComponentType;
+
 		static constexpr inline int RowCount = _RowCount;
 		static constexpr inline int ColumnCount = _ColumnCount;
 
@@ -77,10 +79,10 @@ namespace {
 		}
 
 		constexpr typename ColumnType::ComponentType& IndexElement(int Index) {
-			return reinterpret_cast<typename ColumnType::ComponentType*>(this)[Index];
+			return reinterpret_cast<ComponentType*>(this)[Index];
 		}
 		constexpr typename ColumnType::ComponentType IndexElement(int Index) const {
-			return reinterpret_cast<const typename ColumnType::ComponentType*>(this)[Index];
+			return reinterpret_cast<const ComponentType*>(this)[Index];
 		}
 
 

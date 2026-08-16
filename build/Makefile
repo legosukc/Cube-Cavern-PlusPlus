@@ -113,6 +113,7 @@ preinstall/fast:
 
 # clear depends
 depend:
+	$(CMAKE_COMMAND) -P "/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles/VerifyGlobs.cmake"
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
@@ -128,6 +129,97 @@ CubeCavernApp: cmake_check_build_system
 CubeCavernApp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/build
 .PHONY : CubeCavernApp/fast
+
+#=============================================================================
+# Target rules for targets named SDL3-shared
+
+# Build rule for target.
+SDL3-shared: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL3-shared
+.PHONY : SDL3-shared
+
+# fast build rule for target.
+SDL3-shared/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sdl3-build/CMakeFiles/SDL3-shared.dir/build.make _deps/sdl3-build/CMakeFiles/SDL3-shared.dir/build
+.PHONY : SDL3-shared/fast
+
+#=============================================================================
+# Target rules for targets named SDL3_test
+
+# Build rule for target.
+SDL3_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL3_test
+.PHONY : SDL3_test
+
+# fast build rule for target.
+SDL3_test/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sdl3-build/CMakeFiles/SDL3_test.dir/build.make _deps/sdl3-build/CMakeFiles/SDL3_test.dir/build
+.PHONY : SDL3_test/fast
+
+#=============================================================================
+# Target rules for targets named SDL_uclibc
+
+# Build rule for target.
+SDL_uclibc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_uclibc
+.PHONY : SDL_uclibc
+
+# fast build rule for target.
+SDL_uclibc/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sdl3-build/CMakeFiles/SDL_uclibc.dir/build.make _deps/sdl3-build/CMakeFiles/SDL_uclibc.dir/build
+.PHONY : SDL_uclibc/fast
+
+#=============================================================================
+# Target rules for targets named SDL3_image-shared
+
+# Build rule for target.
+SDL3_image-shared: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL3_image-shared
+.PHONY : SDL3_image-shared
+
+# fast build rule for target.
+SDL3_image-shared/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sdl3_image-build/CMakeFiles/SDL3_image-shared.dir/build.make _deps/sdl3_image-build/CMakeFiles/SDL3_image-shared.dir/build
+.PHONY : SDL3_image-shared/fast
+
+#=============================================================================
+# Target rules for targets named SDL3_mixer-shared
+
+# Build rule for target.
+SDL3_mixer-shared: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL3_mixer-shared
+.PHONY : SDL3_mixer-shared
+
+# fast build rule for target.
+SDL3_mixer-shared/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sdl3_mixer-build/CMakeFiles/SDL3_mixer-shared.dir/build.make _deps/sdl3_mixer-build/CMakeFiles/SDL3_mixer-shared.dir/build
+.PHONY : SDL3_mixer-shared/fast
+
+#=============================================================================
+# Target rules for targets named SDL3_ttf-shared
+
+# Build rule for target.
+SDL3_ttf-shared: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL3_ttf-shared
+.PHONY : SDL3_ttf-shared
+
+# fast build rule for target.
+SDL3_ttf-shared/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sdl3_ttf-build/CMakeFiles/SDL3_ttf-shared.dir/build.make _deps/sdl3_ttf-build/CMakeFiles/SDL3_ttf-shared.dir/build
+.PHONY : SDL3_ttf-shared/fast
+
+#=============================================================================
+# Target rules for targets named SDL3_net-shared
+
+# Build rule for target.
+SDL3_net-shared: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL3_net-shared
+.PHONY : SDL3_net-shared
+
+# fast build rule for target.
+SDL3_net-shared/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sdl3_net-build/CMakeFiles/SDL3_net-shared.dir/build.make _deps/sdl3_net-build/CMakeFiles/SDL3_net-shared.dir/build
+.PHONY : SDL3_net-shared/fast
 
 #=============================================================================
 # Target rules for targets named Luau.Common
@@ -329,6 +421,13 @@ help:
 	@echo "... Luau.Inliner"
 	@echo "... Luau.Require"
 	@echo "... Luau.VM"
+	@echo "... SDL3-shared"
+	@echo "... SDL3_image-shared"
+	@echo "... SDL3_mixer-shared"
+	@echo "... SDL3_net-shared"
+	@echo "... SDL3_test"
+	@echo "... SDL3_ttf-shared"
+	@echo "... SDL_uclibc"
 	@echo "... isocline"
 	@echo "... src/Client/main_client.o"
 	@echo "... src/Client/main_client.i"
@@ -344,6 +443,7 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
+	$(CMAKE_COMMAND) -P "/home/savoury/Documents/C&C++/Cube Cavern++/build/CMakeFiles/VerifyGlobs.cmake"
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

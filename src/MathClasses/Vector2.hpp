@@ -5,8 +5,6 @@
 #include <SDL3/SDL_stdinc.h>
 #include <type_traits>
 
-#include <xmmintrin.h>
-
 #include "../FunctionHeaders/Math.hpp"
 
 namespace Math {
