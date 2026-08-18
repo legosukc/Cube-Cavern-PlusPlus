@@ -1,5 +1,5 @@
 #ifndef WINDOW_HPP
-#define WINDOW_HPP
+#define WINDOW_HPP 1
 
 #include <iostream>
 
@@ -73,7 +73,7 @@ void Game::Classes::Window::Create(const char* WindowTitle,
                                    int Width,
                                    int Height,
                                    SDL_WindowFlags Flags) {
-#ifdef SDL_PLATFORM_PSVITA
+#ifdef SDL_PLATFORM_VITA
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);

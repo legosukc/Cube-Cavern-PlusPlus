@@ -6,5 +6,5 @@ CXX_DEFINES = -DBUILD_CLIENT
 
 CXX_INCLUDES = -I"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/luau-src/VM/include" -I"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/luau-src/Common/include" -I"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/luau-src/Compiler/include" -I"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/luau-src/Ast/include" -I"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/luau-src/Bytecode/include" -isystem /usr/include/AL
 
-CXX_FLAGS =  -std=c++17 -std=gnu++17 -fPIE
+CXX_FLAGS =  -std=c++17 -std=gnu++17
 

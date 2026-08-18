@@ -8,10 +8,10 @@ CubeCavern: \
   _deps/luau-build/libLuau.VM.a \
   _deps/luau-build/libLuau.Compiler.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_net.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_image.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_mixer.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_ttf.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_net.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_mixer.so \
   /usr/lib/libopenal.so \
   _deps/luau-build/libLuau.Ast.a \
   _deps/luau-build/libLuau.Bytecode.a \
@@ -84,13 +84,13 @@ _deps/luau-build/libLuau.Compiler.a:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3.so:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_net.so:
-
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_image.so:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_mixer.so:
-
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_ttf.so:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_net.so:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libSDL3_mixer.so:
 
 /usr/lib/libopenal.so:
 

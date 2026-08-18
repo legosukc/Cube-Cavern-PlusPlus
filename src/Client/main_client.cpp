@@ -1,4 +1,3 @@
-#include <SDL3/SDL_video.h>
 #define SDL_MAIN_HANDLED
 
 #include "../define.h"
@@ -13,24 +12,22 @@
 #include <smmintrin.h>
 #include <mmintrin.h>
 #endif
-/*
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>*/
 
 #include <SDL3/SDL.h>
-//#include <SDL3_net/SDL_net.h>
-//#include <SDL3_mixer/SDL_mixer.h>
 #include <SDL3/SDL_main.h>
 
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
 
+#include "../Collisions.hpp"
 
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alext.h>
+
+//#define STB_IMAGE_IMPLEMENTATION
+//#include "../../include/stb_vorbis.h"
 
 
 #include "../FunctionHeaders/File.hpp"
@@ -125,12 +122,12 @@ try
 	Game::Graphics::Init();
 	Game::Lua::Init();
 
-	Game::Sound::AudioSource* AudioSource = Game::Sound::CreateAudioSource();
-	Game::Sound::Speaker* Speaker = Game::Sound::CreateSpeaker();
+	//Game::Sound::AudioSource* AudioSource = Game::Sound::CreateAudioSource();
+	//Game::Sound::Speaker* Speaker = Game::Sound::CreateSpeaker();
 
-	AudioSource->LoadFile("SFX/Kick.ogg");
-	Speaker->SetAudioSource(AudioSource);
-	Speaker->Play();
+	//AudioSource->LoadFile("SFX/Kick.ogg");
+	//Speaker->SetAudioSource(AudioSource);
+	//Speaker->Play();
 
 	while (true) {
 
@@ -146,8 +143,8 @@ try
 		Game::Window.Present();
 	}
 
-	delete AudioSource;
-	delete Speaker;
+	//delete AudioSource;
+	//delete Speaker;
 
 	::_CloseInitialisedItems();
 

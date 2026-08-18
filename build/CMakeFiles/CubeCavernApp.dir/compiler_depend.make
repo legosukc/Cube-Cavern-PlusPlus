@@ -7,12 +7,23 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: /home/savoury/Documen
   /home/savoury/Documents/C&C++/Cube\ Cavern++/include/VM/lualib.h \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Graphics_Client.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/LuaHelper.hpp \
-  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Lua.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/Sound.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/LuaLibraries/LuaNetwork_Client.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/LuaLibraries/LuaSound_Client.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/Window.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/define.h \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/Math.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/define.h \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/CollisionClasses/BaseCollision.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/CollisionClasses/BoxCollision.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/CollisionClasses/CollisionContainer.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/CollisionClasses/MeshCollision.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/CollisionClasses/SphereCollision.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Collisions.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/include/Compiler/luacode.h \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/define.h \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/nlohmann/json.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/BitOp.hpp \
@@ -20,7 +31,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: /home/savoury/Documen
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/Exceptions.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/File.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/LuaHelper.hpp \
-  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/Math.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/MathTransform.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/StringHelper.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/TypeHelper.hpp \
@@ -30,6 +40,9 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: /home/savoury/Documen
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/LuaHelper.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Game.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Lua.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector2.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector4.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Statistics.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/define.h \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaConsole.hpp \
@@ -38,6 +51,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: /home/savoury/Documen
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/Program.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Graphics_Client.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/LuaHelper.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Statistics.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/define.h \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_BufferBase.hpp \
@@ -65,6 +79,9 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: /home/savoury/Documen
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Statistics.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/define.h \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/pch.h \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector2.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector4.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/define.h \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.hpp \
@@ -82,10 +99,14 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: /home/savoury/Documen
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Network_Client.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/define.h \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/Event.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector2.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Time.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/Window.hpp \
-  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/Sound.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/define.h \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/Sound.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/define.h \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundUtils.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource_OpenAL.hpp \
@@ -94,6 +115,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: /home/savoury/Documen
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/Speaker_OpenAL.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/OpenAL_Sound.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/SDLMixer_Sound.hpp \
+  /home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/Listener.hpp \
   /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/Speaker.hpp \
@@ -638,9 +660,17 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a:
 
-/usr/include/bits/types/wint_t.h:
+/usr/lib/libbrotlidec.so.1:
 
-/usr/include/c++/16/new:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o:
+
+/usr/lib/libm.so:
+
+/usr/lib/libgcc_s.so.1:
 
 /usr/include/bits/types/struct_timeval.h:
 
@@ -670,14 +700,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/include/bits/types.h:
 
-/usr/include/bits/waitstatus.h:
-
-/usr/include/bits/types/struct___jmp_buf_tag.h:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/IndexBuffer.hpp:
-
-/usr/include/bits/wchar.h:
-
 /usr/include/bits/types/struct_itimerspec.h:
 
 /usr/include/SDL3/SDL_scancode.h:
@@ -687,10 +709,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 /usr/include/bits/struct_rwlock.h:
 
 /usr/include/c++/16/iomanip:
-
-/usr/include/bits/time64.h:
-
-/usr/include/bits/stdlib-float.h:
 
 /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h:
 
@@ -838,39 +856,27 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/include/c++/16/bits/cxxabi_forced.h:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/FragmentShader.hpp:
+/usr/include/bits/types/cookie_io_functions_t.h:
+
+/usr/include/assimp/matrix3x3.inl:
+
+/usr/include/c++/16/bits/fs_path.h:
+
+/usr/include/SDL3/SDL_properties.h:
+
+/usr/include/SDL3/SDL_platform.h:
+
+/usr/include/c++/16/memory:
 
 /usr/include/bits/stdint-uintn.h:
 
 /home/savoury/Documents/C&C++/Cube\ Cavern++/src/pch.h:
-
-/usr/include/bits/struct_mutex.h:
-
-/usr/include/c++/16/bits/locale_facets.h:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaVector.hpp:
-
-/usr/include/bits/endianness.h:
-
-/usr/include/libintl.h:
-
-/usr/include/AL/alc.h:
 
 /usr/include/bits/locale.h:
 
 /usr/include/c++/16/bits/stl_pair.h:
 
 /usr/include/AL/al.h:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/VertexShader.hpp:
-
-/usr/include/c++/16/bits/unordered_map.h:
-
-/usr/include/c++/16/ext/alloc_traits.h:
-
-/usr/include/assimp/vector2.inl:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector2.hpp:
 
 /usr/include/bits/setjmp.h:
 
@@ -888,9 +894,11 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/include/SDL3/SDL_opengl.h:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.hpp:
+/usr/include/bits/types/wint_t.h:
 
-/usr/include/bits/waitflags.h:
+/usr/include/c++/16/new:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.hpp:
 
 /usr/include/c++/16/cwctype:
 
@@ -901,12 +909,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 /usr/include/c++/16/bits/memory_resource.h:
 
 /home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_UniformBuffer.hpp:
-
-/usr/include/c++/16/ext/type_traits.h:
-
-/usr/include/bits/uio_lim.h:
-
-/usr/include/bits/math-vector.h:
 
 /home/savoury/Documents/C&C++/Cube\ Cavern++/include/Compiler/luacode.h:
 
@@ -922,25 +924,23 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/include/SDL3/SDL_guid.h:
 
-/usr/include/bits/uintn-identity.h:
-
 /usr/include/c++/16/list:
 
 /usr/include/SDL3/SDL_loadso.h:
 
-/usr/include/assimp/quaternion.inl:
+/usr/include/bits/struct_mutex.h:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_GLObjectBase.hpp:
+/usr/include/c++/16/bits/locale_facets.h:
 
-/usr/include/c++/16/bits/new_except.h:
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaVector.hpp:
+
+/usr/include/bits/endianness.h:
+
+/usr/include/libintl.h:
+
+/usr/include/AL/alc.h:
 
 /usr/include/bits/mathcalls-macros.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so:
-
-/usr/include/c++/16/tr1/hypergeometric.tcc:
-
-/usr/include/asm-generic/int-ll64.h:
 
 /usr/include/c++/16/version:
 
@@ -950,27 +950,39 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/include/c++/16/cctype:
 
-/usr/include/SDL3/SDL_init.h:
+/usr/include/c++/16/backward/binders.h:
 
-/usr/include/c++/16/bits/erase_if.h:
+/usr/include/assimp/vector3.h:
 
-/usr/include/c++/16/tr1/gamma.tcc:
+/usr/include/bits/typesizes.h:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Shader.hpp:
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaTask.hpp:
 
-/usr/include/SDL3/SDL_pixels.h:
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundUtils.hpp:
+
+_deps/luau-build/libLuau.Compiler.a:
+
+/usr/include/asm/posix_types_64.h:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaConsole.hpp:
+
+/usr/include/c++/16/iostream:
+
+/usr/include/AL/alext.h:
 
 /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Lua.hpp:
 
 /usr/lib/crti.o:
 
-/usr/include/bits/types/__FILE.h:
+/usr/include/SDL3/SDL_rect.h:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp:
+/usr/include/bits/types/struct___jmp_buf_tag.h:
 
-/usr/include/c++/16/bits/unique_ptr.h:
+/usr/include/bits/waitstatus.h:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Game.hpp:
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/IndexBuffer.hpp:
+
+/usr/include/bits/wchar.h:
 
 /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/LuaLibraries/LuaSound_Client.hpp:
 
@@ -998,11 +1010,51 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/include/c++/16/codecvt:
 
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Game.hpp:
+
+/usr/include/bits/types/__FILE.h:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector3.hpp:
+
+/usr/include/c++/16/bits/unique_ptr.h:
+
 /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/LuaHelper.hpp:
 
 /usr/include/c++/16/initializer_list:
 
+/usr/include/bits/pthreadtypes.h:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Statistics.hpp:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.hpp:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/include/c++/16/tr1/hypergeometric.tcc:
+
+/usr/include/assimp/camera.h:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/Exceptions.hpp:
+
+/usr/include/wctype.h:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/CollisionClasses/BoxCollision.hpp:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.hpp:
+
+/usr/include/sys/cdefs.h:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaEnums.hpp:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/include/VM/luaconf.h:
+
+/usr/include/c++/16/bits/streambuf.tcc:
+
 /usr/include/SDL3/SDL_haptic.h:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/CollisionClasses/SphereCollision.hpp:
 
 /usr/include/SDL3/SDL_version.h:
 
@@ -1016,8 +1068,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/include/bits/types/__sigset_t.h:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaEnums.hpp:
-
 /usr/include/assert.h:
 
 /home/savoury/Documents/C&C++/Cube\ Cavern++/include/VM/lualib.h:
@@ -1028,41 +1078,27 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
 
 /usr/include/limits.h:
 
-/usr/include/bits/typesizes.h:
+/usr/include/bits/time64.h:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaTask.hpp:
+/usr/include/bits/stdlib-float.h:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o:
+/usr/include/assimp/quaternion.inl:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundUtils.hpp:
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_GLObjectBase.hpp:
 
-_deps/luau-build/libLuau.Compiler.a:
+/usr/include/c++/16/bits/new_except.h:
 
-/usr/include/asm/posix_types_64.h:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaConsole.hpp:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/nlohmann/json.hpp:
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/CollisionClasses/MeshCollision.hpp:
 
 /home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/BitOp.hpp:
 
 /usr/include/c++/16/tr1/modified_bessel_func.tcc:
 
-/usr/include/SDL3/SDL_platform.h:
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaTable.hpp:
 
-/usr/include/c++/16/memory:
+/usr/include/SDL3/SDL_assert.h:
 
-/usr/include/bits/pthreadtypes.h:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Statistics.hpp:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.hpp:
-
-/usr/include/sys/cdefs.h:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/include/VM/luaconf.h:
-
-/usr/include/c++/16/bits/streambuf.tcc:
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/SDLMixer_Sound.hpp:
 
 /usr/include/SDL3/SDL_asyncio.h:
 
@@ -1088,11 +1124,41 @@ _deps/luau-build/libLuau.Compiler.a:
 
 /usr/include/SDL3/SDL_metal.h:
 
-/usr/include/SDL3/SDL_assert.h:
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/FragmentShader.hpp:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/SDLMixer_Sound.hpp:
+/usr/include/SDL3/SDL_gpu.h:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaTable.hpp:
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/Framebuffer.hpp:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Program.hpp:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/nlohmann/json.hpp:
+
+/usr/include/assimp/vector2.inl:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/MathClasses/Vector2.hpp:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/VertexShader.hpp:
+
+/usr/include/c++/16/bits/unordered_map.h:
+
+/usr/include/c++/16/ext/alloc_traits.h:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/CollisionClasses/BaseCollision.hpp:
+
+/usr/include/SDL3/SDL_init.h:
+
+/usr/include/c++/16/bits/erase_if.h:
+
+/usr/include/c++/16/tr1/gamma.tcc:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Shader.hpp:
+
+/usr/include/SDL3/SDL_power.h:
+
+/usr/include/c++/16/exception:
+
+/usr/include/SDL3/SDL_pixels.h:
 
 /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/main_client.cpp:
 
@@ -1101,6 +1167,12 @@ _deps/luau-build/libLuau.Compiler.a:
 /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp:
 
 /usr/include/c++/16/bits/slice_array.h:
+
+/usr/include/bits/math-vector.h:
+
+/usr/include/c++/16/ext/type_traits.h:
+
+/usr/include/bits/uio_lim.h:
 
 /usr/lib/libassimp.so:
 
@@ -1128,6 +1200,10 @@ _deps/luau-build/libLuau.Compiler.a:
 
 /usr/include/SDL3/SDL_keyboard.h:
 
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Collisions.hpp:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/messages_members.h:
+
 /usr/include/SDL3/SDL_atomic.h:
 
 /usr/include/c++/16/bits/locale_classes.tcc:
@@ -1151,14 +1227,6 @@ _deps/luau-build/libLuau.Compiler.a:
 /usr/lib/libc.so:
 
 /usr/include/SDL3/SDL_locale.h:
-
-/usr/include/wctype.h:
-
-/usr/include/assimp/camera.h:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/FunctionHeaders/Exceptions.hpp:
-
-/usr/include/SDL3/SDL_rect.h:
 
 /usr/include/bits/stdint-least.h:
 
@@ -1202,31 +1270,9 @@ _deps/luau-build/libLuau.Compiler.a:
 
 /usr/include/c++/16/bits/atomic_lockfree_defines.h:
 
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/Framebuffer.hpp:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Program.hpp:
-
-/usr/include/SDL3/SDL_gpu.h:
-
-/usr/include/bits/types/cookie_io_functions_t.h:
-
-/usr/include/assimp/matrix3x3.inl:
-
-/usr/include/assimp/vector3.h:
-
-/usr/include/c++/16/backward/binders.h:
-
-/usr/include/c++/16/bits/fs_path.h:
-
-/usr/include/SDL3/SDL_properties.h:
-
 /usr/include/bits/time.h:
 
 /usr/include/bits/stdio_lim.h:
-
-/home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o:
 
 /usr/include/assimp/MathFunctions.h:
 
@@ -1261,6 +1307,8 @@ _deps/luau-build/libLuau.Common.a:
 /usr/include/bits/types/time_t.h:
 
 /usr/include/SDL3/SDL_pen.h:
+
+/home/savoury/Documents/C&C++/Cube\ Cavern++/src/CollisionClasses/CollisionContainer.hpp:
 
 /usr/include/bits/types/struct_FILE.h:
 
@@ -1306,13 +1354,9 @@ _deps/luau-build/libLuau.Common.a:
 
 /usr/include/bits/wctype-wchar.h:
 
-/usr/include/c++/16/iostream:
+/usr/include/bits/uintn-identity.h:
 
-/usr/include/AL/alext.h:
-
-/usr/include/c++/16/exception:
-
-/usr/include/SDL3/SDL_power.h:
+/usr/include/bits/waitflags.h:
 
 /usr/include/bits/wordsize.h:
 
@@ -1524,9 +1568,9 @@ _deps/luau-build/libLuau.Ast.a:
 
 /usr/lib/libc.so.6:
 
-/usr/include/bits/fp-fast.h:
-
 /home/savoury/Documents/C&C++/Cube\ Cavern++/src/LuaLibraries/LuaTypeHelper.hpp:
+
+/usr/include/bits/fp-fast.h:
 
 /usr/include/c++/16/bits/stl_raw_storage_iter.h:
 
@@ -1668,10 +1712,6 @@ _deps/luau-build/libLuau.Ast.a:
 
 /usr/include/linux/errno.h:
 
-/usr/lib/libbrotlidec.so.1:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so:
-
 /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++locale.h:
 
 /usr/include/c++/16/bits/stl_uninitialized.h:
@@ -1689,8 +1729,6 @@ _deps/luau-build/libLuau.Ast.a:
 /usr/include/c++/16/x86_64-pc-linux-gnu/bits/error_constants.h:
 
 /usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/messages_members.h:
 
 /usr/include/c++/16/bits/basic_string.tcc:
 
@@ -1745,7 +1783,3 @@ _deps/luau-build/libLuau.Ast.a:
 /usr/lib/libSDL3.so:
 
 /usr/lib/libSDL3_net.so:
-
-/usr/lib/libgcc_s.so.1:
-
-/usr/lib/libm.so:

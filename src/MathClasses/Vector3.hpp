@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VECTOR3_HPP
+#define VECTOR3_HPP 1
 
 #include "../define.h"
 
@@ -152,10 +153,7 @@ struct Math::etc::_base_vector3 {
 };
 
 struct Math::Vector3 : Math::etc::_base_vector3<float, Vector3> {
-    constexpr Vector3() : _base_vector3() {}
-    constexpr Vector3(float _X, float _Y, float _Z)
-        : _base_vector3(_X, _Y, _Z) {}
-    constexpr explicit Vector3(float Value) : _base_vector3(Value) {}
+    using _base_vector3::_base_vector3;
 
     constexpr Math::Vector3 Floor() const {
         return Math::Vector3(std::floor(this->X), std::floor(this->Y),
@@ -211,10 +209,7 @@ constexpr Math::Vector3 operator%(Math::Vector3::ComponentType A,
 }
 
 struct Math::IVector3 : Math::etc::_base_vector3<Sint32, IVector3> {
-    constexpr IVector3() : _base_vector3() {}
-    constexpr IVector3(Sint32 _X, Sint32 _Y, Sint32 _Z)
-        : _base_vector3(_X, _Y, _Z) {}
-    constexpr explicit IVector3(Sint32 Value) : _base_vector3(Value) {}
+    using _base_vector3::_base_vector3;
 
     constexpr operator Math::Vector3() const;
     constexpr operator Math::UVector3() const;
@@ -246,10 +241,7 @@ constexpr Math::IVector3 operator%(Math::IVector3::ComponentType A,
 }
 
 struct Math::UVector3 : Math::etc::_base_vector3<Uint32, UVector3> {
-    constexpr UVector3() : _base_vector3() {}
-    constexpr UVector3(Uint32 _X, Uint32 _Y, Uint32 _Z)
-        : _base_vector3(_X, _Y, _Z) {}
-    constexpr explicit UVector3(Uint32 Value) : _base_vector3(Value) {}
+    using _base_vector3::_base_vector3;
 
     constexpr operator Math::Vector3() const;
     constexpr operator Math::IVector3() const;
@@ -315,3 +307,4 @@ constexpr Math::UVector3::operator Math::IVector3() const {
                           static_cast<Math::IVector3::ComponentType>(this->Y),
                           static_cast<Math::IVector3::ComponentType>(this->Z));
 }
+#endif

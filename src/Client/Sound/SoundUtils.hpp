@@ -1,26 +1,94 @@
 #ifndef SOUND_UTILS_H
-#define SOUND_UTILS_H
+#define SOUND_UTILS_H 1
 
-#include <iostream>
 #include <cstddef>
 #include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <string>
 
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_audio.h>
+#include <SDL3/SDL_filesystem.h>
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_timer.h>
 
-#include <SDL3_mixer/SDL_mixer.h>
+// #include <SDL3_mixer/SDL_mixer.h>
+
+//#include "../../../include/stb_vorbis.h"
 
 #include "../../FunctionHeaders/Exceptions.hpp"
 
 namespace Game::Sound::Utils {
 
+    class RawAudioBuffer {
+        void(*AudioChannelDataDeallocater)(void*);
+    public:
+        ~RawAudioBuffer() {
+            this->AudioChannelDataDeallocater(this->AudioChannelData);
+        }
+        void** AudioChannelData;
+        Uint32 AudioSize;
+        Uint32 SampleRate;
+        Uint8 Channels;
+
+        friend RawAudioBuffer DecodeAudioFile(const char* Path,
+                                              size_t* AudioSize);
+    };
+
     // Free returned PCM data using "std::free".
-    char* DecodeAudioFile(const char* Path, size_t* AudioSize);
+    RawAudioBuffer DecodeAudioFile(const char* Path, size_t* AudioSize);
 }
 
-char* Game::Sound::Utils::DecodeAudioFile(const char* Path, size_t* AudioSize) {
-    constexpr size_t DecodeIncrement = sizeof(float) * 441000;
+Game::Sound::Utils::RawAudioBuffer Game::Sound::Utils::DecodeAudioFile(
+    const char* Path,
+    size_t* AudioSize) {
+    // constexpr size_t DecodeIncrement = sizeof(float) * 441000;
 
+    if (!SDL_GetPathInfo(Path, NULL)) {
+        Exceptions::ThrowException<Exceptions::IOError>(StringHelper::Combine(
+            "DecodeAudioFile error: '", Path, "' doesn't exist!"));
+    }
+
+    Game::Sound::Utils::RawAudioBuffer Result;
+
+    const char* FileExtension;
+    for (FileExtension = Path + strlen(Path); *FileExtension != '.';
+         --FileExtension)
+        ;
+
+    if (strcmp(FileExtension, "ogg") == 0) {
+        /*int sample_rate, channels;
+        const int result = stb_vorbis_decode_filename(
+            Path, &channels, &sample_rate, (short**)&Result.AudioChannelData);
+        std::cout << "ogg file size (?): " << result << std::endl;
+        Result.SampleRate = sample_rate;
+        Result.Channels = channels;
+        Result.AudioSize = sample_rate * channels;*/
+
+    } else if (strcmp(FileExtension, "wav") == 0) {
+        SDL_AudioSpec Spec;
+
+        if (!SDL_LoadWAV(Path, &Spec, (Uint8**)Result.AudioChannelData,
+                         &Result.AudioSize)) {
+            const std::string ErrorMessage =
+                StringHelper::Combine("Failed to load wav file", Path);
+            std::cerr << ErrorMessage << std::endl;
+            Exceptions::ThrowException<Exceptions::IOError>(ErrorMessage);
+        }
+        Result.AudioChannelDataDeallocater = SDL_free;
+    } else {
+        const std::string ErrorMessage =
+            StringHelper::Combine("DecodeAudioFile error: '", Path,
+                                  "' doesn't have a supported file "
+                                  "extension.\nSupported extensions are: "
+                                  "ogg, wav");
+        std::cerr << ErrorMessage << std::endl;
+        Exceptions::ThrowException<Exceptions::IOError>(ErrorMessage);
+    }
+    return Result;
+
+    /*
     int DecodedNumBytes;
     char* PCMData;
     SDL_AudioSpec AudioSpec;
@@ -67,7 +135,7 @@ char* Game::Sound::Utils::DecodeAudioFile(const char* Path, size_t* AudioSize) {
 
     MIX_DestroyAudioDecoder(AudioDecoder);
 
-    return PCMData;
+    return PCMData;*/
 }
 
 #endif

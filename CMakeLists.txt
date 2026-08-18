@@ -15,42 +15,17 @@ project(CubeCavern LANGUAGES CXX)
 
 include(FetchContent)
 
-FetchContent_Declare(
-    sdl3
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-    GIT_TAG        release-3.4.14
-)
 
-FetchContent_Declare(
-    sdl3_image
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
-    GIT_TAG        release-3.4.4
-)
+#if (PLATFORM STREQUAL "vita")
 
-FetchContent_Declare(
-    sdl3_mixer
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL_mixer.git
-    GIT_TAG        release-3.2.4
-)
+#FetchContent_Declare(
+#    sdl3_net
+#    GIT_REPOSITORY https://github.com/libsdl-org/SDL_net.git
+#    GIT_TAG        release-3.2.0
+#)
 
-FetchContent_Declare(
-    sdl3_ttf
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
-    GIT_TAG        release-3.2.2
-)
-
-FetchContent_Declare(
-    sdl3_net
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL_net.git
-    GIT_TAG        release-3.2.0
-)
-
-FetchContent_MakeAvailable(sdl3)
-FetchContent_MakeAvailable(sdl3_image)
-FetchContent_MakeAvailable(sdl3_mixer)
-FetchContent_MakeAvailable(sdl3_ttf)
-FetchContent_MakeAvailable(sdl3_net)
-
+#FetchContent_MakeAvailable(sdl3_net)
+#endif()
 
 
 FetchContent_Declare(
@@ -93,7 +68,13 @@ add_executable(CubeCavernApp)
 target_link_libraries(CubeCavernApp PRIVATE stdc++)
 target_link_libraries(CubeCavernApp PRIVATE assimp)
 target_link_libraries(CubeCavernApp PRIVATE Luau.VM Luau.Compiler)
-target_link_libraries(CubeCavernApp PRIVATE SDL3 SDL3_net SDL3_image SDL3_mixer SDL3_ttf)
+
+target_link_libraries(CubeCavernApp PRIVATE SDL3 SDL3_image SDL3_ttf)
+if (NOT PLATFORM STREQUAL "vita")
+message("yesss")
+target_link_libraries(CubeCavernApp PRIVATE SDL3_net SDL3_mixer)
+endif()
+
 target_link_libraries(CubeCavernApp PRIVATE OpenAL::OpenAL)
 
 if(BUILD_TARGET STREQUAL "client")

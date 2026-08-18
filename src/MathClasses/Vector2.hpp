@@ -1,8 +1,10 @@
-#pragma once
+#ifndef VECTOR2_HPP
+#define VECTOR2_HPP 1
 
 #include "../define.h"
 
 #include <SDL3/SDL_stdinc.h>
+#include <cmath>
 #include <type_traits>
 
 #include "../FunctionHeaders/Math.hpp"
@@ -289,3 +291,4 @@ constexpr Math::UVector2::operator Math::IVector2() const {
     return Math::IVector2(static_cast<Math::IVector2::ComponentType>(this->X),
                           static_cast<Math::IVector2::ComponentType>(this->Y));
 }
+#endif

@@ -2,11 +2,6 @@
 	"InstallScripts" : 
 	[
 		"/home/savoury/Documents/C&C++/Cube Cavern++/build/cmake_install.cmake",
-		"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/sdl3-build/cmake_install.cmake",
-		"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/sdl3_image-build/cmake_install.cmake",
-		"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/sdl3_mixer-build/cmake_install.cmake",
-		"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/sdl3_ttf-build/cmake_install.cmake",
-		"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/sdl3_net-build/cmake_install.cmake",
 		"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/luau-build/cmake_install.cmake"
 	],
 	"Parallel" : false

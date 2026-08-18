@@ -1,6 +1,9 @@
 #ifndef SOUND_SDLMIXER_H
 #define SOUND_SDLMIXER_H
 
+#ifndef SDL_PLATFORM_VITA
+
+
 #include "../../../define.h"
 
 #include <iostream>
@@ -52,4 +55,7 @@ void Game::Sound::SDLMixer::Destroy() {
         Game::Sound::SDLMixer::Mixer = NULL;
     }
 }
+#else
+#warning "Included 'SDLMixer_Sound.hpp' despite it not being supported on the targetted platform."
+#endif
 #endif

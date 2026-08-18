@@ -7,8 +7,6 @@
 #include "../../../include/VM/lua.h"
 #include "../../FunctionHeaders/LuaHelper.hpp"
 
-#include <SDL3_net/SDL_net.h>
-
 
 namespace Game::Lua::CLibraries::Network {
 	inline void Init(lua_State* State);

@@ -8,12 +8,23 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /home/savoury/Documents/C&C++/Cube Cavern++/include/VM/lualib.h
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Graphics_Client.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/LuaHelper.hpp
- /home/savoury/Documents/C&C++/Cube Cavern++/src/Lua.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector3.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/Sound.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/LuaLibraries/LuaNetwork_Client.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/LuaLibraries/LuaSound_Client.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/SDLClasses/Window.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/define.h
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/Math.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/define.h
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector3.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/CollisionClasses/BaseCollision.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/CollisionClasses/BoxCollision.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/CollisionClasses/CollisionContainer.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/CollisionClasses/MeshCollision.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/CollisionClasses/SphereCollision.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/Collisions.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/include/Compiler/luacode.h
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector3.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/define.h
  /home/savoury/Documents/C&C++/Cube Cavern++/src/nlohmann/json.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/BitOp.hpp
@@ -21,7 +32,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/Exceptions.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/File.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/LuaHelper.hpp
- /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/Math.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/MathTransform.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/StringHelper.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/TypeHelper.hpp
@@ -31,6 +41,9 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/LuaHelper.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Game.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Lua.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector2.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector3.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector4.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Statistics.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/define.h
  /home/savoury/Documents/C&C++/Cube Cavern++/src/LuaLibraries/LuaConsole.hpp
@@ -39,6 +52,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/Program.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Graphics_Client.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/LuaHelper.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector3.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Statistics.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/define.h
  /home/savoury/Documents/C&C++/Cube Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_BufferBase.hpp
@@ -66,6 +80,9 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Statistics.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/define.h
  /home/savoury/Documents/C&C++/Cube Cavern++/src/pch.h
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector2.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector3.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector4.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/define.h
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/GraphicsClasses/BufferBase.hpp
@@ -83,10 +100,14 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Network_Client.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/define.h
  /home/savoury/Documents/C&C++/Cube Cavern++/src/FunctionHeaders/Event.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector2.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Time.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/SDLClasses/Window.hpp
- /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/Sound.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/define.h
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/Sound.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector3.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/define.h
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector3.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/SoundUtils.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/SoundClasses/AudioSource_OpenAL.hpp
@@ -95,6 +116,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/SoundClasses/Speaker_OpenAL.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/SoundAPIHandlers/OpenAL_Sound.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/SoundAPIHandlers/SDLMixer_Sound.hpp
+ /home/savoury/Documents/C&C++/Cube Cavern++/src/MathClasses/Vector3.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/SoundClasses/Listener.hpp
  /home/savoury/Documents/C&C++/Cube Cavern++/src/Client/Sound/SoundClasses/Speaker.hpp

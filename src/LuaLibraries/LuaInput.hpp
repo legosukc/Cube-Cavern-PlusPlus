@@ -262,7 +262,19 @@ void Game::Lua::CLibraries::Input::Init(lua_State* State) {
     struct ScancodeEnumStruct {
         const char* Name;
         SDL_Scancode Scancode;
-    } constexpr static ScancodeEnums[] = {
+    };
+    constexpr static ScancodeEnumStruct ScancodeEnums[] = {
+
+        {"Zero", SDL_SCANCODE_0},
+        {"One", SDL_SCANCODE_1},
+        {"Two", SDL_SCANCODE_2},
+        {"Three", SDL_SCANCODE_3},
+        {"Four", SDL_SCANCODE_4},
+        {"Five", SDL_SCANCODE_5},
+        {"Six", SDL_SCANCODE_6},
+        {"Seven", SDL_SCANCODE_7},
+        {"Eight", SDL_SCANCODE_8},
+        {"Nine", SDL_SCANCODE_9},
 
         {"W", SDL_SCANCODE_W},
         {"A", SDL_SCANCODE_A},

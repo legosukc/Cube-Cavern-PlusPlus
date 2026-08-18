@@ -37,7 +37,7 @@ idk, maybe use wsl and follow the linux guide.
 
 ### Linux:
 
-Dependencies are all installed in the CMake script.
+You need the SDL3 library family (except SDL3_net, that one is installed and compiled in the cmake scripts.) installed.
 
 Run the compile-(environment)-(platform).sh scripts to compile.
 
@@ -45,10 +45,21 @@ The compile-(environment).sh scripts compile for your local platform.
 
 When you build for the first time **IT WILL TAKE A WHILE.**
 
-It how long it takes depends on your internet connection and your CPU power, as it is compiling all the dependenices. (SDL3 library family and Luau)
+It how long it takes depends on your internet connection and your CPU power, as it is compiling all the dependenices. (SDL3_net and Luau)
 
 **It's normal for there to be not much console output for some time**, *this is CMake downloading dependencies.*
 
 ### Mac:
 
 idk 🖕
+
+
+## COMPILING FOR PLATFORMS:
+
+### PS VITA:
+
+If you are on windows, install [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and continue the guide.
+
+For Mac users, idk, probably possible with brew or MacPorts
+
+You will need to install vitasdk, [click here for the install guide.](https://vitasdk.org/)

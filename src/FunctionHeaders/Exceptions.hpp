@@ -2,9 +2,10 @@
 
 /*
 * why are all the throws in functions??? fuck is wrong with you???
-
-* throw calls expand into a big chunk of instructions, by putting them in functions, it saves on code size wrapping them in functions
-* this is probably resolved by compiler optimizations, oh well.
+* throw calls expand into a big chunk of instructions, by putting them in functions, it saves on code size
+* this is probably resolved by compiler optimizations
+* or probably only happened on the compiler i was using at the time i wrote this
+* oh well
 */
 
 #include <stdexcept>
@@ -14,7 +15,6 @@
 #include <SDL3/SDL_error.h>
 
 #include "StringHelper.hpp"
-
 
 namespace Exceptions {
 

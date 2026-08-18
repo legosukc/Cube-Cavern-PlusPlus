@@ -64,14 +64,10 @@ namespace Game::Sound::Classes {
             const char* Path,
             ALenum Format = AL_FORMAT_STEREO_FLOAT32) override {
             size_t AudioSize;
-            char* PCM = Game::Sound::Utils::DecodeAudioFile(Path, &AudioSize);
-            if (PCM == NULL) {
-                return false;
-            }
+            Game::Sound::Utils::RawAudioBuffer AudioData = Game::Sound::Utils::DecodeAudioFile(Path, &AudioSize);
 
-            alBufferData(this->ALBuffer, Format, PCM, AudioSize, 441000);
-
-            std::free(PCM);
+            alBufferData(this->ALBuffer, Format, AudioData.AudioChannelData, AudioSize,
+                         441000);
 
             return true;
         }

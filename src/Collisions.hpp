@@ -1,33 +1,25 @@
-#pragma once
-
-#include <vector>
+#ifndef COLLISIONS_HPP
+#define COLLISIONS_HPP 1
 
 #include <SDL3/SDL_stdinc.h>
 
+#include "CollisionClasses/BaseCollision.hpp"
+#include "CollisionClasses/BoxCollision.hpp"
+#include "CollisionClasses/SphereCollision.hpp"
+#include "CollisionClasses/MeshCollision.hpp"
 
-namespace {
-	namespace Collisions {
-
-		template<Uint8 Resolution>
-		struct VoxelCollisionBox;
-
-		template<Uint8 Resolution>
-		struct VoxelCollisionBox {
-			VoxelCollisionBox<Resolution / 2> a;
-		};
-
-		template<>
-		struct VoxelCollisionBox<0> {
-			std::vector<void*> OverlappingObjects;
-		};
-
-		void a() {
-			VoxelCollisionBox<64> box;
-		}
-	}
-}
+#include "CollisionClasses/CollisionContainer.hpp"
 
 namespace Game::Collision {
 
-	
+    inline void Init();
+    inline void Quit();
+    Game::Collision::CollisionContainer DefaultContainer;
 }
+
+
+void Game::Collision::Init() {}
+
+void Game::Collision::Quit() {}
+
+#endif

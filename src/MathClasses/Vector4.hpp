@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VECTOR4_HPP
+#define VECTOR4_HPP 1
 
 #include "../define.h"
 
@@ -167,10 +168,7 @@ struct Math::etc::_base_vector4 {
 };
 
 struct Math::Vector4 : Math::etc::_base_vector4<float, Vector4> {
-    constexpr Vector4() : _base_vector4() {}
-    constexpr Vector4(float _X, float _Y, float _Z, float _W)
-        : _base_vector4(_X, _Y, _Z, _W) {}
-    constexpr explicit Vector4(float Value) : _base_vector4(Value) {}
+    using _base_vector4::_base_vector4;
 
     SSE3_FUNCTION
     constexpr Math::Vector4 Normalize() const {
@@ -227,10 +225,7 @@ constexpr Math::Vector4 operator%(Math::Vector4::ComponentType A,
 }
 
 struct Math::IVector4 : Math::etc::_base_vector4<Sint32, IVector4> {
-    constexpr IVector4() : _base_vector4() {}
-    constexpr IVector4(Sint32 _X, Sint32 _Y, Sint32 _Z, Sint32 _W)
-        : _base_vector4(_X, _Y, _Z, _W) {}
-    constexpr explicit IVector4(Sint32 Value) : _base_vector4(Value) {}
+    using _base_vector4::_base_vector4;
 
     constexpr operator Math::Vector4() const;
     constexpr operator Math::UVector4() const;
@@ -262,10 +257,7 @@ constexpr Math::IVector4 operator%(Math::IVector4::ComponentType A,
 }
 
 struct Math::UVector4 : Math::etc::_base_vector4<Uint32, UVector4> {
-    constexpr UVector4() : _base_vector4() {}
-    constexpr UVector4(Uint32 _X, Uint32 _Y, Uint32 _Z, Uint32 _W)
-        : _base_vector4(_X, _Y, _Z, _W) {}
-    constexpr explicit UVector4(Uint32 Value) : _base_vector4(Value) {}
+    using _base_vector4::_base_vector4;
 
     constexpr operator Math::Vector4() const;
     constexpr operator Math::IVector4() const;
@@ -337,3 +329,4 @@ constexpr Math::UVector4::operator Math::IVector4() const {
                           static_cast<Math::IVector4::ComponentType>(this->Z),
                           static_cast<Math::IVector4::ComponentType>(this->W));
 }
+#endif

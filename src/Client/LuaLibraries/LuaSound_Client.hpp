@@ -8,16 +8,18 @@
 #include "../../MathClasses/Vector3.hpp"
 #include "../Sound/Sound.hpp"
 
-#include "../../Lua.hpp"
+//#include "../../Lua.hpp"
 
 
 namespace Game::Lua::CLibraries::Sound {
-	inline void Init(lua_State* State);
+    inline void Init(lua_State* State,
+                     LuaHelper::StackTableReference& GameTable);
 
-	static int SetListenerPosition(lua_State* State) {
-		Game::Sound::Listener.SetPosition(*static_cast<Math::Vector3*>(luaL_checkudata(State, 1, "Vector3")));
-		return 0;
-	}
+    static int SetListenerPosition(lua_State* State) {
+        Game::Sound::Listener.SetPosition(
+            *static_cast<Math::Vector3*>(luaL_checkudata(State, 1, "Vector3")));
+        return 0;
+    }
 
 	static int SetListenerVelocity(lua_State* State) {
 		Game::Sound::Listener.SetVelocity(*static_cast<Math::Vector3*>(luaL_checkudata(State, 1, "Vector3")));
@@ -77,7 +79,7 @@ namespace Game::Lua::CLibraries::Sound {
 	};
 }
 
-void Game::Lua::CLibraries::Sound::Init(lua_State* State) {
+void Game::Lua::CLibraries::Sound::Init(lua_State* State, LuaHelper::StackTableReference& GameTable) {
 
 	LuaHelper::StackTableReference AudioSourceMetatable(State, "AudioSource");
 
@@ -102,5 +104,5 @@ void Game::Lua::CLibraries::Sound::Init(lua_State* State) {
 	LuaHelper::SetKeyClosure(State, -2, CLibraries::Sound::CreateAudioSource, "CreateAudioSource");
 	LuaHelper::SetKeyClosure(State, -2, CLibraries::Sound::CreateSpeaker, "CreateSpeaker");
 
-	lua_setfield(State, Game::Lua::GameTable.GetStackIndex(), "Sound");
+	lua_setfield(State, GameTable.GetStackIndex(), "Sound");
 }
