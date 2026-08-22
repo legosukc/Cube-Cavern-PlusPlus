@@ -12,6 +12,8 @@
 
 #include <SDL3/SDL_gamepad.h>
 #include <SDL3/SDL_keyboard.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3/SDL_oldnames.h>
 #include <SDL3/SDL_scancode.h>
 #include <SDL3/SDL_stdinc.h>
 
@@ -83,11 +85,29 @@ namespace Game::Lua::CLibraries::Input {
                     ->SDLScancodes;
 
             for (const SDL_Scancode Scancode : SDLScancodes) {
-                if (Scancode == SDL_SCANCODE_UNKNOWN) {
-                    continue;
+                switch (Scancode) {
+                    case SDL_SCANCODE_UNKNOWN:
+                        continue;
+
+                    case static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT +
+                                                   1):  // left click
+                    case static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT +
+                                                   2):  // middle click
+                    case static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT +
+                                                   3):  // right click
+                    case static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT +
+                                                   4):  // side1 click
+                    case static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT +
+                                                   5):  // side2 click
+                        if (SDL_GetMouseState(NULL, NULL) |
+                            SDL_BUTTON_MASK(1 + Scancode -
+                                            SDL_SCANCODE_COUNT)) {
+                            goto ReturnTrue;
+                        }
                 }
 
                 if (Game::Window.ScancodeHeld(Scancode)) {
+                    ReturnTrue:
                     lua_pushboolean(State, true);
                     return 1;
                 }
@@ -265,7 +285,6 @@ void Game::Lua::CLibraries::Input::Init(lua_State* State) {
     };
     constexpr static ScancodeEnumStruct ScancodeEnums[] = {
 
-        {"Zero", SDL_SCANCODE_0},
         {"One", SDL_SCANCODE_1},
         {"Two", SDL_SCANCODE_2},
         {"Three", SDL_SCANCODE_3},
@@ -275,15 +294,36 @@ void Game::Lua::CLibraries::Input::Init(lua_State* State) {
         {"Seven", SDL_SCANCODE_7},
         {"Eight", SDL_SCANCODE_8},
         {"Nine", SDL_SCANCODE_9},
+        {"Zero", SDL_SCANCODE_0},
+        {"Minus", SDL_SCANCODE_MINUS},
+        {"Equals", SDL_SCANCODE_EQUALS},
+        {"Backspace", SDL_SCANCODE_BACKSPACE},
+
+        {"Q", SDL_SCANCODE_Q},
+        {"W", SDL_SCANCODE_W},
+        {"E", SDL_SCANCODE_E},
+        {"R", SDL_SCANCODE_R},
+        {"T", SDL_SCANCODE_T},
+        {"Y", SDL_SCANCODE_Y},
+        {"U", SDL_SCANCODE_U},
+        {"I", SDL_SCANCODE_I},
+        {"O", SDL_SCANCODE_O},
+        {"LeftBracket", SDL_SCANCODE_LEFTBRACKET},
+        {"RightBracket", SDL_SCANCODE_RIGHTBRACKET},
+        {"Backslash", SDL_SCANCODE_BACKSLASH},
 
         {"W", SDL_SCANCODE_W},
         {"A", SDL_SCANCODE_A},
         {"S", SDL_SCANCODE_S},
         {"D", SDL_SCANCODE_D},
 
+        {"Z", SDL_SCANCODE_Z},
+        {"X", SDL_SCANCODE_X},
         {"C", SDL_SCANCODE_C},
+        {"V", SDL_SCANCODE_V},
 
         {"Enter", SDL_SCANCODE_RETURN},
+        {"Tab", SDL_SCANCODE_TAB},
 
         {"Space", SDL_SCANCODE_SPACE},
 
@@ -292,6 +332,12 @@ void Game::Lua::CLibraries::Input::Init(lua_State* State) {
 
         {"LeftCtrl", SDL_SCANCODE_LCTRL},
         {"RightCtrl", SDL_SCANCODE_RCTRL},
+
+        {"LeftAlt", SDL_SCANCODE_LALT},
+        {"RightAlt", SDL_SCANCODE_RALT},
+
+        {"LeftClick", static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT + 1)},
+        {"RightClick", static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT + 2)},
     };
 
     for (const ScancodeEnumStruct& ScancodeEnum : ScancodeEnums) {

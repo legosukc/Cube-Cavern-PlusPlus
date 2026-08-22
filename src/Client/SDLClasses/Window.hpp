@@ -1,6 +1,11 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP 1
 
+#include "../../define.h"
+
+#include <emmintrin.h>
+#include <immintrin.h>
+
 #include <iostream>
 
 #include <SDL3/SDL_events.h>
@@ -25,10 +30,17 @@ namespace Game::Classes {
         mutable Uint64 LastNS = SDL_GetTicksNS();
 
         enum class ScancodeStatesEnum : Uint8 {
+            NotHeld,
             Released,
             Pressed,
             Held,
         };
+
+        struct ScancodeState {
+            ScancodeStatesEnum CurrentState = ScancodeStatesEnum::NotHeld;
+            float StateChangeTimestamp;  // in secs
+        };
+
         mutable ScancodeStatesEnum
             ScancodeStates[SDL_Scancode::SDL_SCANCODE_COUNT];
 
@@ -52,8 +64,10 @@ namespace Game::Classes {
         SDL_Window* SDLWindow;
         SDL_GLContext GLContext;
 
+        ScancodeStatesEnum MouseButtonStates[5];
+
         Uint64 FrameNSFocused = 16 * 1000000;
-        Uint64 FrameNSUnfocused = 100 * 1000000;
+        Uint64 FrameNSUnfocused = FrameNSFocused * 2;
         Uint64 FrameNS = FrameNSFocused;
 
         inline bool PollEvents();
@@ -130,6 +144,22 @@ void Game::Classes::Window::Destroy() {
 bool Game::Classes::Window::PollEvents() {
     this->MouseDelta = Math::Vector2(0.f, 0.f);
 
+    int numkeys;
+    const bool* KeyboardState = SDL_GetKeyboardState(&numkeys);
+/*
+#ifndef USE_SIMD_INTRINSICS
+    for (const bool* i = KeyboardState;
+         i < KeyboardState + std::min((int)SDL_SCANCODE_COUNT, numkeys);
+         i += sizeof(__m128i)) {
+        __m128i KeyStatesVector = _mm_loadrs_epi8(KeyboardState);
+        _mm_min_epi8(KeyStatesVector, _mm_set1_epi8(1))
+        if (KeyboardState) {
+            this->ScancodeStates[i] = this->ScancodeStates[i]
+        }
+    }
+#else
+#endif*/
+
     SDL_Event Event;
     while (SDL_PollEvent(&Event)) {
         switch (Event.type) {
@@ -139,11 +169,12 @@ bool Game::Classes::Window::PollEvents() {
             case SDL_EventType::SDL_EVENT_WINDOW_RESIZED:
             case SDL_EventType::SDL_EVENT_WINDOW_MAXIMIZED:
             case SDL_EventType::SDL_EVENT_WINDOW_MINIMIZED:
-                
-                SDL_GetWindowSize(this->SDLWindow, &this->Size.X, &this->Size.Y);
+
+                SDL_GetWindowSize(this->SDLWindow, &this->Size.X,
+                                  &this->Size.Y);
                 this->WindowResizedEvent.Fire(this->Size);
                 break;
-            
+
             case SDL_EventType::SDL_EVENT_WINDOW_MOVED:
                 // this->Position = Math::IVector2(Event.window.data1,
                 // Event.window.data2);

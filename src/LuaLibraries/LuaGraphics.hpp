@@ -4,6 +4,10 @@
 
 #include "../../include/VM/lua.h"
 
+#include <SDL3/SDL_opengl.h>
+
+#include "LuaGraphics_MiscHeaders/LuaGraphics_SampleModels.hpp"
+
 #ifdef BUILD_CLIENT
 
 #include "LuaGraphics_Classes/LuaGraphics_BufferBase.hpp"
@@ -47,6 +51,12 @@ namespace Game::Lua::CLibraries::Graphics {
 
     static int SetClearColor(lua_State* State);
     static int Clear(lua_State* State);
+
+    template <GLenum Feature>
+    static int Enable_feature(lua_State* State);
+
+    template <GLenum Feature>
+    static int Disable_feature(lua_State* State);
 #endif
 }
 
@@ -107,6 +117,19 @@ int Game::Lua::CLibraries::Graphics::Clear(lua_State* State) {
                                    Game::Graphics::BufferBitfields.StencilBit);
     return 0;
 }
+
+template <GLenum Feature>
+static int Game::Lua::CLibraries::Graphics::Enable_feature(lua_State* State) {
+    Game::Graphics::OpenGLFunctions::glEnable(Feature);
+    return 0;
+}
+
+template <GLenum Feature>
+static int Game::Lua::CLibraries::Graphics::Disable_feature(lua_State* State) {
+    Game::Graphics::OpenGLFunctions::glDisable(Feature);
+    return 0;
+}
+
 #endif
 
 #ifdef BUILD_CLIENT
@@ -120,9 +143,24 @@ namespace {
         lua_pushinteger(Game::Lua::State, Size.Y);
         lua_setfield(Game::Lua::State, TableIndex, "ResolutionY");
 
-        lua_pushnumber(Game::Lua::State, static_cast<double>(Size.X) /
-                                             static_cast<double>(Size.Y));
-        lua_setfield(Game::Lua::State, TableIndex, "AspectRation");
+        const lua_Number AspectRatio =
+            static_cast<lua_Number>(Size.X) / static_cast<lua_Number>(Size.Y);
+
+        lua_pushnumber(Game::Lua::State, AspectRatio);
+        lua_setfield(Game::Lua::State, TableIndex, "AspectRatio");
+
+        lua_pushnumber(Game::Lua::State,
+                       static_cast<lua_Number>(1) / AspectRatio);
+        lua_setfield(Game::Lua::State, TableIndex, "AspectRatioReciprocal");
+
+        Math::Mat4* OrthographicProjection = static_cast<Math::Mat4*>(
+            lua_newuserdata(Game::Lua::State, sizeof(Math::Mat4)));
+
+        luaL_getmetatable(Game::Lua::State, "Mat4");
+        lua_setmetatable(Game::Lua::State, -2);
+
+        *OrthographicProjection = Math::Transform::Orthographic(
+            -AspectRatio, AspectRatio, -1.f, 1.f);  //, -1.f, 1.f)
     }
 
     static void _lua_graphics_WindowResizedEvent_updateLuaSize(
@@ -155,6 +193,22 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     GraphicsTable.SetKeyClosure(State, Graphics::SetClearColor,
                                 "SetClearColor");
     GraphicsTable.SetKeyClosure(State, Graphics::Clear, "Clear");
+
+    GraphicsTable.SetKeyClosure(State, Graphics::Enable_feature<GL_DEPTH_TEST>,
+                                "EnableDepthTest");
+    GraphicsTable.SetKeyClosure(State, Graphics::Disable_feature<GL_DEPTH_TEST>,
+                                "DisableDepthTest");
+
+    GraphicsTable.SetKeyClosure(
+        State, Graphics::Enable_feature<GL_STENCIL_TEST>, "EnableStencilTest");
+    GraphicsTable.SetKeyClosure(State,
+                                Graphics::Disable_feature<GL_STENCIL_TEST>,
+                                "DisableStencilTest");
+
+    GraphicsTable.SetKeyClosure(State, Graphics::Enable_feature<GL_BLEND>,
+                                "EnableBlending");
+    GraphicsTable.SetKeyClosure(State, Graphics::Disable_feature<GL_BLEND>,
+                                "DisableBlending");
 #endif
 
     // DrawModes
@@ -338,6 +392,39 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_STENCIL, "DepthStencil");
 
     lua_setfield(State, GraphicsTable.GetStackIndex(), "TexFormats");
+
+    // Texture Wrapping
+    SubtableCache = LuaHelper::StackTableReference(State, 0, 15);
+
+    SubtableCache.SetKey<lua_Integer>(State, GL_REPEAT, "Repeat");
+    SubtableCache.SetKey<lua_Integer>(State, GL_MIRRORED_REPEAT,
+                                      "MirroredRepeat");
+
+    SubtableCache.SetKey<lua_Integer>(State, GL_CLAMP_TO_BORDER,
+                                      "ClampToBorder");
+    SubtableCache.SetKey<lua_Integer>(State, GL_CLAMP_TO_EDGE, "ClampToEdge");
+
+    lua_setfield(State, GraphicsTable.GetStackIndex(), "TextureWrapping");
+
+    // Texture Filtering
+    SubtableCache = LuaHelper::StackTableReference(State, 0, 15);
+
+    SubtableCache.SetKey<lua_Integer>(State, GL_LINEAR, "Linear");
+    SubtableCache.SetKey<lua_Integer>(State, GL_NEAREST, "Nearest");
+
+    SubtableCache.SetKey<lua_Integer>(State, GL_NEAREST_MIPMAP_LINEAR,
+                                      "NearestMipmapLinear");
+    SubtableCache.SetKey<lua_Integer>(State, GL_NEAREST_MIPMAP_NEAREST,
+                                      "NearestMipmapNearest");
+
+    SubtableCache.SetKey<lua_Integer>(State, GL_LINEAR_MIPMAP_LINEAR,
+                                      "LinearMipmapLinear");
+    SubtableCache.SetKey<lua_Integer>(State, GL_LINEAR_MIPMAP_NEAREST,
+                                      "LinearMipmapNearest");
+
+    lua_setfield(State, GraphicsTable.GetStackIndex(), "TextureFiltering");
+
+    CLibraries::Graphics::SampleModels::Init(State, GraphicsTable);
 
 #ifdef BUILD_CLIENT
 

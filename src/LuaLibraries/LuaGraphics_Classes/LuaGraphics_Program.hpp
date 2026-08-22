@@ -46,6 +46,7 @@ namespace Game::Lua::CLibraries::Graphics {
         inline void Init(lua_State* State,
                          LuaHelper::StackTableReference& GraphicsTable);
 
+        // safe to directly c call
         int __new(lua_State* State);
 
         int SetUniformSint32(lua_State* State);
@@ -618,6 +619,7 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::SetUniformBlockBinding(
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::__gc(lua_State* State) {
+    std::cout << "free program" << std::endl;
     Game::Graphics::OpenGLFunctions::glDeleteProgram(
         static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))
             ->GLObject);

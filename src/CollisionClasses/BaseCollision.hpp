@@ -15,9 +15,7 @@ namespace Game::Collision {
 
         Game::Collision::CollisionContainer* _ParentContainer = NULL;
 
-        virtual void RecalculateBlockmap() {
-            
-        }
+        virtual void RecalculateOccupiedBlocks() = 0;
 
        public:
         BaseCollision(Game::Collision::CollisionContainer& ParentContainer) : _ParentContainer(&ParentContainer) {}

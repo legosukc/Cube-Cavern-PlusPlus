@@ -41,7 +41,8 @@ namespace Game::Lua::CLibraries::Graphics {
 
         static inline void Init(lua_State* State,
                                 LuaHelper::StackTableReference& GraphicsTable);
-
+        
+        // not safe to directly c call
         static int __new(lua_State* State);
     }
 }
@@ -219,6 +220,7 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::Compile(
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Shader::__gc(lua_State* State) {
+    std::cout << "free shader" << std::endl;
     Game::Graphics::OpenGLFunctions::glDeleteShader(
         static_cast<Shader*>(
             luaL_checkudata(State, 1,

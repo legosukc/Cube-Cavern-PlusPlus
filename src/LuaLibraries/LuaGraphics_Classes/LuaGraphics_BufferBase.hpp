@@ -1,7 +1,10 @@
 #pragma once
 
+#include "../../define.h"
+
 #include "LuaGraphics_GLObjectBase.hpp"
 
+#include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_stdinc.h>
 

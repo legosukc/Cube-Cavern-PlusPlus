@@ -1,8 +1,8 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/savoury/Documents/C&C++/Cube Cavern++/build/cmake_install.cmake",
-		"/home/savoury/Documents/C&C++/Cube Cavern++/build/_deps/luau-build/cmake_install.cmake"
+		"/home/savoury/Documents/Cpp/Cube Cavern++/build/cmake_install.cmake",
+		"/home/savoury/Documents/Cpp/Cube Cavern++/build/_deps/luau-build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

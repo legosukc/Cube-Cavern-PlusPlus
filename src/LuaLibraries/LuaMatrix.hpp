@@ -242,6 +242,23 @@ namespace Game::Lua::CLibraries::Matrix {
 
         return 1;
     }
+
+    static int _Orthographic(lua_State* State) {
+        Math::Mat4* Result = static_cast<Math::Mat4*>(
+            lua_newuserdata(State, sizeof(Math::Mat4)));
+
+        luaL_getmetatable(State, "Mat4");
+        lua_setmetatable(State, -2);
+
+        *Result = Math::Transform::Orthographic(
+            static_cast<float>(luaL_checknumber(State, 1)),  // Left
+            static_cast<float>(luaL_checknumber(State, 2)),  // Right
+            static_cast<float>(luaL_checknumber(State, 3)),  // Bottom
+            static_cast<float>(luaL_checknumber(State, 4))   // Top
+        );
+
+        return 1;
+    }
 }
 
 void Game::Lua::CLibraries::Matrix::Init(lua_State* State) {
@@ -260,6 +277,10 @@ void Game::Lua::CLibraries::Matrix::Init(lua_State* State) {
     lua_pushcfunction(State, Game::Lua::CLibraries::Matrix::_Perspective,
                       "Mat4.Perspective");
     lua_setfield(State, -2, "Perspective");
+
+    lua_pushcfunction(State, Game::Lua::CLibraries::Matrix::_Orthographic,
+                      "Mat4.Orthographic");
+    lua_setfield(State, -2, "Orthographic");
 
     lua_pop(State, 1);
 }

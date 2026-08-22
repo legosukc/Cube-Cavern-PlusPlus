@@ -117,8 +117,13 @@ namespace Game::Graphics {
 namespace Game::Graphics::OpenGLFunctions {
     extern PFNGLVIEWPORTPROC glViewport;
 
+    extern PFNGLENABLEPROC glEnable;
+    extern PFNGLDISABLEPROC glDisable;
+
     extern PFNGLCLEARCOLORPROC glClearColor;
     extern PFNGLCLEARPROC glClear;
+
+    extern PFNGLBLENDFUNCPROC glBlendFunc;
 
     extern PFNGLGETINTEGERVPROC glGetIntegerv;
     extern PFNGLISENABLEDPROC glIsEnabled;
@@ -224,8 +229,13 @@ namespace Game::Graphics::OpenGLFunctions {
 
     PFNGLVIEWPORTPROC glViewport = NULL;
 
+    PFNGLENABLEPROC glEnable = NULL;
+    PFNGLDISABLEPROC glDisable = NULL;
+
     PFNGLCLEARCOLORPROC glClearColor = NULL;
     PFNGLCLEARPROC glClear = NULL;
+
+    PFNGLBLENDFUNCPROC glBlendFunc = NULL;
 
     PFNGLGETINTEGERVPROC glGetIntegerv = NULL;
     PFNGLISENABLEDPROC glIsEnabled = NULL;
@@ -302,8 +312,13 @@ void Game::Graphics::Init() {
 
             LOAD_OPENGL_FUNCTION(glViewport);
 
+            LOAD_OPENGL_FUNCTION(glEnable);
+            LOAD_OPENGL_FUNCTION(glDisable);
+
             LOAD_OPENGL_FUNCTION(glClear);
             LOAD_OPENGL_FUNCTION(glClearColor);
+
+            LOAD_OPENGL_FUNCTION(glBlendFunc);
 
             LOAD_OPENGL_FUNCTION(glDrawArrays);
             LOAD_OPENGL_FUNCTION(glDrawArraysInstanced);
@@ -313,6 +328,9 @@ void Game::Graphics::Init() {
 
             LOAD_OPENGL_FUNCTION(glGetIntegerv);
             LOAD_OPENGL_FUNCTION(glIsEnabled);
+
+            Game::Graphics::OpenGLFunctions::glBlendFunc(
+                GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
             _SetClearColor = _SetClearColor_OpenGL;
             _ClearBitfields = _ClearBitfields_OpenGL;
@@ -346,7 +364,8 @@ void Game::Graphics::Init() {
 
             Graphics::Texture::Init_OpenGL();
 
-            Game::Window.WindowResizedEvent.Connect(::_graphics_WindowResizedEvent_updateGLViewport);
+            Game::Window.WindowResizedEvent.Connect(
+                ::_graphics_WindowResizedEvent_updateGLViewport);
 
             break;
 

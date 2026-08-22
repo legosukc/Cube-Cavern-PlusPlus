@@ -1,7 +1,7 @@
 CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/main_client.cpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/main_client.cpp \
  /usr/include/stdc-predef.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../define.h \
  /usr/include/c++/16/iostream /usr/include/c++/16/bits/requires_hosted.h \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -175,12 +175,12 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /usr/include/SDL3/SDL_main.h /usr/include/SDL3/SDL_opengl.h \
  /usr/include/SDL3/SDL_opengl_glext.h \
  /usr/include/SDL3/SDL_opengles2_gl2ext.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Collisions.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../CollisionClasses/BaseCollision.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../CollisionClasses/../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../CollisionClasses/../MathClasses/../define.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../CollisionClasses/../MathClasses/../FunctionHeaders/Math.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../CollisionClasses/../MathClasses/../FunctionHeaders/../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Collisions.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../CollisionClasses/BaseCollision.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../CollisionClasses/../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../CollisionClasses/../MathClasses/../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../CollisionClasses/../MathClasses/../FunctionHeaders/Math.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../CollisionClasses/../MathClasses/../FunctionHeaders/../define.h \
  /usr/include/c++/16/cmath /usr/include/math.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
@@ -200,22 +200,22 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /usr/include/c++/16/tr1/poly_hermite.tcc \
  /usr/include/c++/16/tr1/poly_laguerre.tcc \
  /usr/include/c++/16/tr1/riemann_zeta.tcc \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../CollisionClasses/BoxCollision.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../CollisionClasses/BaseCollision.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../CollisionClasses/SphereCollision.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../CollisionClasses/MeshCollision.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../CollisionClasses/CollisionContainer.hpp \
- /usr/include/c++/16/list /usr/include/c++/16/bits/stl_list.h \
- /usr/include/c++/16/bits/allocated_ptr.h \
- /usr/include/c++/16/ext/aligned_buffer.h \
- /usr/include/c++/16/bits/list.tcc /usr/include/AL/al.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../CollisionClasses/BoxCollision.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../CollisionClasses/BaseCollision.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../CollisionClasses/SphereCollision.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../CollisionClasses/MeshCollision.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../CollisionClasses/CollisionContainer.hpp \
+ /usr/include/c++/16/vector /usr/include/c++/16/bits/stl_uninitialized.h \
+ /usr/include/c++/16/bits/stl_vector.h \
+ /usr/include/c++/16/bits/stl_bvector.h \
+ /usr/include/c++/16/bits/vector.tcc /usr/include/AL/al.h \
  /usr/include/AL/alc.h /usr/include/AL/alext.h /usr/include/AL/alc.h \
  /usr/include/AL/al.h /usr/include/AL/efx.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/float.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/File.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/ConfigHandler.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/../define.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/../nlohmann/json.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/File.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/ConfigHandler.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/../nlohmann/json.hpp \
  /usr/include/c++/16/algorithm /usr/include/c++/16/bits/stl_algo.h \
  /usr/include/c++/16/bits/algorithmfwd.h \
  /usr/include/c++/16/bits/stl_heap.h \
@@ -229,18 +229,16 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /usr/include/c++/16/bits/unordered_map.h \
  /usr/include/c++/16/bits/hashtable.h \
  /usr/include/c++/16/bits/hashtable_policy.h \
+ /usr/include/c++/16/ext/aligned_buffer.h \
  /usr/include/c++/16/bits/enable_special_members.h \
- /usr/include/c++/16/bits/node_handle.h /usr/include/c++/16/vector \
- /usr/include/c++/16/bits/stl_uninitialized.h \
- /usr/include/c++/16/bits/stl_vector.h \
- /usr/include/c++/16/bits/stl_bvector.h \
- /usr/include/c++/16/bits/vector.tcc /usr/include/c++/16/array \
+ /usr/include/c++/16/bits/node_handle.h /usr/include/c++/16/array \
  /usr/include/c++/16/compare /usr/include/c++/16/iterator \
  /usr/include/c++/16/bits/stream_iterator.h /usr/include/c++/16/memory \
  /usr/include/c++/16/bits/stl_raw_storage_iter.h \
  /usr/include/c++/16/bits/align.h /usr/include/c++/16/bits/unique_ptr.h \
  /usr/include/c++/16/bits/shared_ptr.h \
  /usr/include/c++/16/bits/shared_ptr_base.h \
+ /usr/include/c++/16/bits/allocated_ptr.h \
  /usr/include/c++/16/ext/concurrence.h \
  /usr/include/c++/16/bits/shared_ptr_atomic.h \
  /usr/include/c++/16/bits/atomic_base.h \
@@ -279,120 +277,474 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /usr/include/c++/16/optional /usr/include/c++/16/numeric \
  /usr/include/c++/16/bits/stl_numeric.h \
  /usr/include/c++/16/pstl/glue_numeric_defs.h /usr/include/c++/16/any \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/File.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../pch.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Statistics.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/BitOp.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/StringHelper.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/TypeHelper.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/Exceptions.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Vector2.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/../define.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Vector4.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Matrix.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Vector2.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../MathClasses/Vector4.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/MathTransform.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/Window.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/../../MathClasses/Vector2.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/../../Time.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/../../FunctionHeaders/Event.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/SDLClasses/../../FunctionHeaders/../define.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Game.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../define.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Client/SDLClasses/Window.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/Sound.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/../../define.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundUtils.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/Listener.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/../../../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/Speaker.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/OpenAL_Sound.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../../../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/Listener.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/AudioSource.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/AudioSource_OpenAL.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/AudioSource.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/../SoundUtils.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/Speaker_OpenAL.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/../../../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/Speaker.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/SDLMixer_Sound.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../../../define.h \
- /usr/include/SDL3_mixer/SDL_mixer.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Network_Client.hpp \
- /usr/include/c++/16/fstream \
- /usr/include/c++/16/x86_64-pc-linux-gnu/bits/basic_file.h \
- /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++io.h \
- /usr/include/c++/16/bits/fstream.tcc \
- /usr/local/include/SDL3_net/SDL_net.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/Graphics_Client.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/IndexBuffer.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/../../define.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/VertexArray.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/VertexBuffer.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/UniformBuffer.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/Program.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/../../MathClasses/Vector2.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/../../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/../../MathClasses/Vector4.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/Framebuffer.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/Texture.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/FragmentShader.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/ShaderBase.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/ShaderBase.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/GraphicsClasses/VertexShader.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Lua.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../../include/VM/lua.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../../include/VM/luaconf.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../../include/VM/lualib.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Client/Graphics_Client.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/LuaHelper.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/../../include/Compiler/luacode.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Client/LuaLibraries/LuaNetwork_Client.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Client/LuaLibraries/../../FunctionHeaders/LuaHelper.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Client/LuaLibraries/LuaSound_Client.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Client/LuaLibraries/../../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../Client/LuaLibraries/../Sound/Sound.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../FunctionHeaders/ConfigHandler.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaEnums.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/../FunctionHeaders/LuaHelper.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/../Statistics.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaMath.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaTable.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaTask.hpp \
- /usr/include/c++/16/mutex /usr/include/c++/16/bits/std_mutex.h \
- /usr/include/c++/16/bits/unique_lock.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaTypeHelper.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaMatrix.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaVector.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/../MathClasses/Vector2.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/../MathClasses/Vector4.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaModelLoader.hpp \
- /usr/include/assimp/mesh.h /usr/include/assimp/aabb.h \
- /usr/include/assimp/vector3.h /usr/include/assimp/defs.h \
- /usr/include/assimp/config.h /usr/include/assimp/types.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/File.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../pch.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Statistics.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/BitOp.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/StringHelper.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/TypeHelper.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/Exceptions.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../MathClasses/Vector2.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../MathClasses/../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../MathClasses/Vector4.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../MathClasses/Matrix.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../MathClasses/Vector2.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../MathClasses/Vector4.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/MathTransform.hpp \
+ /usr/include/glm/ext.hpp /usr/include/glm/detail/setup.hpp \
+ /usr/include/glm/simd/platform.h /usr/include/glm/glm.hpp \
+ /usr/include/glm/detail/_fixes.hpp /usr/include/c++/16/climits \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
- /usr/include/bits/uio_lim.h /usr/include/assimp/vector2.h \
- /usr/include/assimp/color4.h /usr/include/assimp/matrix3x3.h \
- /usr/include/assimp/matrix4x4.h /usr/include/assimp/quaternion.h \
- /usr/include/assimp/vector2.inl /usr/include/assimp/vector3.inl \
- /usr/include/assimp/color4.inl /usr/include/assimp/matrix3x3.inl \
- /usr/include/assimp/matrix4x4.inl /usr/include/assimp/MathFunctions.h \
- /usr/include/assimp/quaternion.inl /usr/include/c++/16/unordered_set \
+ /usr/include/bits/uio_lim.h /usr/include/c++/16/cfloat \
+ /usr/include/glm/fwd.hpp /usr/include/glm/detail/qualifier.hpp \
+ /usr/include/glm/detail/setup.hpp /usr/include/glm/vec2.hpp \
+ /usr/include/glm/ext/vector_bool2.hpp \
+ /usr/include/glm/detail/type_vec2.hpp \
+ /usr/include/glm/detail/type_vec2.inl \
+ /usr/include/glm/detail/compute_vector_relational.hpp \
+ /usr/include/glm/ext/vector_bool2_precision.hpp \
+ /usr/include/glm/ext/vector_float2.hpp \
+ /usr/include/glm/ext/vector_float2_precision.hpp \
+ /usr/include/glm/ext/vector_double2.hpp \
+ /usr/include/glm/ext/vector_double2_precision.hpp \
+ /usr/include/glm/ext/vector_int2.hpp \
+ /usr/include/glm/ext/vector_int2_sized.hpp \
+ /usr/include/glm/ext/scalar_int_sized.hpp \
+ /usr/include/glm/detail/setup.hpp /usr/include/glm/ext/vector_uint2.hpp \
+ /usr/include/glm/ext/vector_uint2_sized.hpp \
+ /usr/include/glm/ext/scalar_uint_sized.hpp /usr/include/glm/vec3.hpp \
+ /usr/include/glm/ext/vector_bool3.hpp \
+ /usr/include/glm/detail/type_vec3.hpp \
+ /usr/include/glm/detail/type_vec3.inl \
+ /usr/include/glm/detail/compute_vector_decl.hpp \
+ /usr/include/glm/detail/_vectorize.hpp \
+ /usr/include/glm/ext/vector_bool3_precision.hpp \
+ /usr/include/glm/ext/vector_float3.hpp \
+ /usr/include/glm/ext/vector_float3_precision.hpp \
+ /usr/include/glm/ext/vector_double3.hpp \
+ /usr/include/glm/ext/vector_double3_precision.hpp \
+ /usr/include/glm/ext/vector_int3.hpp \
+ /usr/include/glm/ext/vector_int3_sized.hpp \
+ /usr/include/glm/ext/vector_uint3.hpp \
+ /usr/include/glm/ext/vector_uint3_sized.hpp /usr/include/glm/vec4.hpp \
+ /usr/include/glm/ext/vector_bool4.hpp \
+ /usr/include/glm/detail/type_vec4.hpp \
+ /usr/include/glm/detail/type_vec4.inl \
+ /usr/include/glm/ext/vector_bool4_precision.hpp \
+ /usr/include/glm/ext/vector_float4.hpp \
+ /usr/include/glm/ext/vector_float4_precision.hpp \
+ /usr/include/glm/ext/vector_double4.hpp \
+ /usr/include/glm/ext/vector_double4_precision.hpp \
+ /usr/include/glm/ext/vector_int4.hpp \
+ /usr/include/glm/ext/vector_int4_sized.hpp \
+ /usr/include/glm/ext/vector_uint4.hpp \
+ /usr/include/glm/ext/vector_uint4_sized.hpp /usr/include/glm/mat2x2.hpp \
+ /usr/include/glm/ext/matrix_double2x2.hpp \
+ /usr/include/glm/detail/type_mat2x2.hpp \
+ /usr/include/glm/detail/type_mat2x2.inl /usr/include/glm/matrix.hpp \
+ /usr/include/glm/mat2x3.hpp /usr/include/glm/ext/matrix_double2x3.hpp \
+ /usr/include/glm/detail/type_mat2x3.hpp \
+ /usr/include/glm/detail/type_mat2x3.inl \
+ /usr/include/glm/ext/matrix_double2x3_precision.hpp \
+ /usr/include/glm/ext/matrix_float2x3.hpp \
+ /usr/include/glm/ext/matrix_float2x3_precision.hpp \
+ /usr/include/glm/mat2x4.hpp /usr/include/glm/ext/matrix_double2x4.hpp \
+ /usr/include/glm/detail/type_mat2x4.hpp \
+ /usr/include/glm/detail/type_mat2x4.inl \
+ /usr/include/glm/ext/matrix_double2x4_precision.hpp \
+ /usr/include/glm/ext/matrix_float2x4.hpp \
+ /usr/include/glm/ext/matrix_float2x4_precision.hpp \
+ /usr/include/glm/mat3x2.hpp /usr/include/glm/ext/matrix_double3x2.hpp \
+ /usr/include/glm/detail/type_mat3x2.hpp \
+ /usr/include/glm/detail/type_mat3x2.inl \
+ /usr/include/glm/ext/matrix_double3x2_precision.hpp \
+ /usr/include/glm/ext/matrix_float3x2.hpp \
+ /usr/include/glm/ext/matrix_float3x2_precision.hpp \
+ /usr/include/glm/mat3x3.hpp /usr/include/glm/ext/matrix_double3x3.hpp \
+ /usr/include/glm/detail/type_mat3x3.hpp \
+ /usr/include/glm/detail/type_mat3x3.inl /usr/include/glm/common.hpp \
+ /usr/include/glm/detail/func_common.inl \
+ /usr/include/glm/vector_relational.hpp \
+ /usr/include/glm/detail/func_vector_relational.inl \
+ /usr/include/glm/detail/compute_common.hpp \
+ /usr/include/glm/detail/type_vec1.hpp \
+ /usr/include/glm/detail/type_vec1.inl \
+ /usr/include/glm/ext/matrix_double3x3_precision.hpp \
+ /usr/include/glm/ext/matrix_float3x3.hpp \
+ /usr/include/glm/ext/matrix_float3x3_precision.hpp \
+ /usr/include/glm/mat3x4.hpp /usr/include/glm/ext/matrix_double3x4.hpp \
+ /usr/include/glm/detail/type_mat3x4.hpp \
+ /usr/include/glm/detail/type_mat3x4.inl \
+ /usr/include/glm/ext/matrix_double3x4_precision.hpp \
+ /usr/include/glm/ext/matrix_float3x4.hpp \
+ /usr/include/glm/ext/matrix_float3x4_precision.hpp \
+ /usr/include/glm/mat4x2.hpp /usr/include/glm/ext/matrix_double4x2.hpp \
+ /usr/include/glm/detail/type_mat4x2.hpp \
+ /usr/include/glm/detail/type_mat4x2.inl \
+ /usr/include/glm/ext/matrix_double4x2_precision.hpp \
+ /usr/include/glm/ext/matrix_float4x2.hpp \
+ /usr/include/glm/ext/matrix_float4x2_precision.hpp \
+ /usr/include/glm/mat4x3.hpp /usr/include/glm/ext/matrix_double4x3.hpp \
+ /usr/include/glm/detail/type_mat4x3.hpp \
+ /usr/include/glm/detail/type_mat4x3.inl \
+ /usr/include/glm/ext/matrix_double4x3_precision.hpp \
+ /usr/include/glm/ext/matrix_float4x3.hpp \
+ /usr/include/glm/ext/matrix_float4x3_precision.hpp \
+ /usr/include/glm/mat4x4.hpp /usr/include/glm/ext/matrix_double4x4.hpp \
+ /usr/include/glm/detail/type_mat4x4.hpp \
+ /usr/include/glm/detail/type_mat4x4.inl /usr/include/glm/geometric.hpp \
+ /usr/include/glm/detail/func_geometric.inl \
+ /usr/include/glm/exponential.hpp \
+ /usr/include/glm/detail/func_exponential.inl \
+ /usr/include/glm/ext/matrix_double4x4_precision.hpp \
+ /usr/include/glm/ext/matrix_float4x4.hpp \
+ /usr/include/glm/ext/matrix_float4x4_precision.hpp \
+ /usr/include/glm/detail/func_matrix.inl \
+ /usr/include/glm/ext/matrix_double2x2_precision.hpp \
+ /usr/include/glm/ext/matrix_float2x2.hpp \
+ /usr/include/glm/ext/matrix_float2x2_precision.hpp \
+ /usr/include/glm/trigonometric.hpp \
+ /usr/include/glm/detail/func_trigonometric.inl \
+ /usr/include/glm/packing.hpp /usr/include/glm/detail/func_packing.inl \
+ /usr/include/glm/detail/type_half.hpp \
+ /usr/include/glm/detail/type_half.inl /usr/include/glm/integer.hpp \
+ /usr/include/glm/detail/func_integer.inl \
+ /usr/include/glm/ext/matrix_clip_space.hpp \
+ /usr/include/glm/ext/scalar_constants.hpp \
+ /usr/include/glm/ext/scalar_constants.inl \
+ /usr/include/glm/ext/matrix_clip_space.inl \
+ /usr/include/glm/ext/matrix_common.hpp \
+ /usr/include/glm/detail/_fixes.hpp \
+ /usr/include/glm/ext/matrix_common.inl \
+ /usr/include/glm/ext/_matrix_vectorize.hpp \
+ /usr/include/glm/ext/matrix_int2x2.hpp \
+ /usr/include/glm/ext/matrix_int2x2_sized.hpp \
+ /usr/include/glm/ext/matrix_int2x3.hpp \
+ /usr/include/glm/ext/matrix_int2x3_sized.hpp \
+ /usr/include/glm/ext/matrix_int2x4.hpp \
+ /usr/include/glm/ext/matrix_int2x4_sized.hpp \
+ /usr/include/glm/ext/matrix_int3x2.hpp \
+ /usr/include/glm/ext/matrix_int3x2_sized.hpp \
+ /usr/include/glm/ext/matrix_int3x3.hpp \
+ /usr/include/glm/ext/matrix_int3x3_sized.hpp \
+ /usr/include/glm/ext/matrix_int3x4.hpp \
+ /usr/include/glm/ext/matrix_int3x4_sized.hpp \
+ /usr/include/glm/ext/matrix_int4x2.hpp \
+ /usr/include/glm/ext/matrix_int4x2_sized.hpp \
+ /usr/include/glm/ext/matrix_int4x3.hpp \
+ /usr/include/glm/ext/matrix_int4x3_sized.hpp \
+ /usr/include/glm/ext/matrix_int4x4.hpp \
+ /usr/include/glm/ext/matrix_int4x4_sized.hpp \
+ /usr/include/glm/ext/matrix_uint2x2.hpp \
+ /usr/include/glm/ext/matrix_uint2x2_sized.hpp \
+ /usr/include/glm/ext/matrix_uint2x3.hpp \
+ /usr/include/glm/ext/matrix_uint2x3_sized.hpp \
+ /usr/include/glm/ext/matrix_uint2x4.hpp \
+ /usr/include/glm/ext/matrix_uint2x4_sized.hpp \
+ /usr/include/glm/ext/matrix_uint3x2.hpp \
+ /usr/include/glm/ext/matrix_uint3x2_sized.hpp \
+ /usr/include/glm/ext/matrix_uint3x3.hpp \
+ /usr/include/glm/ext/matrix_uint3x3_sized.hpp \
+ /usr/include/glm/ext/matrix_uint3x4.hpp \
+ /usr/include/glm/ext/matrix_uint3x4_sized.hpp \
+ /usr/include/glm/ext/matrix_uint4x2.hpp \
+ /usr/include/glm/ext/matrix_uint4x2_sized.hpp \
+ /usr/include/glm/ext/matrix_uint4x3.hpp \
+ /usr/include/glm/ext/matrix_uint4x3_sized.hpp \
+ /usr/include/glm/ext/matrix_uint4x4.hpp \
+ /usr/include/glm/ext/matrix_uint4x4_sized.hpp \
+ /usr/include/glm/ext/matrix_projection.hpp \
+ /usr/include/glm/gtc/constants.hpp /usr/include/glm/gtc/constants.inl \
+ /usr/include/glm/ext/matrix_projection.inl \
+ /usr/include/glm/ext/matrix_relational.hpp \
+ /usr/include/glm/ext/matrix_relational.inl \
+ /usr/include/glm/ext/vector_relational.hpp \
+ /usr/include/glm/ext/vector_relational.inl \
+ /usr/include/glm/detail/type_float.hpp \
+ /usr/include/glm/ext/matrix_transform.hpp \
+ /usr/include/glm/ext/matrix_transform.inl \
+ /usr/include/glm/ext/quaternion_common.hpp \
+ /usr/include/glm/ext/quaternion_geometric.hpp \
+ /usr/include/glm/ext/quaternion_geometric.inl \
+ /usr/include/glm/ext/quaternion_common.inl \
+ /usr/include/glm/ext/quaternion_double.hpp \
+ /usr/include/glm/detail/type_quat.hpp \
+ /usr/include/glm/ext/quaternion_relational.hpp \
+ /usr/include/glm/ext/quaternion_relational.inl \
+ /usr/include/glm/gtc/matrix_transform.hpp \
+ /usr/include/glm/gtc/matrix_transform.inl \
+ /usr/include/glm/detail/type_quat.inl \
+ /usr/include/glm/ext/quaternion_double_precision.hpp \
+ /usr/include/glm/ext/quaternion_float.hpp \
+ /usr/include/glm/ext/quaternion_float_precision.hpp \
+ /usr/include/glm/ext/quaternion_exponential.hpp \
+ /usr/include/glm/ext/quaternion_exponential.inl \
+ /usr/include/glm/ext/quaternion_transform.hpp \
+ /usr/include/glm/ext/quaternion_transform.inl \
+ /usr/include/glm/ext/quaternion_trigonometric.hpp \
+ /usr/include/glm/ext/quaternion_trigonometric.inl \
+ /usr/include/glm/ext/scalar_common.hpp \
+ /usr/include/glm/ext/scalar_common.inl \
+ /usr/include/glm/ext/scalar_integer.hpp \
+ /usr/include/glm/ext/scalar_integer.inl \
+ /usr/include/glm/ext/scalar_packing.hpp \
+ /usr/include/glm/ext/scalar_packing.inl \
+ /usr/include/glm/ext/scalar_reciprocal.hpp \
+ /usr/include/glm/ext/scalar_reciprocal.inl \
+ /usr/include/glm/ext/scalar_relational.hpp \
+ /usr/include/glm/ext/scalar_relational.inl \
+ /usr/include/glm/ext/scalar_ulp.hpp /usr/include/glm/ext/scalar_ulp.inl \
+ /usr/include/glm/ext/vector_common.hpp \
+ /usr/include/glm/ext/vector_common.inl \
+ /usr/include/glm/ext/vector_integer.hpp \
+ /usr/include/glm/ext/vector_integer.inl \
+ /usr/include/glm/ext/vector_packing.hpp \
+ /usr/include/glm/ext/vector_packing.inl \
+ /usr/include/glm/ext/vector_reciprocal.hpp \
+ /usr/include/glm/ext/vector_reciprocal.inl \
+ /usr/include/glm/ext/vector_ulp.hpp /usr/include/glm/ext/vector_ulp.inl \
+ /usr/include/glm/ext/vector_bool1.hpp \
+ /usr/include/glm/ext/vector_bool1_precision.hpp \
+ /usr/include/glm/ext/vector_double1.hpp \
+ /usr/include/glm/ext/vector_double1_precision.hpp \
+ /usr/include/glm/ext/vector_float1.hpp \
+ /usr/include/glm/ext/vector_float1_precision.hpp \
+ /usr/include/glm/ext/vector_int1.hpp \
+ /usr/include/glm/ext/vector_int1_sized.hpp \
+ /usr/include/glm/ext/vector_uint1.hpp \
+ /usr/include/glm/ext/vector_uint1_sized.hpp \
+ /usr/include/glm/gtc/bitfield.hpp /usr/include/glm/detail/setup.hpp \
+ /usr/include/glm/gtc/type_precision.hpp \
+ /usr/include/glm/gtc/quaternion.hpp /usr/include/glm/gtc/quaternion.inl \
+ /usr/include/glm/gtc/epsilon.hpp /usr/include/glm/gtc/epsilon.inl \
+ /usr/include/glm/gtc/vec1.hpp /usr/include/glm/gtc/type_precision.inl \
+ /usr/include/glm/gtc/bitfield.inl /usr/include/glm/simd/integer.h \
+ /usr/include/glm/gtc/color_space.hpp \
+ /usr/include/glm/gtc/color_space.inl /usr/include/glm/gtc/integer.hpp \
+ /usr/include/glm/gtc/integer.inl /usr/include/glm/gtc/matrix_access.hpp \
+ /usr/include/glm/gtc/matrix_access.inl \
+ /usr/include/glm/gtc/matrix_integer.hpp \
+ /usr/include/glm/gtc/matrix_inverse.hpp \
+ /usr/include/glm/gtc/matrix_inverse.inl /usr/include/glm/gtc/noise.hpp \
+ /usr/include/glm/detail/_noise.hpp /usr/include/glm/gtc/noise.inl \
+ /usr/include/glm/gtc/packing.hpp /usr/include/glm/gtc/packing.inl \
+ /usr/include/glm/gtc/type_ptr.hpp /usr/include/glm/gtc/type_ptr.inl \
+ /usr/include/glm/gtc/random.hpp /usr/include/glm/gtc/random.inl \
+ /usr/include/glm/gtc/reciprocal.hpp /usr/include/glm/gtc/round.hpp \
+ /usr/include/glm/gtc/round.inl /usr/include/glm/gtc/ulp.hpp \
+ /usr/include/glm/gtc/ulp.inl \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/SDLClasses/Window.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/SDLClasses/../../define.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/emmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xmmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mm_malloc.h \
+ /usr/include/c++/16/stdlib.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/immintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/x86gprintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/ia32intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/adxintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/bmiintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/bmi2intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/cetintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/cldemoteintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/clflushoptintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/clwbintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/clzerointrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/cmpccxaddintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/enqcmdintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/fxsrintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/lzcntintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/lwpintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/movdirintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mwaitintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mwaitxintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/pconfigintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/popcntintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/pkuintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/prfchiintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/raointintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/rdseedintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/rtmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/serializeintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sgxintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/tbmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/tsxldtrkintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/uintrintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/waitpkgintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/wbnoinvdintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsaveintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsavecintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsaveoptintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsavesintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xtestintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/hresetintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/usermsrintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/pmmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/tmmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/smmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/wmmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxvnniintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxifmaintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxvnniint8intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxvnniint16intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx2intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512fintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512cdintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vlintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bwintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512dqintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vlbwintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vldqintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512ifmaintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512ifmavlintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmiintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmivlintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vpopcntdqintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmi2intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmi2vlintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vnniintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vnnivlintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vpopcntdqvlintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bitalgintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bitalgvlintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vp2intersectintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vp2intersectvlintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512fp16intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512fp16vlintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/shaintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sm3intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sha512intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sm4intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/fmaintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/f16cintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/gfniintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/vaesintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/vpclmulqdqintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bf16vlintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bf16intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxneconvertintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxtileintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxint8intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxbf16intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxcomplexintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxavx512intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxtf32intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxfp8intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/prfchwintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/keylockerintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxfp16intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2mediaintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2convertintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2bf16intrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2satcvtintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2minmaxintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2copyintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/movrsintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxmovrsintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bmmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bmmvlintrin.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/SDLClasses/../../MathClasses/Vector2.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/SDLClasses/../../Time.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/SDLClasses/../../FunctionHeaders/Event.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/SDLClasses/../../FunctionHeaders/../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Game.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Client/SDLClasses/Window.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/Sound.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/../../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundUtils.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/Listener.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/../../../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/Speaker.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/OpenAL_Sound.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../../../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/Listener.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/AudioSource.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/AudioSource_OpenAL.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/AudioSource.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/../SoundUtils.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/Speaker_OpenAL.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/../../../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../SoundClasses/Speaker.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/SDLMixer_Sound.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/../../../define.h \
+ /usr/include/SDL3_mixer/SDL_mixer.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Network_Client.hpp \
+ /usr/include/c++/16/fstream \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++io.h \
+ /usr/include/c++/16/bits/fstream.tcc \
+ /usr/local/include/SDL3_net/SDL_net.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Graphics_Client.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/IndexBuffer.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/../../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/VertexArray.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/VertexBuffer.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/UniformBuffer.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/Program.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/../../MathClasses/Vector2.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/../../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/../../MathClasses/Vector4.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/Framebuffer.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/Texture.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/FragmentShader.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/ShaderBase.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/ShaderBase.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/VertexShader.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Lua.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../../include/VM/lua.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../../include/VM/luaconf.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../../include/VM/lualib.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Client/Graphics_Client.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/LuaHelper.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/../../include/Compiler/luacode.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Client/LuaLibraries/LuaNetwork_Client.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Client/LuaLibraries/../../FunctionHeaders/LuaHelper.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Client/LuaLibraries/LuaSound_Client.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Client/LuaLibraries/../../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../Client/LuaLibraries/../Sound/Sound.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../FunctionHeaders/ConfigHandler.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaEnums.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/../FunctionHeaders/LuaHelper.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/../Statistics.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaMath.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaTable.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaTask.hpp \
+ /usr/include/c++/16/list /usr/include/c++/16/bits/stl_list.h \
+ /usr/include/c++/16/bits/list.tcc /usr/include/c++/16/mutex \
+ /usr/include/c++/16/bits/std_mutex.h \
+ /usr/include/c++/16/bits/unique_lock.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaTypeHelper.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaMatrix.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaVector.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/../MathClasses/Vector2.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/../MathClasses/Vector4.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaModelLoader.hpp \
+ /usr/include/assimp/mesh.h /usr/include/assimp/aabb.h \
+ /usr/include/assimp/vector3.h /usr/include/assimp/defs.h \
+ /usr/include/assimp/config.h /usr/include/assimp/types.h \
+ /usr/include/assimp/vector2.h /usr/include/assimp/color4.h \
+ /usr/include/assimp/matrix3x3.h /usr/include/assimp/matrix4x4.h \
+ /usr/include/assimp/quaternion.h /usr/include/assimp/vector2.inl \
+ /usr/include/assimp/vector3.inl /usr/include/assimp/color4.inl \
+ /usr/include/assimp/matrix3x3.inl /usr/include/assimp/matrix4x4.inl \
+ /usr/include/assimp/MathFunctions.h /usr/include/assimp/quaternion.inl \
+ /usr/include/c++/16/unordered_set \
  /usr/include/c++/16/bits/unordered_set.h \
  /usr/include/assimp/postprocess.h /usr/include/assimp/scene.h \
  /usr/include/assimp/texture.h /usr/include/assimp/Compiler/pushpack1.h \
@@ -400,27 +752,28 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: \
  /usr/include/assimp/camera.h /usr/include/assimp/material.h \
  /usr/include/assimp/material.inl /usr/include/assimp/anim.h \
  /usr/include/assimp/metadata.h /usr/include/assimp/Importer.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/../define.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_BufferBase.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_GLObjectBase.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../define.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../FunctionHeaders/LuaHelper.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../Client/Graphics_Client.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_ElementBuffer.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexArray.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexBuffer.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_UniformBuffer.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_Program.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_Shader.hpp \
- /usr/include/c++/16/stdlib.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../Statistics.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../Client/GraphicsClasses/Program.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../MathClasses/Vector3.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_MiscHeaders/LuaGraphics_SampleModels.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_MiscHeaders/../../FunctionHeaders/LuaHelper.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_BufferBase.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../define.h \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_GLObjectBase.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../FunctionHeaders/LuaHelper.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../Client/Graphics_Client.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_ElementBuffer.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexArray.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexBuffer.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_UniformBuffer.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_Program.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_Shader.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../Statistics.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../Client/GraphicsClasses/Program.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/../../MathClasses/Vector3.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.hpp \
  /usr/include/SDL3_image/SDL_image.h \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/../ConsoleVars.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/../Lua.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaInput.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/../Game.hpp \
- /home/savoury/Documents/C&C++/Cube\ Cavern++/src/Client/../LuaLibraries/LuaConsole.hpp
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/../ConsoleVars.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/../Lua.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaInput.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/../Game.hpp \
+ /home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/../LuaLibraries/LuaConsole.hpp
