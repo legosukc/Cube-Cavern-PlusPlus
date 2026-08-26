@@ -316,6 +316,36 @@ OPENAL_INCLUDE_DIR:PATH=/usr/include/AL
 //Path to a library.
 OPENAL_LIBRARY:FILEPATH=/usr/lib/libopenal.so
 
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+
+//The directory containing a CMake configuration file for SDL3.
+SDL3_DIR:PATH=/usr/lib/cmake/SDL3
+
+//The directory containing a CMake configuration file for SDL3_image.
+SDL3_image_DIR:PATH=/usr/lib/cmake/SDL3_image
+
+//The directory containing a CMake configuration file for SDL3_mixer.
+SDL3_mixer_DIR:PATH=/usr/lib/cmake/SDL3_mixer
+
+//The directory containing a CMake configuration file for SDL3_net.
+SDL3_net_DIR:PATH=/usr/local/lib/cmake/SDL3_net
+
+//The directory containing a CMake configuration file for SDL3_ttf.
+SDL3_ttf_DIR:PATH=/usr/lib/cmake/SDL3_ttf
+
+//The directory containing a CMake configuration file for assimp.
+assimp_DIR:PATH=/usr/lib/cmake/assimp-6.0
+
+//Path to a library.
+pkgcfg_lib_PC_LIBUNWIND_unwind:FILEPATH=/usr/lib/libunwind.so
+
+//Path to a library.
+pkgcfg_lib_PC_LIBUNWIND_unwind-generic:FILEPATH=/usr/lib/libunwind-generic.so
+
 
 ########################
 # INTERNAL cache entries
@@ -479,6 +509,8 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 CMAKE_WARN_DEPRECATED:INTERNAL=ON
 //Details about finding OpenAL
 FIND_PACKAGE_MESSAGE_DETAILS_OpenAL:INTERNAL=[/usr/lib/libopenal.so][/usr/include/AL][v()]
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v3.0.5()]
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
 //Build CLI
@@ -489,4 +521,56 @@ LUAU_BUILD_TESTS:INTERNAL=OFF
 OPENAL_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENAL_LIBRARY
 OPENAL_LIBRARY-ADVANCED:INTERNAL=1
+PC_LIBUNWIND_CFLAGS:INTERNAL=-I/usr/include
+PC_LIBUNWIND_CFLAGS_I:INTERNAL=
+PC_LIBUNWIND_CFLAGS_OTHER:INTERNAL=
+PC_LIBUNWIND_FOUND:INTERNAL=1
+PC_LIBUNWIND_INCLUDEDIR:INTERNAL=
+PC_LIBUNWIND_INCLUDE_DIRS:INTERNAL=/usr/include
+PC_LIBUNWIND_LDFLAGS:INTERNAL=-L/usr/lib;-lunwind-generic;-lunwind
+PC_LIBUNWIND_LDFLAGS_OTHER:INTERNAL=
+PC_LIBUNWIND_LIBDIR:INTERNAL=
+PC_LIBUNWIND_LIBRARIES:INTERNAL=unwind-generic;unwind
+PC_LIBUNWIND_LIBRARY_DIRS:INTERNAL=/usr/lib
+PC_LIBUNWIND_LIBS:INTERNAL=
+PC_LIBUNWIND_LIBS_L:INTERNAL=
+PC_LIBUNWIND_LIBS_OTHER:INTERNAL=
+PC_LIBUNWIND_LIBS_PATHS:INTERNAL=
+PC_LIBUNWIND_MODULE_NAME:INTERNAL=
+PC_LIBUNWIND_PREFIX:INTERNAL=
+PC_LIBUNWIND_STATIC_CFLAGS:INTERNAL=-I/usr/include
+PC_LIBUNWIND_STATIC_CFLAGS_I:INTERNAL=
+PC_LIBUNWIND_STATIC_CFLAGS_OTHER:INTERNAL=
+PC_LIBUNWIND_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include
+PC_LIBUNWIND_STATIC_LDFLAGS:INTERNAL=-L/usr/lib;-lunwind-generic;-lunwind;-llzma;-lz
+PC_LIBUNWIND_STATIC_LDFLAGS_OTHER:INTERNAL=
+PC_LIBUNWIND_STATIC_LIBDIR:INTERNAL=
+PC_LIBUNWIND_STATIC_LIBRARIES:INTERNAL=unwind-generic;unwind;lzma;z
+PC_LIBUNWIND_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib
+PC_LIBUNWIND_STATIC_LIBS:INTERNAL=
+PC_LIBUNWIND_STATIC_LIBS_L:INTERNAL=
+PC_LIBUNWIND_STATIC_LIBS_OTHER:INTERNAL=
+PC_LIBUNWIND_STATIC_LIBS_PATHS:INTERNAL=
+PC_LIBUNWIND_VERSION:INTERNAL=
+PC_LIBUNWIND_libunwind-generic_INCLUDEDIR:INTERNAL=/usr/include
+PC_LIBUNWIND_libunwind-generic_LIBDIR:INTERNAL=/usr/lib
+PC_LIBUNWIND_libunwind-generic_MODULE_NAME:INTERNAL=libunwind-generic
+PC_LIBUNWIND_libunwind-generic_PREFIX:INTERNAL=/usr
+PC_LIBUNWIND_libunwind-generic_VERSION:INTERNAL=1.8.2
+PC_LIBUNWIND_libunwind_INCLUDEDIR:INTERNAL=/usr/include
+PC_LIBUNWIND_libunwind_LIBDIR:INTERNAL=/usr/lib
+PC_LIBUNWIND_libunwind_MODULE_NAME:INTERNAL=libunwind
+PC_LIBUNWIND_libunwind_PREFIX:INTERNAL=/usr
+PC_LIBUNWIND_libunwind_VERSION:INTERNAL=1.8.2
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+__pkg_config_arguments_PC_LIBUNWIND:INTERNAL=QUIET;IMPORTED_TARGET;libunwind;libunwind-generic
+__pkg_config_checked_PC_LIBUNWIND:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_PC_LIBUNWIND_unwind
+pkgcfg_lib_PC_LIBUNWIND_unwind-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_PC_LIBUNWIND_unwind-generic
+pkgcfg_lib_PC_LIBUNWIND_unwind-generic-ADVANCED:INTERNAL=1
+prefix_result:INTERNAL=/usr/lib
 

@@ -85,25 +85,12 @@ namespace Game::Lua::CLibraries::Input {
                     ->SDLScancodes;
 
             for (const SDL_Scancode Scancode : SDLScancodes) {
-                switch (Scancode) {
-                    case SDL_SCANCODE_UNKNOWN:
-                        continue;
-
-                    case static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT +
-                                                   1):  // left click
-                    case static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT +
-                                                   2):  // middle click
-                    case static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT +
-                                                   3):  // right click
-                    case static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT +
-                                                   4):  // side1 click
-                    case static_cast<SDL_Scancode>((int)SDL_SCANCODE_COUNT +
-                                                   5):  // side2 click
-                        if (SDL_GetMouseState(NULL, NULL) |
-                            SDL_BUTTON_MASK(1 + Scancode -
-                                            SDL_SCANCODE_COUNT)) {
-                            goto ReturnTrue;
-                        }
+                if (Scancode > (int)SDL_SCANCODE_COUNT) {
+                    if (SDL_GetMouseState(NULL, NULL) &
+                        SDL_BUTTON_MASK(1 + Scancode - SDL_SCANCODE_COUNT)) {
+                        goto ReturnTrue;
+                    }
+                    continue;
                 }
 
                 if (Game::Window.ScancodeHeld(Scancode)) {

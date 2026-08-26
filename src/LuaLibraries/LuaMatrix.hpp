@@ -26,8 +26,9 @@ namespace Game::Lua::CLibraries::Matrix {
             lua_setmetatable(State, -2);
 
             if (lua_gettop(State) == 2) {
-
-                *NewMatrix = MatrixType(LuaHelper::ToTypename<typename MatrixType::ComponentType>(State, 1));
+                *NewMatrix = MatrixType(
+                    LuaHelper::ToTypename<typename MatrixType::ComponentType>(
+                        State, 1));
                 return 1;
             }
             lua_insert(State, 1);
@@ -69,27 +70,28 @@ namespace Game::Lua::CLibraries::Matrix {
 
             for (int Column = 0; Column < MatrixType::ColumnCount; ++Column) {
                 for (int Row = 0; Row < MatrixType::RowCount; ++Row) {
-                    LuaHelper::Push<typename MatrixType::ComponentType>(State, MatrixUD->IndexElement(Row * Column));
+                    LuaHelper::Push<typename MatrixType::ComponentType>(
+                        State, MatrixUD->IndexElement(Row * Column));
                 }
                 lua_pushstring(State, "\n");
             }
             lua_concat(State, MatrixType::RowCount * MatrixType::ColumnCount);
-                /*
-                LuaHelper::Push<typename
-                MatrixType::ColumnType::ComponentType>(State,
-                (*MatrixUD)[MatrixType::ColumnType]); for (int i =
-                VectorType::ComponentCount - 1; i > 0; --i) {
+            /*
+            LuaHelper::Push<typename
+            MatrixType::ColumnType::ComponentType>(State,
+            (*MatrixUD)[MatrixType::ColumnType]); for (int i =
+            VectorType::ComponentCount - 1; i > 0; --i) {
 
-                        //std::cout << i << std::endl;
-                        lua_pushliteral(State, ", ");
-                        LuaHelper::Push<typename
-                MatrixType::ColumnType::ComponentType>(State, (*Vector)[i]);
-                }
-                lua_concat(State, VectorType::ComponentCount);
+                    //std::cout << i << std::endl;
+                    lua_pushliteral(State, ", ");
+                    LuaHelper::Push<typename
+            MatrixType::ColumnType::ComponentType>(State, (*Vector)[i]);
+            }
+            lua_concat(State, VectorType::ComponentCount);
 
-                lua_rotate(State, 1, 1);*/
+            lua_rotate(State, 1, 1);*/
 
-                return 1;
+            return 1;
         }
 
         template <class MatrixType>
@@ -145,6 +147,21 @@ namespace Game::Lua::CLibraries::Matrix {
                           State, 1, lua_upvalueindex(1))) *
                       *static_cast<MatrixType*>(LuaHelper::CheckMetatable(
                           State, 2, lua_upvalueindex(1)));
+            return 1;
+        }
+
+        template <class MatrixType>
+        static int __lerp(lua_State* State) {
+            MatrixType *Result, *B;
+
+            Result = static_cast<MatrixType*>(
+                lua_newuserdata(State, sizeof(MatrixType)));
+
+            *Result =
+                static_cast<MatrixType*>(
+                    LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
+                    ->Lerp(*static_cast<MatrixType*>(LuaHelper::CheckMetatable(
+                        State, 2, lua_upvalueindex(1))));
             return 1;
         }
 

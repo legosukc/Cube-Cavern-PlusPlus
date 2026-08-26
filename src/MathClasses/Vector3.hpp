@@ -155,6 +155,15 @@ struct Math::etc::_base_vector3 {
 struct Math::Vector3 : Math::etc::_base_vector3<float, Vector3> {
     using _base_vector3::_base_vector3;
 
+    constexpr Math::Vector3 Lerp(const Math::Vector3& B, float Alpha) const {
+        return *this + (B - *this) * Alpha;
+    }
+
+    constexpr Math::Vector3 Lerp(const Math::Vector3& B,
+                                  const Math::Vector3& Alpha) const {
+        return *this + (B - *this) * Alpha;
+    }
+
     constexpr Math::Vector3 Floor() const {
         return Math::Vector3(std::floor(this->X), std::floor(this->Y),
                              std::floor(this->Z));

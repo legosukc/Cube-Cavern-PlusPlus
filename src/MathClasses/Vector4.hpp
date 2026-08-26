@@ -19,17 +19,23 @@ namespace Math {
 
 template <typename _ComponentType, class _DerivedType>
 struct Math::etc::_base_vector4 {
-    static constexpr inline int ComponentCount = 4;
+    static constexpr int ComponentCount = 4;
     using ComponentType = _ComponentType;
 
-    constexpr _base_vector4() : _base_vector4(static_cast<ComponentType>(0)) {}
-    constexpr _base_vector4(ComponentType _X,
-                            ComponentType _Y,
-                            ComponentType _Z,
-                            ComponentType _W)
+    constexpr _base_vector4<_ComponentType, _DerivedType>()
+        : _base_vector4<_ComponentType, _DerivedType>(
+              static_cast<ComponentType>(0)) {}
+    constexpr _base_vector4<_ComponentType, _DerivedType>(_ComponentType _X,
+                                                          ComponentType _Y,
+                                                          ComponentType _Z,
+                                                          ComponentType _W)
         : X(_X), Y(_Y), Z(_Z), W(_W) {}
-    constexpr explicit _base_vector4(ComponentType Value)
-        : X(Value), Y(Value), Z(Value), W(Value) {}
+    constexpr explicit _base_vector4<_ComponentType, _DerivedType>(
+        ComponentType Value)
+        : _base_vector4<_ComponentType, _DerivedType>(Value,
+                                                      Value,
+                                                      Value,
+                                                      Value) {}
 
     union {
         ComponentType X, R, S;
@@ -165,9 +171,19 @@ struct Math::etc::_base_vector4 {
                              (this->Z * this->Z) + (this->W * this->W));
         }
     }
+
+    constexpr _DerivedType Lerp(const _DerivedType& B, float Alpha) const {
+        return *this + (B - *this) * Alpha;
+    }
+
+    constexpr _DerivedType Lerp(const _DerivedType& B,
+                                const _DerivedType& Alpha) const {
+        return *this + (B - *this) * Alpha;
+    }
 };
 
-struct Math::Vector4 : Math::etc::_base_vector4<float, Vector4> {
+struct Math::Vector4 : public Math::etc::_base_vector4<float, Vector4> {
+
     using _base_vector4::_base_vector4;
 
     SSE3_FUNCTION
@@ -225,7 +241,7 @@ constexpr Math::Vector4 operator%(Math::Vector4::ComponentType A,
 }
 
 struct Math::IVector4 : Math::etc::_base_vector4<Sint32, IVector4> {
-    using _base_vector4::_base_vector4;
+    using _base_vector4<Sint32, IVector4>::_base_vector4;
 
     constexpr operator Math::Vector4() const;
     constexpr operator Math::UVector4() const;

@@ -444,8 +444,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: /home/savoury/Documen
   /usr/include/c++/16/cassert \
   /usr/include/c++/16/cctype \
   /usr/include/c++/16/cerrno \
-  /usr/include/c++/16/cfloat \
-  /usr/include/c++/16/climits \
   /usr/include/c++/16/clocale \
   /usr/include/c++/16/cmath \
   /usr/include/c++/16/codecvt \
@@ -544,280 +542,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: /home/savoury/Documen
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
-  /usr/include/glm/common.hpp \
-  /usr/include/glm/detail/_fixes.hpp \
-  /usr/include/glm/detail/_noise.hpp \
-  /usr/include/glm/detail/_vectorize.hpp \
-  /usr/include/glm/detail/compute_common.hpp \
-  /usr/include/glm/detail/compute_vector_decl.hpp \
-  /usr/include/glm/detail/compute_vector_relational.hpp \
-  /usr/include/glm/detail/func_common.inl \
-  /usr/include/glm/detail/func_exponential.inl \
-  /usr/include/glm/detail/func_geometric.inl \
-  /usr/include/glm/detail/func_integer.inl \
-  /usr/include/glm/detail/func_matrix.inl \
-  /usr/include/glm/detail/func_packing.inl \
-  /usr/include/glm/detail/func_trigonometric.inl \
-  /usr/include/glm/detail/func_vector_relational.inl \
-  /usr/include/glm/detail/qualifier.hpp \
-  /usr/include/glm/detail/setup.hpp \
-  /usr/include/glm/detail/type_float.hpp \
-  /usr/include/glm/detail/type_half.hpp \
-  /usr/include/glm/detail/type_half.inl \
-  /usr/include/glm/detail/type_mat2x2.hpp \
-  /usr/include/glm/detail/type_mat2x2.inl \
-  /usr/include/glm/detail/type_mat2x3.hpp \
-  /usr/include/glm/detail/type_mat2x3.inl \
-  /usr/include/glm/detail/type_mat2x4.hpp \
-  /usr/include/glm/detail/type_mat2x4.inl \
-  /usr/include/glm/detail/type_mat3x2.hpp \
-  /usr/include/glm/detail/type_mat3x2.inl \
-  /usr/include/glm/detail/type_mat3x3.hpp \
-  /usr/include/glm/detail/type_mat3x3.inl \
-  /usr/include/glm/detail/type_mat3x4.hpp \
-  /usr/include/glm/detail/type_mat3x4.inl \
-  /usr/include/glm/detail/type_mat4x2.hpp \
-  /usr/include/glm/detail/type_mat4x2.inl \
-  /usr/include/glm/detail/type_mat4x3.hpp \
-  /usr/include/glm/detail/type_mat4x3.inl \
-  /usr/include/glm/detail/type_mat4x4.hpp \
-  /usr/include/glm/detail/type_mat4x4.inl \
-  /usr/include/glm/detail/type_quat.hpp \
-  /usr/include/glm/detail/type_quat.inl \
-  /usr/include/glm/detail/type_vec1.hpp \
-  /usr/include/glm/detail/type_vec1.inl \
-  /usr/include/glm/detail/type_vec2.hpp \
-  /usr/include/glm/detail/type_vec2.inl \
-  /usr/include/glm/detail/type_vec3.hpp \
-  /usr/include/glm/detail/type_vec3.inl \
-  /usr/include/glm/detail/type_vec4.hpp \
-  /usr/include/glm/detail/type_vec4.inl \
-  /usr/include/glm/exponential.hpp \
-  /usr/include/glm/ext.hpp \
-  /usr/include/glm/ext/_matrix_vectorize.hpp \
-  /usr/include/glm/ext/matrix_clip_space.hpp \
-  /usr/include/glm/ext/matrix_clip_space.inl \
-  /usr/include/glm/ext/matrix_common.hpp \
-  /usr/include/glm/ext/matrix_common.inl \
-  /usr/include/glm/ext/matrix_double2x2.hpp \
-  /usr/include/glm/ext/matrix_double2x2_precision.hpp \
-  /usr/include/glm/ext/matrix_double2x3.hpp \
-  /usr/include/glm/ext/matrix_double2x3_precision.hpp \
-  /usr/include/glm/ext/matrix_double2x4.hpp \
-  /usr/include/glm/ext/matrix_double2x4_precision.hpp \
-  /usr/include/glm/ext/matrix_double3x2.hpp \
-  /usr/include/glm/ext/matrix_double3x2_precision.hpp \
-  /usr/include/glm/ext/matrix_double3x3.hpp \
-  /usr/include/glm/ext/matrix_double3x3_precision.hpp \
-  /usr/include/glm/ext/matrix_double3x4.hpp \
-  /usr/include/glm/ext/matrix_double3x4_precision.hpp \
-  /usr/include/glm/ext/matrix_double4x2.hpp \
-  /usr/include/glm/ext/matrix_double4x2_precision.hpp \
-  /usr/include/glm/ext/matrix_double4x3.hpp \
-  /usr/include/glm/ext/matrix_double4x3_precision.hpp \
-  /usr/include/glm/ext/matrix_double4x4.hpp \
-  /usr/include/glm/ext/matrix_double4x4_precision.hpp \
-  /usr/include/glm/ext/matrix_float2x2.hpp \
-  /usr/include/glm/ext/matrix_float2x2_precision.hpp \
-  /usr/include/glm/ext/matrix_float2x3.hpp \
-  /usr/include/glm/ext/matrix_float2x3_precision.hpp \
-  /usr/include/glm/ext/matrix_float2x4.hpp \
-  /usr/include/glm/ext/matrix_float2x4_precision.hpp \
-  /usr/include/glm/ext/matrix_float3x2.hpp \
-  /usr/include/glm/ext/matrix_float3x2_precision.hpp \
-  /usr/include/glm/ext/matrix_float3x3.hpp \
-  /usr/include/glm/ext/matrix_float3x3_precision.hpp \
-  /usr/include/glm/ext/matrix_float3x4.hpp \
-  /usr/include/glm/ext/matrix_float3x4_precision.hpp \
-  /usr/include/glm/ext/matrix_float4x2.hpp \
-  /usr/include/glm/ext/matrix_float4x2_precision.hpp \
-  /usr/include/glm/ext/matrix_float4x3.hpp \
-  /usr/include/glm/ext/matrix_float4x3_precision.hpp \
-  /usr/include/glm/ext/matrix_float4x4.hpp \
-  /usr/include/glm/ext/matrix_float4x4_precision.hpp \
-  /usr/include/glm/ext/matrix_int2x2.hpp \
-  /usr/include/glm/ext/matrix_int2x2_sized.hpp \
-  /usr/include/glm/ext/matrix_int2x3.hpp \
-  /usr/include/glm/ext/matrix_int2x3_sized.hpp \
-  /usr/include/glm/ext/matrix_int2x4.hpp \
-  /usr/include/glm/ext/matrix_int2x4_sized.hpp \
-  /usr/include/glm/ext/matrix_int3x2.hpp \
-  /usr/include/glm/ext/matrix_int3x2_sized.hpp \
-  /usr/include/glm/ext/matrix_int3x3.hpp \
-  /usr/include/glm/ext/matrix_int3x3_sized.hpp \
-  /usr/include/glm/ext/matrix_int3x4.hpp \
-  /usr/include/glm/ext/matrix_int3x4_sized.hpp \
-  /usr/include/glm/ext/matrix_int4x2.hpp \
-  /usr/include/glm/ext/matrix_int4x2_sized.hpp \
-  /usr/include/glm/ext/matrix_int4x3.hpp \
-  /usr/include/glm/ext/matrix_int4x3_sized.hpp \
-  /usr/include/glm/ext/matrix_int4x4.hpp \
-  /usr/include/glm/ext/matrix_int4x4_sized.hpp \
-  /usr/include/glm/ext/matrix_projection.hpp \
-  /usr/include/glm/ext/matrix_projection.inl \
-  /usr/include/glm/ext/matrix_relational.hpp \
-  /usr/include/glm/ext/matrix_relational.inl \
-  /usr/include/glm/ext/matrix_transform.hpp \
-  /usr/include/glm/ext/matrix_transform.inl \
-  /usr/include/glm/ext/matrix_uint2x2.hpp \
-  /usr/include/glm/ext/matrix_uint2x2_sized.hpp \
-  /usr/include/glm/ext/matrix_uint2x3.hpp \
-  /usr/include/glm/ext/matrix_uint2x3_sized.hpp \
-  /usr/include/glm/ext/matrix_uint2x4.hpp \
-  /usr/include/glm/ext/matrix_uint2x4_sized.hpp \
-  /usr/include/glm/ext/matrix_uint3x2.hpp \
-  /usr/include/glm/ext/matrix_uint3x2_sized.hpp \
-  /usr/include/glm/ext/matrix_uint3x3.hpp \
-  /usr/include/glm/ext/matrix_uint3x3_sized.hpp \
-  /usr/include/glm/ext/matrix_uint3x4.hpp \
-  /usr/include/glm/ext/matrix_uint3x4_sized.hpp \
-  /usr/include/glm/ext/matrix_uint4x2.hpp \
-  /usr/include/glm/ext/matrix_uint4x2_sized.hpp \
-  /usr/include/glm/ext/matrix_uint4x3.hpp \
-  /usr/include/glm/ext/matrix_uint4x3_sized.hpp \
-  /usr/include/glm/ext/matrix_uint4x4.hpp \
-  /usr/include/glm/ext/matrix_uint4x4_sized.hpp \
-  /usr/include/glm/ext/quaternion_common.hpp \
-  /usr/include/glm/ext/quaternion_common.inl \
-  /usr/include/glm/ext/quaternion_double.hpp \
-  /usr/include/glm/ext/quaternion_double_precision.hpp \
-  /usr/include/glm/ext/quaternion_exponential.hpp \
-  /usr/include/glm/ext/quaternion_exponential.inl \
-  /usr/include/glm/ext/quaternion_float.hpp \
-  /usr/include/glm/ext/quaternion_float_precision.hpp \
-  /usr/include/glm/ext/quaternion_geometric.hpp \
-  /usr/include/glm/ext/quaternion_geometric.inl \
-  /usr/include/glm/ext/quaternion_relational.hpp \
-  /usr/include/glm/ext/quaternion_relational.inl \
-  /usr/include/glm/ext/quaternion_transform.hpp \
-  /usr/include/glm/ext/quaternion_transform.inl \
-  /usr/include/glm/ext/quaternion_trigonometric.hpp \
-  /usr/include/glm/ext/quaternion_trigonometric.inl \
-  /usr/include/glm/ext/scalar_common.hpp \
-  /usr/include/glm/ext/scalar_common.inl \
-  /usr/include/glm/ext/scalar_constants.hpp \
-  /usr/include/glm/ext/scalar_constants.inl \
-  /usr/include/glm/ext/scalar_int_sized.hpp \
-  /usr/include/glm/ext/scalar_integer.hpp \
-  /usr/include/glm/ext/scalar_integer.inl \
-  /usr/include/glm/ext/scalar_packing.hpp \
-  /usr/include/glm/ext/scalar_packing.inl \
-  /usr/include/glm/ext/scalar_reciprocal.hpp \
-  /usr/include/glm/ext/scalar_reciprocal.inl \
-  /usr/include/glm/ext/scalar_relational.hpp \
-  /usr/include/glm/ext/scalar_relational.inl \
-  /usr/include/glm/ext/scalar_uint_sized.hpp \
-  /usr/include/glm/ext/scalar_ulp.hpp \
-  /usr/include/glm/ext/scalar_ulp.inl \
-  /usr/include/glm/ext/vector_bool1.hpp \
-  /usr/include/glm/ext/vector_bool1_precision.hpp \
-  /usr/include/glm/ext/vector_bool2.hpp \
-  /usr/include/glm/ext/vector_bool2_precision.hpp \
-  /usr/include/glm/ext/vector_bool3.hpp \
-  /usr/include/glm/ext/vector_bool3_precision.hpp \
-  /usr/include/glm/ext/vector_bool4.hpp \
-  /usr/include/glm/ext/vector_bool4_precision.hpp \
-  /usr/include/glm/ext/vector_common.hpp \
-  /usr/include/glm/ext/vector_common.inl \
-  /usr/include/glm/ext/vector_double1.hpp \
-  /usr/include/glm/ext/vector_double1_precision.hpp \
-  /usr/include/glm/ext/vector_double2.hpp \
-  /usr/include/glm/ext/vector_double2_precision.hpp \
-  /usr/include/glm/ext/vector_double3.hpp \
-  /usr/include/glm/ext/vector_double3_precision.hpp \
-  /usr/include/glm/ext/vector_double4.hpp \
-  /usr/include/glm/ext/vector_double4_precision.hpp \
-  /usr/include/glm/ext/vector_float1.hpp \
-  /usr/include/glm/ext/vector_float1_precision.hpp \
-  /usr/include/glm/ext/vector_float2.hpp \
-  /usr/include/glm/ext/vector_float2_precision.hpp \
-  /usr/include/glm/ext/vector_float3.hpp \
-  /usr/include/glm/ext/vector_float3_precision.hpp \
-  /usr/include/glm/ext/vector_float4.hpp \
-  /usr/include/glm/ext/vector_float4_precision.hpp \
-  /usr/include/glm/ext/vector_int1.hpp \
-  /usr/include/glm/ext/vector_int1_sized.hpp \
-  /usr/include/glm/ext/vector_int2.hpp \
-  /usr/include/glm/ext/vector_int2_sized.hpp \
-  /usr/include/glm/ext/vector_int3.hpp \
-  /usr/include/glm/ext/vector_int3_sized.hpp \
-  /usr/include/glm/ext/vector_int4.hpp \
-  /usr/include/glm/ext/vector_int4_sized.hpp \
-  /usr/include/glm/ext/vector_integer.hpp \
-  /usr/include/glm/ext/vector_integer.inl \
-  /usr/include/glm/ext/vector_packing.hpp \
-  /usr/include/glm/ext/vector_packing.inl \
-  /usr/include/glm/ext/vector_reciprocal.hpp \
-  /usr/include/glm/ext/vector_reciprocal.inl \
-  /usr/include/glm/ext/vector_relational.hpp \
-  /usr/include/glm/ext/vector_relational.inl \
-  /usr/include/glm/ext/vector_uint1.hpp \
-  /usr/include/glm/ext/vector_uint1_sized.hpp \
-  /usr/include/glm/ext/vector_uint2.hpp \
-  /usr/include/glm/ext/vector_uint2_sized.hpp \
-  /usr/include/glm/ext/vector_uint3.hpp \
-  /usr/include/glm/ext/vector_uint3_sized.hpp \
-  /usr/include/glm/ext/vector_uint4.hpp \
-  /usr/include/glm/ext/vector_uint4_sized.hpp \
-  /usr/include/glm/ext/vector_ulp.hpp \
-  /usr/include/glm/ext/vector_ulp.inl \
-  /usr/include/glm/fwd.hpp \
-  /usr/include/glm/geometric.hpp \
-  /usr/include/glm/glm.hpp \
-  /usr/include/glm/gtc/bitfield.hpp \
-  /usr/include/glm/gtc/bitfield.inl \
-  /usr/include/glm/gtc/color_space.hpp \
-  /usr/include/glm/gtc/color_space.inl \
-  /usr/include/glm/gtc/constants.hpp \
-  /usr/include/glm/gtc/constants.inl \
-  /usr/include/glm/gtc/epsilon.hpp \
-  /usr/include/glm/gtc/epsilon.inl \
-  /usr/include/glm/gtc/integer.hpp \
-  /usr/include/glm/gtc/integer.inl \
-  /usr/include/glm/gtc/matrix_access.hpp \
-  /usr/include/glm/gtc/matrix_access.inl \
-  /usr/include/glm/gtc/matrix_integer.hpp \
-  /usr/include/glm/gtc/matrix_inverse.hpp \
-  /usr/include/glm/gtc/matrix_inverse.inl \
-  /usr/include/glm/gtc/matrix_transform.hpp \
-  /usr/include/glm/gtc/matrix_transform.inl \
-  /usr/include/glm/gtc/noise.hpp \
-  /usr/include/glm/gtc/noise.inl \
-  /usr/include/glm/gtc/packing.hpp \
-  /usr/include/glm/gtc/packing.inl \
-  /usr/include/glm/gtc/quaternion.hpp \
-  /usr/include/glm/gtc/quaternion.inl \
-  /usr/include/glm/gtc/random.hpp \
-  /usr/include/glm/gtc/random.inl \
-  /usr/include/glm/gtc/reciprocal.hpp \
-  /usr/include/glm/gtc/round.hpp \
-  /usr/include/glm/gtc/round.inl \
-  /usr/include/glm/gtc/type_precision.hpp \
-  /usr/include/glm/gtc/type_precision.inl \
-  /usr/include/glm/gtc/type_ptr.hpp \
-  /usr/include/glm/gtc/type_ptr.inl \
-  /usr/include/glm/gtc/ulp.hpp \
-  /usr/include/glm/gtc/ulp.inl \
-  /usr/include/glm/gtc/vec1.hpp \
-  /usr/include/glm/integer.hpp \
-  /usr/include/glm/mat2x2.hpp \
-  /usr/include/glm/mat2x3.hpp \
-  /usr/include/glm/mat2x4.hpp \
-  /usr/include/glm/mat3x2.hpp \
-  /usr/include/glm/mat3x3.hpp \
-  /usr/include/glm/mat3x4.hpp \
-  /usr/include/glm/mat4x2.hpp \
-  /usr/include/glm/mat4x3.hpp \
-  /usr/include/glm/mat4x4.hpp \
-  /usr/include/glm/matrix.hpp \
-  /usr/include/glm/packing.hpp \
-  /usr/include/glm/simd/integer.h \
-  /usr/include/glm/simd/platform.h \
-  /usr/include/glm/trigonometric.hpp \
-  /usr/include/glm/vec2.hpp \
-  /usr/include/glm/vec3.hpp \
-  /usr/include/glm/vec4.hpp \
-  /usr/include/glm/vector_relational.hpp \
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
   /usr/include/libintl.h \
@@ -845,2104 +569,1077 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o: /home/savoury/Documen
   /usr/include/time.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/adxintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxavx512intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxbf16intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxcomplexintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxfp16intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxfp8intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxint8intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxmovrsintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxtf32intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxtileintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2bf16intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2convertintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2copyintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2mediaintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2minmaxintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2satcvtintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx2intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bf16intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bf16vlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bitalgintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bitalgvlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bmmintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bmmvlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bwintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512cdintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512dqintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512fintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512fp16intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512fp16vlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512ifmaintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512ifmavlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmi2intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmi2vlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmiintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmivlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vlbwintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vldqintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vnniintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vnnivlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vp2intersectintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vp2intersectvlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vpopcntdqintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vpopcntdqvlintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxifmaintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxneconvertintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxvnniint16intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxvnniint8intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxvnniintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/bmi2intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/bmiintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/cetintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/cldemoteintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/clflushoptintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/clwbintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/clzerointrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/cmpccxaddintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/emmintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/enqcmdintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/f16cintrin.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/float.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/fmaintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/fxsrintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/gfniintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/hresetintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/ia32intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/immintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/keylockerintrin.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/lwpintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/lzcntintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mm_malloc.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mmintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/movdirintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/movrsintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mwaitintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mwaitxintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/pconfigintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/pkuintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/pmmintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/popcntintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/prfchiintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/prfchwintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/raointintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/rdseedintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/rtmintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/serializeintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sgxintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sha512intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/shaintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sm3intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sm4intrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/smmintrin.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/tbmintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/tmmintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/tsxldtrkintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/uintrintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/usermsrintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/vaesintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/vpclmulqdqintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/waitpkgintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/wbnoinvdintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/wmmintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/x86gprintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xmmintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsavecintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsaveintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsaveoptintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsavesintrin.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xtestintrin.h \
   /usr/local/include/SDL3_net/SDL_net.h
 
-CubeCavern: /usr/lib/Scrt1.o \
-  /usr/lib/crti.o \
-  /usr/lib/crtn.o \
-  /usr/lib/libSDL3.so \
-  /usr/lib/libSDL3_image.so \
-  /usr/lib/libSDL3_mixer.so \
-  /usr/lib/libSDL3_net.so \
-  /usr/lib/libSDL3_ttf.so \
-  /usr/lib/libassimp.so \
-  /usr/lib/libc.so \
-  /usr/lib/libgcc_s.so.1 \
-  /usr/lib/libm.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so \
-  /usr/lib/ld-linux-x86-64.so.2 \
-  /usr/lib/libbrotlicommon.so.1 \
-  /usr/lib/libbrotlidec.so.1 \
-  /usr/lib/libbz2.so.1.0 \
-  /usr/lib/libc.so.6 \
-  /usr/lib/libc_nonshared.a \
-  /usr/lib/libfreetype.so.6 \
-  /usr/lib/libglib-2.0.so.0 \
-  /usr/lib/libgraphite2.so.3 \
-  /usr/lib/libharfbuzz.so.0 \
-  /usr/lib/libm.so.6 \
-  /usr/lib/libmvec.so.1 \
-  /usr/lib/libopenal.so \
-  /usr/lib/libpcre2-8.so.0 \
-  /usr/lib/libpng16.so.16 \
-  /usr/lib/libz.so.1 \
-  /usr/lib32/libbrotlicommon.so.1 \
-  /usr/lib32/libbrotlidec.so.1 \
-  /usr/lib32/libbz2.so.1.0 \
-  /usr/lib32/libfreetype.so.6 \
-  /usr/lib32/libglib-2.0.so.0 \
-  /usr/lib32/libpcre2-8.so.0 \
-  /usr/lib32/libpng16.so.16 \
-  /usr/lib32/libz.so.1 \
-  CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o \
-  _deps/luau-build/libLuau.Ast.a \
-  _deps/luau-build/libLuau.Bytecode.a \
-  _deps/luau-build/libLuau.Common.a \
-  _deps/luau-build/libLuau.Compiler.a \
-  _deps/luau-build/libLuau.VM.a
-
-
-_deps/luau-build/libLuau.VM.a:
-
-_deps/luau-build/libLuau.Bytecode.a:
-
-CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o:
-
-/usr/lib32/libz.so.1:
-
-/usr/lib32/libglib-2.0.so.0:
-
-/usr/lib32/libbz2.so.1.0:
-
-/usr/lib32/libbrotlicommon.so.1:
-
-/usr/lib/libz.so.1:
-
-/usr/lib/libpcre2-8.so.0:
-
-/usr/lib/libm.so.6:
-
-/usr/lib/libgraphite2.so.3:
-
-/usr/lib/libfreetype.so.6:
-
-/usr/lib/libbrotlicommon.so.1:
-
-/usr/lib/ld-linux-x86-64.so.2:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o:
-
-/usr/lib/libm.so:
-
-/usr/lib/libgcc_s.so.1:
-
-/usr/lib/libassimp.so:
-
-/usr/lib/libSDL3_ttf.so:
-
-/usr/lib/crti.o:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsavesintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsaveintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsavecintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xmmintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/x86gprintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xtestintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/wmmintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/wbnoinvdintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/waitpkgintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/vpclmulqdqintrin.h:
 
 /usr/local/include/SDL3_net/SDL_net.h:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/uintrintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/tbmintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/smmintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sm3intrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/serializeintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/rtmintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/raointintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/prfchiintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/pkuintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mwaitintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/movrsintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/movdirintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/lzcntintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/lwpintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/popcntintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/keylockerintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/immintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/ia32intrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/hresetintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/fxsrintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/float.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/enqcmdintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/emmintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxneconvertintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxifmaintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vpopcntdqvlintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vpopcntdqintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vp2intersectintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/gfniintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vnniintrin.h:
-
-/usr/lib/libbz2.so.1.0:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vlintrin.h:
-
-/usr/lib/libharfbuzz.so.0:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmivlintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmi2vlintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512ifmaintrin.h:
-
-/usr/lib/libSDL3.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512cdintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/bmiintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bwintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bmmvlintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bitalgintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bf16vlintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2satcvtintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2convertintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2bf16intrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxtileintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxtf32intrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxint8intrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/fmaintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxcomplexintrin.h:
-
-/usr/include/wchar.h:
-
-/usr/include/sys/select.h:
-
-/usr/include/strings.h:
-
-/usr/include/stdio.h:
-
-/usr/lib/libSDL3_image.so:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/linux/types.h:
-
-/usr/include/limits.h:
-
-/usr/include/libintl.h:
-
-/usr/include/gnu/stubs.h:
-
-/usr/include/glm/vec3.hpp:
-
-/usr/include/glm/vec2.hpp:
-
-/usr/include/glm/trigonometric.hpp:
-
-/usr/include/glm/packing.hpp:
-
-/usr/include/glm/mat4x3.hpp:
-
-/usr/include/glm/mat4x2.hpp:
-
-/usr/include/glm/mat3x4.hpp:
-
-/usr/include/glm/mat2x2.hpp:
-
-/usr/include/glm/gtc/vec1.hpp:
-
-/usr/include/glm/gtc/ulp.hpp:
-
-/usr/include/glm/gtc/type_ptr.hpp:
-
-/usr/include/glm/gtc/type_precision.inl:
-
-/usr/include/glm/gtc/type_precision.hpp:
-
-/usr/include/glm/gtc/quaternion.inl:
-
-/usr/include/glm/gtc/packing.hpp:
-
-/usr/include/glm/gtc/noise.hpp:
-
-/usr/include/glm/gtc/matrix_transform.inl:
-
-/usr/include/glm/gtc/matrix_inverse.hpp:
-
-/usr/include/glm/gtc/matrix_integer.hpp:
-
-/usr/include/glm/gtc/matrix_access.inl:
-
-/usr/include/glm/gtc/matrix_access.hpp:
-
-/usr/include/glm/gtc/constants.hpp:
-
-/usr/include/glm/gtc/color_space.hpp:
-
-/usr/include/glm/gtc/bitfield.hpp:
-
-/usr/include/glm/fwd.hpp:
-
-/usr/include/glm/ext/vector_ulp.hpp:
-
-/usr/include/glm/ext/vector_uint4.hpp:
-
-/usr/include/glm/ext/vector_uint3.hpp:
-
-/usr/include/glm/ext/vector_uint2.hpp:
-
-/usr/lib32/libbrotlidec.so.1:
-
-/usr/include/stdlib.h:
-
-/usr/include/glm/ext/vector_uint1_sized.hpp:
-
-/usr/include/glm/ext/vector_relational.hpp:
-
-/usr/include/glm/gtc/integer.inl:
-
-/usr/include/glm/ext/vector_packing.inl:
-
-/usr/include/glm/ext/vector_integer.inl:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/adxintrin.h:
-
-/usr/include/glm/gtc/bitfield.inl:
-
-/usr/include/glm/ext/vector_int3_sized.hpp:
-
-/usr/include/glm/ext/vector_int3.hpp:
-
-/usr/include/glm/ext/vector_int1.hpp:
-
-/usr/include/glm/ext/vector_uint2_sized.hpp:
-
-/usr/include/glm/ext/vector_float4.hpp:
-
-/usr/include/glm/ext/vector_float3_precision.hpp:
-
-/usr/include/glm/ext/vector_float3.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxbf16intrin.h:
-
-/usr/include/glm/ext/vector_float1_precision.hpp:
-
-/usr/include/glm/ext/vector_float1.hpp:
-
-/usr/include/glm/ext/vector_double4_precision.hpp:
-
-/usr/include/glm/ext/vector_double4.hpp:
-
-/usr/include/glm/ext/vector_double3_precision.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vldqintrin.h:
-
-/usr/include/glm/ext/vector_double2_precision.hpp:
-
-/usr/include/glm/ext/vector_double2.hpp:
-
-/usr/include/glm/ext/vector_double1_precision.hpp:
-
-/usr/include/glm/ext/vector_double1.hpp:
-
-/usr/include/glm/ext/vector_common.inl:
-
-/usr/include/glm/ext/vector_bool4_precision.hpp:
-
-/usr/include/glm/ext/vector_bool3_precision.hpp:
-
-/usr/include/glm/ext/vector_bool3.hpp:
-
-/usr/include/gnu/stubs-64.h:
-
-/usr/include/glm/ext/vector_bool1_precision.hpp:
-
-/usr/include/glm/ext/scalar_relational.hpp:
-
-/usr/include/glm/ext/scalar_reciprocal.hpp:
-
-/usr/include/glm/ext/scalar_packing.inl:
-
-/usr/include/glm/ext/scalar_packing.hpp:
-
-/usr/include/glm/gtc/reciprocal.hpp:
-
-/usr/include/glm/ext/scalar_integer.inl:
-
-/usr/include/glm/ext/scalar_integer.hpp:
-
-/usr/include/glm/ext/vector_uint3_sized.hpp:
-
-/usr/include/glm/ext/scalar_constants.inl:
-
-/usr/include/glm/ext/scalar_constants.hpp:
-
-/usr/include/glm/ext/scalar_common.inl:
-
-/usr/include/glm/ext/quaternion_relational.inl:
-
-/usr/include/glm/ext/quaternion_relational.hpp:
-
-/usr/include/glm/ext/quaternion_geometric.inl:
-
-/usr/include/glm/ext/quaternion_float.hpp:
-
-/usr/include/glm/ext/quaternion_exponential.hpp:
-
-/usr/include/glm/ext/quaternion_double_precision.hpp:
-
-/usr/include/glm/ext/quaternion_common.inl:
-
-/usr/include/glm/ext/quaternion_common.hpp:
-
-/usr/include/glm/ext/matrix_uint4x3_sized.hpp:
-
-/usr/include/glm/ext/vector_integer.hpp:
-
-/usr/include/glm/ext/matrix_uint3x4_sized.hpp:
-
-/usr/include/glm/ext/matrix_uint3x3_sized.hpp:
-
-/usr/include/glm/ext/matrix_uint3x3.hpp:
-
-/usr/include/glm/ext/matrix_uint3x2_sized.hpp:
-
-/usr/include/glm/ext/matrix_uint2x4_sized.hpp:
-
-/usr/include/glm/ext/matrix_uint2x2_sized.hpp:
-
-/usr/include/glm/ext/matrix_uint2x2.hpp:
-
-/usr/include/glm/ext/matrix_transform.inl:
-
-/usr/include/glm/ext/matrix_transform.hpp:
-
-/usr/include/glm/ext/matrix_relational.hpp:
-
-/usr/include/glm/ext/matrix_projection.inl:
-
-/usr/include/glm/ext/matrix_projection.hpp:
-
-/usr/include/glm/ext/matrix_int4x4_sized.hpp:
-
-/usr/include/glm/ext/matrix_int4x4.hpp:
-
-/usr/include/glm/ext/matrix_int4x3_sized.hpp:
-
-/usr/include/glm/ext/matrix_int4x2_sized.hpp:
-
-/usr/include/sys/types.h:
-
-/usr/include/glm/ext/matrix_int3x4_sized.hpp:
-
-/usr/include/glm/ext/matrix_int2x3_sized.hpp:
-
-/usr/include/glm/ext/matrix_int2x3.hpp:
-
-/usr/include/locale.h:
-
-/usr/include/glm/ext/scalar_ulp.hpp:
-
-/usr/include/glm/ext/matrix_int2x2_sized.hpp:
-
-/usr/include/math.h:
-
-/usr/include/glm/ext/matrix_float4x4_precision.hpp:
-
-/usr/include/glm/ext/matrix_float4x3.hpp:
-
-/usr/include/sys/cdefs.h:
-
-/usr/include/glm/ext/matrix_float4x2_precision.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/pmmintrin.h:
-
-/usr/include/glm/ext/matrix_float4x2.hpp:
-
-/usr/include/glm/ext/matrix_float3x3.hpp:
-
-/usr/include/glm/ext/vector_bool4.hpp:
-
-/usr/include/glm/ext/matrix_float3x2.hpp:
-
-/usr/include/glm/ext/matrix_float2x3_precision.hpp:
-
-/usr/include/glm/ext/matrix_float2x3.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2mediaintrin.h:
-
-/usr/include/glm/ext/quaternion_geometric.hpp:
-
-/usr/include/glm/ext/matrix_float2x2_precision.hpp:
-
-/usr/include/glm/ext/matrix_float2x2.hpp:
-
-/usr/include/glm/ext/matrix_double4x4_precision.hpp:
-
-/usr/include/glm/ext/matrix_double4x3.hpp:
-
-/usr/include/glm/ext/matrix_double4x2.hpp:
-
-/usr/include/glm/ext/matrix_double3x2_precision.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/vaesintrin.h:
-
-/usr/include/glm/ext/matrix_double3x2.hpp:
-
-/usr/include/glm/ext/matrix_double2x3_precision.hpp:
-
-/usr/include/glm/ext/matrix_double2x3.hpp:
-
-/usr/include/glm/ext/matrix_double2x2_precision.hpp:
-
-/usr/include/glm/ext/matrix_double2x2.hpp:
-
-/usr/include/glm/ext/matrix_common.inl:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxintrin.h:
-
-/usr/include/glm/ext/matrix_clip_space.inl:
-
-/usr/include/glm/ext/matrix_clip_space.hpp:
-
-/usr/include/linux/sched/types.h:
-
-/usr/include/glm/ext/_matrix_vectorize.hpp:
-
-/usr/include/glm/mat3x3.hpp:
-
-/usr/include/glm/exponential.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bitalgvlintrin.h:
-
-/usr/include/glm/ext/quaternion_float_precision.hpp:
-
-/usr/include/glm/detail/type_vec4.inl:
-
-/usr/include/glm/detail/type_vec3.inl:
-
-/usr/include/glm/ext/matrix_uint4x2.hpp:
-
-/usr/include/glm/detail/type_vec3.hpp:
-
-/usr/include/glm/detail/type_vec2.hpp:
-
-/usr/include/glm/detail/type_vec1.hpp:
-
-/usr/lib/libopenal.so:
-
-/usr/include/glm/ext/matrix_uint2x3_sized.hpp:
-
-/usr/include/c++/16/ostream:
-
-/usr/include/c++/16/pstl/pstl_config.h:
-
-/usr/include/bits/types/struct_sched_param.h:
-
-/usr/include/glm/ext/matrix_float3x4.hpp:
-
-/usr/include/bits/types/struct___jmp_buf_tag.h:
-
-/usr/include/bits/waitstatus.h:
-
-/usr/include/glm/ext/vector_bool1.hpp:
-
-/usr/include/bits/wchar.h:
-
-/usr/include/bits/types/mbstate_t.h:
-
-/usr/include/bits/types/__locale_t.h:
-
-/usr/include/assimp/config.h:
-
-/usr/include/bits/types/__fpos64_t.h:
-
-/usr/include/bits/types/struct_itimerspec.h:
-
-/usr/include/SDL3/SDL_scancode.h:
-
-/usr/lib/libbrotlidec.so.1:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics.hpp:
-
-/usr/include/c++/16/iomanip:
-
-/usr/include/c++/16/bits/locale_facets.h:
-
-/usr/include/bits/time64.h:
-
-/usr/include/bits/stdlib-float.h:
-
-/usr/include/glm/gtc/round.inl:
-
-/usr/include/bits/setjmp.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/include/VM/lua.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so:
-
-/usr/include/bits/posix2_lim.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/Math.hpp:
-
-/usr/include/glm/ext/matrix_int2x2.hpp:
-
-/usr/include/bits/types/clock_t.h:
-
-/usr/lib/libglib-2.0.so.0:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/cldemoteintrin.h:
-
-/usr/include/SDL3/SDL_iostream.h:
-
-/usr/include/bits/types/__fpos_t.h:
-
-/usr/include/c++/16/bits/char_traits.h:
-
-/usr/include/bits/mathcalls.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512fp16intrin.h:
-
-/usr/include/bits/mathcalls-narrow.h:
-
-/usr/include/glm/ext/matrix_double2x4.hpp:
-
-/usr/include/bits/math-vector.h:
-
-/usr/include/bits/long-double.h:
-
-/usr/include/bits/locale.h:
-
-/usr/include/bits/local_lim.h:
-
-/usr/include/SDL3/SDL_thread.h:
-
-/usr/include/glm/ext/vector_int2_sized.hpp:
-
-/usr/include/c++/16/bits/algorithmfwd.h:
-
-/usr/include/c++/16/tr1/bessel_function.tcc:
-
-/usr/include/glm/ext/matrix_int3x2_sized.hpp:
-
-/usr/include/bits/libc-header-start.h:
-
-/usr/lib/libSDL3_mixer.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxmovrsintrin.h:
-
-/usr/include/bits/types/FILE.h:
-
-/usr/include/bits/flt-eval-method.h:
-
-/usr/include/c++/16/bits/unordered_set.h:
-
-/usr/include/bits/timex.h:
-
-/usr/include/bits/errno.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/cetintrin.h:
-
-/usr/include/SDL3_image/SDL_image.h:
-
-/usr/include/glm/ext/quaternion_transform.inl:
-
-/usr/include/bits/typesizes.h:
-
-/usr/include/assimp/vector2.inl:
-
-/usr/include/c++/16/bits/fs_fwd.h:
-
-/usr/include/assimp/vector2.h:
-
-/usr/include/c++/16/bits/locale_classes.h:
-
-/usr/include/glm/ext/matrix_uint4x2_sized.hpp:
-
-/usr/include/c++/16/concepts:
-
-/usr/include/glm/detail/type_vec2.inl:
-
-/usr/include/assimp/types.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/tmmintrin.h:
-
-/usr/include/glm/vector_relational.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/FragmentShader.hpp:
-
-/usr/lib32/libpcre2-8.so.0:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sgxintrin.h:
-
-/usr/include/assimp/scene.h:
-
-/usr/include/SDL3/SDL_endian.h:
-
-/usr/include/bits/types/sigset_t.h:
-
-/usr/include/glm/ext/vector_int1_sized.hpp:
-
-/usr/include/SDL3/SDL_dlopennote.h:
-
-/usr/include/c++/16/cwchar:
-
-/usr/include/SDL3/SDL_asyncio.h:
-
-/usr/include/c++/16/bits/new_allocator.h:
-
-/usr/include/c++/16/map:
-
-/usr/include/bits/floatn.h:
-
-/usr/include/c++/16/bits/vector.tcc:
-
-/usr/include/glm/ext/matrix_common.hpp:
-
-/usr/include/assimp/color4.inl:
-
-/usr/include/assimp/color4.h:
-
-/usr/include/assimp/Compiler/poppack1.h:
-
-/usr/include/glm/ext/quaternion_trigonometric.inl:
-
-/usr/include/assert.h:
-
-/usr/include/glm/ext/vector_bool2_precision.hpp:
-
-/usr/include/asm/types.h:
-
-/usr/include/glm/detail/_vectorize.hpp:
-
-_deps/luau-build/libLuau.Compiler.a:
-
-/usr/include/asm/posix_types_64.h:
-
-/usr/include/asm/errno.h:
-
-/usr/include/bits/stdint-uintn.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2copyintrin.h:
-
-/usr/include/asm/bitsperlong.h:
-
-/usr/include/asm-generic/posix_types.h:
-
-/usr/include/c++/16/bits/uses_allocator.h:
-
-/usr/include/assimp/mesh.h:
-
-/usr/include/sys/single_threaded.h:
-
-/usr/include/glm/ext/matrix_int3x2.hpp:
-
-/usr/include/asm-generic/errno.h:
-
-/usr/include/c++/16/bits/stl_vector.h:
-
-/usr/include/asm-generic/bitsperlong.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxfp8intrin.h:
-
-/usr/include/c++/16/clocale:
-
-/usr/include/c++/16/bits/ostream_insert.h:
-
-/usr/include/glm/ext/scalar_common.hpp:
-
-/usr/include/glm/ext/matrix_double4x4.hpp:
-
-/usr/include/alloca.h:
-
-/usr/include/c++/16/algorithm:
-
-/usr/include/c++/16/bits/enable_special_members.h:
-
-/usr/include/c++/16/tr1/exp_integral.tcc:
-
-/usr/include/SDL3/SDL_tray.h:
-
-/usr/include/SDL3/SDL_touch.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bf16intrin.h:
-
-/usr/include/c++/16/bits/allocated_ptr.h:
-
-/usr/include/SDL3/SDL_timer.h:
-
-/usr/include/glm/vec4.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/MathTransform.hpp:
-
-/usr/include/bits/types/struct_tm.h:
-
-/usr/include/SDL3/SDL_storage.h:
-
-/usr/include/errno.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mwaitxintrin.h:
-
-/usr/include/c++/16/bits/locale_facets_nonio.h:
-
-/usr/include/glm/ext/matrix_float3x4_precision.hpp:
-
-/usr/include/SDL3/SDL_rect.h:
-
-/usr/include/c++/16/memory:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaConsole.hpp:
-
-/usr/include/assimp/quaternion.inl:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaTask.hpp:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/error_constants.h:
-
-/usr/include/glm/ext/quaternion_trigonometric.hpp:
-
-/usr/include/bits/types/struct_timespec.h:
-
-/usr/include/c++/16/valarray:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaTable.hpp:
-
-/usr/include/glm/ext/matrix_uint4x4.hpp:
-
-/usr/include/glm/ext/matrix_double4x3_precision.hpp:
-
-/usr/include/assimp/material.h:
-
-/usr/include/SDL3/SDL_opengles2_gl2ext.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaEnums.hpp:
-
-/usr/include/c++/16/backward/auto_ptr.h:
-
-/usr/include/assimp/quaternion.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.hpp:
-
-/usr/include/glm/ext/matrix_double3x4_precision.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaMatrix.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/VertexShader.hpp:
-
-/usr/include/c++/16/bits/hashtable_policy.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_MiscHeaders/LuaGraphics_SampleModels.hpp:
-
-/usr/include/glm/ext/vector_reciprocal.inl:
-
-/usr/include/c++/16/ctime:
-
-/usr/include/bits/pthreadtypes-arch.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaMath.hpp:
-
-/usr/include/string.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_UniformBuffer.hpp:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/cpu_defines.h:
-
-/usr/include/SDL3/SDL_mouse.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/Program.hpp:
-
-/usr/include/SDL3/SDL_metal.h:
-
-/usr/include/glm/gtc/epsilon.inl:
-
-/usr/include/bits/types/error_t.h:
-
-/usr/include/c++/16/tr1/poly_hermite.tcc:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Statistics.hpp:
-
-/usr/include/glm/ext/matrix_int3x3_sized.hpp:
-
-/usr/include/bits/pthread_stack_min-dynamic.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/bmi2intrin.h:
-
-/usr/include/c++/16/string_view:
-
-/usr/include/SDL3/SDL_hidapi.h:
-
-/usr/include/SDL3/SDL_gamepad.h:
-
-/usr/lib/libc.so:
-
-/usr/include/glm/mat2x4.hpp:
-
-/usr/include/asm-generic/types.h:
-
-/usr/include/SDL3/SDL_locale.h:
-
-/usr/include/glm/ext/matrix_uint2x4.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Lua.hpp:
-
-/usr/include/c++/16/tuple:
-
-/usr/include/glm/ext/vector_ulp.inl:
-
-/usr/include/glm/ext/scalar_ulp.inl:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Time.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vp2intersectvlintrin.h:
-
-/usr/include/glm/mat2x3.hpp:
-
-/usr/include/SDL3/SDL_haptic.h:
-
-/usr/include/glm/gtc/integer.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexArray.hpp:
-
-/usr/include/glm/ext/matrix_int3x3.hpp:
-
-/usr/include/c++/16/bits/forward_list.tcc:
-
-/usr/include/bits/endianness.h:
-
-/usr/include/AL/alc.h:
-
-/usr/include/SDL3/SDL_atomic.h:
-
-/usr/include/c++/16/bits/locale_classes.tcc:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_ElementBuffer.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_GLObjectBase.hpp:
-
-/usr/include/wctype.h:
-
-/usr/include/glm/ext/vector_common.hpp:
-
-/usr/include/assimp/camera.h:
-
-/usr/include/bits/types/cookie_io_functions_t.h:
-
-/usr/include/glm/detail/compute_vector_decl.hpp:
-
-/usr/include/glm/ext/vector_float2_precision.hpp:
-
-/usr/include/assimp/matrix3x3.inl:
-
-/usr/include/assimp/vector3.h:
-
-/usr/include/c++/16/backward/binders.h:
-
-/usr/include/c++/16/bits/fs_path.h:
-
-/usr/include/SDL3/SDL_properties.h:
-
-/usr/include/glm/ext/vector_double3.hpp:
-
-/usr/include/c++/16/cstdlib:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/MathClasses/Vector3.hpp:
-
-/usr/include/c++/16/utility:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/StringHelper.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h:
-
-/usr/include/c++/16/bits/basic_string.h:
-
-/usr/include/glm/gtc/packing.inl:
-
-/usr/include/glm/detail/type_half.inl:
-
-/usr/include/bits/pthreadtypes.h:
-
-/usr/include/bits/mathcalls-helper-functions.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Graphics_Client.hpp:
-
-/usr/include/c++/16/bits/specfun.h:
-
-/usr/include/SDL3/SDL_platform.h:
-
-/usr/include/glm/detail/type_mat4x3.inl:
-
-/usr/include/SDL3/SDL_mutex.h:
-
-/usr/include/c++/16/bits/requires_hosted.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/LuaLibraries/LuaNetwork_Client.hpp:
-
-/usr/include/glm/gtc/constants.inl:
-
-/usr/include/c++/16/filesystem:
-
-/usr/include/bits/wctype-wchar.h:
-
-/usr/include/bits/stdint-intn.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/f16cintrin.h:
-
-/usr/include/c++/16/list:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/VertexArray.hpp:
-
-/usr/include/SDL3/SDL_loadso.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mmintrin.h:
-
-/usr/include/assimp/aabb.h:
-
-/usr/include/bits/types/__FILE.h:
-
-/usr/include/bits/struct_rwlock.h:
-
-/usr/include/bits/sched.h:
-
-/usr/include/features.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vnnivlintrin.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaTypeHelper.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/MathClasses/Vector2.hpp:
-
-/usr/include/bits/byteswap.h:
-
-/usr/include/c++/16/stdlib.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/TypeHelper.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxvnniint8intrin.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaVector.hpp:
-
-/usr/include/bits/mathcalls-macros.h:
-
-/usr/include/c++/16/tr1/hypergeometric.tcc:
-
-/usr/include/asm-generic/int-ll64.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxavx512intrin.h:
-
-/usr/include/c++/16/version:
-
-/usr/lib/libSDL3_net.so:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/include/VM/lualib.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/clzerointrin.h:
-
-/usr/include/c++/16/bits/postypes.h:
-
-/usr/include/c++/16/cstdio:
-
-/usr/include/glm/detail/type_mat3x4.inl:
-
-/usr/include/c++/16/bits/stl_pair.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/CollisionClasses/BoxCollision.hpp:
-
-/usr/include/SDL3/SDL_misc.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/include/VM/luaconf.h:
-
-/usr/include/bits/xopen_lim.h:
-
-/usr/include/c++/16/bits/stl_construct.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource_OpenAL.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512dqintrin.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/CollisionClasses/CollisionContainer.hpp:
-
-/usr/include/SDL3/SDL_messagebox.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/main_client.cpp:
-
-/usr/include/bits/types/locale_t.h:
-
-/usr/include/glm/ext/scalar_int_sized.hpp:
-
-/usr/include/c++/16/bits/valarray_array.tcc:
-
-/usr/include/bits/struct_mutex.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/ConsoleVars.hpp:
-
-/usr/include/glm/ext/matrix_relational.inl:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/CollisionClasses/SphereCollision.hpp:
-
-/usr/lib/crtn.o:
-
-/usr/include/linux/limits.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/basic_file.h:
-
-/usr/include/c++/16/bits/cxxabi_forced.h:
-
-/usr/include/glm/ext/matrix_int3x4.hpp:
-
-/usr/include/SDL3/SDL_camera.h:
-
-/usr/include/c++/16/cwctype:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mm_malloc.h:
-
-/usr/include/c++/16/cctype:
-
-/usr/include/bits/posix1_lim.h:
-
-/usr/include/SDL3/SDL_keycode.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/clwbintrin.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Network_Client.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/SDLClasses/Window.hpp:
-
-/usr/include/glm/ext/vector_int4_sized.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/nlohmann/json.hpp:
-
-/usr/include/glm/ext/scalar_uint_sized.hpp:
-
-/usr/include/bits/endian.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Collisions.hpp:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/time_members.h:
-
-/usr/include/assimp/matrix3x3.h:
-
-/usr/include/bits/thread-shared-types.h:
-
-/usr/include/bits/uio_lim.h:
-
-/usr/include/c++/16/ext/type_traits.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/Texture.hpp:
-
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h:
-
-/usr/include/glm/ext/vector_int2.hpp:
-
-/usr/include/c++/16/bits/ostream.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vlbwintrin.h:
-
-/usr/include/SDL3/SDL_dialog.h:
-
-/usr/include/SDL3/SDL_keyboard.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/CollisionClasses/BaseCollision.hpp:
-
-/usr/include/bits/types.h:
-
-/usr/include/glm/detail/type_mat2x2.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/include/Compiler/luacode.h:
-
-/usr/include/glm/ext/matrix_uint3x4.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/LuaHelper.hpp:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/bits/cpu-set.h:
-
-/usr/include/SDL3/SDL_bits.h:
-
-/usr/include/assimp/MathFunctions.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sha512intrin.h:
-
-/usr/include/SDL3/SDL_system.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/CollisionClasses/MeshCollision.hpp:
-
-/usr/include/SDL3/SDL_hints.h:
-
-/usr/include/glm/ext/matrix_int2x4.hpp:
-
-/usr/include/glm/ext/matrix_double3x3_precision.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaModelLoader.hpp:
-
-/usr/include/c++/16/any:
-
-/usr/include/SDL3/SDL_opengl_glext.h:
-
-/usr/include/c++/16/bits/range_access.h:
-
-/usr/include/glm/mat4x4.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/Sound.hpp:
-
-/usr/lib/libpng16.so.16:
-
-/usr/include/c++/16/bits/ostream_print.h:
-
-/usr/include/glm/detail/func_matrix.inl:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/ConfigHandler.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxvnniint16intrin.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/SDLMixer_Sound.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/Speaker_OpenAL.hpp:
-
-/usr/include/SDL3/SDL_pixels.h:
-
-/usr/include/SDL3/SDL_video.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/OpenAL_Sound.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Game.hpp:
-
-/usr/include/c++/16/bits/locale_facets.tcc:
-
-/usr/include/glm/gtc/round.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexBuffer.hpp:
-
-/usr/include/SDL3/SDL_init.h:
-
-/usr/include/c++/16/bits/erase_if.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Shader.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/ShaderBase.hpp:
-
-/usr/include/c++/16/system_error:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avxvnniintrin.h:
-
-/usr/include/glm/detail/compute_common.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/UniformBuffer.hpp:
-
-/usr/include/assimp/material.inl:
-
-/usr/include/c++/16/bits/predefined_ops.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/usermsrintrin.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/VertexBuffer.hpp:
-
-/usr/lib/Scrt1.o:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/Listener.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/Exceptions.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/Event.hpp:
-
-/usr/include/bits/timesize.h:
-
-/usr/include/c++/16/codecvt:
-
-/usr/include/bits/time.h:
-
-/usr/include/glm/ext/matrix_uint4x3.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundUtils.hpp:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512fintrin.h:
-
-/usr/include/assimp/metadata.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/Speaker.hpp:
-
-/usr/include/AL/al.h:
-
-/usr/include/AL/alext.h:
-
-/usr/include/bits/select.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/pch.h:
-
-/usr/include/AL/efx.h:
-
-/usr/include/SDL3/SDL_assert.h:
-
-/usr/include/glm/ext/matrix_uint3x2.hpp:
-
-/usr/include/bits/types/struct_FILE.h:
-
-/usr/lib32/libpng16.so.16:
-
-/usr/include/SDL3/SDL_log.h:
-
-/usr/include/glm/detail/func_integer.inl:
 
 /usr/include/time.h:
 
-/usr/include/c++/16/bits/fs_ops.h:
+/usr/include/sys/types.h:
 
-/usr/include/SDL3/SDL_blendmode.h:
+/usr/include/sys/single_threaded.h:
 
-/usr/include/c++/16/bits/stl_algobase.h:
+/usr/include/sys/cdefs.h:
 
-/usr/include/c++/16/bits/stl_iterator_base_funcs.h:
+/usr/include/string.h:
 
-/usr/include/asm/posix_types.h:
+/usr/include/math.h:
 
-/usr/include/c++/16/bits/valarray_after.h:
+/usr/include/linux/types.h:
 
-/usr/include/bits/stdint-least.h:
+/usr/include/linux/limits.h:
 
-/usr/include/c++/16/bits/shared_ptr_base.h:
+/usr/include/limits.h:
 
-/usr/include/c++/16/debug/debug.h:
-
-/usr/include/assimp/anim.h:
-
-/usr/include/SDL3/SDL_oldnames.h:
-
-/usr/include/glm/ext/vector_float2.hpp:
-
-/usr/include/c++/16/bits/node_handle.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/File.hpp:
-
-/usr/include/bits/atomic_wide_counter.h:
-
-/usr/include/c++/16/bits/charconv.h:
-
-/usr/include/c++/16/ext/string_conversions.h:
-
-/usr/include/assimp/Importer.hpp:
-
-/usr/include/assimp/vector3.inl:
-
-/usr/include/SDL3/SDL_cpuinfo.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/IndexBuffer.hpp:
-
-/usr/include/SDL3/SDL_audio.h:
-
-/usr/include/glm/ext/vector_relational.inl:
-
-/usr/include/c++/16/bits/atomic_lockfree_defines.h:
-
-/usr/include/glm/ext/vector_float4_precision.hpp:
-
-/usr/include/SDL3/SDL_render.h:
-
-/usr/include/SDL3/SDL_error.h:
-
-/usr/include/glm/ext/matrix_float2x4.hpp:
-
-/usr/include/c++/16/bits/stl_multimap.h:
-
-/usr/include/glm/mat3x2.hpp:
-
-/usr/include/SDL3/SDL_version.h:
-
-/usr/include/bits/iscanonical.h:
-
-/usr/include/c++/16/unordered_set:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/define.h:
-
-/usr/include/bits/types/wint_t.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/LuaLibraries/LuaSound_Client.hpp:
-
-/usr/include/c++/16/new:
-
-/usr/include/glm/ext/vector_uint1.hpp:
-
-/usr/include/SDL3/SDL_gpu.h:
-
-/usr/include/glm/ext/scalar_reciprocal.inl:
-
-/usr/include/glm/ext/matrix_int4x3.hpp:
-
-/usr/include/SDL3/SDL_guid.h:
-
-/usr/include/glm/gtc/epsilon.hpp:
-
-/usr/include/SDL3/SDL_pen.h:
-
-/usr/include/SDL3/SDL_main.h:
-
-/usr/include/glm/simd/integer.h:
-
-/usr/include/glm/ext/matrix_uint2x3.hpp:
-
-/usr/include/SDL3/SDL_opengl.h:
-
-/usr/include/SDL3/SDL_sensor.h:
-
-/usr/include/bits/types/__sigset_t.h:
-
-/usr/include/stdint.h:
-
-/usr/include/c++/16/bits/fs_dir.h:
-
-/usr/include/glm/ext/matrix_float2x4_precision.hpp:
-
-/usr/include/SDL3/SDL_joystick.h:
-
-/usr/include/glm/detail/compute_vector_relational.hpp:
-
-/usr/include/assimp/postprocess.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512bmmintrin.h:
-
-/usr/include/bits/types/time_t.h:
-
-/usr/include/bits/uintn-identity.h:
-
-/usr/include/bits/waitflags.h:
-
-/usr/include/bits/wordsize.h:
-
-/usr/include/c++/16/stdexcept:
-
-/usr/include/glm/geometric.hpp:
-
-/usr/include/c++/16/array:
-
-/usr/include/glm/gtc/matrix_transform.hpp:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/atomic_word.h:
-
-/usr/include/glm/detail/func_geometric.inl:
-
-/usr/include/c++/16/bit:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xsaveoptintrin.h:
-
-/usr/include/c++/16/bits/stl_list.h:
-
-/usr/include/c++/16/bits/align.h:
-
-/usr/include/c++/16/cmath:
-
-/usr/include/c++/16/bits/alloc_traits.h:
-
-/usr/include/SDL3/SDL_filesystem.h:
-
-/usr/include/c++/16/bits/allocator.h:
-
-/usr/include/glm/ext/quaternion_transform.hpp:
-
-/usr/include/glm/ext/matrix_float3x2_precision.hpp:
-
-/usr/include/c++/16/bits/atomic_base.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/MathClasses/Vector4.hpp:
-
-/usr/include/c++/16/bits/std_mutex.h:
-
-/usr/include/assimp/defs.h:
-
-/usr/include/c++/16/bits/basic_ios.h:
-
-/usr/include/SDL3/SDL_clipboard.h:
-
-/usr/include/c++/16/cstdint:
-
-/usr/include/c++/16/bits/chrono.h:
-
-/usr/include/c++/16/bits/codecvt.h:
-
-/usr/include/c++/16/bits/mask_array.h:
-
-/usr/include/bits/types/clockid_t.h:
-
-/usr/include/c++/16/bits/stl_heap.h:
-
-/usr/include/c++/16/bits/concept_check.h:
-
-/usr/include/c++/16/bits/cpp_type_traits.h:
-
-/usr/include/SDL3/SDL_platform_defines.h:
-
-/usr/include/c++/16/bits/cxxabi_init_exception.h:
-
-/usr/include/c++/16/bits/exception.h:
-
-/usr/include/glm/gtc/matrix_inverse.inl:
-
-/usr/include/c++/16/bits/std_function.h:
-
-/usr/include/glm/gtc/quaternion.hpp:
-
-/usr/include/glm/ext/matrix_float4x3_precision.hpp:
-
-/usr/include/c++/16/iterator:
-
-/usr/include/endian.h:
-
-/usr/include/assimp/matrix4x4.h:
-
-/usr/include/c++/16/bits/exception_ptr.h:
-
-/usr/include/c++/16/bits/forward_list.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaInput.hpp:
-
-/usr/include/c++/16/bits/functexcept.h:
-
-/usr/include/assimp/light.h:
-
-/usr/include/c++/16/bits/stl_bvector.h:
-
-/usr/include/c++/16/bits/functional_hash.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/cmpccxaddintrin.h:
-
-/usr/include/asm-generic/errno-base.h:
-
-/usr/include/c++/16/bits/gslice.h:
-
-/usr/include/c++/16/bits/hash_bytes.h:
-
-/usr/include/sched.h:
-
-/usr/include/c++/16/bits/hashtable.h:
-
-/usr/include/c++/16/bits/indirect_array.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/prfchwintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512fp16vlintrin.h:
-
-/usr/include/glm/ext/matrix_double3x3.hpp:
-
-/usr/include/c++/16/bits/ptr_traits.h:
-
-/usr/include/bits/floatn-common.h:
-
-/usr/include/c++/16/bits/invoke.h:
-
-/usr/include/c++/16/bits/ios_base.h:
-
-/usr/include/SDL3/SDL_begin_code.h:
-
-/usr/include/c++/16/bits/istream.tcc:
-
-/usr/include/bits/libm-simd-decl-stubs.h:
-
-/usr/include/glm/detail/type_mat3x2.hpp:
-
-/usr/include/c++/16/bits/list.tcc:
-
-/usr/include/c++/16/bits/locale_facets_nonio.tcc:
-
-/usr/include/c++/16/bits/refwrap.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr-default.h:
-
-/usr/include/pthread.h:
-
-/usr/include/glm/matrix.hpp:
-
-/usr/include/glm/glm.hpp:
-
-/usr/include/glm/ext/matrix_int2x4_sized.hpp:
-
-/usr/include/c++/16/bits/localefwd.h:
-
-/usr/include/SDL3/SDL.h:
-
-/usr/include/c++/16/unordered_map:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/rdseedintrin.h:
-
-/usr/include/glm/ext/vector_packing.hpp:
-
-/usr/include/SDL3_mixer/SDL_mixer.h:
-
-/usr/include/c++/16/bits/memoryfwd.h:
-
-/usr/include/c++/16/bits/move.h:
-
-/usr/include/c++/16/bits/nested_exception.h:
-
-/usr/include/c++/16/bits/new_except.h:
-
-/usr/include/c++/16/bits/new_throw.h:
-
-/usr/include/c++/16/bits/string_view.tcc:
-
-/usr/include/c++/16/ext/atomicity.h:
-
-/usr/include/c++/16/bits/parse_numbers.h:
-
-/usr/include/c++/16/bits/quoted_string.h:
-
-/usr/include/c++/16/type_traits:
-
-/usr/include/SDL3/SDL_surface.h:
-
-/usr/include/c++/16/bits/shared_ptr.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/shaintrin.h:
-
-/usr/include/SDL3/SDL_stdinc.h:
-
-/usr/include/c++/16/bits/stringfwd.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx10_2minmaxintrin.h:
-
-/usr/include/c++/16/bits/shared_ptr_atomic.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/BitOp.hpp:
-
-/usr/include/c++/16/bits/slice_array.h:
-
-/usr/include/glm/simd/platform.h:
-
-/usr/include/glm/detail/type_vec4.hpp:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Program.hpp:
-
-/usr/include/c++/16/bits/sstream.tcc:
-
-/usr/include/glm/gtc/noise.inl:
-
-/usr/include/glm/ext.hpp:
-
-/usr/include/c++/16/bits/std_abs.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/clflushoptintrin.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/amxfp16intrin.h:
-
-/usr/include/c++/16/bits/stdexcept_throw.h:
-
-/usr/include/c++/16/bits/stl_algo.h:
-
-/usr/include/glm/ext/matrix_uint4x4_sized.hpp:
-
-/usr/include/c++/16/bits/stdexcept_except.h:
-
-/usr/include/c++/16/bits/valarray_array.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h:
-
-/usr/include/c++/16/optional:
-
-/usr/include/c++/16/bits/stl_function.h:
-
-/usr/include/linux/errno.h:
-
-/usr/include/c++/16/bits/stl_iterator.h:
-
-/usr/include/glm/ext/vector_uint4_sized.hpp:
-
-/usr/include/c++/16/ext/numeric_traits.h:
-
-_deps/luau-build/libLuau.Ast.a:
-
-/usr/include/c++/16/bits/stl_map.h:
-
-/usr/include/c++/16/bits/stl_numeric.h:
-
-/usr/include/assimp/Compiler/pushpack1.h:
-
-/usr/include/c++/16/tr1/poly_laguerre.tcc:
-
-/usr/lib/libc.so.6:
-
-/usr/include/bits/fp-fast.h:
-
-/usr/include/c++/16/bits/stl_raw_storage_iter.h:
-
-/usr/include/c++/16/bits/stl_iterator_base_types.h:
-
-/usr/include/c++/16/bits/stl_relops.h:
-
-/usr/include/SDL3/SDL_time.h:
-
-/usr/include/glm/detail/_fixes.hpp:
-
-/usr/include/c++/16/bits/stl_tempbuf.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/sm4intrin.h:
-
-/usr/include/ctype.h:
-
-/usr/include/c++/16/bits/stl_tree.h:
-
-/usr/include/SDL3/SDL_process.h:
-
-/usr/include/bits/types/__mbstate_t.h:
-
-/usr/include/c++/16/bits/stream_iterator.h:
-
-/usr/include/c++/16/bits/streambuf.tcc:
-
-/usr/lib/libc_nonshared.a:
-
-/usr/include/c++/16/bits/ostream.tcc:
-
-/usr/include/c++/16/bits/uniform_int_dist.h:
-
-/usr/include/glm/detail/type_mat2x3.inl:
-
-/usr/include/c++/16/bits/unique_lock.h:
-
-/usr/include/c++/16/bits/unique_ptr.h:
-
-/usr/include/c++/16/bits/unordered_map.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/pconfigintrin.h:
-
-/usr/include/glm/gtc/random.hpp:
-
-/usr/include/c++/16/ext/alloc_traits.h:
-
-/usr/include/c++/16/bits/uses_allocator_args.h:
-
-/usr/include/SDL3/SDL_events.h:
-
-/usr/include/c++/16/bits/utility.h:
-
-/usr/include/c++/16/bits/valarray_before.h:
-
-/usr/include/c++/16/bits/version.h:
-
-/usr/include/assimp/matrix4x4.inl:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/Framebuffer.hpp:
-
-/usr/include/c++/16/cassert:
-
-/usr/include/glm/ext/vector_bool2.hpp:
-
-/usr/include/c++/16/cerrno:
-
-/usr/include/c++/16/cfloat:
-
-/usr/include/c++/16/climits:
-
-/usr/include/c++/16/compare:
-
-/usr/include/c++/16/cstddef:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h:
-
-/usr/include/c++/16/bits/stl_uninitialized.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/MathClasses/Matrix.hpp:
-
-/usr/include/c++/16/cstring:
-
-/usr/include/SDL3/SDL_close_code.h:
-
-/usr/include/c++/16/pstl/execution_defs.h:
-
-/usr/include/c++/16/debug/assertions.h:
-
-/usr/include/c++/16/bits/basic_ios.tcc:
-
-/usr/include/c++/16/fstream:
-
-/usr/include/c++/16/pstl/glue_algorithm_defs.h:
-
-/usr/include/glm/ext/quaternion_double.hpp:
-
-/usr/include/SDL3/SDL_power.h:
-
-/usr/include/c++/16/exception:
-
-/usr/include/c++/16/ext/aligned_buffer.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmiintrin.h:
-
-/usr/include/c++/16/ext/concurrence.h:
-
-/usr/include/c++/16/forward_list:
-
-/usr/include/c++/16/numeric:
-
-/usr/include/glm/ext/matrix_float3x3_precision.hpp:
-
-/usr/include/c++/16/functional:
-
-/usr/include/c++/16/initializer_list:
-
-/usr/include/bits/types/timer_t.h:
-
-/usr/include/c++/16/tr1/riemann_zeta.tcc:
-
-/usr/include/c++/16/ios:
-
-/usr/include/glm/ext/matrix_double3x4.hpp:
-
-/usr/include/c++/16/iostream:
-
-/usr/include/c++/16/istream:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512vbmi2intrin.h:
-
-/usr/include/glm/gtc/color_space.inl:
-
-/usr/include/c++/16/limits:
-
-/usr/include/c++/16/locale:
-
-/usr/include/c++/16/mutex:
-
-/usr/include/c++/16/pstl/glue_memory_defs.h:
-
-/usr/include/c++/16/pstl/glue_numeric_defs.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx512ifmavlintrin.h:
-
-/usr/include/c++/16/ratio:
-
-/usr/include/c++/16/bits/stdexcept_throwfwd.h:
-
-/usr/include/c++/16/sstream:
-
-/usr/include/c++/16/bits/fstream.tcc:
-
-/usr/include/c++/16/streambuf:
-
-/usr/lib32/libfreetype.so.6:
-
-/usr/include/glm/gtc/random.inl:
-
-/usr/include/c++/16/string:
-
-/usr/include/c++/16/tr1/beta_function.tcc:
-
-/usr/include/c++/16/iosfwd:
-
-/usr/include/c++/16/tr1/ell_integral.tcc:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_base.h:
-
-/usr/include/glm/detail/func_common.inl:
-
-/usr/include/glm/gtc/ulp.inl:
-
-/usr/include/c++/16/tr1/legendre_function.tcc:
-
-/usr/include/c++/16/tr1/modified_bessel_func.tcc:
-
-/usr/include/glm/detail/type_vec1.inl:
-
-/usr/include/c++/16/tr1/special_function_util.h:
-
-/usr/include/c++/16/bits/locale_conv.h:
-
-/usr/include/c++/16/typeinfo:
-
-_deps/luau-build/libLuau.Common.a:
-
-/usr/lib/libmvec.so.1:
-
-/usr/include/linux/stddef.h:
-
-/usr/include/bits/fp-logb.h:
-
-/usr/include/c++/16/vector:
-
-/usr/include/glm/ext/scalar_relational.inl:
-
-/usr/include/glm/ext/quaternion_exponential.inl:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++allocator.h:
-
-/usr/include/c++/16/bits/gslice_array.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++io.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++locale.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_inline.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr.h:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/messages_members.h:
-
-/usr/include/c++/16/bits/basic_string.tcc:
-
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/os_defines.h:
-
-/usr/include/glm/ext/matrix_double2x4_precision.hpp:
+/usr/include/gnu/stubs-64.h:
 
 /usr/include/features-time64.h:
 
-/usr/include/glm/ext/vector_int4.hpp:
+/usr/include/stdc-predef.h:
 
-/usr/include/glm/detail/type_quat.inl:
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/os_defines.h:
 
-/usr/include/glm/gtc/type_ptr.inl:
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/messages_members.h:
 
-/usr/include/glm/common.hpp:
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr.h:
 
-/usr/include/assimp/texture.h:
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_inline.h:
 
-/usr/include/c++/16/bits/memory_resource.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h:
 
-/usr/include/glm/detail/_noise.hpp:
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++locale.h:
 
-/usr/include/glm/detail/func_packing.inl:
+/usr/include/linux/errno.h:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/avx2intrin.h:
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++io.h:
 
-/usr/include/glm/integer.hpp:
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++allocator.h:
 
-/usr/include/glm/ext/matrix_float4x4.hpp:
+/usr/include/c++/16/vector:
+
+/usr/include/c++/16/typeinfo:
+
+/usr/include/c++/16/tr1/special_function_util.h:
+
+/usr/include/c++/16/tr1/modified_bessel_func.tcc:
+
+/usr/include/c++/16/tr1/legendre_function.tcc:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/ctype_base.h:
+
+/usr/include/c++/16/tr1/ell_integral.tcc:
+
+/usr/include/c++/16/tr1/beta_function.tcc:
+
+/usr/include/c++/16/string:
+
+/usr/include/c++/16/streambuf:
+
+/usr/include/c++/16/sstream:
+
+/usr/include/c++/16/ratio:
+
+/usr/include/c++/16/pstl/glue_numeric_defs.h:
+
+/usr/include/c++/16/pstl/glue_memory_defs.h:
+
+/usr/include/c++/16/mutex:
+
+/usr/include/c++/16/locale:
+
+/usr/include/c++/16/limits:
+
+/usr/include/c++/16/istream:
+
+/usr/include/c++/16/iostream:
+
+/usr/include/c++/16/ios:
+
+/usr/include/c++/16/tr1/riemann_zeta.tcc:
+
+/usr/include/c++/16/initializer_list:
+
+/usr/include/c++/16/functional:
+
+/usr/include/c++/16/numeric:
+
+/usr/include/c++/16/forward_list:
+
+/usr/include/c++/16/ext/concurrence.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/c++/16/ext/aligned_buffer.h:
+
+/usr/include/c++/16/exception:
+
+/usr/include/c++/16/pstl/glue_algorithm_defs.h:
+
+/usr/include/c++/16/debug/assertions.h:
+
+/usr/include/c++/16/cstring:
+
+/usr/include/c++/16/cstddef:
+
+/usr/include/pthread.h:
+
+/usr/include/c++/16/compare:
+
+/usr/include/c++/16/cerrno:
+
+/usr/include/c++/16/cassert:
+
+/usr/include/c++/16/fstream:
+
+/usr/include/c++/16/bits/version.h:
+
+/usr/include/c++/16/bits/valarray_before.h:
+
+/usr/include/c++/16/bits/utility.h:
+
+/usr/include/c++/16/bits/uses_allocator_args.h:
+
+/usr/include/c++/16/ext/alloc_traits.h:
+
+/usr/include/c++/16/bits/unordered_map.h:
+
+/usr/include/c++/16/bits/unique_ptr.h:
+
+/usr/include/c++/16/bits/unique_lock.h:
+
+/usr/include/c++/16/bits/uniform_int_dist.h:
+
+/usr/include/c++/16/bits/streambuf.tcc:
+
+/usr/include/c++/16/bits/stream_iterator.h:
+
+/usr/include/c++/16/bits/stl_tree.h:
+
+/usr/include/ctype.h:
+
+/usr/include/c++/16/bits/stl_tempbuf.h:
+
+/usr/include/c++/16/bits/stl_relops.h:
+
+/usr/include/c++/16/bits/stl_raw_storage_iter.h:
+
+/usr/include/c++/16/tr1/poly_laguerre.tcc:
+
+/usr/include/c++/16/bits/stl_numeric.h:
+
+/usr/include/c++/16/bits/stl_map.h:
+
+/usr/include/c++/16/ext/numeric_traits.h:
+
+/usr/include/c++/16/bits/stl_iterator.h:
+
+/usr/include/c++/16/bits/stl_function.h:
+
+/usr/include/c++/16/optional:
+
+/usr/include/c++/16/bits/valarray_array.h:
+
+/usr/include/c++/16/bits/stl_algo.h:
+
+/usr/include/c++/16/bits/stdexcept_throw.h:
+
+/usr/include/c++/16/bits/stdexcept_except.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/c++/16/bits/std_abs.h:
+
+/usr/include/c++/16/bits/sstream.tcc:
+
+/usr/include/c++/16/bits/slice_array.h:
+
+/usr/include/c++/16/bits/shared_ptr_atomic.h:
+
+/usr/include/c++/16/bits/stringfwd.h:
+
+/usr/include/c++/16/bits/shared_ptr.h:
+
+/usr/include/c++/16/bits/quoted_string.h:
+
+/usr/include/c++/16/bits/parse_numbers.h:
+
+/usr/include/c++/16/bits/ostream.tcc:
+
+/usr/include/c++/16/ext/atomicity.h:
+
+/usr/include/c++/16/bits/new_throw.h:
+
+/usr/include/c++/16/bits/new_except.h:
+
+/usr/include/c++/16/bits/nested_exception.h:
+
+/usr/include/c++/16/bits/move.h:
+
+/usr/include/c++/16/bits/memoryfwd.h:
+
+/usr/include/c++/16/unordered_map:
+
+/usr/include/c++/16/bits/localefwd.h:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/gthr-default.h:
+
+/usr/include/c++/16/bits/locale_facets_nonio.tcc:
+
+/usr/include/c++/16/bits/list.tcc:
+
+/usr/include/c++/16/bits/istream.tcc:
+
+/usr/include/c++/16/bits/ios_base.h:
+
+/usr/include/c++/16/bits/stdexcept_throwfwd.h:
+
+/usr/include/c++/16/bits/invoke.h:
+
+/usr/include/c++/16/bits/ptr_traits.h:
+
+/usr/include/c++/16/bits/indirect_array.h:
+
+/usr/include/c++/16/bits/hashtable.h:
+
+/usr/include/c++/16/bits/hash_bytes.h:
+
+/usr/include/c++/16/bits/gslice_array.h:
+
+/usr/include/c++/16/bits/gslice.h:
+
+/usr/include/c++/16/bits/functional_hash.h:
+
+/usr/include/c++/16/bits/functexcept.h:
+
+/usr/include/c++/16/bits/fstream.tcc:
+
+/usr/include/c++/16/bits/forward_list.h:
+
+/usr/include/c++/16/bits/exception_ptr.h:
+
+/usr/include/stdint.h:
+
+/usr/include/endian.h:
+
+/usr/include/c++/16/bits/std_function.h:
+
+/usr/include/c++/16/bits/exception.h:
+
+/usr/include/c++/16/bits/cxxabi_init_exception.h:
+
+/usr/include/c++/16/bits/cpp_type_traits.h:
+
+/usr/include/c++/16/bits/concept_check.h:
+
+/usr/include/c++/16/bits/stl_heap.h:
+
+/usr/include/c++/16/bits/mask_array.h:
+
+/usr/include/c++/16/bits/codecvt.h:
+
+/usr/include/c++/16/bits/chrono.h:
+
+/usr/include/c++/16/cstdint:
+
+/usr/include/c++/16/bits/basic_ios.tcc:
+
+/usr/include/c++/16/bits/basic_ios.h:
+
+/usr/include/c++/16/bits/std_mutex.h:
+
+/usr/include/c++/16/bits/atomic_base.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h:
+
+/usr/include/c++/16/pstl/execution_defs.h:
+
+/usr/include/c++/16/bits/allocator.h:
+
+/usr/include/c++/16/bits/alloc_traits.h:
+
+/usr/include/c++/16/cmath:
+
+/usr/include/c++/16/bits/align.h:
+
+/usr/include/c++/16/bits/stl_list.h:
+
+/usr/include/c++/16/bit:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/atomic_word.h:
+
+/usr/include/c++/16/array:
+
+/usr/include/stdio.h:
+
+/usr/include/c++/16/stdexcept:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/uintn-identity.h:
+
+/usr/include/bits/types/timer_t.h:
+
+/usr/include/bits/types/time_t.h:
+
+/usr/include/assimp/postprocess.h:
+
+/usr/include/c++/16/iosfwd:
+
+/usr/include/c++/16/bits/fs_dir.h:
+
+/usr/include/bits/types/__sigset_t.h:
+
+/usr/include/SDL3/SDL_opengl.h:
+
+/usr/include/SDL3/SDL_main.h:
+
+/usr/include/SDL3/SDL_pen.h:
+
+/usr/include/SDL3/SDL_clipboard.h:
+
+/usr/include/SDL3/SDL_guid.h:
+
+/usr/include/bits/types/__mbstate_t.h:
+
+/usr/include/SDL3/SDL_gpu.h:
+
+/usr/include/c++/16/new:
+
+/usr/include/bits/types/wint_t.h:
+
+/usr/include/SDL3/SDL_filesystem.h:
+
+/usr/include/c++/16/unordered_set:
+
+/usr/include/SDL3/SDL_events.h:
+
+/usr/include/bits/iscanonical.h:
+
+/usr/include/c++/16/bits/stl_multimap.h:
+
+/usr/include/SDL3/SDL_error.h:
+
+/usr/include/c++/16/bits/atomic_lockfree_defines.h:
+
+/usr/include/SDL3/SDL_audio.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/IndexBuffer.hpp:
+
+/usr/include/c++/16/bits/locale_conv.h:
+
+/usr/include/SDL3/SDL_cpuinfo.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h:
+
+/usr/include/SDL3/SDL_close_code.h:
+
+/usr/include/assimp/Importer.hpp:
+
+/usr/include/c++/16/ext/string_conversions.h:
+
+/usr/include/c++/16/bits/charconv.h:
+
+/usr/include/bits/atomic_wide_counter.h:
+
+/usr/include/c++/16/bits/node_handle.h:
+
+/usr/include/SDL3/SDL_oldnames.h:
+
+/usr/include/assimp/anim.h:
+
+/usr/include/c++/16/bits/shared_ptr_base.h:
+
+/usr/include/bits/stdint-least.h:
+
+/usr/include/c++/16/bits/valarray_after.h:
+
+/usr/include/c++/16/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/16/bits/stl_algobase.h:
+
+/usr/include/SDL3/SDL_blendmode.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/SDL3/SDL_log.h:
+
+/usr/include/bits/types/struct_FILE.h:
+
+/usr/include/SDL3/SDL_assert.h:
+
+/usr/include/AL/efx.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/AL/alext.h:
+
+/usr/include/SDL3/SDL_power.h:
+
+/usr/include/AL/al.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/Speaker.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundUtils.hpp:
+
+/usr/include/bits/time.h:
+
+/usr/include/asm/posix_types.h:
+
+/usr/include/c++/16/codecvt:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/Event.hpp:
+
+/usr/include/assimp/metadata.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/Listener.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/VertexBuffer.hpp:
+
+/usr/include/c++/16/bits/predefined_ops.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/UniformBuffer.hpp:
+
+/usr/include/strings.h:
+
+/usr/include/c++/16/system_error:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/ShaderBase.hpp:
 
 /usr/include/c++/16/bits/streambuf_iterator.h:
 
-/usr/include/glm/detail/func_trigonometric.inl:
-
-/usr/include/glm/detail/func_vector_relational.inl:
-
-/usr/include/glm/ext/matrix_int4x2.hpp:
-
-/usr/include/glm/detail/qualifier.hpp:
-
-/usr/include/linux/posix_types.h:
-
-/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_BufferBase.hpp:
-
-/usr/include/glm/detail/type_mat2x3.hpp:
-
-/usr/include/bits/types/struct_timeval.h:
-
-/usr/include/glm/detail/setup.hpp:
-
-/usr/include/glm/detail/type_float.hpp:
-
-/usr/include/glm/detail/type_half.hpp:
-
-/usr/include/glm/detail/type_mat2x2.inl:
-
-/usr/include/glm/detail/type_mat2x4.hpp:
-
-/usr/include/glm/detail/type_mat2x4.inl:
-
-/usr/include/glm/detail/type_mat3x2.inl:
-
-/usr/include/glm/ext/matrix_double4x2_precision.hpp:
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Shader.hpp:
 
 /usr/include/c++/16/tr1/gamma.tcc:
 
-/usr/include/glm/detail/type_mat3x3.hpp:
+/usr/include/c++/16/bits/erase_if.h:
 
-/usr/include/glm/detail/type_mat3x3.inl:
+/usr/include/SDL3/SDL_init.h:
 
-/usr/include/glm/detail/type_mat3x4.hpp:
+/usr/include/c++/16/bits/locale_facets.tcc:
 
-/usr/include/glm/detail/func_exponential.inl:
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Game.hpp:
 
-/usr/include/glm/detail/type_mat4x2.hpp:
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/OpenAL_Sound.hpp:
 
-/usr/include/glm/detail/type_mat4x2.inl:
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/Exceptions.hpp:
 
-/usr/include/glm/detail/type_mat4x3.hpp:
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.hpp:
 
-/usr/include/glm/ext/vector_reciprocal.hpp:
+/usr/include/SDL3/SDL_pixels.h:
 
-/usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h:
+/usr/include/SDL3_mixer/SDL_mixer.h:
 
-/usr/include/glm/detail/type_mat4x4.hpp:
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundAPIHandlers/SDLMixer_Sound.hpp:
 
-/usr/include/glm/detail/type_mat4x4.inl:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/tsxldtrkintrin.h:
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/ConfigHandler.hpp:
 
 /usr/include/c++/16/bits/exception_defines.h:
 
-/usr/include/glm/detail/type_quat.hpp:
+/usr/include/SDL3/SDL_joystick.h:
+
+/usr/include/SDL3/SDL_surface.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/Sound.hpp:
+
+/usr/include/c++/16/bits/range_access.h:
+
+/usr/include/SDL3/SDL_opengl_glext.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/c++/16/any:
+
+/usr/include/SDL3/SDL_hints.h:
+
+/usr/include/SDL3/SDL_system.h:
+
+/usr/include/assimp/MathFunctions.h:
+
+/usr/include/SDL3/SDL_bits.h:
+
+/usr/include/bits/cpu-set.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/LuaHelper.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/MathClasses/Vector4.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/include/Compiler/luacode.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/SDL3/SDL_keyboard.h:
+
+/usr/include/SDL3/SDL_dialog.h:
+
+/usr/include/c++/16/bits/ostream.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/Texture.hpp:
+
+/usr/include/c++/16/ext/type_traits.h:
+
+/usr/include/bits/thread-shared-types.h:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/time_members.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Collisions.hpp:
+
+/usr/include/SDL3/SDL_platform_defines.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/nlohmann/json.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/SDLClasses/Window.hpp:
+
+/usr/include/c++/16/bits/basic_string.tcc:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexBuffer.hpp:
+
+/usr/include/bits/endian.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Network_Client.hpp:
+
+/usr/include/wchar.h:
+
+/usr/include/SDL3/SDL_keycode.h:
+
+/usr/include/bits/posix1_lim.h:
+
+/usr/include/c++/16/cwctype:
+
+/usr/include/c++/16/bits/cxxabi_forced.h:
+
+/usr/include/SDL3/SDL_stdinc.h:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/basic_file.h:
+
+/usr/include/c++/16/bits/stl_iterator_base_types.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/CollisionClasses/SphereCollision.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/ConsoleVars.hpp:
+
+/usr/include/c++/16/bits/valarray_array.tcc:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/CollisionClasses/MeshCollision.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaInput.hpp:
+
+/usr/include/bits/types/locale_t.h:
+
+/usr/include/c++/16/bits/string_view.tcc:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/main_client.cpp:
+
+/usr/include/SDL3/SDL_messagebox.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource_OpenAL.hpp:
+
+/usr/include/c++/16/bits/stl_construct.h:
+
+/usr/include/bits/xopen_lim.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/include/VM/luaconf.h:
+
+/usr/include/SDL3/SDL_misc.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/CollisionClasses/BoxCollision.hpp:
+
+/usr/include/c++/16/cstdio:
+
+/usr/include/SDL3/SDL_sensor.h:
+
+/usr/include/c++/16/bits/postypes.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/BitOp.hpp:
+
+/usr/include/c++/16/type_traits:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/include/VM/lualib.h:
+
+/usr/include/c++/16/version:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/include/bits/mathcalls-macros.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/TypeHelper.hpp:
+
+/usr/include/c++/16/stdlib.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/locale.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/MathClasses/Vector2.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/CollisionClasses/CollisionContainer.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaTypeHelper.hpp:
+
+/usr/include/features.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/types/__FILE.h:
+
+/usr/include/assimp/aabb.h:
+
+/usr/include/SDL3/SDL_loadso.h:
+
+/usr/include/bits/types/clockid_t.h:
+
+/usr/include/bits/stdint-intn.h:
+
+/usr/include/c++/16/filesystem:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/LuaLibraries/LuaNetwork_Client.hpp:
+
+/usr/include/c++/16/bits/requires_hosted.h:
+
+/usr/include/SDL3/SDL_mutex.h:
+
+/usr/include/c++/16/bits/specfun.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Graphics_Client.hpp:
+
+/usr/include/bits/mathcalls-helper-functions.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/c++/16/bits/basic_string.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/File.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/StringHelper.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/MathClasses/Vector3.hpp:
+
+/usr/include/SDL3/SDL_properties.h:
+
+/usr/include/c++/16/bits/fs_path.h:
+
+/usr/include/c++/16/backward/binders.h:
+
+/usr/include/assimp/matrix3x3.inl:
+
+/usr/include/bits/types/cookie_io_functions_t.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/MathClasses/Matrix.hpp:
+
+/usr/include/assimp/camera.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/CollisionClasses/BaseCollision.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_GLObjectBase.hpp:
+
+/usr/include/c++/16/bits/locale_classes.tcc:
+
+/usr/include/SDL3/SDL_atomic.h:
+
+/usr/include/AL/alc.h:
+
+/usr/include/libintl.h:
+
+/usr/include/bits/endianness.h:
+
+/usr/include/c++/16/bits/forward_list.tcc:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexArray.hpp:
+
+/usr/include/SDL3/SDL_haptic.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Time.hpp:
+
+/usr/include/c++/16/tuple:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Lua.hpp:
+
+/usr/include/SDL3/SDL_locale.h:
+
+/usr/include/SDL3/SDL_gamepad.h:
+
+/usr/include/SDL3/SDL_hidapi.h:
+
+/usr/include/bits/pthread_stack_min-dynamic.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Statistics.hpp:
+
+/usr/include/c++/16/tr1/poly_hermite.tcc:
+
+/usr/include/bits/types/error_t.h:
+
+/usr/include/SDL3/SDL_metal.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/Program.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/AudioSource.hpp:
+
+/usr/include/SDL3/SDL_mouse.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_BufferBase.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_UniformBuffer.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaMath.hpp:
+
+/usr/include/c++/16/bits/memory_resource.h:
+
+/usr/include/SDL3/SDL_camera.h:
+
+/usr/include/c++/16/ctime:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Program.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_MiscHeaders/LuaGraphics_SampleModels.hpp:
+
+/usr/include/c++/16/bits/ostream_print.h:
+
+/usr/include/c++/16/bits/hashtable_policy.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/VertexShader.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaMatrix.hpp:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/cpu_defines.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/BaseClassDefinitions.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/BufferBase.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/VertexArray.hpp:
+
+/usr/include/assimp/quaternion.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaModelLoader.hpp:
+
+/usr/include/c++/16/backward/auto_ptr.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaEnums.hpp:
+
+/usr/include/bits/wctype-wchar.h:
+
+/usr/include/SDL3/SDL_opengles2_gl2ext.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaTable.hpp:
+
+/usr/include/c++/16/valarray:
+
+/usr/include/bits/types/struct_timespec.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/Framebuffer.hpp:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/error_constants.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaTask.hpp:
+
+/usr/include/assimp/quaternion.inl:
+
+/usr/include/c++/16/cctype:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaConsole.hpp:
+
+/usr/include/c++/16/memory:
+
+/usr/include/SDL3/SDL_platform.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/define.h:
+
+/usr/include/SDL3/SDL_process.h:
+
+/usr/include/SDL3/SDL_rect.h:
+
+/usr/include/c++/16/bits/locale_facets_nonio.h:
+
+/usr/include/SDL3/SDL_render.h:
+
+/usr/include/errno.h:
+
+/usr/include/SDL3/SDL_storage.h:
+
+/usr/include/c++/16/iterator:
+
+/usr/include/bits/types/struct_tm.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/MathTransform.hpp:
+
+/usr/include/SDL3/SDL_time.h:
+
+/usr/include/c++/16/bits/stl_uninitialized.h:
+
+/usr/include/SDL3/SDL_timer.h:
+
+/usr/include/c++/16/bits/allocated_ptr.h:
+
+/usr/include/SDL3/SDL_touch.h:
+
+/usr/include/SDL3/SDL_tray.h:
+
+/usr/include/c++/16/tr1/exp_integral.tcc:
+
+/usr/include/c++/16/bits/enable_special_members.h:
+
+/usr/include/bits/floatn-common.h:
+
+/usr/include/c++/16/algorithm:
+
+/usr/include/SDL3/SDL_version.h:
+
+/usr/include/alloca.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/float.h:
+
+/usr/include/assimp/defs.h:
+
+/usr/include/c++/16/bits/ostream_insert.h:
+
+/usr/include/SDL3/SDL_video.h:
+
+/usr/include/c++/16/clocale:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/c++/16/debug/debug.h:
+
+/usr/include/c++/16/bits/stl_bvector.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/pch.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/asm-generic/types.h:
+
+/usr/include/c++/16/bits/stl_vector.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/assimp/mesh.h:
+
+/usr/include/bits/fp-logb.h:
+
+/usr/include/c++/16/bits/uses_allocator.h:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/asm/bitsperlong.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h:
+
+/usr/include/bits/stdint-uintn.h:
+
+/usr/include/asm/errno.h:
+
+/usr/include/asm/posix_types_64.h:
+
+/usr/include/assimp/material.h:
+
+/usr/include/asm/types.h:
+
+/usr/include/assert.h:
+
+/usr/include/assimp/Compiler/poppack1.h:
+
+/usr/include/assimp/Compiler/pushpack1.h:
+
+/usr/include/assimp/color4.h:
+
+/usr/include/assimp/color4.inl:
+
+/usr/include/c++/16/bits/vector.tcc:
+
+/usr/include/bits/floatn.h:
+
+/usr/include/c++/16/map:
+
+/usr/include/c++/16/bits/new_allocator.h:
+
+/usr/include/SDL3/SDL_asyncio.h:
+
+/usr/include/assimp/light.h:
+
+/usr/include/linux/sched/types.h:
+
+/usr/include/c++/16/cwchar:
+
+/usr/include/SDL3/SDL_dlopennote.h:
+
+/usr/include/assimp/material.inl:
+
+/usr/include/bits/types/sigset_t.h:
+
+/usr/include/assimp/matrix3x3.h:
+
+/usr/include/assimp/matrix4x4.h:
+
+/usr/include/SDL3/SDL_endian.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_ElementBuffer.hpp:
+
+/usr/include/assimp/matrix4x4.inl:
+
+/usr/include/assimp/scene.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/GraphicsClasses/FragmentShader.hpp:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/LuaLibraries/LuaSound_Client.hpp:
+
+/usr/include/assimp/types.h:
+
+/usr/include/c++/16/utility:
+
+/usr/include/c++/16/concepts:
+
+/usr/include/c++/16/bits/locale_classes.h:
+
+/usr/include/assimp/texture.h:
+
+/usr/include/assimp/vector2.h:
+
+/usr/include/c++/16/bits/fs_fwd.h:
+
+/usr/include/assimp/vector2.inl:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/assimp/vector3.h:
+
+/usr/include/c++/16/cstdlib:
+
+/usr/include/SDL3_image/SDL_image.h:
+
+/usr/include/bits/errno.h:
+
+/usr/include/bits/timex.h:
+
+/usr/include/c++/16/bits/unordered_set.h:
+
+/usr/include/bits/flt-eval-method.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/bits/types/FILE.h:
+
+/usr/include/wctype.h:
+
+/usr/include/sched.h:
+
+/usr/include/c++/16/tr1/hypergeometric.tcc:
+
+/usr/include/bits/fp-fast.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/Client/Sound/SoundClasses/Speaker_OpenAL.hpp:
+
+/usr/include/bits/libc-header-start.h:
+
+/usr/include/c++/16/tr1/bessel_function.tcc:
+
+/usr/include/c++/16/bits/algorithmfwd.h:
+
+/usr/include/bits/libm-simd-decl-stubs.h:
+
+/usr/include/SDL3/SDL_thread.h:
+
+/usr/include/bits/local_lim.h:
+
+/usr/include/c++/16/bits/stl_pair.h:
+
+/usr/include/SDL3/SDL.h:
+
+/usr/include/assimp/vector3.inl:
+
+/usr/include/bits/locale.h:
+
+/usr/include/bits/long-double.h:
+
+/usr/include/bits/uio_lim.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaVector.hpp:
+
+/usr/include/bits/math-vector.h:
+
+/usr/include/c++/16/bits/refwrap.h:
+
+/usr/include/bits/mathcalls-narrow.h:
+
+/usr/include/c++/16/list:
+
+/usr/include/bits/mathcalls.h:
+
+/usr/include/c++/16/bits/char_traits.h:
+
+/usr/include/bits/types/__fpos_t.h:
+
+/usr/include/SDL3/SDL_iostream.h:
+
+/usr/include/SDL3/SDL_begin_code.h:
+
+/usr/include/bits/types/clock_t.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/FunctionHeaders/Math.hpp:
+
+/usr/include/bits/posix2_lim.h:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/include/VM/lua.h:
+
+/usr/include/bits/pthreadtypes-arch.h:
+
+/usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h:
+
+/usr/include/bits/setjmp.h:
+
+/usr/include/bits/stdlib-float.h:
+
+/usr/include/bits/time64.h:
+
+/usr/include/c++/16/bits/locale_facets.h:
+
+/usr/include/bits/struct_mutex.h:
+
+/usr/include/c++/16/iomanip:
+
+/home/savoury/Documents/Cpp/Cube\ Cavern++/src/LuaLibraries/LuaGraphics.hpp:
+
+/usr/include/bits/struct_rwlock.h:
+
+/usr/include/SDL3/SDL_scancode.h:
+
+/usr/include/bits/types/struct_itimerspec.h:
+
+/usr/include/bits/timesize.h:
+
+/usr/include/c++/16/string_view:
+
+/usr/include/bits/types/__fpos64_t.h:
+
+/usr/include/assimp/config.h:
+
+/usr/include/bits/types/__locale_t.h:
+
+/usr/include/bits/types/mbstate_t.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/bits/types/struct___jmp_buf_tag.h:
+
+/usr/include/bits/types/struct_sched_param.h:
+
+/usr/include/c++/16/pstl/pstl_config.h:
+
+/usr/include/c++/16/ostream:
+
+/usr/include/c++/16/bits/fs_ops.h:
+
+/usr/include/bits/types/struct_timeval.h:

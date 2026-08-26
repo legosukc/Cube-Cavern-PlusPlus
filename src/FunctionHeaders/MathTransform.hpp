@@ -1,9 +1,6 @@
 #pragma once
 
-#include <glm/ext.hpp>
-
 #include <cmath>
-#include <glm/ext/matrix_clip_space.hpp>
 
 #include "../MathClasses/Matrix.hpp"
 #include "../MathClasses/Vector3.hpp"

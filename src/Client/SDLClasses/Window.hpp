@@ -3,8 +3,10 @@
 
 #include "../../define.h"
 
+#if defined(USE_SIMD_INTRINSICS) && !defined(SDL_PLATFORM_VITA)
 #include <emmintrin.h>
 #include <immintrin.h>
+#endif
 
 #include <iostream>
 
@@ -36,12 +38,12 @@ namespace Game::Classes {
             Held,
         };
 
-        struct ScancodeState {
+        struct ScancodeStateStruct {
             ScancodeStatesEnum CurrentState = ScancodeStatesEnum::NotHeld;
             float StateChangeTimestamp;  // in secs
         };
 
-        mutable ScancodeStatesEnum
+        mutable ScancodeStateStruct
             ScancodeStates[SDL_Scancode::SDL_SCANCODE_COUNT];
 
        public:
@@ -75,9 +77,11 @@ namespace Game::Classes {
         Math::IVector2 GetPosition() const;
         Math::IVector2 GetSize() const;
 
-        inline bool ScancodePressed(SDL_Scancode Scancode) const;
-        bool ScancodeHeld(SDL_Scancode Scancode) const;
-        inline bool ScancodeReleased(SDL_Scancode Scancode) const;
+        bool ScancodePressed(SDL_Scancode Scancode,
+                                    float BufferTime = 0.f) const;
+        bool ScancodeHeld(SDL_Scancode Scancode, float BufferTime = 0.f) const;
+        bool ScancodeReleased(SDL_Scancode Scancode,
+                                     float BufferTime = 0.f) const;
 
         void Present() const;
     };
@@ -210,7 +214,7 @@ bool Game::Classes::Window::PollEvents() {
                           << SDL_GetScancodeName(Event.key.scancode)
                           << " state " << std::boolalpha << Event.key.down
                           << std::endl;
-                this->ScancodeStates[Event.key.scancode] =
+                this->ScancodeStates[Event.key.scancode].CurrentState =
                     static_cast<ScancodeStatesEnum>(Event.key.down);
                 break;
 
@@ -237,24 +241,26 @@ Math::IVector2 Game::Classes::Window::GetSize() const {
     return Size;
 }
 
-bool Game::Classes::Window::ScancodePressed(SDL_Scancode Scancode) const {
+bool Game::Classes::Window::ScancodePressed(SDL_Scancode Scancode,
+                                            float BufferTime) const {
     // return this->ScancodeStates[Scancode] == ScancodeStatesEnum::Pressed;
     return SDL_GetKeyboardState(NULL)[Scancode];
 }
 
-bool Game::Classes::Window::ScancodeHeld(SDL_Scancode Scancode) const {
-    // return SDL_GetKeyboardState(NULL)[Scancode];
-
-    ScancodeStatesEnum& ScancodeState = this->ScancodeStates[Scancode];
-    if (ScancodeState == ScancodeStatesEnum::Released) {
+bool Game::Classes::Window::ScancodeHeld(SDL_Scancode Scancode, float BufferTime) const {
+    return SDL_GetKeyboardState(NULL)[Scancode];
+    
+    ScancodeStateStruct& ScancodeState = this->ScancodeStates[Scancode];
+    if (ScancodeState.CurrentState == ScancodeStatesEnum::Released) {
         return false;
     }
-    ScancodeState = ScancodeStatesEnum::Held;
+    ScancodeState.CurrentState = ScancodeStatesEnum::Held;
 
-    return true;
+    return ScancodeState.CurrentState == ScancodeStatesEnum::Released;
 }
 
-bool Game::Classes::Window::ScancodeReleased(SDL_Scancode Scancode) const {
+bool Game::Classes::Window::ScancodeReleased(SDL_Scancode Scancode,
+                                             float BufferTime) const {
     // return this->ScancodeStates[Scancode] == ScancodeStatesEnum::Released;
     return !SDL_GetKeyboardState(NULL)[Scancode];
 }

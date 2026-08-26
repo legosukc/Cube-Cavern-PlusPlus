@@ -19,9 +19,15 @@ namespace Math {
     struct UVector2;
 }
 
+constexpr Math::Vector2 operator+(float A, const Math::Vector2& B);
+constexpr Math::Vector2 operator-(float A, const Math::Vector2& B);
+constexpr Math::Vector2 operator*(float A, const Math::Vector2& B);
+constexpr Math::Vector2 operator/(float A, const Math::Vector2& B);
+constexpr Math::Vector2 operator%(float A, const Math::Vector2& B);
+
 template <typename _ComponentType, typename _DerivedType>
 struct Math::etc::_base_vector2 {
-    static constexpr inline int ComponentCount = 2;
+    static constexpr int ComponentCount = 2;
     using ComponentType = _ComponentType;
 
     static_assert(std::is_integral_v<ComponentType> ||
@@ -61,10 +67,8 @@ struct Math::etc::_base_vector2 {
         return _DerivedType(this->X + B, this->Y + B);
     }
 
-    constexpr void operator+=(const _DerivedType& B) {
-        *this = this->operator+(B);
-    }
-    constexpr void operator+=(ComponentType B) { *this = this->operator+(B); }
+    constexpr void operator+=(const _DerivedType& B) { *this = *this + B; }
+    constexpr void operator+=(ComponentType B) { *this = *this + B; }
 
     constexpr _DerivedType operator-(const _DerivedType& B) const {
         return _DerivedType(this->X - B.X, this->Y - B.Y);
@@ -78,10 +82,8 @@ struct Math::etc::_base_vector2 {
         return _DerivedType(-this->X, -this->Y);
     }
 
-    constexpr void operator-=(const _DerivedType& B) {
-        *this = this->operator-(B);
-    }
-    constexpr void operator-=(ComponentType B) { *this = this->operator-(B); }
+    constexpr void operator-=(const _DerivedType& B) { *this = *this - B; }
+    constexpr void operator-=(ComponentType B) { *this = *this - B; }
 
     constexpr _DerivedType operator*(const _DerivedType& B) const {
         return _DerivedType(this->X * B.X, this->Y * B.Y);
@@ -91,10 +93,8 @@ struct Math::etc::_base_vector2 {
         return _DerivedType(this->X * B, this->Y * B);
     }
 
-    constexpr void operator*=(const _DerivedType& B) {
-        *this = this->operator*(B);
-    }
-    constexpr void operator*=(ComponentType B) { *this = this->operator*(B); }
+    constexpr void operator*=(const _DerivedType& B) { *this = *this * B; }
+    constexpr void operator*=(ComponentType B) { *this = *this * B; }
 
     constexpr _DerivedType operator/(const _DerivedType& B) const {
         return _DerivedType(this->X / B.X, this->Y / B.Y);
@@ -103,10 +103,8 @@ struct Math::etc::_base_vector2 {
         return _DerivedType(this->X / B, this->Y / B);
     }
 
-    constexpr void operator/=(const _DerivedType& B) {
-        *this = this->operator/(B);
-    }
-    constexpr void operator/=(ComponentType B) { *this = this->operator/(B); }
+    constexpr void operator/=(const _DerivedType& B) { *this = *this / B; }
+    constexpr void operator/=(ComponentType B) { *this = *this / B; }
 
     constexpr _DerivedType operator%(const _DerivedType& B) const {
         return _DerivedType(Math::Mod<ComponentType>(this->X, B.X),
@@ -120,7 +118,7 @@ struct Math::etc::_base_vector2 {
     constexpr void operator%=(const _DerivedType& B) {
         *this = this->operator%(B);
     }
-    constexpr void operator%=(ComponentType B) { *this = this->operator%(B); }
+    constexpr void operator%=(ComponentType B) { *this = *this % B; }
 
     constexpr bool operator==(const _DerivedType& B) const {
         return this->X == B.X && this->Y == B.Y;
@@ -142,10 +140,33 @@ struct Math::etc::_base_vector2 {
                                                     (this->Y * this->Y))));
         }
     }
+
+    constexpr _DerivedType Lerp(const _DerivedType& B, float Alpha) const {
+        return *this + (B - *this) * Alpha;
+    }
+
+    constexpr _DerivedType Lerp(const _DerivedType& B,
+                                const _DerivedType& Alpha) const {
+        return *this + (B - *this) * Alpha;
+    }
 };
 
 struct Math::Vector2 : Math::etc::_base_vector2<float, Math::Vector2> {
     using _base_vector2::_base_vector2;
+
+    using _base_vector2::operator[];
+    using _base_vector2::operator+;
+    using _base_vector2::operator+=;
+    using _base_vector2::operator-;
+    using _base_vector2::operator-=;
+    using _base_vector2::operator*;
+    using _base_vector2::operator*=;
+    using _base_vector2::operator/;
+    using _base_vector2::operator/=;
+    using _base_vector2::operator%;
+    using _base_vector2::operator%=;
+    using _base_vector2::operator==;
+    using _base_vector2::operator!=;
 
     constexpr operator Math::IVector2() const;
     constexpr operator Math::UVector2() const;

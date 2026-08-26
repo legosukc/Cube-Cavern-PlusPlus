@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
 # include vita toolchain
 if(PLATFORM STREQUAL "vita" AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
@@ -16,31 +16,29 @@ project(CubeCavern LANGUAGES CXX)
 include(FetchContent)
 
 
-#if (PLATFORM STREQUAL "vita")
-
-#FetchContent_Declare(
-#    sdl3_net
-#    GIT_REPOSITORY https://github.com/libsdl-org/SDL_net.git
-#    GIT_TAG        release-3.2.0
-#)
-
-#FetchContent_MakeAvailable(sdl3_net)
-#endif()
-
-
 FetchContent_Declare(
     luau
     GIT_REPOSITORY https://github.com/luau-lang/luau.git
     GIT_TAG        0.733
 )
 
-# ai told me to put this here... ()
+# ai told me to put this here...
 # Prevent Luau from compiling its standalone CLI binaries and test suites
 set(LUAU_BUILD_CLI OFF CACHE INTERNAL "")
 set(LUAU_BUILD_TESTS OFF CACHE INTERNAL "")
 
 FetchContent_MakeAvailable(luau)
 
+find_package(assimp REQUIRED)
+
+find_package(SDL3 REQUIRED)
+find_package(SDL3_image REQUIRED)
+find_package(SDL3_ttf REQUIRED)
+
+if(NOT PLATFORM STREQUAL "vita")
+find_package(SDL3_mixer REQUIRED)
+find_package(SDL3_net REQUIRED)
+endif()
 
 find_package(OpenAL REQUIRED)
 
@@ -53,14 +51,14 @@ if(PLATFORM STREQUAL "vita")
   set(VITA_APP_NAME "Cube Cavern++ CLIENT")
 
   # Optional. You can specify more param.sfo flags this way.
-  set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d PARENTAL_LEVEL=1")
+  #set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d PARENTAL_LEVEL=1")
 endif()
 
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 add_executable(CubeCavernApp)
 
