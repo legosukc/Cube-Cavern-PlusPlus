@@ -19,6 +19,7 @@ namespace Math {
 
 template <typename _ComponentType, class _DerivedType>
 struct Math::etc::_base_vector4 {
+
     static constexpr int ComponentCount = 4;
     using ComponentType = _ComponentType;
 
@@ -77,6 +78,7 @@ struct Math::etc::_base_vector4 {
         return _DerivedType(this->X - B.X, this->Y - B.Y, this->Z - B.Z,
                             this->W - B.W);
     }
+    
 
     constexpr _DerivedType operator-(ComponentType B) const {
         return _DerivedType(this->X - B, this->Y - B, this->Z - B, this->W - B);
@@ -173,12 +175,12 @@ struct Math::etc::_base_vector4 {
     }
 
     constexpr _DerivedType Lerp(const _DerivedType& B, float Alpha) const {
-        return *this + (B - *this) * Alpha;
+        return *(_DerivedType*)this + (B - *(_DerivedType*)this) * Alpha;
     }
 
     constexpr _DerivedType Lerp(const _DerivedType& B,
                                 const _DerivedType& Alpha) const {
-        return *this + (B - *this) * Alpha;
+        return *(_DerivedType*)this + (B - *(_DerivedType*)this) * Alpha;
     }
 };
 

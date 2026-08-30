@@ -1,4 +1,4 @@
-/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/CubeCavernApp.dir
+/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/CubeCavern.dir
 /home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/edit_cache.dir
 /home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/rebuild_cache.dir
 /home/savoury/Documents/Cpp/Cube Cavern++/build/_deps/luau-build/CMakeFiles/Luau.Common.dir

@@ -269,7 +269,7 @@ void Game::Classes::Window::Present() const {
     SDL_DelayPrecise(this->FrameNS - (SDL_GetTicksNS() - this->LastNS));
 
     SDL_GL_SwapWindow(this->SDLWindow);
-
+    
     const Uint64 TicksNS = SDL_GetTicksNS();
     Game::Time::DeltaTime = static_cast<double>(TicksNS - this->LastNS) / 1e+9;
     this->LastNS = TicksNS;

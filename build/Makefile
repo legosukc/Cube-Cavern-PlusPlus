@@ -117,17 +117,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named CubeCavernApp
+# Target rules for targets named CubeCavern
 
 # Build rule for target.
-CubeCavernApp: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CubeCavernApp
-.PHONY : CubeCavernApp
+CubeCavern: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CubeCavern
+.PHONY : CubeCavern
 
 # fast build rule for target.
-CubeCavernApp/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/build
-.PHONY : CubeCavernApp/fast
+CubeCavern/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavern.dir/build.make CMakeFiles/CubeCavern.dir/build
+.PHONY : CubeCavern/fast
 
 #=============================================================================
 # Target rules for targets named Luau.Common
@@ -290,7 +290,7 @@ src/Client/main_client.o: src/Client/main_client.cpp.o
 
 # target to build an object file
 src/Client/main_client.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavern.dir/build.make CMakeFiles/CubeCavern.dir/src/Client/main_client.cpp.o
 .PHONY : src/Client/main_client.cpp.o
 
 src/Client/main_client.i: src/Client/main_client.cpp.i
@@ -298,7 +298,7 @@ src/Client/main_client.i: src/Client/main_client.cpp.i
 
 # target to preprocess a source file
 src/Client/main_client.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavern.dir/build.make CMakeFiles/CubeCavern.dir/src/Client/main_client.cpp.i
 .PHONY : src/Client/main_client.cpp.i
 
 src/Client/main_client.s: src/Client/main_client.cpp.s
@@ -306,7 +306,7 @@ src/Client/main_client.s: src/Client/main_client.cpp.s
 
 # target to generate assembly for a file
 src/Client/main_client.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavern.dir/build.make CMakeFiles/CubeCavern.dir/src/Client/main_client.cpp.s
 .PHONY : src/Client/main_client.cpp.s
 
 # Help Target
@@ -317,7 +317,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... CubeCavernApp"
+	@echo "... CubeCavern"
 	@echo "... Luau.Analysis"
 	@echo "... Luau.Ast"
 	@echo "... Luau.Bytecode"

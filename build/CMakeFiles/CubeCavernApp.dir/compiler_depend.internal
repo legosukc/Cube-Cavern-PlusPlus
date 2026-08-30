@@ -13,16 +13,6 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /home/savoury/Documents/Cpp/Cube Cavern++/src/Client/LuaLibraries/LuaNetwork_Client.hpp
  /home/savoury/Documents/Cpp/Cube Cavern++/src/Client/LuaLibraries/LuaSound_Client.hpp
  /home/savoury/Documents/Cpp/Cube Cavern++/src/Client/SDLClasses/Window.hpp
- /home/savoury/Documents/Cpp/Cube Cavern++/src/define.h
- /home/savoury/Documents/Cpp/Cube Cavern++/src/FunctionHeaders/Math.hpp
- /home/savoury/Documents/Cpp/Cube Cavern++/src/define.h
- /home/savoury/Documents/Cpp/Cube Cavern++/src/MathClasses/Vector3.hpp
- /home/savoury/Documents/Cpp/Cube Cavern++/src/CollisionClasses/BaseCollision.hpp
- /home/savoury/Documents/Cpp/Cube Cavern++/src/CollisionClasses/BoxCollision.hpp
- /home/savoury/Documents/Cpp/Cube Cavern++/src/CollisionClasses/CollisionContainer.hpp
- /home/savoury/Documents/Cpp/Cube Cavern++/src/CollisionClasses/MeshCollision.hpp
- /home/savoury/Documents/Cpp/Cube Cavern++/src/CollisionClasses/SphereCollision.hpp
- /home/savoury/Documents/Cpp/Cube Cavern++/src/Collisions.hpp
  /home/savoury/Documents/Cpp/Cube Cavern++/include/Compiler/luacode.h
  /home/savoury/Documents/Cpp/Cube Cavern++/src/MathClasses/Vector3.hpp
  /home/savoury/Documents/Cpp/Cube Cavern++/src/define.h
@@ -74,6 +64,8 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /home/savoury/Documents/Cpp/Cube Cavern++/src/LuaLibraries/LuaTask.hpp
  /home/savoury/Documents/Cpp/Cube Cavern++/src/LuaLibraries/LuaTypeHelper.hpp
  /home/savoury/Documents/Cpp/Cube Cavern++/src/LuaLibraries/LuaVector.hpp
+ /home/savoury/Documents/Cpp/Cube Cavern++/src/define.h
+ /home/savoury/Documents/Cpp/Cube Cavern++/src/FunctionHeaders/Math.hpp
  /home/savoury/Documents/Cpp/Cube Cavern++/src/define.h
  /home/savoury/Documents/Cpp/Cube Cavern++/src/MathClasses/Matrix.hpp
  /home/savoury/Documents/Cpp/Cube Cavern++/src/MathClasses/Vector2.hpp
@@ -161,6 +153,7 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /usr/include/SDL3/SDL_locale.h
  /usr/include/SDL3/SDL_log.h
  /usr/include/SDL3/SDL_main.h
+ /usr/include/SDL3/SDL_main_impl.h
  /usr/include/SDL3/SDL_messagebox.h
  /usr/include/SDL3/SDL_metal.h
  /usr/include/SDL3/SDL_misc.h
@@ -577,4 +570,55 @@ CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h
  /usr/local/include/SDL3_net/SDL_net.h
+
+CubeCavern
+ /usr/lib/Scrt1.o
+ /usr/lib/crti.o
+ /usr/lib/crtn.o
+ /usr/lib/libassimp.so
+ /usr/lib/libc.so
+ /usr/lib/libgcc_s.so.1
+ /usr/lib/libm.so
+ /usr/lib/libminizip.so
+ /usr/lib/libz.so
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so
+ /usr/lib/ld-linux-x86-64.so.2
+ /usr/lib/libSDL3.so.0.4.14
+ /usr/lib/libSDL3_image.so.0.4.4
+ /usr/lib/libSDL3_mixer.so.0.2.4
+ /usr/lib/libSDL3_ttf.so.0.2.2
+ /usr/lib/libbrotlicommon.so.1
+ /usr/lib/libbrotlidec.so.1
+ /usr/lib/libbz2.so.1.0
+ /usr/lib/libc.so.6
+ /usr/lib/libc_nonshared.a
+ /usr/lib/libfreetype.so.6
+ /usr/lib/libglib-2.0.so.0
+ /usr/lib/libgraphite2.so.3
+ /usr/lib/libharfbuzz.so.0
+ /usr/lib/libm.so.6
+ /usr/lib/libmvec.so.1
+ /usr/lib/libopenal.so
+ /usr/lib/libpcre2-8.so.0
+ /usr/lib/libpng16.so.16
+ /usr/lib32/libbrotlicommon.so.1
+ /usr/lib32/libbrotlidec.so.1
+ /usr/lib32/libbz2.so.1.0
+ /usr/lib32/libfreetype.so.6
+ /usr/lib32/libglib-2.0.so.0
+ /usr/lib32/libpcre2-8.so.0
+ /usr/lib32/libpng16.so.16
+ /usr/local/lib/libSDL3_net.so.0.3.0
+ /home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
+ /home/savoury/Documents/Cpp/Cube Cavern++/build/_deps/luau-build/libLuau.Ast.a
+ /home/savoury/Documents/Cpp/Cube Cavern++/build/_deps/luau-build/libLuau.Bytecode.a
+ /home/savoury/Documents/Cpp/Cube Cavern++/build/_deps/luau-build/libLuau.Common.a
+ /home/savoury/Documents/Cpp/Cube Cavern++/build/_deps/luau-build/libLuau.Compiler.a
+ /home/savoury/Documents/Cpp/Cube Cavern++/build/_deps/luau-build/libLuau.VM.a
 

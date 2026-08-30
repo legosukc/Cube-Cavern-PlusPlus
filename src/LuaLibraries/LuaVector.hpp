@@ -438,13 +438,13 @@ namespace Game::Lua::CLibraries::Vector {
 
     template <class VectorType>
     static int __Lerp(lua_State* State) {
-        lua_settop(State, 1);
+        lua_settop(State, 3);
         lua_pushvalue(State, lua_upvalueindex(1));
 
         const VectorType* A =
-            static_cast<VectorType*>(LuaHelper::CheckMetatable(State, 1, 2));
+            static_cast<VectorType*>(LuaHelper::CheckMetatable(State, 1, 4));
         const VectorType* B =
-            static_cast<VectorType*>(LuaHelper::CheckMetatable(State, 2, 2));
+            static_cast<VectorType*>(LuaHelper::CheckMetatable(State, 2, 4));
 
         VectorType* Result = static_cast<VectorType*>(
             lua_newuserdata(State, sizeof(VectorType)));
@@ -452,17 +452,17 @@ namespace Game::Lua::CLibraries::Vector {
         if (lua_isnumber(State, 3)) {
             *Result = A->Lerp(*B, static_cast<float>(lua_tonumber(State, 3)));
         } else if (const VectorType* AlphaVector = static_cast<VectorType*>(
-                       LuaHelper::CheckMetatable(State, 3, 2));
+                       LuaHelper::CheckMetatable(State, 3, 4));
                    AlphaVector != NULL) {
                     *Result = A->Lerp(*B, *AlphaVector);
         } else {
             // TODO: replace 'Vector' with correct type name.
             luaL_typeerror(State, 3, "Vector or number");
-            return -1;
+            return 0;
         }
 
-        lua_pushvalue(State, 2);
-        lua_setmetatable(State, 3);
+        lua_pushvalue(State, 4);
+        lua_setmetatable(State, 5);
         return 1;
     }
 
@@ -572,13 +572,13 @@ namespace Game::Lua::CLibraries::Vector {
             VectorMetatable.PushReference(State);
             VectorMetatable.SetKeyClosure(State, __StripNaN<VectorType>,
                                           "StripNaN", 1);
+
+            VectorMetatable.PushReference(State);
+            VectorMetatable.SetKeyClosure(State, __Lerp<VectorType>, "Lerp", 1);
         }
 
         VectorMetatable.PushReference(State);
         VectorMetatable.SetKeyClosure(State, __StripY<VectorType>, "StripY", 1);
-
-        VectorMetatable.PushReference(State);
-        VectorMetatable.SetKeyClosure(State, __Lerp<VectorType>, "Lerp", 1);
 
         VectorMetatable.PushReference(State);
         VectorMetatable.SetKeyClosure(State, __index<VectorType>, "__index", 1);

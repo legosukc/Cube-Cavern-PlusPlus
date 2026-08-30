@@ -19,12 +19,6 @@ namespace Math {
     struct UVector2;
 }
 
-constexpr Math::Vector2 operator+(float A, const Math::Vector2& B);
-constexpr Math::Vector2 operator-(float A, const Math::Vector2& B);
-constexpr Math::Vector2 operator*(float A, const Math::Vector2& B);
-constexpr Math::Vector2 operator/(float A, const Math::Vector2& B);
-constexpr Math::Vector2 operator%(float A, const Math::Vector2& B);
-
 template <typename _ComponentType, typename _DerivedType>
 struct Math::etc::_base_vector2 {
     static constexpr int ComponentCount = 2;
@@ -142,31 +136,17 @@ struct Math::etc::_base_vector2 {
     }
 
     constexpr _DerivedType Lerp(const _DerivedType& B, float Alpha) const {
-        return *this + (B - *this) * Alpha;
+        return *(_DerivedType*)this + (B - *(_DerivedType*)this) * Alpha;
     }
 
     constexpr _DerivedType Lerp(const _DerivedType& B,
                                 const _DerivedType& Alpha) const {
-        return *this + (B - *this) * Alpha;
+        return *(_DerivedType*)this + (B - *(_DerivedType*)this) * Alpha;
     }
 };
 
 struct Math::Vector2 : Math::etc::_base_vector2<float, Math::Vector2> {
     using _base_vector2::_base_vector2;
-
-    using _base_vector2::operator[];
-    using _base_vector2::operator+;
-    using _base_vector2::operator+=;
-    using _base_vector2::operator-;
-    using _base_vector2::operator-=;
-    using _base_vector2::operator*;
-    using _base_vector2::operator*=;
-    using _base_vector2::operator/;
-    using _base_vector2::operator/=;
-    using _base_vector2::operator%;
-    using _base_vector2::operator%=;
-    using _base_vector2::operator==;
-    using _base_vector2::operator!=;
 
     constexpr operator Math::IVector2() const;
     constexpr operator Math::UVector2() const;
@@ -184,16 +164,10 @@ struct Math::Vector2 : Math::etc::_base_vector2<float, Math::Vector2> {
     }
 
     constexpr Math::Vector2 Normalize() const {
-        return *this *
-
-#ifdef USE_SIMD_INTRINSICS
-               _mm_rsqrt_ss(_mm_set_ss(this->Dot(*this)))[0];
-#else
-               1.f / std::sqrt(this->Dot(*this));
-#endif
+        return *this * (1.f / std::sqrt(this->Dot(*this)));
     }
 };
-
+/*
 constexpr Math::Vector2 operator+(Math::Vector2::ComponentType A,
                                   const Math::Vector2& B) {
     return Math::Vector2(A) + B;
@@ -217,7 +191,7 @@ constexpr Math::Vector2 operator/(Math::Vector2::ComponentType A,
 constexpr Math::Vector2 operator%(Math::Vector2::ComponentType A,
                                   const Math::Vector2& B) {
     return Math::Vector2(A) % B;
-}
+}*/
 
 struct Math::IVector2 : Math::etc::_base_vector2<Sint32, Math::IVector2> {
     using _base_vector2::_base_vector2;
@@ -225,7 +199,7 @@ struct Math::IVector2 : Math::etc::_base_vector2<Sint32, Math::IVector2> {
     constexpr operator Math::Vector2() const;
     constexpr operator Math::UVector2() const;
 };
-
+/*
 constexpr Math::IVector2 operator+(Math::IVector2::ComponentType A,
                                    const Math::IVector2& B) {
     return Math::IVector2(A) + B;
@@ -249,7 +223,7 @@ constexpr Math::IVector2 operator/(Math::IVector2::ComponentType A,
 constexpr Math::IVector2 operator%(Math::IVector2::ComponentType A,
                                    const Math::IVector2& B) {
     return Math::IVector2(A) % B;
-}
+}*/
 
 struct Math::UVector2 : Math::etc::_base_vector2<Uint32, Math::UVector2> {
     using _base_vector2::_base_vector2;
@@ -257,7 +231,7 @@ struct Math::UVector2 : Math::etc::_base_vector2<Uint32, Math::UVector2> {
     constexpr operator Math::Vector2() const;
     constexpr operator Math::IVector2() const;
 };
-
+/*
 constexpr Math::UVector2 operator+(Math::UVector2::ComponentType A,
                                    const Math::UVector2& B) {
     return Math::UVector2(A) + B;
@@ -281,7 +255,7 @@ constexpr Math::UVector2 operator/(Math::UVector2::ComponentType A,
 constexpr Math::UVector2 operator%(Math::UVector2::ComponentType A,
                                    const Math::UVector2& B) {
     return Math::UVector2(A) % B;
-}
+}*/
 
 constexpr Math::Vector2::operator Math::IVector2() const {
     return Math::IVector2(static_cast<Math::IVector2::ComponentType>(this->X),

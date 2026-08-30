@@ -63,12 +63,12 @@ CMAKE_BINARY_DIR = "/home/savoury/Documents/Cpp/Cube Cavern++/build"
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/CubeCavernApp.dir/all
+all: CMakeFiles/CubeCavern.dir/all
 all: _deps/luau-build/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen: CMakeFiles/CubeCavernApp.dir/codegen
+codegen: CMakeFiles/CubeCavern.dir/codegen
 codegen: _deps/luau-build/codegen
 .PHONY : codegen
 
@@ -77,7 +77,7 @@ preinstall: _deps/luau-build/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/CubeCavernApp.dir/clean
+clean: CMakeFiles/CubeCavern.dir/clean
 clean: _deps/luau-build/clean
 .PHONY : clean
 
@@ -134,40 +134,40 @@ _deps/luau-build/clean: _deps/luau-build/CMakeFiles/isocline.dir/clean
 .PHONY : _deps/luau-build/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/CubeCavernApp.dir
+# Target rules for target CMakeFiles/CubeCavern.dir
 
 # All Build rule for target.
-CMakeFiles/CubeCavernApp.dir/all: _deps/luau-build/CMakeFiles/Luau.Ast.dir/all
-CMakeFiles/CubeCavernApp.dir/all: _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
-CMakeFiles/CubeCavernApp.dir/all: _deps/luau-build/CMakeFiles/Luau.Compiler.dir/all
-CMakeFiles/CubeCavernApp.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
-CMakeFiles/CubeCavernApp.dir/all: _deps/luau-build/CMakeFiles/Luau.VM.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num= "Built target CubeCavernApp"
-.PHONY : CMakeFiles/CubeCavernApp.dir/all
+CMakeFiles/CubeCavern.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
+CMakeFiles/CubeCavern.dir/all: _deps/luau-build/CMakeFiles/Luau.Ast.dir/all
+CMakeFiles/CubeCavern.dir/all: _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
+CMakeFiles/CubeCavern.dir/all: _deps/luau-build/CMakeFiles/Luau.Compiler.dir/all
+CMakeFiles/CubeCavern.dir/all: _deps/luau-build/CMakeFiles/Luau.VM.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavern.dir/build.make CMakeFiles/CubeCavern.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavern.dir/build.make CMakeFiles/CubeCavern.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num= "Built target CubeCavern"
+.PHONY : CMakeFiles/CubeCavern.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/CubeCavernApp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 31
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/CubeCavernApp.dir/all
+CMakeFiles/CubeCavern.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 33
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/CubeCavern.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
-.PHONY : CMakeFiles/CubeCavernApp.dir/rule
+.PHONY : CMakeFiles/CubeCavern.dir/rule
 
 # Convenience name for target.
-CubeCavernApp: CMakeFiles/CubeCavernApp.dir/rule
-.PHONY : CubeCavernApp
+CubeCavern: CMakeFiles/CubeCavern.dir/rule
+.PHONY : CubeCavern
 
 # codegen rule for target.
-CMakeFiles/CubeCavernApp.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num= "Finished codegen for target CubeCavernApp"
-.PHONY : CMakeFiles/CubeCavernApp.dir/codegen
+CMakeFiles/CubeCavern.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavern.dir/build.make CMakeFiles/CubeCavern.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num= "Finished codegen for target CubeCavern"
+.PHONY : CMakeFiles/CubeCavern.dir/codegen
 
 # clean rule for target.
-CMakeFiles/CubeCavernApp.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavernApp.dir/build.make CMakeFiles/CubeCavernApp.dir/clean
-.PHONY : CMakeFiles/CubeCavernApp.dir/clean
+CMakeFiles/CubeCavern.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CubeCavern.dir/build.make CMakeFiles/CubeCavern.dir/clean
+.PHONY : CMakeFiles/CubeCavern.dir/clean
 
 #=============================================================================
 # Target rules for target _deps/luau-build/CMakeFiles/Luau.Common.dir
@@ -176,12 +176,12 @@ CMakeFiles/CubeCavernApp.dir/clean:
 _deps/luau-build/CMakeFiles/Luau.Common.dir/all:
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Common.dir/build.make _deps/luau-build/CMakeFiles/Luau.Common.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Common.dir/build.make _deps/luau-build/CMakeFiles/Luau.Common.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=67 "Built target Luau.Common"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=67,68 "Built target Luau.Common"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 
 # Build rule for subdir invocation for target.
 _deps/luau-build/CMakeFiles/Luau.Common.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 1
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Common.dir/rule
@@ -193,7 +193,7 @@ Luau.Common: _deps/luau-build/CMakeFiles/Luau.Common.dir/rule
 # codegen rule for target.
 _deps/luau-build/CMakeFiles/Luau.Common.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Common.dir/build.make _deps/luau-build/CMakeFiles/Luau.Common.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=67 "Finished codegen for target Luau.Common"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=67,68 "Finished codegen for target Luau.Common"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Common.dir/codegen
 
 # clean rule for target.
@@ -205,20 +205,20 @@ _deps/luau-build/CMakeFiles/Luau.Common.dir/clean:
 # Target rules for target _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir
 
 # All Build rule for target.
+_deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/all: _deps/luau-build/CMakeFiles/Luau.Ast.dir/all
 _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/all: _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
 _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/all: _deps/luau-build/CMakeFiles/Luau.Compiler.dir/all
-_deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/all: _deps/luau-build/CMakeFiles/Luau.Config.dir/all
 _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/all: _deps/luau-build/CMakeFiles/Luau.VM.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/build.make _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/build.make _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=46,47 "Built target Luau.CLI.lib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=47,48 "Built target Luau.CLI.lib"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/all
 
 # Build rule for subdir invocation for target.
 _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 35
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 37
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
 .PHONY : _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/rule
@@ -230,7 +230,7 @@ Luau.CLI.lib: _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/rule
 # codegen rule for target.
 _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/build.make _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=46,47 "Finished codegen for target Luau.CLI.lib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=47,48 "Finished codegen for target Luau.CLI.lib"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.CLI.lib.dir/codegen
 
 # clean rule for target.
@@ -250,7 +250,7 @@ _deps/luau-build/CMakeFiles/Luau.Ast.dir/all: _deps/luau-build/CMakeFiles/Luau.C
 
 # Build rule for subdir invocation for target.
 _deps/luau-build/CMakeFiles/Luau.Ast.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 5
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/luau-build/CMakeFiles/Luau.Ast.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Ast.dir/rule
@@ -277,12 +277,12 @@ _deps/luau-build/CMakeFiles/Luau.Ast.dir/clean:
 _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/build.make _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/build.make _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=44,45 "Built target Luau.Bytecode"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=44,45,46 "Built target Luau.Bytecode"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
 
 # Build rule for subdir invocation for target.
 _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 3
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/rule
@@ -294,7 +294,7 @@ Luau.Bytecode: _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/rule
 # codegen rule for target.
 _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/build.make _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=44,45 "Finished codegen for target Luau.Bytecode"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=44,45,46 "Finished codegen for target Luau.Bytecode"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/codegen
 
 # clean rule for target.
@@ -306,17 +306,17 @@ _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/clean:
 # Target rules for target _deps/luau-build/CMakeFiles/Luau.Inliner.dir
 
 # All Build rule for target.
-_deps/luau-build/CMakeFiles/Luau.Inliner.dir/all: _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
 _deps/luau-build/CMakeFiles/Luau.Inliner.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
+_deps/luau-build/CMakeFiles/Luau.Inliner.dir/all: _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
 _deps/luau-build/CMakeFiles/Luau.Inliner.dir/all: _deps/luau-build/CMakeFiles/Luau.VM.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Inliner.dir/build.make _deps/luau-build/CMakeFiles/Luau.Inliner.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Inliner.dir/build.make _deps/luau-build/CMakeFiles/Luau.Inliner.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=75,76 "Built target Luau.Inliner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=76 "Built target Luau.Inliner"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Inliner.dir/all
 
 # Build rule for subdir invocation for target.
 _deps/luau-build/CMakeFiles/Luau.Inliner.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 24
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 25
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/luau-build/CMakeFiles/Luau.Inliner.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Inliner.dir/rule
@@ -328,7 +328,7 @@ Luau.Inliner: _deps/luau-build/CMakeFiles/Luau.Inliner.dir/rule
 # codegen rule for target.
 _deps/luau-build/CMakeFiles/Luau.Inliner.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Inliner.dir/build.make _deps/luau-build/CMakeFiles/Luau.Inliner.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=75,76 "Finished codegen for target Luau.Inliner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=76 "Finished codegen for target Luau.Inliner"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Inliner.dir/codegen
 
 # clean rule for target.
@@ -340,17 +340,17 @@ _deps/luau-build/CMakeFiles/Luau.Inliner.dir/clean:
 # Target rules for target _deps/luau-build/CMakeFiles/Luau.Compiler.dir
 
 # All Build rule for target.
+_deps/luau-build/CMakeFiles/Luau.Compiler.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 _deps/luau-build/CMakeFiles/Luau.Compiler.dir/all: _deps/luau-build/CMakeFiles/Luau.Ast.dir/all
 _deps/luau-build/CMakeFiles/Luau.Compiler.dir/all: _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
-_deps/luau-build/CMakeFiles/Luau.Compiler.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Compiler.dir/build.make _deps/luau-build/CMakeFiles/Luau.Compiler.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Compiler.dir/build.make _deps/luau-build/CMakeFiles/Luau.Compiler.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=68,69,70,71,72 "Built target Luau.Compiler"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=69,70,71,72,73 "Built target Luau.Compiler"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Compiler.dir/all
 
 # Build rule for subdir invocation for target.
 _deps/luau-build/CMakeFiles/Luau.Compiler.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 12
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 14
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/luau-build/CMakeFiles/Luau.Compiler.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Compiler.dir/rule
@@ -362,7 +362,7 @@ Luau.Compiler: _deps/luau-build/CMakeFiles/Luau.Compiler.dir/rule
 # codegen rule for target.
 _deps/luau-build/CMakeFiles/Luau.Compiler.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Compiler.dir/build.make _deps/luau-build/CMakeFiles/Luau.Compiler.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=68,69,70,71,72 "Finished codegen for target Luau.Compiler"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=69,70,71,72,73 "Finished codegen for target Luau.Compiler"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Compiler.dir/codegen
 
 # clean rule for target.
@@ -374,19 +374,19 @@ _deps/luau-build/CMakeFiles/Luau.Compiler.dir/clean:
 # Target rules for target _deps/luau-build/CMakeFiles/Luau.Config.dir
 
 # All Build rule for target.
+_deps/luau-build/CMakeFiles/Luau.Config.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 _deps/luau-build/CMakeFiles/Luau.Config.dir/all: _deps/luau-build/CMakeFiles/Luau.Ast.dir/all
 _deps/luau-build/CMakeFiles/Luau.Config.dir/all: _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
 _deps/luau-build/CMakeFiles/Luau.Config.dir/all: _deps/luau-build/CMakeFiles/Luau.Compiler.dir/all
-_deps/luau-build/CMakeFiles/Luau.Config.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 _deps/luau-build/CMakeFiles/Luau.Config.dir/all: _deps/luau-build/CMakeFiles/Luau.VM.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Config.dir/build.make _deps/luau-build/CMakeFiles/Luau.Config.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Config.dir/build.make _deps/luau-build/CMakeFiles/Luau.Config.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=73,74 "Built target Luau.Config"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=74,75 "Built target Luau.Config"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Config.dir/all
 
 # Build rule for subdir invocation for target.
 _deps/luau-build/CMakeFiles/Luau.Config.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 33
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 35
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/luau-build/CMakeFiles/Luau.Config.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Config.dir/rule
@@ -398,7 +398,7 @@ Luau.Config: _deps/luau-build/CMakeFiles/Luau.Config.dir/rule
 # codegen rule for target.
 _deps/luau-build/CMakeFiles/Luau.Config.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Config.dir/build.make _deps/luau-build/CMakeFiles/Luau.Config.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=73,74 "Finished codegen for target Luau.Config"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=74,75 "Finished codegen for target Luau.Config"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Config.dir/codegen
 
 # clean rule for target.
@@ -410,10 +410,10 @@ _deps/luau-build/CMakeFiles/Luau.Config.dir/clean:
 # Target rules for target _deps/luau-build/CMakeFiles/Luau.Analysis.dir
 
 # All Build rule for target.
+_deps/luau-build/CMakeFiles/Luau.Analysis.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 _deps/luau-build/CMakeFiles/Luau.Analysis.dir/all: _deps/luau-build/CMakeFiles/Luau.Ast.dir/all
 _deps/luau-build/CMakeFiles/Luau.Analysis.dir/all: _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
 _deps/luau-build/CMakeFiles/Luau.Analysis.dir/all: _deps/luau-build/CMakeFiles/Luau.Compiler.dir/all
-_deps/luau-build/CMakeFiles/Luau.Analysis.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 _deps/luau-build/CMakeFiles/Luau.Analysis.dir/all: _deps/luau-build/CMakeFiles/Luau.Config.dir/all
 _deps/luau-build/CMakeFiles/Luau.Analysis.dir/all: _deps/luau-build/CMakeFiles/Luau.VM.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Analysis.dir/build.make _deps/luau-build/CMakeFiles/Luau.Analysis.dir/depend
@@ -423,7 +423,7 @@ _deps/luau-build/CMakeFiles/Luau.Analysis.dir/all: _deps/luau-build/CMakeFiles/L
 
 # Build rule for subdir invocation for target.
 _deps/luau-build/CMakeFiles/Luau.Analysis.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 72
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 74
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/luau-build/CMakeFiles/Luau.Analysis.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Analysis.dir/rule
@@ -451,7 +451,7 @@ _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/all: _deps/luau-build/CMakeFiles/Lu
 _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/all: _deps/luau-build/CMakeFiles/Luau.VM.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/build.make _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/build.make _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66 "Built target Luau.CodeGen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66 "Built target Luau.CodeGen"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/all
 
 # Build rule for subdir invocation for target.
@@ -468,7 +468,7 @@ Luau.CodeGen: _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/rule
 # codegen rule for target.
 _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/build.make _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66 "Finished codegen for target Luau.CodeGen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" --progress-num=49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66 "Finished codegen for target Luau.CodeGen"
 .PHONY : _deps/luau-build/CMakeFiles/Luau.CodeGen.dir/codegen
 
 # clean rule for target.
@@ -488,7 +488,7 @@ _deps/luau-build/CMakeFiles/Luau.VM.dir/all: _deps/luau-build/CMakeFiles/Luau.Co
 
 # Build rule for subdir invocation for target.
 _deps/luau-build/CMakeFiles/Luau.VM.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 20
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 21
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/luau-build/CMakeFiles/Luau.VM.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
 .PHONY : _deps/luau-build/CMakeFiles/Luau.VM.dir/rule
@@ -512,10 +512,10 @@ _deps/luau-build/CMakeFiles/Luau.VM.dir/clean:
 # Target rules for target _deps/luau-build/CMakeFiles/Luau.Require.dir
 
 # All Build rule for target.
+_deps/luau-build/CMakeFiles/Luau.Require.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 _deps/luau-build/CMakeFiles/Luau.Require.dir/all: _deps/luau-build/CMakeFiles/Luau.Ast.dir/all
 _deps/luau-build/CMakeFiles/Luau.Require.dir/all: _deps/luau-build/CMakeFiles/Luau.Bytecode.dir/all
 _deps/luau-build/CMakeFiles/Luau.Require.dir/all: _deps/luau-build/CMakeFiles/Luau.Compiler.dir/all
-_deps/luau-build/CMakeFiles/Luau.Require.dir/all: _deps/luau-build/CMakeFiles/Luau.Common.dir/all
 _deps/luau-build/CMakeFiles/Luau.Require.dir/all: _deps/luau-build/CMakeFiles/Luau.Config.dir/all
 _deps/luau-build/CMakeFiles/Luau.Require.dir/all: _deps/luau-build/CMakeFiles/Luau.VM.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/luau-build/CMakeFiles/Luau.Require.dir/build.make _deps/luau-build/CMakeFiles/Luau.Require.dir/depend
@@ -525,7 +525,7 @@ _deps/luau-build/CMakeFiles/Luau.Require.dir/all: _deps/luau-build/CMakeFiles/Lu
 
 # Build rule for subdir invocation for target.
 _deps/luau-build/CMakeFiles/Luau.Require.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 37
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 39
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/luau-build/CMakeFiles/Luau.Require.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles" 0
 .PHONY : _deps/luau-build/CMakeFiles/Luau.Require.dir/rule

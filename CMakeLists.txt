@@ -15,19 +15,29 @@ project(CubeCavern LANGUAGES CXX)
 
 include(FetchContent)
 
-
+message("Fetching luau...")
 FetchContent_Declare(
     luau
     GIT_REPOSITORY https://github.com/luau-lang/luau.git
-    GIT_TAG        0.733
+    GIT_TAG        0.736
 )
+
+set(LUAU_HAS_MMAP OFF CACHE BOOL "Disable mmap for Vita" FORCE)
+
+add_compile_definitions(LUAU_ENABLE_JIT=0)
 
 # ai told me to put this here...
 # Prevent Luau from compiling its standalone CLI binaries and test suites
 set(LUAU_BUILD_CLI OFF CACHE INTERNAL "")
 set(LUAU_BUILD_TESTS OFF CACHE INTERNAL "")
 
+set(LUAU_ENABLE_JIT OFF CACHE INTERNAL "")
+set(LUAU_BUILD_SHARED OFF CACHE INTERNAL "")
+
+set(LUAU_BUILD_CODEGEN OFF CACHE BOOL "Disable Luau native codegen" FORCE)
+
 FetchContent_MakeAvailable(luau)
+message("Fetched luau!")
 
 find_package(assimp REQUIRED)
 
@@ -57,32 +67,21 @@ endif()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
-add_executable(CubeCavernApp)
+add_executable(${PROJECT_NAME})
 
-
-target_link_libraries(CubeCavernApp PRIVATE stdc++)
-target_link_libraries(CubeCavernApp PRIVATE assimp)
-target_link_libraries(CubeCavernApp PRIVATE Luau.VM Luau.Compiler)
-
-if (PLATFORM STREQUAL "vita")
-target_link_libraries(CubeCavernApp PRIVATE SDL3::SDL3 SDL3_image::SDL3_image SDL3_ttf::SDL3_ttf)
-else()
-target_link_libraries(CubeCavernApp PRIVATE SDL3 SDL3_image SDL3_ttf SDL3_net SDL3_mixer)
-endif()
-
-target_link_libraries(CubeCavernApp PRIVATE OpenAL::OpenAL)
+target_compile_definitions(${PROJECT_NAME} PRIVATE LUAU_ENABLE_CODEGEN=0)
 
 if(BUILD_TARGET STREQUAL "client")
 
     message("building for client")
 
-    target_sources(CubeCavernApp PRIVATE src/Client/main_client.cpp)
-    target_compile_definitions(CubeCavernApp PRIVATE BUILD_CLIENT)
+    target_sources(${PROJECT_NAME} PRIVATE src/Client/main_client.cpp)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_CLIENT)
 
-    set_target_properties(CubeCavernApp PROPERTIES
+    set_target_properties(${PROJECT_NAME} PROPERTIES
       OUTPUT_NAME "CubeCavern"
     )
 
@@ -90,15 +89,63 @@ elseif(BUILD_TARGET STREQUAL "server")
 
     message("building for server")
 
-    target_sources(CubeCavernApp PRIVATE src/Server/main_server.cpp)
-    target_compile_definitions(CubeCavernApp PRIVATE BUILD_SERVER)
+    target_sources(${PROJECT_NAME} PRIVATE src/Server/main_server.cpp)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SERVER)
 
-    set_target_properties(CubeCavernApp PROPERTIES
+    set_target_properties(${PROJECT_NAME} PROPERTIES
       OUTPUT_NAME "CubeCavern-DedicatedServer"
     )
 
 else()
     message(FATAL_ERROR, "'BUILD_TARGET' unspecified! Add '-DBUILD_TARGET=client|server'.")
+endif()
+
+target_compile_definitions(Luau.CodeGen PRIVATE LUAU_ENABLE_CODEGEN=0)
+target_compile_definitions(Luau.VM PRIVATE LUAU_ENABLE_CODEGEN=0)
+
+if (NOT PLATFORM STREQUAL "vita")
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_net::SDL3_net SDL3_mixer::SDL3_mixer)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenAL::OpenAL)
+endif()
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+  SDL3_image::SDL3_image
+  SDL3_ttf::SDL3_ttf
+  SDL3::SDL3
+)
+
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE
+
+    Luau.VM Luau.Compiler
+
+    -Wl,--start-group
+    
+    assimp
+    minizip
+    ppmd        # <--- ADD THIS HERE (must be after minizip)
+    webp
+    sharpyuv
+    zstd
+    lzma
+    bz2
+    z             # zlib
+    crypto
+    
+    -Wl,--end-group
+)
+
+if (PLATFORM STREQUAL "vita")
+  target_link_libraries(${PROJECT_NAME} PRIVATE
+
+    -Wl,--whole-archive pthread -Wl,--no-whole-archive
+
+    #SceKernelThreadMgr_stub
+    SceLibKernel_stub
+    SceDisplay_stub
+    SceGxm_stub
+  )
 endif()
 
 

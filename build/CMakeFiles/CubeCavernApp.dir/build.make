@@ -96,9 +96,14 @@ CubeCavernApp_EXTERNAL_OBJECTS =
 CubeCavern: CMakeFiles/CubeCavernApp.dir/src/Client/main_client.cpp.o
 CubeCavern: CMakeFiles/CubeCavernApp.dir/build.make
 CubeCavern: CMakeFiles/CubeCavernApp.dir/compiler_depend.ts
+CubeCavern: /usr/local/lib/libSDL3_net.so.0.3.0
+CubeCavern: /usr/lib/libSDL3_mixer.so.0.2.4
+CubeCavern: /usr/lib/libopenal.so
+CubeCavern: /usr/lib/libSDL3_image.so.0.4.4
+CubeCavern: /usr/lib/libSDL3_ttf.so.0.2.2
+CubeCavern: /usr/lib/libSDL3.so.0.4.14
 CubeCavern: _deps/luau-build/libLuau.VM.a
 CubeCavern: _deps/luau-build/libLuau.Compiler.a
-CubeCavern: /usr/lib/libopenal.so
 CubeCavern: _deps/luau-build/libLuau.Ast.a
 CubeCavern: _deps/luau-build/libLuau.Bytecode.a
 CubeCavern: _deps/luau-build/libLuau.Common.a

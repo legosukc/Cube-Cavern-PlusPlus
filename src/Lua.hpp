@@ -115,7 +115,11 @@ Game::Lua::LuaThreadInfo::LuaThreadInfo() {
 #ifdef BUILD_CLIENT
 
 #include "Client/LuaLibraries/LuaNetwork_Client.hpp"
+
+#ifndef SDL_PLATFORM_VITA
 #include "Client/LuaLibraries/LuaSound_Client.hpp"
+#endif
+
 #else
 
 #ifdef BUILD_SERVER
@@ -297,7 +301,27 @@ int _LuaDirectoryLibrary::__index(lua_State* State) {
             lua_error(State);
         }
 
-        lua_call(State, 0, 1);
+        switch (lua_pcall(State, 0, 1, 0)) {
+            case LUA_YIELD:
+                luaL_error(State, Path.c_str(),
+                           " yielded during loading (e.g wait()). that's not "
+                           "allowed yo");
+            case LUA_ERRRUN:
+                luaL_error(
+                    State, Path.c_str(),
+                    " had an error during loading: ", lua_tostring(State, -1));
+            case LUA_ERRMEM:
+                luaL_error(State, Path.c_str(),
+                           " had an error during loading. Ran out of memory.");
+            case LUA_ERRERR:
+                luaL_error(
+                    State, Path.c_str(),
+                    " had an error during error handling (e.g pcall()): ",
+                    lua_tostring(State, -1));
+            case LUA_BREAK:
+                // TODO: handle breakpoint
+                break;
+        }
 
         lua_pushvalue(State, 2);
         lua_pushvalue(State, -2);
@@ -423,15 +447,15 @@ void Game::Lua::Init() {
     luaopen_debug(Game::Lua::State);
     lua_setglobal(Game::Lua::State, LUA_DBLIBNAME);
 
-    //luaopen_integer(Game::Lua::State);
-    //lua_setglobal(Game::Lua::State, LUA_INTLIBNAME);
+    // luaopen_integer(Game::Lua::State);
+    // lua_setglobal(Game::Lua::State, LUA_INTLIBNAME);
 
     // luaopen_buffer(Game)
 
     // Create global tables
     Game::Lua::GameTable =
         LuaHelper::StackTableReference(Game::Lua::State, 0, 4);
-    
+
     Game::Lua::GameTable.PushReference(Game::Lua::State);
     lua_setglobal(Game::Lua::State, "Game");
 
