@@ -24,7 +24,8 @@ Luau API for modding, OpenGL knowledge is recommended. (You could probably get a
 ## TODO:
 
 - networkinggggggg
-- model loading
+- fix model loadinggg
+- [port luau to the ps vita](https://github.com/legosukc/luau-psvita)
 - everything :(
 
 ## BUILDING:
@@ -63,3 +64,9 @@ If you are on windows, install [WSL](https://learn.microsoft.com/en-us/windows/w
 For Mac users, idk, probably possible with brew or MacPorts
 
 You will need to install vitasdk, [click here for the install guide.](https://vitasdk.org/)
+
+After that, install the dependencies using this command:
+
+todo: figure out how to use codeblocks and list all of the dependecies (i forgot!)
+
+vdpm install SDL3 SDL3_image SDL3_ttf libwebp
