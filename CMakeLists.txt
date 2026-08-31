@@ -19,13 +19,13 @@ message("Fetching luau...")
 if (PLATFORM STREQUAL "vita")
 FetchContent_Declare(
     luau
-    GIT_REPOSITORY https://github.com/luau-lang/luau.git
+    GIT_REPOSITORY https://github.com/legosukc/luau-psvita/luau-psvita.git
     GIT_TAG        0.736
 )
 else()
 FetchContent_Declare(
     luau
-    GIT_REPOSITORY https://github.com/legosukc/luau-psvita/luau-psvita.git
+    GIT_REPOSITORY https://github.com/luau-lang/luau.git
     GIT_TAG        0.736
 )
 endif()
