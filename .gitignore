@@ -6,6 +6,7 @@
 *.sln.docstates
 
 /build/
+/build[.-]*/
 /build-vita/
 /build-win64/
 /build-win32/

@@ -56,6 +56,32 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 //Flags used by the CXX compiler during RELWITHDEBINFO builds.
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
+//C compiler
+CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
+
+//A wrapper around 'ar' adding the appropriate '--plugin' option
+// for the GCC compiler
+CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar
+
+//A wrapper around 'ranlib' adding the appropriate '--plugin' option
+// for the GCC compiler
+CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib
+
+//Flags used by the C compiler during all build types.
+CMAKE_C_FLAGS:STRING=
+
+//Flags used by the C compiler during DEBUG builds.
+CMAKE_C_FLAGS_DEBUG:STRING=-g
+
+//Flags used by the C compiler during MINSIZEREL builds.
+CMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
+
+//Flags used by the C compiler during RELEASE builds.
+CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
+
+//Flags used by the C compiler during RELWITHDEBINFO builds.
+CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+
 //Path to a program.
 CMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND
 
@@ -233,6 +259,96 @@ GIT_EXECUTABLE:FILEPATH=/usr/bin/git
 //Disable Luau native codegen
 LUAU_BUILD_CODEGEN:BOOL=OFF
 
+//Build as a shared library
+LUAU_BUILD_SHARED:BOOL=OFF
+
+//Build Web module
+LUAU_BUILD_WEB:BOOL=OFF
+
+//Use extern C for all APIs
+LUAU_EXTERN_C:BOOL=OFF
+
+//Link with the static CRT (/MT)
+LUAU_STATIC_CRT:BOOL=OFF
+
+//Warnings as errors
+LUAU_WERROR:BOOL=OFF
+
+//Dependencies for the target
+Luau.Analysis_LIB_DEPENDS:STATIC=general;Luau.Ast;general;Luau.Config;general;Luau.Compiler;general;Luau.VM;
+
+//Dependencies for the target
+Luau.Ast_LIB_DEPENDS:STATIC=general;Luau.Common;
+
+//Dependencies for the target
+Luau.Bytecode_LIB_DEPENDS:STATIC=general;Luau.Common;
+
+//Dependencies for the target
+Luau.CLI.lib_LIB_DEPENDS:STATIC=general;Luau.Common;general;Luau.Config;
+
+//Dependencies for the target
+Luau.CodeGen_LIB_DEPENDS:STATIC=general;Luau.VM;general;Luau.Common;
+
+//Dependencies for the target
+Luau.Compiler_LIB_DEPENDS:STATIC=general;Luau.Ast;general;Luau.Bytecode;
+
+//Dependencies for the target
+Luau.Config_LIB_DEPENDS:STATIC=general;Luau.Ast;general;Luau.Compiler;general;Luau.VM;
+
+//Dependencies for the target
+Luau.Inliner_LIB_DEPENDS:STATIC=general;Luau.VM;general;Luau.Bytecode;
+
+//Dependencies for the target
+Luau.Require_LIB_DEPENDS:STATIC=general;Luau.Config;general;Luau.VM;
+
+//Dependencies for the target
+Luau.VM_LIB_DEPENDS:STATIC=general;Luau.Common;
+
+//Value Computed by CMake
+Luau_BINARY_DIR:STATIC=/home/savoury/Documents/Cpp/Cube Cavern++/build/_deps/luau-build
+
+//Value Computed by CMake
+Luau_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+Luau_SOURCE_DIR:STATIC=/home/savoury/Documents/Cpp/Cube Cavern++/build/_deps/luau-src
+
+//Path to a file.
+OPENAL_INCLUDE_DIR:PATH=/usr/include/AL
+
+//Path to a library.
+OPENAL_LIBRARY:FILEPATH=/usr/lib/libopenal.so
+
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+
+//The directory containing a CMake configuration file for SDL3.
+SDL3_DIR:PATH=/usr/lib/cmake/SDL3
+
+//The directory containing a CMake configuration file for SDL3_image.
+SDL3_image_DIR:PATH=/usr/lib/cmake/SDL3_image
+
+//The directory containing a CMake configuration file for SDL3_mixer.
+SDL3_mixer_DIR:PATH=/usr/lib/cmake/SDL3_mixer
+
+//The directory containing a CMake configuration file for SDL3_net.
+SDL3_net_DIR:PATH=/usr/local/lib/cmake/SDL3_net
+
+//The directory containing a CMake configuration file for SDL3_ttf.
+SDL3_ttf_DIR:PATH=/usr/lib/cmake/SDL3_ttf
+
+//The directory containing a CMake configuration file for assimp.
+assimp_DIR:PATH=/usr/lib/cmake/assimp-6.0
+
+//Path to a library.
+pkgcfg_lib_PC_LIBUNWIND_unwind:FILEPATH=/usr/lib/libunwind.so
+
+//Path to a library.
+pkgcfg_lib_PC_LIBUNWIND_unwind-generic:FILEPATH=/usr/lib/libunwind-generic.so
+
 
 ########################
 # INTERNAL cache entries
@@ -274,6 +390,22 @@ CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO
 CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_COMPILER
+CMAKE_C_COMPILER-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_COMPILER_AR
+CMAKE_C_COMPILER_AR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_COMPILER_RANLIB
+CMAKE_C_COMPILER_RANLIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS
+CMAKE_C_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS_DEBUG
+CMAKE_C_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS_MINSIZEREL
+CMAKE_C_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS_RELEASE
+CMAKE_C_FLAGS_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS_RELWITHDEBINFO
+CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //Set initial state for CMake diagnostics; used to persist state
 // set by command-line options across invocations.
 CMAKE_DIAGNOSTIC_INIT:INTERNAL=CMD_AUTHOR=WARN;CMD_DEPRECATED=WARN;CMD_EXPERIMENTAL=WARN;CMD_INSTALL_ABSOLUTE_DESTINATION=IGNORE;CMD_POLICY=WARN;CMD_UNINITIALIZED=IGNORE;CMD_UNUSED_CLI=WARN
@@ -331,7 +463,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -378,8 +510,70 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Deprecated.  Use -W[no-]deprecated instead.
 CMAKE_WARN_DEPRECATED:INTERNAL=ON
+//Details about finding OpenAL
+FIND_PACKAGE_MESSAGE_DETAILS_OpenAL:INTERNAL=[/usr/lib/libopenal.so][/usr/include/AL][v()]
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v3.0.6()]
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
+//Build CLI
 LUAU_BUILD_CLI:INTERNAL=OFF
+//Build tests
 LUAU_BUILD_TESTS:INTERNAL=OFF
+//ADVANCED property for variable: OPENAL_INCLUDE_DIR
+OPENAL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENAL_LIBRARY
+OPENAL_LIBRARY-ADVANCED:INTERNAL=1
+PC_LIBUNWIND_CFLAGS:INTERNAL=-I/usr/include
+PC_LIBUNWIND_CFLAGS_I:INTERNAL=
+PC_LIBUNWIND_CFLAGS_OTHER:INTERNAL=
+PC_LIBUNWIND_FOUND:INTERNAL=1
+PC_LIBUNWIND_INCLUDEDIR:INTERNAL=
+PC_LIBUNWIND_INCLUDE_DIRS:INTERNAL=/usr/include
+PC_LIBUNWIND_LDFLAGS:INTERNAL=-L/usr/lib;-lunwind-generic;-lunwind
+PC_LIBUNWIND_LDFLAGS_OTHER:INTERNAL=
+PC_LIBUNWIND_LIBDIR:INTERNAL=
+PC_LIBUNWIND_LIBRARIES:INTERNAL=unwind-generic;unwind
+PC_LIBUNWIND_LIBRARY_DIRS:INTERNAL=/usr/lib
+PC_LIBUNWIND_LIBS:INTERNAL=
+PC_LIBUNWIND_LIBS_L:INTERNAL=
+PC_LIBUNWIND_LIBS_OTHER:INTERNAL=
+PC_LIBUNWIND_LIBS_PATHS:INTERNAL=
+PC_LIBUNWIND_MODULE_NAME:INTERNAL=
+PC_LIBUNWIND_PREFIX:INTERNAL=
+PC_LIBUNWIND_STATIC_CFLAGS:INTERNAL=-I/usr/include
+PC_LIBUNWIND_STATIC_CFLAGS_I:INTERNAL=
+PC_LIBUNWIND_STATIC_CFLAGS_OTHER:INTERNAL=
+PC_LIBUNWIND_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include
+PC_LIBUNWIND_STATIC_LDFLAGS:INTERNAL=-L/usr/lib;-lunwind-generic;-lunwind;-llzma;-lz
+PC_LIBUNWIND_STATIC_LDFLAGS_OTHER:INTERNAL=
+PC_LIBUNWIND_STATIC_LIBDIR:INTERNAL=
+PC_LIBUNWIND_STATIC_LIBRARIES:INTERNAL=unwind-generic;unwind;lzma;z
+PC_LIBUNWIND_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib
+PC_LIBUNWIND_STATIC_LIBS:INTERNAL=
+PC_LIBUNWIND_STATIC_LIBS_L:INTERNAL=
+PC_LIBUNWIND_STATIC_LIBS_OTHER:INTERNAL=
+PC_LIBUNWIND_STATIC_LIBS_PATHS:INTERNAL=
+PC_LIBUNWIND_VERSION:INTERNAL=
+PC_LIBUNWIND_libunwind-generic_INCLUDEDIR:INTERNAL=/usr/include
+PC_LIBUNWIND_libunwind-generic_LIBDIR:INTERNAL=/usr/lib
+PC_LIBUNWIND_libunwind-generic_MODULE_NAME:INTERNAL=libunwind-generic
+PC_LIBUNWIND_libunwind-generic_PREFIX:INTERNAL=/usr
+PC_LIBUNWIND_libunwind-generic_VERSION:INTERNAL=1.8.2
+PC_LIBUNWIND_libunwind_INCLUDEDIR:INTERNAL=/usr/include
+PC_LIBUNWIND_libunwind_LIBDIR:INTERNAL=/usr/lib
+PC_LIBUNWIND_libunwind_MODULE_NAME:INTERNAL=libunwind
+PC_LIBUNWIND_libunwind_PREFIX:INTERNAL=/usr
+PC_LIBUNWIND_libunwind_VERSION:INTERNAL=1.8.2
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+__pkg_config_arguments_PC_LIBUNWIND:INTERNAL=QUIET;IMPORTED_TARGET;libunwind;libunwind-generic
+__pkg_config_checked_PC_LIBUNWIND:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_PC_LIBUNWIND_unwind
+pkgcfg_lib_PC_LIBUNWIND_unwind-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_PC_LIBUNWIND_unwind-generic
+pkgcfg_lib_PC_LIBUNWIND_unwind-generic-ADVANCED:INTERNAL=1
+prefix_result:INTERNAL=/usr/lib
 

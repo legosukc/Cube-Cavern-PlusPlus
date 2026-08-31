@@ -10238,3 +10238,3473 @@ events:
         - "/usr/pkg"
         - "/opt"
 ...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompiler.cmake:54 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:64 (_cmake_find_compiler)"
+      - "build/_deps/luau-src/CMakeLists.txt:29 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER"
+    description: "C compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cc"
+      - "gcc"
+      - "cl"
+      - "bcc"
+      - "xlc"
+      - "icx"
+      - "clang"
+    candidate_directories:
+      - "/usr/bin/"
+    found: "/usr/bin/cc"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "build/_deps/luau-src/CMakeLists.txt:29 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCCompilerId.c.in"
+    candidate_directories:
+      - "/usr/share/cmake/Modules/"
+    found: "/usr/share/cmake/Modules/CMakeCCompilerId.c.in"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/usr/include/X11"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "build/_deps/luau-src/CMakeLists.txt:29 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/bin/cc 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        /home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/4.4.3/CompilerIdC/a.out
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake:18 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:201 (include)"
+      - "build/_deps/luau-src/CMakeLists.txt:29 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_AR"
+    description: "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ar-16.2"
+      - "gcc-ar-16"
+      - "gcc-ar16"
+      - "gcc-ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/vitasdk/bin/"
+      - "/home/savoury/.cargo/bin/"
+      - "/home/savoury/.local/bin/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/local/sbin/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/opt/llvm-mingw/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/usr/bin/gcc-ar-16.2"
+      - "/usr/local/vitasdk/bin/gcc-ar-16.2"
+      - "/home/savoury/.cargo/bin/gcc-ar-16.2"
+      - "/home/savoury/.local/bin/gcc-ar-16.2"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar-16.2"
+      - "/usr/local/bin/gcc-ar-16.2"
+      - "/bin/gcc-ar-16.2"
+      - "/usr/local/sbin/gcc-ar-16.2"
+      - "/home/savoury/.local/share/flatpak/exports/bin/gcc-ar-16.2"
+      - "/var/lib/flatpak/exports/bin/gcc-ar-16.2"
+      - "/usr/lib/jvm/default/bin/gcc-ar-16.2"
+      - "/opt/llvm-mingw/bin/gcc-ar-16.2"
+      - "/usr/bin/site_perl/gcc-ar-16.2"
+      - "/usr/bin/vendor_perl/gcc-ar-16.2"
+      - "/usr/bin/core_perl/gcc-ar-16.2"
+      - "/usr/local/bin/gcc-ar-16.2"
+      - "/usr/local/sbin/gcc-ar-16.2"
+      - "/usr/local/gcc-ar-16.2"
+      - "/usr/bin/gcc-ar-16.2"
+      - "/usr/sbin/gcc-ar-16.2"
+      - "/usr/gcc-ar-16.2"
+      - "/bin/gcc-ar-16.2"
+      - "/sbin/gcc-ar-16.2"
+      - "/usr/X11R6/bin/gcc-ar-16.2"
+      - "/usr/X11R6/sbin/gcc-ar-16.2"
+      - "/usr/X11R6/gcc-ar-16.2"
+      - "/usr/pkg/bin/gcc-ar-16.2"
+      - "/usr/pkg/sbin/gcc-ar-16.2"
+      - "/usr/pkg/gcc-ar-16.2"
+      - "/opt/bin/gcc-ar-16.2"
+      - "/opt/sbin/gcc-ar-16.2"
+      - "/opt/gcc-ar-16.2"
+      - "/usr/bin/gcc-ar-16"
+      - "/usr/local/vitasdk/bin/gcc-ar-16"
+      - "/home/savoury/.cargo/bin/gcc-ar-16"
+      - "/home/savoury/.local/bin/gcc-ar-16"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar-16"
+      - "/usr/local/bin/gcc-ar-16"
+      - "/bin/gcc-ar-16"
+      - "/usr/local/sbin/gcc-ar-16"
+      - "/home/savoury/.local/share/flatpak/exports/bin/gcc-ar-16"
+      - "/var/lib/flatpak/exports/bin/gcc-ar-16"
+      - "/usr/lib/jvm/default/bin/gcc-ar-16"
+      - "/opt/llvm-mingw/bin/gcc-ar-16"
+      - "/usr/bin/site_perl/gcc-ar-16"
+      - "/usr/bin/vendor_perl/gcc-ar-16"
+      - "/usr/bin/core_perl/gcc-ar-16"
+      - "/usr/local/bin/gcc-ar-16"
+      - "/usr/local/sbin/gcc-ar-16"
+      - "/usr/local/gcc-ar-16"
+      - "/usr/bin/gcc-ar-16"
+      - "/usr/sbin/gcc-ar-16"
+      - "/usr/gcc-ar-16"
+      - "/bin/gcc-ar-16"
+      - "/sbin/gcc-ar-16"
+      - "/usr/X11R6/bin/gcc-ar-16"
+      - "/usr/X11R6/sbin/gcc-ar-16"
+      - "/usr/X11R6/gcc-ar-16"
+      - "/usr/pkg/bin/gcc-ar-16"
+      - "/usr/pkg/sbin/gcc-ar-16"
+      - "/usr/pkg/gcc-ar-16"
+      - "/opt/bin/gcc-ar-16"
+      - "/opt/sbin/gcc-ar-16"
+      - "/opt/gcc-ar-16"
+      - "/usr/bin/gcc-ar16"
+      - "/usr/local/vitasdk/bin/gcc-ar16"
+      - "/home/savoury/.cargo/bin/gcc-ar16"
+      - "/home/savoury/.local/bin/gcc-ar16"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar16"
+      - "/usr/local/bin/gcc-ar16"
+      - "/bin/gcc-ar16"
+      - "/usr/local/sbin/gcc-ar16"
+      - "/home/savoury/.local/share/flatpak/exports/bin/gcc-ar16"
+      - "/var/lib/flatpak/exports/bin/gcc-ar16"
+      - "/usr/lib/jvm/default/bin/gcc-ar16"
+      - "/opt/llvm-mingw/bin/gcc-ar16"
+      - "/usr/bin/site_perl/gcc-ar16"
+      - "/usr/bin/vendor_perl/gcc-ar16"
+      - "/usr/bin/core_perl/gcc-ar16"
+      - "/usr/local/bin/gcc-ar16"
+      - "/usr/local/sbin/gcc-ar16"
+      - "/usr/local/gcc-ar16"
+      - "/usr/bin/gcc-ar16"
+      - "/usr/sbin/gcc-ar16"
+      - "/usr/gcc-ar16"
+      - "/bin/gcc-ar16"
+      - "/sbin/gcc-ar16"
+      - "/usr/X11R6/bin/gcc-ar16"
+      - "/usr/X11R6/sbin/gcc-ar16"
+      - "/usr/X11R6/gcc-ar16"
+      - "/usr/pkg/bin/gcc-ar16"
+      - "/usr/pkg/sbin/gcc-ar16"
+      - "/usr/pkg/gcc-ar16"
+      - "/opt/bin/gcc-ar16"
+      - "/opt/sbin/gcc-ar16"
+      - "/opt/gcc-ar16"
+    found: "/usr/bin/gcc-ar"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake:30 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:201 (include)"
+      - "build/_deps/luau-src/CMakeLists.txt:29 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_RANLIB"
+    description: "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ranlib-16.2"
+      - "gcc-ranlib-16"
+      - "gcc-ranlib16"
+      - "gcc-ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/vitasdk/bin/"
+      - "/home/savoury/.cargo/bin/"
+      - "/home/savoury/.local/bin/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/local/sbin/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/opt/llvm-mingw/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/usr/bin/gcc-ranlib-16.2"
+      - "/usr/local/vitasdk/bin/gcc-ranlib-16.2"
+      - "/home/savoury/.cargo/bin/gcc-ranlib-16.2"
+      - "/home/savoury/.local/bin/gcc-ranlib-16.2"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib-16.2"
+      - "/usr/local/bin/gcc-ranlib-16.2"
+      - "/bin/gcc-ranlib-16.2"
+      - "/usr/local/sbin/gcc-ranlib-16.2"
+      - "/home/savoury/.local/share/flatpak/exports/bin/gcc-ranlib-16.2"
+      - "/var/lib/flatpak/exports/bin/gcc-ranlib-16.2"
+      - "/usr/lib/jvm/default/bin/gcc-ranlib-16.2"
+      - "/opt/llvm-mingw/bin/gcc-ranlib-16.2"
+      - "/usr/bin/site_perl/gcc-ranlib-16.2"
+      - "/usr/bin/vendor_perl/gcc-ranlib-16.2"
+      - "/usr/bin/core_perl/gcc-ranlib-16.2"
+      - "/usr/local/bin/gcc-ranlib-16.2"
+      - "/usr/local/sbin/gcc-ranlib-16.2"
+      - "/usr/local/gcc-ranlib-16.2"
+      - "/usr/bin/gcc-ranlib-16.2"
+      - "/usr/sbin/gcc-ranlib-16.2"
+      - "/usr/gcc-ranlib-16.2"
+      - "/bin/gcc-ranlib-16.2"
+      - "/sbin/gcc-ranlib-16.2"
+      - "/usr/X11R6/bin/gcc-ranlib-16.2"
+      - "/usr/X11R6/sbin/gcc-ranlib-16.2"
+      - "/usr/X11R6/gcc-ranlib-16.2"
+      - "/usr/pkg/bin/gcc-ranlib-16.2"
+      - "/usr/pkg/sbin/gcc-ranlib-16.2"
+      - "/usr/pkg/gcc-ranlib-16.2"
+      - "/opt/bin/gcc-ranlib-16.2"
+      - "/opt/sbin/gcc-ranlib-16.2"
+      - "/opt/gcc-ranlib-16.2"
+      - "/usr/bin/gcc-ranlib-16"
+      - "/usr/local/vitasdk/bin/gcc-ranlib-16"
+      - "/home/savoury/.cargo/bin/gcc-ranlib-16"
+      - "/home/savoury/.local/bin/gcc-ranlib-16"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib-16"
+      - "/usr/local/bin/gcc-ranlib-16"
+      - "/bin/gcc-ranlib-16"
+      - "/usr/local/sbin/gcc-ranlib-16"
+      - "/home/savoury/.local/share/flatpak/exports/bin/gcc-ranlib-16"
+      - "/var/lib/flatpak/exports/bin/gcc-ranlib-16"
+      - "/usr/lib/jvm/default/bin/gcc-ranlib-16"
+      - "/opt/llvm-mingw/bin/gcc-ranlib-16"
+      - "/usr/bin/site_perl/gcc-ranlib-16"
+      - "/usr/bin/vendor_perl/gcc-ranlib-16"
+      - "/usr/bin/core_perl/gcc-ranlib-16"
+      - "/usr/local/bin/gcc-ranlib-16"
+      - "/usr/local/sbin/gcc-ranlib-16"
+      - "/usr/local/gcc-ranlib-16"
+      - "/usr/bin/gcc-ranlib-16"
+      - "/usr/sbin/gcc-ranlib-16"
+      - "/usr/gcc-ranlib-16"
+      - "/bin/gcc-ranlib-16"
+      - "/sbin/gcc-ranlib-16"
+      - "/usr/X11R6/bin/gcc-ranlib-16"
+      - "/usr/X11R6/sbin/gcc-ranlib-16"
+      - "/usr/X11R6/gcc-ranlib-16"
+      - "/usr/pkg/bin/gcc-ranlib-16"
+      - "/usr/pkg/sbin/gcc-ranlib-16"
+      - "/usr/pkg/gcc-ranlib-16"
+      - "/opt/bin/gcc-ranlib-16"
+      - "/opt/sbin/gcc-ranlib-16"
+      - "/opt/gcc-ranlib-16"
+      - "/usr/bin/gcc-ranlib16"
+      - "/usr/local/vitasdk/bin/gcc-ranlib16"
+      - "/home/savoury/.cargo/bin/gcc-ranlib16"
+      - "/home/savoury/.local/bin/gcc-ranlib16"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib16"
+      - "/usr/local/bin/gcc-ranlib16"
+      - "/bin/gcc-ranlib16"
+      - "/usr/local/sbin/gcc-ranlib16"
+      - "/home/savoury/.local/share/flatpak/exports/bin/gcc-ranlib16"
+      - "/var/lib/flatpak/exports/bin/gcc-ranlib16"
+      - "/usr/lib/jvm/default/bin/gcc-ranlib16"
+      - "/opt/llvm-mingw/bin/gcc-ranlib16"
+      - "/usr/bin/site_perl/gcc-ranlib16"
+      - "/usr/bin/vendor_perl/gcc-ranlib16"
+      - "/usr/bin/core_perl/gcc-ranlib16"
+      - "/usr/local/bin/gcc-ranlib16"
+      - "/usr/local/sbin/gcc-ranlib16"
+      - "/usr/local/gcc-ranlib16"
+      - "/usr/bin/gcc-ranlib16"
+      - "/usr/sbin/gcc-ranlib16"
+      - "/usr/gcc-ranlib16"
+      - "/bin/gcc-ranlib16"
+      - "/sbin/gcc-ranlib16"
+      - "/usr/X11R6/bin/gcc-ranlib16"
+      - "/usr/X11R6/sbin/gcc-ranlib16"
+      - "/usr/X11R6/gcc-ranlib16"
+      - "/usr/pkg/bin/gcc-ranlib16"
+      - "/usr/pkg/sbin/gcc-ranlib16"
+      - "/usr/pkg/gcc-ranlib16"
+      - "/opt/bin/gcc-ranlib16"
+      - "/opt/sbin/gcc-ranlib16"
+      - "/opt/gcc-ranlib16"
+    found: "/usr/bin/gcc-ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:123 (try_compile)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "build/_deps/luau-src/CMakeLists.txt:29 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/CMakeScratch/TryCompile-Nwclpq"
+      binary: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/CMakeScratch/TryCompile-Nwclpq"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: false
+      stdout: |
+        Change Dir: '/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/CMakeScratch/TryCompile-Nwclpq'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_1df25/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_1df25.dir/build.make CMakeFiles/cmTC_1df25.dir/build
+        make[1]: Entering directory '/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/CMakeScratch/TryCompile-Nwclpq'
+        Building C object CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o
+        /usr/bin/cc   -v -o CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        Target: x86_64-pc-linux-gnu
+        Configured with: ../gcc/configure --enable-languages=ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++,rust,cobol --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://github.com/CachyOS/CachyOS-PKGBUILDS/issues --with-build-config=bootstrap-lto --with-gcc-major-version-only --with-linker-hash-style=gnu --with-system-zlib --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-fixincludes --disable-libssp --disable-libstdcxx-pch --disable-werror
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 16.2.1 20260810 (GCC) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1df25.dir/'
+         /usr/lib/gcc/x86_64-pc-linux-gnu/16/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_1df25.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/ccSs2qVw.s
+        GNU C23 (GCC) version 16.2.1 20260810 (x86_64-pc-linux-gnu)
+        	compiled by GNU C version 16.2.1 20260810, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.4.1, isl version isl-0.28-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-linux-gnu/16/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../x86_64-pc-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib/gcc/x86_64-pc-linux-gnu/16/include
+         /usr/local/include
+         /usr/include
+        End of search list.
+        Compiler executable checksum: a48c0af3a2776f11d2f29c8a4f4a097f
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1df25.dir/'
+         as -v --64 -o CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o /tmp/ccSs2qVw.s
+        GNU assembler version 2.47 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.47
+        COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_1df25
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1df25.dir/link.txt --verbose=1
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper
+        Target: x86_64-pc-linux-gnu
+        Configured with: ../gcc/configure --enable-languages=ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++,rust,cobol --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://github.com/CachyOS/CachyOS-PKGBUILDS/issues --with-build-config=bootstrap-lto --with-gcc-major-version-only --with-linker-hash-style=gnu --with-system-zlib --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-fixincludes --disable-libssp --disable-libstdcxx-pch --disable-werror
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 16.2.1 20260810 (GCC) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1df25' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_1df25.'
+         /usr/lib/gcc/x86_64-pc-linux-gnu/16/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRMn9K5.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_1df25 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o
+        collect2 version 16.2.1 20260810
+        /usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRMn9K5.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_1df25 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o
+        GNU ld (GNU Binutils) 2.47
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1df25' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_1df25.'
+        /usr/bin/cc  -v -Wl,-v CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o -o cmTC_1df25
+        make[1]: Leaving directory '/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/CMakeScratch/TryCompile-Nwclpq'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:255 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "build/_deps/luau-src/CMakeLists.txt:29 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/lib/gcc/x86_64-pc-linux-gnu/16/include]
+          add: [/usr/local/include]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/lib/gcc/x86_64-pc-linux-gnu/16/include] ==> [/usr/lib/gcc/x86_64-pc-linux-gnu/16/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/lib/gcc/x86_64-pc-linux-gnu/16/include;/usr/local/include;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:291 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "build/_deps/luau-src/CMakeLists.txt:29 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild))("|,| |$)]
+        ignore line: [Change Dir: '/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/CMakeScratch/TryCompile-Nwclpq']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_1df25/fast]
+        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_1df25.dir/build.make CMakeFiles/cmTC_1df25.dir/build]
+        ignore line: [make[1]: Entering directory '/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/CMakeScratch/TryCompile-Nwclpq']
+        ignore line: [Building C object CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [Target: x86_64-pc-linux-gnu]
+        ignore line: [Configured with: ../gcc/configure --enable-languages=ada c c++ d fortran go lto m2 objc obj-c++ rust cobol --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://github.com/CachyOS/CachyOS-PKGBUILDS/issues --with-build-config=bootstrap-lto --with-gcc-major-version-only --with-linker-hash-style=gnu --with-system-zlib --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-fixincludes --disable-libssp --disable-libstdcxx-pch --disable-werror]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 16.2.1 20260810 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1df25.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/16/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_1df25.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/ccSs2qVw.s]
+        ignore line: [GNU C23 (GCC) version 16.2.1 20260810 (x86_64-pc-linux-gnu)]
+        ignore line: [	compiled by GNU C version 16.2.1 20260810  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.4.1  isl version isl-0.28-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-linux-gnu/16/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../x86_64-pc-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: a48c0af3a2776f11d2f29c8a4f4a097f]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1df25.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o /tmp/ccSs2qVw.s]
+        ignore line: [GNU assembler version 2.47 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.47]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_1df25]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1df25.dir/link.txt --verbose=1]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper]
+        ignore line: [Target: x86_64-pc-linux-gnu]
+        ignore line: [Configured with: ../gcc/configure --enable-languages=ada c c++ d fortran go lto m2 objc obj-c++ rust cobol --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://github.com/CachyOS/CachyOS-PKGBUILDS/issues --with-build-config=bootstrap-lto --with-gcc-major-version-only --with-linker-hash-style=gnu --with-system-zlib --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-fixincludes --disable-libssp --disable-libstdcxx-pch --disable-werror]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 16.2.1 20260810 (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1df25' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_1df25.']
+        link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/16/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRMn9K5.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_1df25 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccRMn9K5.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s_asneeded] ==> ignore
+          arg [-plugin-opt=-pass-through=-latomic_asneeded] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s_asneeded] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_1df25] ==> ignore
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/16] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/16]
+          arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../..]
+          arg [-L/lib] ==> dir [/lib]
+          arg [-L/usr/lib] ==> dir [/usr/lib]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lgcc_s_asneeded] ==> lib [gcc_s_asneeded]
+          arg [-latomic_asneeded] ==> lib [atomic_asneeded]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lgcc_s_asneeded] ==> lib [gcc_s_asneeded]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o]
+        ignore line: [collect2 version 16.2.1 20260810]
+        link line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRMn9K5.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_1df25 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o] ==> linker [/usr/bin/ld]
+        link line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRMn9K5.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_1df25 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o] ==> linker architecture flags [-m;elf]
+        ignore line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRMn9K5.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_1df25 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_1df25.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o]
+        linker tool for 'C': /usr/bin/ld -m;elf
+        collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o] ==> [/usr/lib/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o] ==> [/usr/lib/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o] ==> [/usr/lib/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/16] ==> [/usr/lib/gcc/x86_64-pc-linux-gnu/16]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../..] ==> [/usr/lib]
+        collapse library dir [/lib] ==> [/lib]
+        collapse library dir [/usr/lib] ==> [/usr/lib]
+        implicit libs: [gcc;gcc_s_asneeded;atomic_asneeded;c;gcc;gcc_s_asneeded]
+        implicit objs: [/usr/lib/Scrt1.o;/usr/lib/crti.o;/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o;/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o;/usr/lib/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-pc-linux-gnu/16;/usr/lib;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "build/_deps/luau-src/CMakeLists.txt:29 (project)"
+    message: |
+      Running the C compiler's linker: "/usr/bin/ld" "-v"
+      GNU ld (GNU Binutils) 2.47
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:47 (find_package)"
+    name: "assimp"
+    configs:
+      -
+        filename: "assimp.cps"
+        kind: "cps"
+      -
+        filename: "assimpConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "assimp-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "assimp"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found:
+      path: "/usr/lib/cmake/assimp-6.0/assimpConfig.cmake"
+      mode: "config"
+      version: "6.0.5"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindPkgConfig.cmake:517 (find_program)"
+      - "/usr/lib/cmake/SDL3/SDL3Config.cmake:100 (find_package)"
+      - "CMakeLists.txt:49 (find_package)"
+    mode: "program"
+    variable: "PKG_CONFIG_EXECUTABLE"
+    description: "pkg-config executable"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "pkg-config"
+      - "pkgconf"
+    candidate_directories:
+      - "/usr/local/vitasdk/bin/"
+      - "/home/savoury/.cargo/bin/"
+      - "/home/savoury/.local/bin/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/local/sbin/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/opt/llvm-mingw/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/usr/local/vitasdk/bin/pkg-config"
+      - "/usr/local/vitasdk/bin/pkgconf"
+      - "/home/savoury/.cargo/bin/pkg-config"
+      - "/home/savoury/.cargo/bin/pkgconf"
+      - "/home/savoury/.local/bin/pkg-config"
+      - "/home/savoury/.local/bin/pkgconf"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/pkg-config"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/pkgconf"
+      - "/usr/local/bin/pkg-config"
+      - "/usr/local/bin/pkgconf"
+    found: "/usr/bin/pkg-config"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindPkgConfig.cmake:761 (find_library)"
+      - "/usr/share/cmake/Modules/FindPkgConfig.cmake:811 (_pkg_find_libs)"
+      - "/usr/share/cmake/Modules/FindPkgConfig.cmake:1149 (_pkg_recalculate)"
+      - "/usr/share/cmake/Modules/FindPkgConfig.cmake:1166 (_pkg_check_modules_internal)"
+      - "/usr/lib/cmake/SDL3/SDL3Config.cmake:102 (pkg_check_modules)"
+      - "CMakeLists.txt:49 (find_package)"
+    mode: "library"
+    variable: "pkgcfg_lib_PC_LIBUNWIND_unwind-generic"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "unwind-generic"
+    candidate_directories:
+      - "/usr/lib/"
+    found: "/usr/lib/libunwind-generic.so"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindPkgConfig.cmake:761 (find_library)"
+      - "/usr/share/cmake/Modules/FindPkgConfig.cmake:811 (_pkg_find_libs)"
+      - "/usr/share/cmake/Modules/FindPkgConfig.cmake:1149 (_pkg_recalculate)"
+      - "/usr/share/cmake/Modules/FindPkgConfig.cmake:1166 (_pkg_check_modules_internal)"
+      - "/usr/lib/cmake/SDL3/SDL3Config.cmake:102 (pkg_check_modules)"
+      - "CMakeLists.txt:49 (find_package)"
+    mode: "library"
+    variable: "pkgcfg_lib_PC_LIBUNWIND_unwind"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "unwind"
+    candidate_directories:
+      - "/usr/lib/"
+    found: "/usr/lib/libunwind.so"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:49 (find_package)"
+    name: "SDL3"
+    configs:
+      -
+        filename: "SDL3.cps"
+        kind: "cps"
+      -
+        filename: "sdl3.cps"
+        kind: "cps"
+      -
+        filename: "SDL3Config.cmake"
+        kind: "cmake"
+      -
+        filename: "sdl3-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "SDL3"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cmake/SDL3_net/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cmake/SDL3_net/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/SDL3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/sdl3.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cmake/SDL3_ttf/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cmake/SDL3_ttf/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cmake/SDL3_mixer/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cmake/SDL3_mixer/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cmake/SDL3_image/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cmake/SDL3_image/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+    found:
+      path: "/usr/lib/cmake/SDL3/SDL3Config.cmake"
+      mode: "config"
+      version: "3.4.14"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:50 (find_package)"
+    name: "SDL3_image"
+    configs:
+      -
+        filename: "SDL3_image.cps"
+        kind: "cps"
+      -
+        filename: "sdl3_image.cps"
+        kind: "cps"
+      -
+        filename: "SDL3_imageConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "sdl3_image-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "SDL3_image"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/SDL3_imageConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/sdl3_image-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/SDL3_imageConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/sdl3_image-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/SDL3_imageConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/sdl3_image-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/SDL3_imageConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/sdl3_image-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/SDL3_imageConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/sdl3_image-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/SDL3_imageConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/sdl3_image-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/SDL3_imageConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/sdl3_image-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/SDL3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/sdl3_image.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found:
+      path: "/usr/lib/cmake/SDL3_image/SDL3_imageConfig.cmake"
+      mode: "config"
+      version: "3.4.4"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:51 (find_package)"
+    name: "SDL3_ttf"
+    configs:
+      -
+        filename: "SDL3_ttf.cps"
+        kind: "cps"
+      -
+        filename: "sdl3_ttf.cps"
+        kind: "cps"
+      -
+        filename: "SDL3_ttfConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "sdl3_ttf-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "SDL3_ttf"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/SDL3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/sdl3_ttf.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found:
+      path: "/usr/lib/cmake/SDL3_ttf/SDL3_ttfConfig.cmake"
+      mode: "config"
+      version: "3.2.2"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:54 (find_package)"
+    name: "SDL3_mixer"
+    configs:
+      -
+        filename: "SDL3_mixer.cps"
+        kind: "cps"
+      -
+        filename: "sdl3_mixer.cps"
+        kind: "cps"
+      -
+        filename: "SDL3_mixerConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "sdl3_mixer-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "SDL3_mixer"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/SDL3_mixerConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/sdl3_mixer-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/SDL3_mixerConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/sdl3_mixer-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/SDL3_mixerConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/sdl3_mixer-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/SDL3_mixerConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/sdl3_mixer-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/SDL3_mixerConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/sdl3_mixer-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/SDL3_mixerConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/sdl3_mixer-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/SDL3_mixerConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/sdl3_mixer-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/SDL3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/sdl3_mixer.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found:
+      path: "/usr/lib/cmake/SDL3_mixer/SDL3_mixerConfig.cmake"
+      mode: "config"
+      version: "3.2.4"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:55 (find_package)"
+    name: "SDL3_net"
+    configs:
+      -
+        filename: "SDL3_net.cps"
+        kind: "cps"
+      -
+        filename: "sdl3_net.cps"
+        kind: "cps"
+      -
+        filename: "SDL3_netConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "sdl3_net-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "SDL3_net"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/SDL3_netConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/sdl3_net-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/lib/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/Documents/Cpp/Cube Cavern++/build/CMakeFiles/pkgRedirects/share/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/SDL3_netConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/sdl3_net-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/lib/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/vitasdk/share/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/SDL3_netConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/sdl3_net-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/lib/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.cargo/share/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/SDL3_netConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/sdl3_net-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/lib/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.local/share/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/SDL3_netConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/sdl3_net-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/lib/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/share/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/SDL3_netConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/sdl3_net-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/SDL3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/sdl3_net.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found:
+      path: "/usr/local/lib/cmake/SDL3_net/SDL3_netConfig.cmake"
+      mode: "config"
+      version: "3.3.0"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindOpenAL.cmake:108 (find_path)"
+      - "CMakeLists.txt:58 (find_package)"
+    mode: "path"
+    variable: "OPENAL_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "al.h"
+    candidate_directories:
+      - "/usr/local/vitasdk/bin/include/AL/"
+      - "/usr/local/vitasdk/bin/include/OpenAL/"
+      - "/usr/local/vitasdk/bin/include/"
+      - "/usr/local/vitasdk/bin/AL/"
+      - "/usr/local/vitasdk/bin/OpenAL/"
+      - "/usr/local/vitasdk/bin/"
+      - "/home/savoury/.cargo/bin/include/AL/"
+      - "/home/savoury/.cargo/bin/include/OpenAL/"
+      - "/home/savoury/.cargo/bin/include/"
+      - "/home/savoury/.cargo/bin/AL/"
+      - "/home/savoury/.cargo/bin/OpenAL/"
+      - "/home/savoury/.cargo/bin/"
+      - "/home/savoury/.local/bin/include/AL/"
+      - "/home/savoury/.local/bin/include/OpenAL/"
+      - "/home/savoury/.local/bin/include/"
+      - "/home/savoury/.local/bin/AL/"
+      - "/home/savoury/.local/bin/OpenAL/"
+      - "/home/savoury/.local/bin/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/include/AL/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/include/OpenAL/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/include/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/AL/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/OpenAL/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/usr/local/bin/include/AL/"
+      - "/usr/local/bin/include/OpenAL/"
+      - "/usr/local/bin/include/"
+      - "/usr/local/bin/AL/"
+      - "/usr/local/bin/OpenAL/"
+      - "/usr/local/bin/"
+      - "/usr/bin/include/AL/"
+      - "/usr/bin/include/OpenAL/"
+      - "/usr/bin/include/"
+      - "/usr/bin/AL/"
+      - "/usr/bin/OpenAL/"
+      - "/usr/bin/"
+      - "/bin/include/AL/"
+      - "/bin/include/OpenAL/"
+      - "/bin/include/"
+      - "/bin/AL/"
+      - "/bin/OpenAL/"
+      - "/bin/"
+      - "/usr/local/sbin/include/AL/"
+      - "/usr/local/sbin/include/OpenAL/"
+      - "/usr/local/sbin/include/"
+      - "/usr/local/sbin/AL/"
+      - "/usr/local/sbin/OpenAL/"
+      - "/usr/local/sbin/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/include/AL/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/include/OpenAL/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/include/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/AL/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/OpenAL/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/include/AL/"
+      - "/var/lib/flatpak/exports/bin/include/OpenAL/"
+      - "/var/lib/flatpak/exports/bin/include/"
+      - "/var/lib/flatpak/exports/bin/AL/"
+      - "/var/lib/flatpak/exports/bin/OpenAL/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/usr/lib/jvm/default/bin/include/AL/"
+      - "/usr/lib/jvm/default/bin/include/OpenAL/"
+      - "/usr/lib/jvm/default/bin/include/"
+      - "/usr/lib/jvm/default/bin/AL/"
+      - "/usr/lib/jvm/default/bin/OpenAL/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/opt/llvm-mingw/bin/include/AL/"
+      - "/opt/llvm-mingw/bin/include/OpenAL/"
+      - "/opt/llvm-mingw/bin/include/"
+      - "/opt/llvm-mingw/bin/AL/"
+      - "/opt/llvm-mingw/bin/OpenAL/"
+      - "/opt/llvm-mingw/bin/"
+      - "/usr/bin/site_perl/include/AL/"
+      - "/usr/bin/site_perl/include/OpenAL/"
+      - "/usr/bin/site_perl/include/"
+      - "/usr/bin/site_perl/AL/"
+      - "/usr/bin/site_perl/OpenAL/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/include/AL/"
+      - "/usr/bin/vendor_perl/include/OpenAL/"
+      - "/usr/bin/vendor_perl/include/"
+      - "/usr/bin/vendor_perl/AL/"
+      - "/usr/bin/vendor_perl/OpenAL/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/include/AL/"
+      - "/usr/bin/core_perl/include/OpenAL/"
+      - "/usr/bin/core_perl/include/"
+      - "/usr/bin/core_perl/AL/"
+      - "/usr/bin/core_perl/OpenAL/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/include/include/AL/"
+      - "/usr/local/include/include/OpenAL/"
+      - "/usr/local/include/include/"
+      - "/usr/local/include/AL/"
+      - "/usr/local/include/OpenAL/"
+      - "/usr/local/include/"
+      - "/usr/local/include/AL/"
+      - "/usr/local/include/OpenAL/"
+      - "/usr/local/include/"
+      - "/usr/local/AL/"
+      - "/usr/local/OpenAL/"
+      - "/usr/local/"
+      - "/usr/include/include/AL/"
+      - "/usr/include/include/OpenAL/"
+      - "/usr/include/include/"
+      - "/usr/include/AL/"
+      - "/usr/include/OpenAL/"
+      - "/usr/include/"
+      - "/usr/include/AL/"
+      - "/usr/include/OpenAL/"
+      - "/usr/include/"
+      - "/usr/AL/"
+      - "/usr/OpenAL/"
+      - "/usr/"
+      - "/include/include/AL/"
+      - "/include/include/OpenAL/"
+      - "/include/include/"
+      - "/include/AL/"
+      - "/include/OpenAL/"
+      - "/include/"
+      - "/usr/X11R6/include/include/AL/"
+      - "/usr/X11R6/include/include/OpenAL/"
+      - "/usr/X11R6/include/include/"
+      - "/usr/X11R6/include/AL/"
+      - "/usr/X11R6/include/OpenAL/"
+      - "/usr/X11R6/include/"
+      - "/usr/X11R6/include/AL/"
+      - "/usr/X11R6/include/OpenAL/"
+      - "/usr/X11R6/include/"
+      - "/usr/X11R6/AL/"
+      - "/usr/X11R6/OpenAL/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/include/include/AL/"
+      - "/usr/pkg/include/include/OpenAL/"
+      - "/usr/pkg/include/include/"
+      - "/usr/pkg/include/AL/"
+      - "/usr/pkg/include/OpenAL/"
+      - "/usr/pkg/include/"
+      - "/usr/pkg/include/AL/"
+      - "/usr/pkg/include/OpenAL/"
+      - "/usr/pkg/include/"
+      - "/usr/pkg/AL/"
+      - "/usr/pkg/OpenAL/"
+      - "/usr/pkg/"
+      - "/opt/include/include/AL/"
+      - "/opt/include/include/OpenAL/"
+      - "/opt/include/include/"
+      - "/opt/include/AL/"
+      - "/opt/include/OpenAL/"
+      - "/opt/include/"
+      - "/opt/include/AL/"
+      - "/opt/include/OpenAL/"
+      - "/opt/include/"
+      - "/opt/AL/"
+      - "/opt/OpenAL/"
+      - "/opt/"
+      - "/usr/include/X11/include/AL/"
+      - "/usr/include/X11/include/OpenAL/"
+      - "/usr/include/X11/include/"
+      - "/usr/include/X11/AL/"
+      - "/usr/include/X11/OpenAL/"
+      - "/usr/include/X11/"
+      - "/home/savoury/Library/Frameworks/include/AL/"
+      - "/home/savoury/Library/Frameworks/include/OpenAL/"
+      - "/home/savoury/Library/Frameworks/include/"
+      - "/home/savoury/Library/Frameworks/AL/"
+      - "/home/savoury/Library/Frameworks/OpenAL/"
+      - "/home/savoury/Library/Frameworks/"
+      - "/Library/Frameworks/include/AL/"
+      - "/Library/Frameworks/include/OpenAL/"
+      - "/Library/Frameworks/include/"
+      - "/Library/Frameworks/AL/"
+      - "/Library/Frameworks/OpenAL/"
+      - "/Library/Frameworks/"
+      - "/opt/include/AL/"
+      - "/opt/include/OpenAL/"
+      - "/opt/include/"
+      - "/opt/AL/"
+      - "/opt/OpenAL/"
+      - "/opt/"
+    searched_directories:
+      - "/usr/local/vitasdk/bin/include/AL/al.h"
+      - "/usr/local/vitasdk/bin/include/OpenAL/al.h"
+      - "/usr/local/vitasdk/bin/include/al.h"
+      - "/usr/local/vitasdk/bin/AL/al.h"
+      - "/usr/local/vitasdk/bin/OpenAL/al.h"
+      - "/usr/local/vitasdk/bin/al.h"
+      - "/home/savoury/.cargo/bin/include/AL/al.h"
+      - "/home/savoury/.cargo/bin/include/OpenAL/al.h"
+      - "/home/savoury/.cargo/bin/include/al.h"
+      - "/home/savoury/.cargo/bin/AL/al.h"
+      - "/home/savoury/.cargo/bin/OpenAL/al.h"
+      - "/home/savoury/.cargo/bin/al.h"
+      - "/home/savoury/.local/bin/include/AL/al.h"
+      - "/home/savoury/.local/bin/include/OpenAL/al.h"
+      - "/home/savoury/.local/bin/include/al.h"
+      - "/home/savoury/.local/bin/AL/al.h"
+      - "/home/savoury/.local/bin/OpenAL/al.h"
+      - "/home/savoury/.local/bin/al.h"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/include/AL/al.h"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/include/OpenAL/al.h"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/include/al.h"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/AL/al.h"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/OpenAL/al.h"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/al.h"
+      - "/usr/local/bin/include/AL/al.h"
+      - "/usr/local/bin/include/OpenAL/al.h"
+      - "/usr/local/bin/include/al.h"
+      - "/usr/local/bin/AL/al.h"
+      - "/usr/local/bin/OpenAL/al.h"
+      - "/usr/local/bin/al.h"
+      - "/usr/bin/include/AL/al.h"
+      - "/usr/bin/include/OpenAL/al.h"
+      - "/usr/bin/include/al.h"
+      - "/usr/bin/AL/al.h"
+      - "/usr/bin/OpenAL/al.h"
+      - "/usr/bin/al.h"
+      - "/bin/include/AL/al.h"
+      - "/bin/include/OpenAL/al.h"
+      - "/bin/include/al.h"
+      - "/bin/AL/al.h"
+      - "/bin/OpenAL/al.h"
+      - "/bin/al.h"
+      - "/usr/local/sbin/include/AL/al.h"
+      - "/usr/local/sbin/include/OpenAL/al.h"
+      - "/usr/local/sbin/include/al.h"
+      - "/usr/local/sbin/AL/al.h"
+      - "/usr/local/sbin/OpenAL/al.h"
+      - "/usr/local/sbin/al.h"
+      - "/home/savoury/.local/share/flatpak/exports/bin/include/AL/al.h"
+      - "/home/savoury/.local/share/flatpak/exports/bin/include/OpenAL/al.h"
+      - "/home/savoury/.local/share/flatpak/exports/bin/include/al.h"
+      - "/home/savoury/.local/share/flatpak/exports/bin/AL/al.h"
+      - "/home/savoury/.local/share/flatpak/exports/bin/OpenAL/al.h"
+      - "/home/savoury/.local/share/flatpak/exports/bin/al.h"
+      - "/var/lib/flatpak/exports/bin/include/AL/al.h"
+      - "/var/lib/flatpak/exports/bin/include/OpenAL/al.h"
+      - "/var/lib/flatpak/exports/bin/include/al.h"
+      - "/var/lib/flatpak/exports/bin/AL/al.h"
+      - "/var/lib/flatpak/exports/bin/OpenAL/al.h"
+      - "/var/lib/flatpak/exports/bin/al.h"
+      - "/usr/lib/jvm/default/bin/include/AL/al.h"
+      - "/usr/lib/jvm/default/bin/include/OpenAL/al.h"
+      - "/usr/lib/jvm/default/bin/include/al.h"
+      - "/usr/lib/jvm/default/bin/AL/al.h"
+      - "/usr/lib/jvm/default/bin/OpenAL/al.h"
+      - "/usr/lib/jvm/default/bin/al.h"
+      - "/opt/llvm-mingw/bin/include/AL/al.h"
+      - "/opt/llvm-mingw/bin/include/OpenAL/al.h"
+      - "/opt/llvm-mingw/bin/include/al.h"
+      - "/opt/llvm-mingw/bin/AL/al.h"
+      - "/opt/llvm-mingw/bin/OpenAL/al.h"
+      - "/opt/llvm-mingw/bin/al.h"
+      - "/usr/bin/site_perl/include/AL/al.h"
+      - "/usr/bin/site_perl/include/OpenAL/al.h"
+      - "/usr/bin/site_perl/include/al.h"
+      - "/usr/bin/site_perl/AL/al.h"
+      - "/usr/bin/site_perl/OpenAL/al.h"
+      - "/usr/bin/site_perl/al.h"
+      - "/usr/bin/vendor_perl/include/AL/al.h"
+      - "/usr/bin/vendor_perl/include/OpenAL/al.h"
+      - "/usr/bin/vendor_perl/include/al.h"
+      - "/usr/bin/vendor_perl/AL/al.h"
+      - "/usr/bin/vendor_perl/OpenAL/al.h"
+      - "/usr/bin/vendor_perl/al.h"
+      - "/usr/bin/core_perl/include/AL/al.h"
+      - "/usr/bin/core_perl/include/OpenAL/al.h"
+      - "/usr/bin/core_perl/include/al.h"
+      - "/usr/bin/core_perl/AL/al.h"
+      - "/usr/bin/core_perl/OpenAL/al.h"
+      - "/usr/bin/core_perl/al.h"
+      - "/usr/local/include/include/AL/al.h"
+      - "/usr/local/include/include/OpenAL/al.h"
+      - "/usr/local/include/include/al.h"
+      - "/usr/local/include/AL/al.h"
+      - "/usr/local/include/OpenAL/al.h"
+      - "/usr/local/include/al.h"
+      - "/usr/local/include/AL/al.h"
+      - "/usr/local/include/OpenAL/al.h"
+      - "/usr/local/include/al.h"
+      - "/usr/local/AL/al.h"
+      - "/usr/local/OpenAL/al.h"
+      - "/usr/local/al.h"
+      - "/usr/include/include/AL/al.h"
+      - "/usr/include/include/OpenAL/al.h"
+      - "/usr/include/include/al.h"
+    found: "/usr/include/AL/"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/usr/include/X11"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindOpenAL.cmake:125 (find_library)"
+      - "CMakeLists.txt:58 (find_package)"
+    mode: "library"
+    variable: "OPENAL_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "OpenAL"
+      - "al"
+      - "openal"
+      - "OpenAL32"
+    candidate_directories:
+      - "/usr/local/vitasdk/bin/libx32/"
+      - "/usr/local/vitasdk/bin/lib64/"
+      - "/usr/local/vitasdk/bin/lib/"
+      - "/usr/local/vitasdk/bin/libs64/"
+      - "/usr/local/vitasdk/bin/libs/"
+      - "/usr/local/vitasdk/bin/libs/Win64/"
+      - "/usr/local/vitasdk/bin/"
+      - "/home/savoury/.cargo/bin/libx32/"
+      - "/home/savoury/.cargo/bin/lib64/"
+      - "/home/savoury/.cargo/bin/lib/"
+      - "/home/savoury/.cargo/bin/libs64/"
+      - "/home/savoury/.cargo/bin/libs/"
+      - "/home/savoury/.cargo/bin/libs/Win64/"
+      - "/home/savoury/.cargo/bin/"
+      - "/home/savoury/.local/bin/libx32/"
+      - "/home/savoury/.local/bin/lib64/"
+      - "/home/savoury/.local/bin/lib/"
+      - "/home/savoury/.local/bin/libs64/"
+      - "/home/savoury/.local/bin/libs/"
+      - "/home/savoury/.local/bin/libs/Win64/"
+      - "/home/savoury/.local/bin/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libx32/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/lib64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/lib/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs/Win64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/usr/local/bin/libx32/"
+      - "/usr/local/bin/lib64/"
+      - "/usr/local/bin/lib/"
+      - "/usr/local/bin/libs64/"
+      - "/usr/local/bin/libs/"
+      - "/usr/local/bin/libs/Win64/"
+      - "/usr/local/bin/"
+      - "/usr/bin/libx32/"
+      - "/usr/bin/lib64/"
+      - "/usr/bin/lib/"
+      - "/usr/bin/libs64/"
+      - "/usr/bin/libs/"
+      - "/usr/bin/libs/Win64/"
+      - "/usr/bin/"
+      - "/bin/libx32/"
+      - "/bin/lib64/"
+      - "/bin/lib/"
+      - "/bin/libs64/"
+      - "/bin/libs/"
+      - "/bin/libs/Win64/"
+      - "/bin/"
+      - "/usr/local/sbin/libx32/"
+      - "/usr/local/sbin/lib64/"
+      - "/usr/local/sbin/lib/"
+      - "/usr/local/sbin/libs64/"
+      - "/usr/local/sbin/libs/"
+      - "/usr/local/sbin/libs/Win64/"
+      - "/usr/local/sbin/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libx32/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/lib64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/lib/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs/Win64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/libx32/"
+      - "/var/lib/flatpak/exports/bin/lib64/"
+      - "/var/lib/flatpak/exports/bin/lib/"
+      - "/var/lib/flatpak/exports/bin/libs64/"
+      - "/var/lib/flatpak/exports/bin/libs/"
+      - "/var/lib/flatpak/exports/bin/libs/Win64/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/usr/lib/jvm/default/bin/libx32/"
+      - "/usr/lib/jvm/default/bin/lib64/"
+      - "/usr/lib/jvm/default/bin/lib/"
+      - "/usr/lib/jvm/default/bin/libs64/"
+      - "/usr/lib/jvm/default/bin/libs/"
+      - "/usr/lib/jvm/default/bin/libs/Win64/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/opt/llvm-mingw/bin/libx32/"
+      - "/opt/llvm-mingw/bin/lib64/"
+      - "/opt/llvm-mingw/bin/lib/"
+      - "/opt/llvm-mingw/bin/libs64/"
+      - "/opt/llvm-mingw/bin/libs/"
+      - "/opt/llvm-mingw/bin/libs/Win64/"
+      - "/opt/llvm-mingw/bin/"
+      - "/usr/bin/site_perl/libx32/"
+      - "/usr/bin/site_perl/lib64/"
+      - "/usr/bin/site_perl/lib/"
+      - "/usr/bin/site_perl/libs64/"
+      - "/usr/bin/site_perl/libs/"
+      - "/usr/bin/site_perl/libs/Win64/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/libx32/"
+      - "/usr/bin/vendor_perl/lib64/"
+      - "/usr/bin/vendor_perl/lib/"
+      - "/usr/bin/vendor_perl/libs64/"
+      - "/usr/bin/vendor_perl/libs/"
+      - "/usr/bin/vendor_perl/libs/Win64/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/libx32/"
+      - "/usr/bin/core_perl/lib64/"
+      - "/usr/bin/core_perl/lib/"
+      - "/usr/bin/core_perl/libs64/"
+      - "/usr/bin/core_perl/libs/"
+      - "/usr/bin/core_perl/libs/Win64/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/lib/libx32/"
+      - "/usr/local/lib/lib64/"
+      - "/usr/local/lib/lib/"
+      - "/usr/local/lib/libs64/"
+      - "/usr/local/lib/libs/"
+      - "/usr/local/lib/libs/Win64/"
+      - "/usr/local/lib/"
+      - "/usr/local/libx32/"
+      - "/usr/local/lib64/"
+      - "/usr/local/lib/"
+      - "/usr/local/libs64/"
+      - "/usr/local/libs/"
+      - "/usr/local/libs/Win64/"
+      - "/usr/local/"
+      - "/usr/lib/libx32/"
+      - "/usr/lib/lib64/"
+      - "/usr/lib/lib/"
+      - "/usr/lib/libs64/"
+      - "/usr/lib/libs/"
+      - "/usr/lib/libs/Win64/"
+      - "/usr/lib/"
+      - "/usr/libx32/"
+      - "/usr/lib64/"
+      - "/usr/lib/"
+      - "/usr/libs64/"
+      - "/usr/libs/"
+      - "/usr/libs/Win64/"
+      - "/usr/"
+      - "/lib/libx32/"
+      - "/lib/lib64/"
+      - "/lib/lib/"
+      - "/lib/libs64/"
+      - "/lib/libs/"
+      - "/lib/libs/Win64/"
+      - "/lib/"
+      - "/usr/X11R6/lib/libx32/"
+      - "/usr/X11R6/lib/lib64/"
+      - "/usr/X11R6/lib/lib/"
+      - "/usr/X11R6/lib/libs64/"
+      - "/usr/X11R6/lib/libs/"
+      - "/usr/X11R6/lib/libs/Win64/"
+      - "/usr/X11R6/lib/"
+      - "/usr/X11R6/libx32/"
+      - "/usr/X11R6/lib64/"
+      - "/usr/X11R6/lib/"
+      - "/usr/X11R6/libs64/"
+      - "/usr/X11R6/libs/"
+      - "/usr/X11R6/libs/Win64/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/lib/libx32/"
+      - "/usr/pkg/lib/lib64/"
+      - "/usr/pkg/lib/lib/"
+      - "/usr/pkg/lib/libs64/"
+      - "/usr/pkg/lib/libs/"
+      - "/usr/pkg/lib/libs/Win64/"
+      - "/usr/pkg/lib/"
+      - "/usr/pkg/libx32/"
+      - "/usr/pkg/lib64/"
+      - "/usr/pkg/lib/"
+      - "/usr/pkg/libs64/"
+      - "/usr/pkg/libs/"
+      - "/usr/pkg/libs/Win64/"
+      - "/usr/pkg/"
+      - "/opt/lib/libx32/"
+      - "/opt/lib/lib64/"
+      - "/opt/lib/lib/"
+      - "/opt/lib/libs64/"
+      - "/opt/lib/libs/"
+      - "/opt/lib/libs/Win64/"
+      - "/opt/lib/"
+      - "/opt/libx32/"
+      - "/opt/lib64/"
+      - "/opt/lib/"
+      - "/opt/libs64/"
+      - "/opt/libs/"
+      - "/opt/libs/Win64/"
+      - "/opt/"
+      - "/usr/lib/X11/libx32/"
+      - "/usr/lib/X11/lib64/"
+      - "/usr/lib/X11/lib/"
+      - "/usr/lib/X11/libs64/"
+      - "/usr/lib/X11/libs/"
+      - "/usr/lib/X11/libs/Win64/"
+      - "/usr/lib/X11/"
+      - "/home/savoury/Library/Frameworks/libx32/"
+      - "/home/savoury/Library/Frameworks/lib64/"
+      - "/home/savoury/Library/Frameworks/lib/"
+      - "/home/savoury/Library/Frameworks/libs64/"
+      - "/home/savoury/Library/Frameworks/libs/"
+      - "/home/savoury/Library/Frameworks/libs/Win64/"
+      - "/home/savoury/Library/Frameworks/"
+      - "/Library/Frameworks/libx32/"
+      - "/Library/Frameworks/lib64/"
+      - "/Library/Frameworks/lib/"
+      - "/Library/Frameworks/libs64/"
+      - "/Library/Frameworks/libs/"
+      - "/Library/Frameworks/libs/Win64/"
+      - "/Library/Frameworks/"
+      - "/opt/libx32/"
+      - "/opt/lib64/"
+      - "/opt/lib/"
+      - "/opt/libs64/"
+      - "/opt/libs/"
+      - "/opt/libs/Win64/"
+      - "/opt/"
+    searched_directories:
+      - "/usr/local/vitasdk/bin/libx32/"
+      - "/usr/local/vitasdk/bin/lib64/"
+      - "/usr/local/vitasdk/bin/lib/"
+      - "/usr/local/vitasdk/bin/libs64/"
+      - "/usr/local/vitasdk/bin/libs/"
+      - "/usr/local/vitasdk/bin/libs/Win64/"
+      - "/usr/local/vitasdk/bin/"
+      - "/home/savoury/.cargo/bin/libx32/"
+      - "/home/savoury/.cargo/bin/lib64/"
+      - "/home/savoury/.cargo/bin/lib/"
+      - "/home/savoury/.cargo/bin/libs64/"
+      - "/home/savoury/.cargo/bin/libs/"
+      - "/home/savoury/.cargo/bin/libs/Win64/"
+      - "/home/savoury/.cargo/bin/"
+      - "/home/savoury/.local/bin/libx32/"
+      - "/home/savoury/.local/bin/lib64/"
+      - "/home/savoury/.local/bin/lib/"
+      - "/home/savoury/.local/bin/libs64/"
+      - "/home/savoury/.local/bin/libs/"
+      - "/home/savoury/.local/bin/libs/Win64/"
+      - "/home/savoury/.local/bin/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libx32/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/lib64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/lib/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs/Win64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/usr/local/bin/libx32/"
+      - "/usr/local/bin/lib64/"
+      - "/usr/local/bin/lib/"
+      - "/usr/local/bin/libs64/"
+      - "/usr/local/bin/libs/"
+      - "/usr/local/bin/libs/Win64/"
+      - "/usr/local/bin/"
+      - "/usr/bin/libx32/"
+      - "/usr/bin/lib64/"
+      - "/usr/bin/lib/"
+      - "/usr/bin/libs64/"
+      - "/usr/bin/libs/"
+      - "/usr/bin/libs/Win64/"
+      - "/usr/bin/"
+      - "/bin/libx32/"
+      - "/bin/lib64/"
+      - "/bin/lib/"
+      - "/bin/libs64/"
+      - "/bin/libs/"
+      - "/bin/libs/Win64/"
+      - "/bin/"
+      - "/usr/local/sbin/libx32/"
+      - "/usr/local/sbin/lib64/"
+      - "/usr/local/sbin/lib/"
+      - "/usr/local/sbin/libs64/"
+      - "/usr/local/sbin/libs/"
+      - "/usr/local/sbin/libs/Win64/"
+      - "/usr/local/sbin/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libx32/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/lib64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/lib/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs/Win64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/libx32/"
+      - "/var/lib/flatpak/exports/bin/lib64/"
+      - "/var/lib/flatpak/exports/bin/lib/"
+      - "/var/lib/flatpak/exports/bin/libs64/"
+      - "/var/lib/flatpak/exports/bin/libs/"
+      - "/var/lib/flatpak/exports/bin/libs/Win64/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/usr/lib/jvm/default/bin/libx32/"
+      - "/usr/lib/jvm/default/bin/lib64/"
+      - "/usr/lib/jvm/default/bin/lib/"
+      - "/usr/lib/jvm/default/bin/libs64/"
+      - "/usr/lib/jvm/default/bin/libs/"
+      - "/usr/lib/jvm/default/bin/libs/Win64/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/opt/llvm-mingw/bin/libx32/"
+      - "/opt/llvm-mingw/bin/lib64/"
+      - "/opt/llvm-mingw/bin/lib/"
+      - "/opt/llvm-mingw/bin/libs64/"
+      - "/opt/llvm-mingw/bin/libs/"
+      - "/opt/llvm-mingw/bin/libs/Win64/"
+      - "/opt/llvm-mingw/bin/"
+      - "/usr/bin/site_perl/libx32/"
+      - "/usr/bin/site_perl/lib64/"
+      - "/usr/bin/site_perl/lib/"
+      - "/usr/bin/site_perl/libs64/"
+      - "/usr/bin/site_perl/libs/"
+      - "/usr/bin/site_perl/libs/Win64/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/libx32/"
+      - "/usr/bin/vendor_perl/lib64/"
+      - "/usr/bin/vendor_perl/lib/"
+      - "/usr/bin/vendor_perl/libs64/"
+      - "/usr/bin/vendor_perl/libs/"
+      - "/usr/bin/vendor_perl/libs/Win64/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/libx32/"
+      - "/usr/bin/core_perl/lib64/"
+      - "/usr/bin/core_perl/lib/"
+      - "/usr/bin/core_perl/libs64/"
+      - "/usr/bin/core_perl/libs/"
+      - "/usr/bin/core_perl/libs/Win64/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/lib/libx32/"
+      - "/usr/local/lib/lib64/"
+      - "/usr/local/lib/lib/"
+      - "/usr/local/lib/libs64/"
+      - "/usr/local/lib/libs/"
+      - "/usr/local/lib/libs/Win64/"
+      - "/usr/local/lib/"
+      - "/usr/local/libx32/"
+      - "/usr/local/lib64/"
+      - "/usr/local/lib/"
+      - "/usr/local/libs64/"
+      - "/usr/local/libs/"
+      - "/usr/local/libs/Win64/"
+      - "/usr/local/"
+      - "/usr/lib/libx32/"
+      - "/usr/lib/lib64/"
+      - "/usr/lib/lib/"
+      - "/usr/lib/libs64/"
+      - "/usr/lib/libs/"
+      - "/usr/lib/libs/Win64/"
+      - "/usr/lib/"
+      - "/usr/libx32/"
+      - "/usr/lib64/"
+      - "/usr/lib/"
+      - "/usr/libs64/"
+      - "/usr/libs/"
+      - "/usr/libs/Win64/"
+      - "/usr/"
+      - "/lib/libx32/"
+      - "/lib/lib64/"
+      - "/lib/lib/"
+      - "/lib/libs64/"
+      - "/lib/libs/"
+      - "/lib/libs/Win64/"
+      - "/lib/"
+      - "/usr/X11R6/lib/libx32/"
+      - "/usr/X11R6/lib/lib64/"
+      - "/usr/X11R6/lib/lib/"
+      - "/usr/X11R6/lib/libs64/"
+      - "/usr/X11R6/lib/libs/"
+      - "/usr/X11R6/lib/libs/Win64/"
+      - "/usr/X11R6/lib/"
+      - "/usr/X11R6/libx32/"
+      - "/usr/X11R6/lib64/"
+      - "/usr/X11R6/lib/"
+      - "/usr/X11R6/libs64/"
+      - "/usr/X11R6/libs/"
+      - "/usr/X11R6/libs/Win64/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/lib/libx32/"
+      - "/usr/pkg/lib/lib64/"
+      - "/usr/pkg/lib/lib/"
+      - "/usr/pkg/lib/libs64/"
+      - "/usr/pkg/lib/libs/"
+      - "/usr/pkg/lib/libs/Win64/"
+      - "/usr/pkg/lib/"
+      - "/usr/pkg/libx32/"
+      - "/usr/pkg/lib64/"
+      - "/usr/pkg/lib/"
+      - "/usr/pkg/libs64/"
+      - "/usr/pkg/libs/"
+      - "/usr/pkg/libs/Win64/"
+      - "/usr/pkg/"
+      - "/opt/lib/libx32/"
+      - "/opt/lib/lib64/"
+      - "/opt/lib/lib/"
+      - "/opt/lib/libs64/"
+      - "/opt/lib/libs/"
+      - "/opt/lib/libs/Win64/"
+      - "/opt/lib/"
+      - "/opt/libx32/"
+      - "/opt/lib64/"
+      - "/opt/lib/"
+      - "/opt/libs64/"
+      - "/opt/libs/"
+      - "/opt/libs/Win64/"
+      - "/opt/"
+      - "/usr/lib/X11/libx32/"
+      - "/usr/lib/X11/lib64/"
+      - "/usr/lib/X11/lib/"
+      - "/usr/lib/X11/libs64/"
+      - "/usr/lib/X11/libs/"
+      - "/usr/lib/X11/libs/Win64/"
+      - "/usr/lib/X11/"
+      - "/home/savoury/Library/Frameworks/libx32/"
+      - "/home/savoury/Library/Frameworks/lib64/"
+      - "/home/savoury/Library/Frameworks/lib/"
+      - "/home/savoury/Library/Frameworks/libs64/"
+      - "/home/savoury/Library/Frameworks/libs/"
+      - "/home/savoury/Library/Frameworks/libs/Win64/"
+      - "/home/savoury/Library/Frameworks/"
+      - "/Library/Frameworks/libx32/"
+      - "/Library/Frameworks/lib64/"
+      - "/Library/Frameworks/lib/"
+      - "/Library/Frameworks/libs64/"
+      - "/Library/Frameworks/libs/"
+      - "/Library/Frameworks/libs/Win64/"
+      - "/Library/Frameworks/"
+      - "/opt/libx32/"
+      - "/opt/lib64/"
+      - "/opt/lib/"
+      - "/opt/libs64/"
+      - "/opt/libs/"
+      - "/opt/libs/Win64/"
+      - "/opt/"
+      - "/usr/local/vitasdk/bin/libx32/"
+      - "/usr/local/vitasdk/bin/lib64/"
+      - "/usr/local/vitasdk/bin/lib/"
+      - "/usr/local/vitasdk/bin/libs64/"
+      - "/usr/local/vitasdk/bin/libs/"
+      - "/usr/local/vitasdk/bin/libs/Win64/"
+      - "/usr/local/vitasdk/bin/"
+      - "/home/savoury/.cargo/bin/libx32/"
+      - "/home/savoury/.cargo/bin/lib64/"
+      - "/home/savoury/.cargo/bin/lib/"
+      - "/home/savoury/.cargo/bin/libs64/"
+      - "/home/savoury/.cargo/bin/libs/"
+      - "/home/savoury/.cargo/bin/libs/Win64/"
+      - "/home/savoury/.cargo/bin/"
+      - "/home/savoury/.local/bin/libx32/"
+      - "/home/savoury/.local/bin/lib64/"
+      - "/home/savoury/.local/bin/lib/"
+      - "/home/savoury/.local/bin/libs64/"
+      - "/home/savoury/.local/bin/libs/"
+      - "/home/savoury/.local/bin/libs/Win64/"
+      - "/home/savoury/.local/bin/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libx32/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/lib64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/lib/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs/Win64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/usr/local/bin/libx32/"
+      - "/usr/local/bin/lib64/"
+      - "/usr/local/bin/lib/"
+      - "/usr/local/bin/libs64/"
+      - "/usr/local/bin/libs/"
+      - "/usr/local/bin/libs/Win64/"
+      - "/usr/local/bin/"
+      - "/usr/bin/libx32/"
+      - "/usr/bin/lib64/"
+      - "/usr/bin/lib/"
+      - "/usr/bin/libs64/"
+      - "/usr/bin/libs/"
+      - "/usr/bin/libs/Win64/"
+      - "/usr/bin/"
+      - "/bin/libx32/"
+      - "/bin/lib64/"
+      - "/bin/lib/"
+      - "/bin/libs64/"
+      - "/bin/libs/"
+      - "/bin/libs/Win64/"
+      - "/bin/"
+      - "/usr/local/sbin/libx32/"
+      - "/usr/local/sbin/lib64/"
+      - "/usr/local/sbin/lib/"
+      - "/usr/local/sbin/libs64/"
+      - "/usr/local/sbin/libs/"
+      - "/usr/local/sbin/libs/Win64/"
+      - "/usr/local/sbin/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libx32/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/lib64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/lib/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs/Win64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/libx32/"
+      - "/var/lib/flatpak/exports/bin/lib64/"
+      - "/var/lib/flatpak/exports/bin/lib/"
+      - "/var/lib/flatpak/exports/bin/libs64/"
+      - "/var/lib/flatpak/exports/bin/libs/"
+      - "/var/lib/flatpak/exports/bin/libs/Win64/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/usr/lib/jvm/default/bin/libx32/"
+      - "/usr/lib/jvm/default/bin/lib64/"
+      - "/usr/lib/jvm/default/bin/lib/"
+      - "/usr/lib/jvm/default/bin/libs64/"
+      - "/usr/lib/jvm/default/bin/libs/"
+      - "/usr/lib/jvm/default/bin/libs/Win64/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/opt/llvm-mingw/bin/libx32/"
+      - "/opt/llvm-mingw/bin/lib64/"
+      - "/opt/llvm-mingw/bin/lib/"
+      - "/opt/llvm-mingw/bin/libs64/"
+      - "/opt/llvm-mingw/bin/libs/"
+      - "/opt/llvm-mingw/bin/libs/Win64/"
+      - "/opt/llvm-mingw/bin/"
+      - "/usr/bin/site_perl/libx32/"
+      - "/usr/bin/site_perl/lib64/"
+      - "/usr/bin/site_perl/lib/"
+      - "/usr/bin/site_perl/libs64/"
+      - "/usr/bin/site_perl/libs/"
+      - "/usr/bin/site_perl/libs/Win64/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/libx32/"
+      - "/usr/bin/vendor_perl/lib64/"
+      - "/usr/bin/vendor_perl/lib/"
+      - "/usr/bin/vendor_perl/libs64/"
+      - "/usr/bin/vendor_perl/libs/"
+      - "/usr/bin/vendor_perl/libs/Win64/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/libx32/"
+      - "/usr/bin/core_perl/lib64/"
+      - "/usr/bin/core_perl/lib/"
+      - "/usr/bin/core_perl/libs64/"
+      - "/usr/bin/core_perl/libs/"
+      - "/usr/bin/core_perl/libs/Win64/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/lib/libx32/"
+      - "/usr/local/lib/lib64/"
+      - "/usr/local/lib/lib/"
+      - "/usr/local/lib/libs64/"
+      - "/usr/local/lib/libs/"
+      - "/usr/local/lib/libs/Win64/"
+      - "/usr/local/lib/"
+      - "/usr/local/libx32/"
+      - "/usr/local/lib64/"
+      - "/usr/local/lib/"
+      - "/usr/local/libs64/"
+      - "/usr/local/libs/"
+      - "/usr/local/libs/Win64/"
+      - "/usr/local/"
+      - "/usr/lib/libx32/"
+      - "/usr/lib/lib64/"
+      - "/usr/lib/lib/"
+      - "/usr/lib/libs64/"
+      - "/usr/lib/libs/"
+      - "/usr/lib/libs/Win64/"
+      - "/usr/lib/"
+      - "/usr/libx32/"
+      - "/usr/lib64/"
+      - "/usr/lib/"
+      - "/usr/libs64/"
+      - "/usr/libs/"
+      - "/usr/libs/Win64/"
+      - "/usr/"
+      - "/lib/libx32/"
+      - "/lib/lib64/"
+      - "/lib/lib/"
+      - "/lib/libs64/"
+      - "/lib/libs/"
+      - "/lib/libs/Win64/"
+      - "/lib/"
+      - "/usr/X11R6/lib/libx32/"
+      - "/usr/X11R6/lib/lib64/"
+      - "/usr/X11R6/lib/lib/"
+      - "/usr/X11R6/lib/libs64/"
+      - "/usr/X11R6/lib/libs/"
+      - "/usr/X11R6/lib/libs/Win64/"
+      - "/usr/X11R6/lib/"
+      - "/usr/X11R6/libx32/"
+      - "/usr/X11R6/lib64/"
+      - "/usr/X11R6/lib/"
+      - "/usr/X11R6/libs64/"
+      - "/usr/X11R6/libs/"
+      - "/usr/X11R6/libs/Win64/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/lib/libx32/"
+      - "/usr/pkg/lib/lib64/"
+      - "/usr/pkg/lib/lib/"
+      - "/usr/pkg/lib/libs64/"
+      - "/usr/pkg/lib/libs/"
+      - "/usr/pkg/lib/libs/Win64/"
+      - "/usr/pkg/lib/"
+      - "/usr/pkg/libx32/"
+      - "/usr/pkg/lib64/"
+      - "/usr/pkg/lib/"
+      - "/usr/pkg/libs64/"
+      - "/usr/pkg/libs/"
+      - "/usr/pkg/libs/Win64/"
+      - "/usr/pkg/"
+      - "/opt/lib/libx32/"
+      - "/opt/lib/lib64/"
+      - "/opt/lib/lib/"
+      - "/opt/lib/libs64/"
+      - "/opt/lib/libs/"
+      - "/opt/lib/libs/Win64/"
+      - "/opt/lib/"
+      - "/opt/libx32/"
+      - "/opt/lib64/"
+      - "/opt/lib/"
+      - "/opt/libs64/"
+      - "/opt/libs/"
+      - "/opt/libs/Win64/"
+      - "/opt/"
+      - "/usr/lib/X11/libx32/"
+      - "/usr/lib/X11/lib64/"
+      - "/usr/lib/X11/lib/"
+      - "/usr/lib/X11/libs64/"
+      - "/usr/lib/X11/libs/"
+      - "/usr/lib/X11/libs/Win64/"
+      - "/usr/lib/X11/"
+      - "/home/savoury/Library/Frameworks/libx32/"
+      - "/home/savoury/Library/Frameworks/lib64/"
+      - "/home/savoury/Library/Frameworks/lib/"
+      - "/home/savoury/Library/Frameworks/libs64/"
+      - "/home/savoury/Library/Frameworks/libs/"
+      - "/home/savoury/Library/Frameworks/libs/Win64/"
+      - "/home/savoury/Library/Frameworks/"
+      - "/Library/Frameworks/libx32/"
+      - "/Library/Frameworks/lib64/"
+      - "/Library/Frameworks/lib/"
+      - "/Library/Frameworks/libs64/"
+      - "/Library/Frameworks/libs/"
+      - "/Library/Frameworks/libs/Win64/"
+      - "/Library/Frameworks/"
+      - "/opt/libx32/"
+      - "/opt/lib64/"
+      - "/opt/lib/"
+      - "/opt/libs64/"
+      - "/opt/libs/"
+      - "/opt/libs/Win64/"
+      - "/opt/"
+      - "/usr/local/vitasdk/bin/libx32/"
+      - "/usr/local/vitasdk/bin/lib64/"
+      - "/usr/local/vitasdk/bin/lib/"
+      - "/usr/local/vitasdk/bin/libs64/"
+      - "/usr/local/vitasdk/bin/libs/"
+      - "/usr/local/vitasdk/bin/libs/Win64/"
+      - "/usr/local/vitasdk/bin/"
+      - "/home/savoury/.cargo/bin/libx32/"
+      - "/home/savoury/.cargo/bin/lib64/"
+      - "/home/savoury/.cargo/bin/lib/"
+      - "/home/savoury/.cargo/bin/libs64/"
+      - "/home/savoury/.cargo/bin/libs/"
+      - "/home/savoury/.cargo/bin/libs/Win64/"
+      - "/home/savoury/.cargo/bin/"
+      - "/home/savoury/.local/bin/libx32/"
+      - "/home/savoury/.local/bin/lib64/"
+      - "/home/savoury/.local/bin/lib/"
+      - "/home/savoury/.local/bin/libs64/"
+      - "/home/savoury/.local/bin/libs/"
+      - "/home/savoury/.local/bin/libs/Win64/"
+      - "/home/savoury/.local/bin/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libx32/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/lib64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/lib/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/libs/Win64/"
+      - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/usr/local/bin/libx32/"
+      - "/usr/local/bin/lib64/"
+      - "/usr/local/bin/lib/"
+      - "/usr/local/bin/libs64/"
+      - "/usr/local/bin/libs/"
+      - "/usr/local/bin/libs/Win64/"
+      - "/usr/local/bin/"
+      - "/usr/bin/libx32/"
+      - "/usr/bin/lib64/"
+      - "/usr/bin/lib/"
+      - "/usr/bin/libs64/"
+      - "/usr/bin/libs/"
+      - "/usr/bin/libs/Win64/"
+      - "/usr/bin/"
+      - "/bin/libx32/"
+      - "/bin/lib64/"
+      - "/bin/lib/"
+      - "/bin/libs64/"
+      - "/bin/libs/"
+      - "/bin/libs/Win64/"
+      - "/bin/"
+      - "/usr/local/sbin/libx32/"
+      - "/usr/local/sbin/lib64/"
+      - "/usr/local/sbin/lib/"
+      - "/usr/local/sbin/libs64/"
+      - "/usr/local/sbin/libs/"
+      - "/usr/local/sbin/libs/Win64/"
+      - "/usr/local/sbin/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libx32/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/lib64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/lib/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/libs/Win64/"
+      - "/home/savoury/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/libx32/"
+      - "/var/lib/flatpak/exports/bin/lib64/"
+      - "/var/lib/flatpak/exports/bin/lib/"
+      - "/var/lib/flatpak/exports/bin/libs64/"
+      - "/var/lib/flatpak/exports/bin/libs/"
+      - "/var/lib/flatpak/exports/bin/libs/Win64/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/usr/lib/jvm/default/bin/libx32/"
+      - "/usr/lib/jvm/default/bin/lib64/"
+      - "/usr/lib/jvm/default/bin/lib/"
+      - "/usr/lib/jvm/default/bin/libs64/"
+      - "/usr/lib/jvm/default/bin/libs/"
+      - "/usr/lib/jvm/default/bin/libs/Win64/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/opt/llvm-mingw/bin/libx32/"
+      - "/opt/llvm-mingw/bin/lib64/"
+      - "/opt/llvm-mingw/bin/lib/"
+      - "/opt/llvm-mingw/bin/libs64/"
+      - "/opt/llvm-mingw/bin/libs/"
+      - "/opt/llvm-mingw/bin/libs/Win64/"
+      - "/opt/llvm-mingw/bin/"
+      - "/usr/bin/site_perl/libx32/"
+      - "/usr/bin/site_perl/lib64/"
+      - "/usr/bin/site_perl/lib/"
+      - "/usr/bin/site_perl/libs64/"
+      - "/usr/bin/site_perl/libs/"
+      - "/usr/bin/site_perl/libs/Win64/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/libx32/"
+      - "/usr/bin/vendor_perl/lib64/"
+      - "/usr/bin/vendor_perl/lib/"
+      - "/usr/bin/vendor_perl/libs64/"
+      - "/usr/bin/vendor_perl/libs/"
+      - "/usr/bin/vendor_perl/libs/Win64/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/libx32/"
+      - "/usr/bin/core_perl/lib64/"
+      - "/usr/bin/core_perl/lib/"
+      - "/usr/bin/core_perl/libs64/"
+      - "/usr/bin/core_perl/libs/"
+      - "/usr/bin/core_perl/libs/Win64/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/lib/libx32/"
+      - "/usr/local/lib/lib64/"
+      - "/usr/local/lib/lib/"
+      - "/usr/local/lib/libs64/"
+      - "/usr/local/lib/libs/"
+      - "/usr/local/lib/libs/Win64/"
+      - "/usr/local/lib/"
+      - "/usr/local/libx32/"
+      - "/usr/local/lib64/"
+      - "/usr/local/lib/"
+      - "/usr/local/libs64/"
+      - "/usr/local/libs/"
+      - "/usr/local/libs/Win64/"
+      - "/usr/local/"
+      - "/usr/lib/libx32/"
+      - "/usr/lib/lib64/"
+      - "/usr/lib/lib/"
+      - "/usr/lib/libs64/"
+      - "/usr/lib/libs/"
+      - "/usr/lib/libs/Win64/"
+    found: "/usr/lib/libopenal.so"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/vitasdk/bin"
+        - "/home/savoury/.cargo/bin"
+        - "/home/savoury/.local/bin"
+        - "/home/savoury/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/usr/local/vitasdk/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/local/sbin"
+        - "/home/savoury/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/opt/llvm-mingw/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+...
