@@ -16,23 +16,28 @@ project(CubeCavern LANGUAGES CXX)
 include(FetchContent)
 
 message("Fetching luau...")
+if (PLATFORM STREQUAL "vita")
 FetchContent_Declare(
     luau
     GIT_REPOSITORY https://github.com/luau-lang/luau.git
     GIT_TAG        0.736
 )
-
-set(LUAU_HAS_MMAP OFF CACHE BOOL "Disable mmap for Vita" FORCE)
-
-add_compile_definitions(LUAU_ENABLE_JIT=0)
+else()
+FetchContent_Declare(
+    luau
+    GIT_REPOSITORY https://github.com/legosukc/luau-psvita/luau-psvita.git
+    GIT_TAG        0.736
+)
+endif()
 
 # ai told me to put this here...
 # Prevent Luau from compiling its standalone CLI binaries and test suites
 set(LUAU_BUILD_CLI OFF CACHE INTERNAL "")
 set(LUAU_BUILD_TESTS OFF CACHE INTERNAL "")
 
-set(LUAU_ENABLE_JIT OFF CACHE INTERNAL "")
+if(PLATFORM STREQUAL "vita")
 set(LUAU_BUILD_SHARED OFF CACHE INTERNAL "")
+endif()
 
 set(LUAU_BUILD_CODEGEN OFF CACHE BOOL "Disable Luau native codegen" FORCE)
 

@@ -1,0 +1,45 @@
+﻿  In file included from main_server.cpp:40:
+  In file included from .\../pch.h:17:
+.\..\FunctionHeaders/MathTransform.hpp(44,9): warning : uninitialized variable in a constexpr function is a C++20 extension [-Wc++20-extensions]
+.\..\FunctionHeaders/MathTransform.hpp(62,9): warning : uninitialized variable in a constexpr function is a C++20 extension [-Wc++20-extensions]
+.\..\FunctionHeaders/MathTransform.hpp(62,20): warning : uninitialized variable in a constexpr function is a C++20 extension [-Wc++20-extensions]
+  In file included from main_server.cpp:47:
+.\Network_Server.hpp(182,8): warning : variable 'CurrentEventPool' set but not used [-Wunused-but-set-variable]
+  In file included from main_server.cpp:51:
+  In file included from .\../Lua.hpp:87:
+  In file included from .\..\LuaLibraries/LuaGraphics.hpp:21:
+  In file included from .\..\LuaLibraries\../ConsoleVars.hpp:8:
+.\..\LuaLibraries\..\Memory.hpp(92,5): warning : non-void function does not return a value [-Wreturn-type]
+  In file included from main_server.cpp:51:
+  In file included from .\../Lua.hpp:88:
+.\..\LuaLibraries/LuaInput.hpp(210,47): warning : unused variable 'BindingsTable' [-Wunused-variable]
+.\..\LuaLibraries/LuaInput.hpp(210,62): warning : unused variable 'BindingMetatable' [-Wunused-variable]
+  In file included from main_server.cpp:51:
+.\../Lua.hpp(98,10): warning : #include resolved using non-portable Microsoft search rules as: .\LuaLibraries/LuaNetwork_Server.hpp [-Wmicrosoft-include]
+  In file included from main_server.cpp:51:
+  In file included from .\../Lua.hpp:98:
+.\LuaLibraries/LuaNetwork_Server.hpp(59,6): warning : ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+.\LuaLibraries/LuaNetwork_Server.hpp(50,12): warning : unused variable 'Userdata' [-Wunused-variable]
+.\LuaLibraries/LuaNetwork_Server.hpp(34,17): warning : variable 'RemoteEventUD' set but not used [-Wunused-but-set-variable]
+.\LuaLibraries/LuaNetwork_Server.hpp(45,11): warning : unused variable 'BufferSize' [-Wunused-variable]
+.\LuaLibraries/LuaNetwork_Server.hpp(73,3): warning : non-void function does not return a value [-Wreturn-type]
+  In file included from main_server.cpp:51:
+.\../Lua.hpp(99,10): warning : #include resolved using non-portable Microsoft search rules as: .\LuaLibraries/LuaSound_Server.hpp [-Wmicrosoft-include]
+  In file included from main_server.cpp:51:
+  In file included from .\../Lua.hpp:83:
+.\..\LuaLibraries/LuaMatrix.hpp(51,22): warning : unused variable 'MatrixUD' [-Wunused-variable]
+.\..\LuaLibraries/LuaMatrix.hpp(145,49): message : in instantiation of function template specialization '(anonymous namespace)::_LuaMatrix::__tostring<Math::Mat4>' requested here
+.\..\LuaLibraries/LuaMatrix.hpp(212,17): message : in instantiation of function template specialization '(anonymous namespace)::_LuaMatrix::SetupMatrix<Math::Mat4>' requested here
+.\..\LuaLibraries/LuaMatrix.hpp(107,26): warning : unused variable 'B' [-Wunused-variable]
+.\..\LuaLibraries/LuaMatrix.hpp(157,49): message : in instantiation of function template specialization '(anonymous namespace)::_LuaMatrix::__mul<Math::Mat4>' requested here
+.\..\LuaLibraries/LuaMatrix.hpp(212,17): message : in instantiation of function template specialization '(anonymous namespace)::_LuaMatrix::SetupMatrix<Math::Mat4>' requested here
+  In file included from main_server.cpp:51:
+  In file included from .\../Lua.hpp:87:
+  In file included from .\..\LuaLibraries/LuaGraphics.hpp:21:
+  In file included from .\..\LuaLibraries\../ConsoleVars.hpp:8:
+.\..\LuaLibraries\..\Memory.hpp(24,18): warning : unused function '_Allocate' [-Wunused-function]
+.\..\LuaLibraries\..\Memory.hpp(51,17): warning : unused function '_Free' [-Wunused-function]
+  In file included from main_server.cpp:51:
+  In file included from .\../Lua.hpp:98:
+.\LuaLibraries/LuaNetwork_Server.hpp(22,13): warning : unused function 'GetRemotePool' [-Wunused-function]
+  Server-Cube Cavern++.vcxproj -> C:\Users\super\OneDrive\Documents\VS\C&C++\Cube Cavern++\Debug\Server-Cube Cavern++.exe

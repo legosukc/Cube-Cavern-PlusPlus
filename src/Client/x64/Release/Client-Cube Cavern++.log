@@ -1,0 +1,67 @@
+﻿  In file included from main_client.cpp:51:
+.\../Memory.hpp(89,5): warning : non-void function does not return a value [-Wreturn-type]
+  In file included from main_client.cpp:70:
+  In file included from .\Sound_Client.hpp:18:
+.\SoundClasses/AudioSource.hpp(16,86): warning : non-void function does not return a value [-Wreturn-type]
+  In file included from main_client.cpp:70:
+  In file included from .\Sound_Client.hpp:105:
+  In file included from .\SDLMixer_Sound.hpp:30:
+.\SoundClasses/AudioSource_SDLMixer.hpp(25,95): warning : non-void function does not return a value [-Wreturn-type]
+  In file included from main_client.cpp:70:
+.\Sound_Client.hpp(120,10): warning : enumeration values 'Cubeb' and 'NoAudio' not handled in switch [-Wswitch]
+.\Sound_Client.hpp(143,10): warning : enumeration values 'Cubeb' and 'NoAudio' not handled in switch [-Wswitch]
+  In file included from main_client.cpp:71:
+.\Network_Client.hpp(193,12): warning : enumeration value 'NET_WAITING' not handled in switch [-Wswitch]
+.\Network_Client.hpp(218,98): warning : result of comparison of constant -1 with expression of type 'bool' is always false [-Wtautological-constant-out-of-range-compare]
+.\Network_Client.hpp(288,8): warning : variable 'CurrentEventPool' set but not used [-Wunused-but-set-variable]
+  In file included from main_client.cpp:72:
+  In file included from .\Graphics_Client.hpp:165:
+.\GraphicsClasses/FragmentShader.hpp(47,3): warning : non-void function does not return a value [-Wreturn-type]
+  In file included from main_client.cpp:74:
+  In file included from .\../Lua.hpp:113:
+.\..\LuaLibraries/LuaModelLoader.hpp(40,12): warning : unused variable 'VertexIndex' [-Wunused-variable]
+.\..\LuaLibraries/LuaModelLoader.hpp(41,13): warning : unused variable 'Mesh' [-Wunused-variable]
+.\..\LuaLibraries/LuaModelLoader.hpp(42,12): warning : unused variable 'MeshIndex' [-Wunused-variable]
+.\..\LuaLibraries/LuaModelLoader.hpp(43,15): warning : unused variable 'LuaBuffer' [-Wunused-variable]
+  In file included from main_client.cpp:74:
+  In file included from .\../Lua.hpp:116:
+.\..\LuaLibraries/LuaInput.hpp(202,3): warning : function declared 'noreturn' should not return [-Winvalid-noreturn]
+  In file included from main_client.cpp:74:
+  In file included from .\../Lua.hpp:122:
+.\..\Client/LuaLibraries/LuaNetwork_Client.hpp(65,6): warning : ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+.\..\Client/LuaLibraries/LuaNetwork_Client.hpp(56,12): warning : unused variable 'Userdata' [-Wunused-variable]
+.\..\Client/LuaLibraries/LuaNetwork_Client.hpp(40,17): warning : variable 'RemoteEventUD' set but not used [-Wunused-but-set-variable]
+.\..\Client/LuaLibraries/LuaNetwork_Client.hpp(51,11): warning : unused variable 'BufferSize' [-Wunused-variable]
+.\..\Client/LuaLibraries/LuaNetwork_Client.hpp(79,3): warning : non-void function does not return a value [-Wreturn-type]
+  In file included from main_client.cpp:74:
+  In file included from .\../Lua.hpp:109:
+.\..\LuaLibraries/LuaMatrix.hpp(51,22): warning : unused variable 'MatrixUD' [-Wunused-variable]
+.\..\LuaLibraries/LuaMatrix.hpp(145,49): message : in instantiation of function template specialization '(anonymous namespace)::_LuaMatrix::__tostring<(anonymous namespace)::_MatrixBase<Math::Vector4, 4, 4>>' requested here
+.\..\LuaLibraries/LuaMatrix.hpp(212,17): message : in instantiation of function template specialization '(anonymous namespace)::_LuaMatrix::SetupMatrix<(anonymous namespace)::_MatrixBase<Math::Vector4, 4, 4>>' requested here
+.\..\LuaLibraries/LuaMatrix.hpp(107,26): warning : unused variable 'B' [-Wunused-variable]
+.\..\LuaLibraries/LuaMatrix.hpp(157,49): message : in instantiation of function template specialization '(anonymous namespace)::_LuaMatrix::__mul<(anonymous namespace)::_MatrixBase<Math::Vector4, 4, 4>>' requested here
+.\..\LuaLibraries/LuaMatrix.hpp(212,17): message : in instantiation of function template specialization '(anonymous namespace)::_LuaMatrix::SetupMatrix<(anonymous namespace)::_MatrixBase<Math::Vector4, 4, 4>>' requested here
+  In file included from main_client.cpp:51:
+.\../Memory.hpp(21,18): warning : unused function '_Allocate' [-Wunused-function]
+.\../Memory.hpp(48,17): warning : unused function '_Free' [-Wunused-function]
+  In file included from main_client.cpp:71:
+.\Network_Client.hpp(180,14): warning : unused function '_GlobalServerLocater' [-Wunused-function]
+  In file included from main_client.cpp:74:
+  In file included from .\../Lua.hpp:115:
+  In file included from .\..\LuaLibraries/LuaGraphics.hpp:19:
+.\..\LuaLibraries\LuaGraphics_Classes/LuaGraphics_Texture.hpp(82,47): warning : unused function 'Unbind' [-Wunused-function]
+.\..\LuaLibraries\LuaGraphics_Classes/LuaGraphics_Texture.hpp(88,47): warning : unused function 'SetActiveTexture' [-Wunused-function]
+.\..\LuaLibraries\LuaGraphics_Classes/LuaGraphics_Texture.hpp(123,47): warning : unused function 'SetFilteringUpscale' [-Wunused-function]
+.\..\LuaLibraries\LuaGraphics_Classes/LuaGraphics_Texture.hpp(131,47): warning : unused function 'SetFilteringDownscale' [-Wunused-function]
+.\..\LuaLibraries\LuaGraphics_Classes/LuaGraphics_Texture.hpp(47,14): warning : unused function 'SetWrappingHorizontal' [-Wunused-function]
+.\..\LuaLibraries\LuaGraphics_Classes/LuaGraphics_Texture.hpp(48,14): warning : unused function 'SetWrappingVertical' [-Wunused-function]
+.\..\LuaLibraries\LuaGraphics_Classes/LuaGraphics_Texture.hpp(94,47): warning : unused function 'SetTexImage2D' [-Wunused-function]
+  In file included from main_client.cpp:74:
+  In file included from .\../Lua.hpp:122:
+.\..\Client/LuaLibraries/LuaNetwork_Client.hpp(28,13): warning : unused function 'GetRemotePool' [-Wunused-function]
+  In file included from main_client.cpp:74:
+  In file included from .\../Lua.hpp:123:
+.\..\Client/LuaLibraries/LuaSound_Client.hpp(13,13): warning : unused function 'SetListenerPosition' [-Wunused-function]
+.\..\Client/LuaLibraries/LuaSound_Client.hpp(18,13): warning : unused function 'SetListenerVelocity' [-Wunused-function]
+.\..\Client/LuaLibraries/LuaSound_Client.hpp(23,13): warning : unused function 'SetListenerOrientation' [-Wunused-function]
+  Client-Cube Cavern++.vcxproj -> C:\Users\super\OneDrive\Documents\VS\C&C++\Cube Cavern++\x64\Release\Client-Cube Cavern++.exe
