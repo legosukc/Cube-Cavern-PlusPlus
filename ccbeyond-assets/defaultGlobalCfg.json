@@ -1,0 +1,8 @@
+{
+	"Main": {
+		"Lua": {
+			"CacheLuaBytecode": true,
+			"MaxTotalCacheSizeMB": 20
+		}
+	}
+}

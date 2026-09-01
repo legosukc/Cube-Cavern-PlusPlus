@@ -1,3 +1,4 @@
+#include <SDL3/SDL_hints.h>
 #ifndef WINDOW_HPP
 #define WINDOW_HPP 1
 
@@ -18,6 +19,7 @@
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
+#include <SDL3/SDL_egl.h>
 
 #include "../../FunctionHeaders/Exceptions.hpp"
 #include "../../MathClasses/Vector2.hpp"
@@ -91,16 +93,27 @@ void Game::Classes::Window::Create(const char* WindowTitle,
                                    int Width,
                                    int Height,
                                    SDL_WindowFlags Flags) {
+    
 #ifdef SDL_PLATFORM_VITA
+    std::cout << "version 2.0 es" << std::endl;
+
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+    
+    Width = 960;
+    Height = 544;
 #else
+    std::cout << "version 3.30 core" << std::endl;
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
                         SDL_GL_CONTEXT_PROFILE_CORE);
 #endif
+
+    // Double buffering and depth buffer
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
     // SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     // SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
@@ -122,6 +135,8 @@ void Game::Classes::Window::Create(const char* WindowTitle,
     if (!SDL_GL_MakeCurrent(this->SDLWindow, this->GLContext)) {
         Exceptions::ThrowSDLError("Error while calling SDL_GL_MakeCurrent.");
     }
+
+
 
     SDL_SetWindowRelativeMouseMode(this->SDLWindow, true);
 

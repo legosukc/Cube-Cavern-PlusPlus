@@ -27,14 +27,14 @@
             "label": "Compile Client for PSVita",
             "detail": "Spits out a .vpk named 'CubeCavern' to /build/.",
             "type": "shell",
-            "command": "/bin/bash ./compile-client-vita.sh",
+            "command": "${workspaceRoot}/compile-client-vita.sh",
             "group": "build"
         },
         {
             "label": "Compile Server for PSVita",
             "detail": "Spits out a .vpk named 'CubeCavern-DedicatedServer' to /build/.",
             "type": "shell",
-            "command": "/bin/bash ${workspaceRoot}/compile-server-vita.sh",
+            "command": "${workspaceRoot}/compile-server-vita.sh",
             "group": "build"
         },
         {

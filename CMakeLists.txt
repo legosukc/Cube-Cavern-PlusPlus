@@ -16,18 +16,18 @@ project(CubeCavern LANGUAGES CXX)
 include(FetchContent)
 
 message("Fetching luau...")
-if (PLATFORM STREQUAL "vita")
-FetchContent_Declare(
+if(PLATFORM STREQUAL "vita")
+  FetchContent_Declare(
     luau
     GIT_REPOSITORY https://github.com/legosukc/luau-psvita.git
-    GIT_TAG        "0.736-1"
-)
+    GIT_TAG "0.736"
+  )
 else()
-FetchContent_Declare(
+  FetchContent_Declare(
     luau
     GIT_REPOSITORY https://github.com/luau-lang/luau.git
-    GIT_TAG        0.736
-)
+    GIT_TAG 0.736
+  )
 endif()
 
 # ai told me to put this here...
@@ -36,7 +36,7 @@ set(LUAU_BUILD_CLI OFF CACHE INTERNAL "")
 set(LUAU_BUILD_TESTS OFF CACHE INTERNAL "")
 
 if(PLATFORM STREQUAL "vita")
-set(LUAU_BUILD_SHARED OFF CACHE INTERNAL "")
+  set(LUAU_BUILD_SHARED OFF CACHE INTERNAL "")
 endif()
 
 set(LUAU_BUILD_CODEGEN OFF CACHE BOOL "Disable Luau native codegen" FORCE)
@@ -51,8 +51,8 @@ find_package(SDL3_image REQUIRED)
 find_package(SDL3_ttf REQUIRED)
 
 if(NOT PLATFORM STREQUAL "vita")
-find_package(SDL3_mixer REQUIRED)
-find_package(SDL3_net REQUIRED)
+  find_package(SDL3_mixer REQUIRED)
+  find_package(SDL3_net REQUIRED)
 endif()
 
 find_package(OpenAL REQUIRED)
@@ -81,37 +81,37 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE LUAU_ENABLE_CODEGEN=0)
 
 if(BUILD_TARGET STREQUAL "client")
 
-    message("building for client")
+  message("building for client")
 
-    target_sources(${PROJECT_NAME} PRIVATE src/Client/main_client.cpp)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_CLIENT)
+  target_sources(${PROJECT_NAME} PRIVATE src/Client/main_client.cpp)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_CLIENT)
 
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-      OUTPUT_NAME "CubeCavern"
-    )
+  set_target_properties(${PROJECT_NAME} PROPERTIES
+    OUTPUT_NAME "CubeCavern"
+  )
 
 elseif(BUILD_TARGET STREQUAL "server")
 
-    message("building for server")
+  message("building for server")
 
-    target_sources(${PROJECT_NAME} PRIVATE src/Server/main_server.cpp)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SERVER)
+  target_sources(${PROJECT_NAME} PRIVATE src/Server/main_server.cpp)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SERVER)
 
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-      OUTPUT_NAME "CubeCavern-DedicatedServer"
-    )
+  set_target_properties(${PROJECT_NAME} PROPERTIES
+    OUTPUT_NAME "CubeCavern-DedicatedServer"
+  )
 
 else()
-    message(FATAL_ERROR, "'BUILD_TARGET' unspecified! Add '-DBUILD_TARGET=client|server'.")
+  message(FATAL_ERROR, "'BUILD_TARGET' unspecified! Add '-DBUILD_TARGET=client|server'.")
 endif()
 
 target_compile_definitions(Luau.CodeGen PRIVATE LUAU_ENABLE_CODEGEN=0)
 target_compile_definitions(Luau.VM PRIVATE LUAU_ENABLE_CODEGEN=0)
 
-if (NOT PLATFORM STREQUAL "vita")
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_net::SDL3_net SDL3_mixer::SDL3_mixer)
+if(NOT PLATFORM STREQUAL "vita")
+  target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_net::SDL3_net SDL3_mixer::SDL3_mixer)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE OpenAL::OpenAL)
+  target_link_libraries(${PROJECT_NAME} PRIVATE OpenAL::OpenAL)
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -121,28 +121,29 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME}
-    PRIVATE
+  PRIVATE
 
-    Luau.VM Luau.Compiler
+  Luau.VM Luau.Compiler
 
-    -Wl,--start-group
-    
-    assimp
+  #-Wl,--start-group
+
+  assimp
+
+  #-Wl,--end-group
+)
+
+if(PLATFORM STREQUAL "vita")
+  target_link_libraries(${PROJECT_NAME} PRIVATE
+
     minizip
-    ppmd        # <--- ADD THIS HERE (must be after minizip)
+    ppmd
     webp
     sharpyuv
     zstd
     lzma
     bz2
-    z             # zlib
+    z # zlib
     crypto
-    
-    -Wl,--end-group
-)
-
-if (PLATFORM STREQUAL "vita")
-  target_link_libraries(${PROJECT_NAME} PRIVATE
 
     -Wl,--whole-archive pthread -Wl,--no-whole-archive
 
@@ -162,6 +163,11 @@ if(PLATFORM STREQUAL "vita")
   vita_create_vpk(${PROJECT_NAME}.vpk "WORM02011" ${PROJECT_NAME}.self
     VERSION 01.00
     NAME "Cube Cavern (" PLATFORM ")"
+    ${VPK_FILE_ARGS}
+
+    FILE ${CMAKE_CURRENT_SOURCE_DIR}/vita-assets/ ./
+    FILE ${CMAKE_CURRENT_SOURCE_DIR}/ccbeyond-assets/ ./
+    
     # FILE sce_sys/icon0.png sce_sys/icon0.png
     # FILE sce_sys/livearea/contents/bg.png sce_sys/livearea/contents/bg.png
     # FILE sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png

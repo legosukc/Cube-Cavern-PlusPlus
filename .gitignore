@@ -5,11 +5,10 @@
 *.userosscache
 *.sln.docstates
 
-/build/
-/build[.-]*/
-/build-vita/
-/build-win64/
-/build-win32/
+/build/**
+/build-vita/**
+/build-win64/**
+/build-win32/**
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

@@ -1,0 +1,20 @@
+{
+    "rank": {
+        "electrical": "YOU'RE ELECTRICAL!!!",
+        "radical": "RADICAL!",
+        "malevolent": "MALEVOLENT",
+        "sparky": "SPARKY",
+        "putrid": "PUTRID..."
+    },
+    "misc": {
+
+    },
+    "subtitle": {
+
+    },
+    "item": {
+        "Dagger": {
+            "name": "Dagger"
+        }
+    }
+}

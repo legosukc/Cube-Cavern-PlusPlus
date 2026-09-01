@@ -287,7 +287,7 @@ void Game::Graphics::VertexArray::Init_OpenGL() {
         if (SDL_GL_ExtensionSupported(VAOExtensionName)) {
             std::cout << "OpenGL version isn't 3.0+, but your GPU "
                          "supports the extension "
-                      << VAOExtensionName << ". (it's all good!)" << std::endl;
+                      << VAOExtensionName << ". (you're all good!)" << std::endl;
 
             Game::Graphics::OpenGLFunctions::glGenVertexArrays =
                 (PFNGLGENVERTEXARRAYSPROC)SDL_GL_GetProcAddress(
@@ -307,7 +307,7 @@ void Game::Graphics::VertexArray::Init_OpenGL() {
                          "neither the extension "
                       << VAOExtensionName
                       << ". Using emulated VAOs. (tldr your gpu sucks "
-                         "or something bad happened)"
+                         "or something is bugged, idk bro)"
                       << std::endl;
 
             ::_old_BindBuffer = Game::Graphics::OpenGLFunctions::glBindBuffer;
