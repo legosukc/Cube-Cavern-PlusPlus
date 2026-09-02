@@ -12,6 +12,7 @@ endif()
 
 
 project(CubeCavern LANGUAGES CXX)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(FetchContent)
 
@@ -135,6 +136,13 @@ target_link_libraries(${PROJECT_NAME}
 if(PLATFORM STREQUAL "vita")
   target_link_libraries(${PROJECT_NAME} PRIVATE
 
+    vitaGL
+    stdc++ mathneon
+    c m
+    zip vitashark SceShaccCgExt taihen_stub
+
+    vitashark
+
     minizip
     ppmd
     webp
@@ -144,10 +152,19 @@ if(PLATFORM STREQUAL "vita")
     bz2
     z # zlib
     crypto
+    libpib.a
 
     -Wl,--whole-archive pthread -Wl,--no-whole-archive
 
-    #SceKernelThreadMgr_stub
+
+    SceKernelDmacMgr_stub
+    SceCtrl_stub
+    SceShaccCg_stub
+    SceCommonDialog_stub
+    SceSysmodule_stub
+    SceKernelThreadMgr_stub
+    SceAppMgr_stub
+    SceAppUtil_stub
     SceLibKernel_stub
     SceDisplay_stub
     SceGxm_stub
@@ -167,7 +184,7 @@ if(PLATFORM STREQUAL "vita")
 
     FILE ${CMAKE_CURRENT_SOURCE_DIR}/vita-assets/ ./
     FILE ${CMAKE_CURRENT_SOURCE_DIR}/ccbeyond-assets/ ./
-    
+
     # FILE sce_sys/icon0.png sce_sys/icon0.png
     # FILE sce_sys/livearea/contents/bg.png sce_sys/livearea/contents/bg.png
     # FILE sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png

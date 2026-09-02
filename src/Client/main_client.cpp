@@ -1,4 +1,3 @@
-// #define SDL_MAIN_HANDLED
 #define SDL_MAIN_USE_CALLBACKS 1
 
 #include "../define.h"
@@ -12,27 +11,22 @@
 
 #include <string>
 
-#ifdef USE_SIMD_INTRINSICS
-#include <mmintrin.h>
-#include <pmmintrin.h>
-#include <smmintrin.h>
-#include <xmmintrin.h>
-
-#endif
-
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_main.h>
 
+#ifdef SDL_PLATFORM_VITA
+#include <psp2/kernel/processmgr.h>
+#include <vitaGL.h>
+#include <vitasdk.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
+#endif
 
 //#include "../Collisions.hpp"
 
-//#include <AL/al.h>
-//#include <AL/alc.h>
-//#include <AL/alext.h>
 
 #include "../FunctionHeaders/ConfigHandler.hpp"
 #include "../FunctionHeaders/File.hpp"
@@ -105,17 +99,23 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 
 #ifdef SDL_PLATFORM_VITA
 
-    SDL_SetHint(SDL_HINT_VITA_ENABLE_BACK_TOUCH, "0");
+    //vglInitExtended(0, 960, 544, 0x1800000, SCE_GXM_MULTISAMPLE_NONE);
 
-    SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "1");
-    SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
-    SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "1");
-#endif
+    //SDL_SetHint(SDL_HINT_VITA_ENABLE_BACK_TOUCH, "0");
 
-    if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
+    //SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "1");
+    //SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
+    //SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "1");
+    if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_AUDIO |
                   SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
         Exceptions::ThrowSDLError("Failed to initalize SDL.");
     }
+#else
+if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
+                  SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
+        Exceptions::ThrowSDLError("Failed to initalize SDL.");
+    }
+#endif
 
     Utils::File::Init("DribbleCo", "CubeCavernPlus");
 
@@ -132,7 +132,12 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 
     Game::Network::Init();
 
-    Game::Window.Create("Cube Cavern++", 800, 600, SDL_WINDOW_RESIZABLE);
+    Game::Window.Create("Cube Cavern++", 800, 600, SDL_WINDOW_RESIZABLE | SDL_WINDOW_FULLSCREEN);
+    SDL_Log("created window ya slut");
+
+#ifdef SDL_PLATFORM_VITA
+    sceKernelExitProcess(-1);
+#endif
 
     Game::Graphics::Init();
     Game::Lua::Init();
@@ -193,41 +198,12 @@ catch (const Exceptions::Exception& Exception) {
 
 SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* Event) {
 
+    Game::Window.HandleEvent(*Event);
+
     switch (Event->type) {
         case SDL_EventType::SDL_EVENT_QUIT:
             return SDL_APP_SUCCESS;
 
-        case SDL_EventType::SDL_EVENT_WINDOW_RESIZED:
-        case SDL_EventType::SDL_EVENT_WINDOW_MAXIMIZED:
-        case SDL_EventType::SDL_EVENT_WINDOW_MINIMIZED:
-
-            SDL_GetWindowSize(Game::Window.SDLWindow, &Game::Window.Size.X,
-                              &Game::Window.Size.Y);
-            Game::Window.WindowResizedEvent.Fire(Game::Window.Size);
-            break;
-
-        case SDL_EventType::SDL_EVENT_WINDOW_MOVED:
-            // this->Position = Math::IVector2(Event.window.data1,
-            // Event.window.data2);
-            Game::Window.Position =
-                *reinterpret_cast<Math::IVector2*>(&Event->window.data1);
-            break;
-
-        case SDL_EventType::SDL_EVENT_WINDOW_MOUSE_ENTER:
-            Game::Window.HasMouseFocus = true;
-        case SDL_EventType::SDL_EVENT_WINDOW_SHOWN:
-            Game::Window.Focus = true;
-            Game::Window.FrameNS = Game::Window.FrameNSFocused;
-            break;
-
-        case SDL_EventType::SDL_EVENT_WINDOW_MOUSE_LEAVE:
-            Game::Window.HasMouseFocus = false;
-        case SDL_EventType::SDL_EVENT_WINDOW_HIDDEN:
-            Game::Window.Focus = false;
-            Game::Window.FrameNS = Game::Window.FrameNSUnfocused;
-            break;
-
-        case SDL_EventType::SDL_EVENT_KEY_UP:
         case SDL_EventType::SDL_EVENT_KEY_DOWN:
 
             // make sure to remove laterrr
@@ -236,18 +212,6 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* Event) {
             if (Event->key.scancode == SDL_SCANCODE_ESCAPE) {
                 return SDL_APP_SUCCESS;
             }
-            /*
-std::cout << "scancode " << SDL_GetScancodeName(Event.key.scancode)
-          << " state " << std::boolalpha << Event.key.down
-          << std::endl;
-Game::Window.ScancodeStates[Event.key.scancode].CurrentState =
-    static_cast<ScancodeStatesEnum>(Event.key.down);*/
-            break;
-
-        case SDL_EventType::SDL_EVENT_MOUSE_MOTION:
-            Game::Window.MouseDelta.X = Event->motion.xrel;
-            Game::Window.MouseDelta.Y = Event->motion.yrel;
-
             break;
     }
 
@@ -259,11 +223,15 @@ SDL_AppResult SDL_AppIterate(void* appstate) {
 
     Game::Draw();
 
-    Game::Window.MouseDelta = Math::Vector2(0.f);
+    //Game::Window.MouseDelta = Math::Vector2(0.f);
     Game::Window.Present();
     return SDL_APP_CONTINUE;
 }
 
 void SDL_AppQuit(void* appstate, SDL_AppResult result) {
     ::_CloseInitialisedItems();
+
+    #ifdef SDL_PLATFORM_VITA
+    sceKernelExitProcess(-1);
+    #endif
 }

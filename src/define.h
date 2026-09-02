@@ -13,7 +13,6 @@
 
 #define GL_APIENTRYP *
 
-
 #if defined(DEBUG) && !defined(_DEBUG)
 #define _DEBUG
 
@@ -21,7 +20,6 @@
 #define DEBUG
 
 #endif
-
 
 #ifdef _MSVC_LANG
 
@@ -65,7 +63,6 @@
 #endif
 #endif
 
-
 #if defined(_MSVC_LANG) || defined(__clang__)
 #define restrict __restrict
 #else
@@ -74,9 +71,10 @@
 
 /*
 Determines whether to use SIMD intrinsics to speed up certain functions.
-Comment out to use regular math operations. (The compiler can slot in SIMD instructions if it sees fit.)
+Comment out to use regular math operations. (The compiler can slot in SIMD
+instructions if it sees fit.)
 */
-//#define USE_SIMD_INTRINSICS
+// #define USE_SIMD_INTRINSICS
 
 #ifdef USE_SIMD_INTRINSICS
 
@@ -93,10 +91,6 @@ Comment out to use regular math operations. (The compiler can slot in SIMD instr
 #define SSE3_FUNCTION
 
 #endif
-
-
-
-
 
 #ifdef CPP_20_SUPPORTED
 
@@ -124,10 +118,16 @@ Comment out to use regular math operations. (The compiler can slot in SIMD instr
 
 #ifndef LOAD_OPENGL_FUNCTION
 
+#ifdef SDL_PLATFORM_VITA
+#define LOAD_OPENGL_FUNCTION(FunctionName) \
+    Game::Graphics::OpenGLFunctions::FunctionName = FunctionName
+#else
+
 #define LOAD_OPENGL_FUNCTION(FunctionName)                         \
     (Game::Graphics::OpenGLFunctions::FunctionName =               \
          (decltype(Game::Graphics::OpenGLFunctions::FunctionName)) \
              SDL_GL_GetProcAddress(#FunctionName))
+#endif
 
 #endif
 

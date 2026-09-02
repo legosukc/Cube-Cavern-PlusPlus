@@ -432,7 +432,7 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
         ::_lua_graphics_WindowResizedEvent_updateLuaSize);
 
     ::_lua_graphics_updateScreenSize(GraphicsTable.GetStackIndex(),
-                                     Game::Window.Size);
+                                     Game::Window.GetSize());
 
     lua_createtable(State, 0, 4);
 

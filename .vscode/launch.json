@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceRoot}/build/CubeCavern",
             "args": [],
-            "cwd": "${workspaceRoot}/build/"
+            "cwd": "${workspaceRoot}/ccbeyond-assets/"
         },
         {
             "name": "Launch Server (Local platform)",
@@ -19,6 +19,13 @@
             "program": "${workspaceRoot}/build/CubeCavern-DedicatedServer",
             "args": [],
             "cwd": "${workspaceRoot}/build/"
+        },
+        {
+            "name": "Launch Client (Vita)",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "~/Games/Vita3K-x86_64.AppImage -r WORM02011 build-vita/CubeCavern.vpk",
+            "cwd": "${workspaceRoot}/"
         }
     ]
 }
