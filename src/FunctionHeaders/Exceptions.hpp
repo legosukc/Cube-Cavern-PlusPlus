@@ -11,7 +11,12 @@
 #include <stdexcept>
 #include <ios>
 
+#ifdef SDL_PLATFORM_VITA
+#include <vitaGL.h>
+#else
 #include <SDL3/SDL_opengl.h>
+#endif
+
 #include <SDL3/SDL_error.h>
 
 #include "StringHelper.hpp"

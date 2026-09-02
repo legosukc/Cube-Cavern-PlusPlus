@@ -4,7 +4,11 @@
 
 #include "../../include/VM/lua.h"
 
+#ifdef SDL_PLATFORM_VITA
+#include <vitaGL.h>
+#else
 #include <SDL3/SDL_opengl.h>
+#endif
 
 #include "LuaGraphics_MiscHeaders/LuaGraphics_SampleModels.hpp"
 

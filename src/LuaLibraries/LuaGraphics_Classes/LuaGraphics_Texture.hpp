@@ -2,9 +2,12 @@
 
 #include "../../define.h"
 
-#include <SDL3/SDL_oldnames.h>
+#ifdef SDL_PLATFORM_VITA
+#include <vitaGL.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include <SDL3/SDL_pixels.h>
 #include <SDL3/SDL_surface.h>
@@ -15,8 +18,6 @@
 #include "../../../include/VM/lua.h"
 #include "../../../include/VM/lualib.h"
 #include "../../FunctionHeaders/LuaHelper.hpp"
-
-// #include "../LuaBuffer.hpp"
 
 #include "../../Statistics.hpp"
 

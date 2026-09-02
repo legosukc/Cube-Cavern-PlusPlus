@@ -8,9 +8,13 @@
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_video.h>
 
+#ifdef SDL_PLATFORM_VITA
+#include <vitaGL.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
+#endif
 
 #include "../Game.hpp"
 

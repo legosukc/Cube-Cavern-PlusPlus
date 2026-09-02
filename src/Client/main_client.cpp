@@ -136,7 +136,7 @@ if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
     SDL_Log("created window ya slut");
 
 #ifdef SDL_PLATFORM_VITA
-    sceKernelExitProcess(-1);
+    //sceKernelExitProcess(-1);
 #endif
 
     Game::Graphics::Init();
