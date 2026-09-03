@@ -78,13 +78,25 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 add_executable(${PROJECT_NAME})
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE LUAU_ENABLE_CODEGEN=0)
+#target_compile_definitions(${PROJECT_NAME} PRIVATE LUAU_ENABLE_CODEGEN=0)
+
+target_sources(${PROJECT_NAME} PRIVATE
+
+  src/MathClasses/Vector2.cpp
+
+  src/Statistics.cpp
+  src/Time.cpp
+)
 
 if(BUILD_TARGET STREQUAL "client")
 
   message("building for client")
 
-  target_sources(${PROJECT_NAME} PRIVATE src/Client/main_client.cpp)
+  target_sources(${PROJECT_NAME} PRIVATE
+    src/Client/SDLClasses/Window.cpp
+    src/Client/main_client.cpp
+  )
+  
   target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_CLIENT)
 
   set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -101,13 +113,12 @@ elseif(BUILD_TARGET STREQUAL "server")
   set_target_properties(${PROJECT_NAME} PROPERTIES
     OUTPUT_NAME "CubeCavern-DedicatedServer"
   )
-
 else()
   message(FATAL_ERROR, "'BUILD_TARGET' unspecified! Add '-DBUILD_TARGET=client|server'.")
 endif()
 
-target_compile_definitions(Luau.CodeGen PRIVATE LUAU_ENABLE_CODEGEN=0)
-target_compile_definitions(Luau.VM PRIVATE LUAU_ENABLE_CODEGEN=0)
+#target_compile_definitions(Luau.CodeGen PRIVATE LUAU_ENABLE_CODEGEN=0)
+#target_compile_definitions(Luau.VM PRIVATE LUAU_ENABLE_CODEGEN=0)
 
 if(NOT PLATFORM STREQUAL "vita")
   target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_net::SDL3_net SDL3_mixer::SDL3_mixer)

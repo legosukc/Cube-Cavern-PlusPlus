@@ -6,13 +6,8 @@
 #include "LuaGraphics_Shader.hpp"
 
 #include <SDL3/SDL_joystick.h>
-
-#ifdef SDL_PLATFORM_VITA
-#include <vitaGL.h>
-#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
-#endif
 
 #ifdef BUILD_CLIENT
 #include "../../Client/GraphicsClasses/Program.hpp"

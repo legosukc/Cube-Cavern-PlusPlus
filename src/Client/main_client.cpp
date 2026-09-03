@@ -17,13 +17,12 @@
 
 #ifdef SDL_PLATFORM_VITA
 #include <psp2/kernel/processmgr.h>
-#include <vitaGL.h>
 #include <vitasdk.h>
-#else
+#endif
+
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
-#endif
 
 //#include "../Collisions.hpp"
 
@@ -99,8 +98,6 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 
 #ifdef SDL_PLATFORM_VITA
 
-    //vglInitExtended(0, 960, 544, 0x1800000, SCE_GXM_MULTISAMPLE_NONE);
-
     //SDL_SetHint(SDL_HINT_VITA_ENABLE_BACK_TOUCH, "0");
 
     //SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "1");
@@ -133,11 +130,6 @@ if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
     Game::Network::Init();
 
     Game::Window.Create("Cube Cavern++", 800, 600, SDL_WINDOW_RESIZABLE | SDL_WINDOW_FULLSCREEN);
-    SDL_Log("created window ya slut");
-
-#ifdef SDL_PLATFORM_VITA
-    //sceKernelExitProcess(-1);
-#endif
 
     Game::Graphics::Init();
     Game::Lua::Init();

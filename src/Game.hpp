@@ -10,7 +10,7 @@
 
 namespace Game {
 #ifdef BUILD_CLIENT
-    Game::Classes::Window Window;
+    inline Game::Classes::Window Window;
 #endif
 
     inline void Update();

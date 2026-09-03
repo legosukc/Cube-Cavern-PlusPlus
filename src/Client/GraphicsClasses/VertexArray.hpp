@@ -7,13 +7,8 @@
 #include <iostream>
 #include <map>
 
-#ifdef SDL_PLATFORM_VITA
-#include <vitaGL.h>
-#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
-#endif
-
 #include <SDL3/SDL_video.h>
 
 #include "BaseClassDefinitions.hpp"

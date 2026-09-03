@@ -1,13 +1,10 @@
 #ifndef VECTOR2_HPP
 #define VECTOR2_HPP 1
 
-#include "../define.h"
-
 #include <SDL3/SDL_stdinc.h>
-#include <cmath>
 #include <type_traits>
 
-#include "../FunctionHeaders/Math.hpp"
+#include <cmath>
 
 namespace Math {
     namespace etc {
@@ -29,13 +26,9 @@ struct Math::etc::_base_vector2 {
                   "Unexpected _base_vector2 template parameter. "
                   "Expected floating point or integral.");
 
-    constexpr _base_vector2()
-        : X(static_cast<_ComponentType>(0)),
-          Y(static_cast<_ComponentType>(0)) {}
-    constexpr _base_vector2(ComponentType _X, ComponentType _Y)
-        : X(_X), Y(_Y) {}
-    constexpr explicit _base_vector2(ComponentType Value)
-        : X(Value), Y(Value) {}
+    constexpr _base_vector2();
+    constexpr _base_vector2(ComponentType _X, ComponentType _Y);
+    constexpr explicit _base_vector2(ComponentType Value);
 
     union {
         ComponentType X, R, S;
@@ -44,105 +37,50 @@ struct Math::etc::_base_vector2 {
         ComponentType Y, G, T;
     };
 
-    template <typename IndexType>
-    constexpr ComponentType& operator[](IndexType Index) {
-        return reinterpret_cast<ComponentType*>(this)[Index];
-    }
+    constexpr ComponentType& operator[](int Index);
+    constexpr const ComponentType& operator[](int Index) const;
 
-    template <typename IndexType>
-    constexpr const ComponentType& operator[](IndexType Index) const {
-        return reinterpret_cast<const ComponentType*>(this)[Index];
-    }
+    constexpr _DerivedType operator+(const _DerivedType& B) const;
+    constexpr _DerivedType operator+(ComponentType B) const;
 
-    constexpr _DerivedType operator+(const _DerivedType& B) const {
-        return _DerivedType(this->X + B.X, this->Y + B.Y);
-    }
-    constexpr _DerivedType operator+(ComponentType B) const {
-        return _DerivedType(this->X + B, this->Y + B);
-    }
+    constexpr void operator+=(const _DerivedType& B);
+    constexpr void operator+=(ComponentType B);
 
-    constexpr void operator+=(const _DerivedType& B) { *this = *this + B; }
-    constexpr void operator+=(ComponentType B) { *this = *this + B; }
+    constexpr _DerivedType operator-(const _DerivedType& B) const;
+    constexpr _DerivedType operator-(ComponentType B) const;
+    constexpr _DerivedType operator-() const;
 
-    constexpr _DerivedType operator-(const _DerivedType& B) const {
-        return _DerivedType(this->X - B.X, this->Y - B.Y);
-    }
+    constexpr void operator-=(const _DerivedType& B);
+    constexpr void operator-=(ComponentType B);
 
-    constexpr _DerivedType operator-(ComponentType B) const {
-        return _DerivedType(this->X - B, this->Y - B);
-    }
+    constexpr _DerivedType operator*(const _DerivedType& B) const;
+    constexpr _DerivedType operator*(ComponentType B) const;
 
-    constexpr _DerivedType operator-() const {
-        return _DerivedType(-this->X, -this->Y);
-    }
+    constexpr void operator*=(const _DerivedType& B);
+    constexpr void operator*=(ComponentType B);
 
-    constexpr void operator-=(const _DerivedType& B) { *this = *this - B; }
-    constexpr void operator-=(ComponentType B) { *this = *this - B; }
+    constexpr _DerivedType operator/(const _DerivedType& B) const;
+    constexpr _DerivedType operator/(ComponentType B) const;
 
-    constexpr _DerivedType operator*(const _DerivedType& B) const {
-        return _DerivedType(this->X * B.X, this->Y * B.Y);
-    }
+    constexpr void operator/=(const _DerivedType& B);
+    constexpr void operator/=(ComponentType B);
 
-    constexpr _DerivedType operator*(ComponentType B) const {
-        return _DerivedType(this->X * B, this->Y * B);
-    }
+    constexpr _DerivedType operator%(const _DerivedType& B) const;
+    constexpr _DerivedType operator%(ComponentType B) const;
 
-    constexpr void operator*=(const _DerivedType& B) { *this = *this * B; }
-    constexpr void operator*=(ComponentType B) { *this = *this * B; }
+    constexpr void operator%=(const _DerivedType& B);
+    constexpr void operator%=(ComponentType B);
 
-    constexpr _DerivedType operator/(const _DerivedType& B) const {
-        return _DerivedType(this->X / B.X, this->Y / B.Y);
-    }
-    constexpr _DerivedType operator/(ComponentType B) const {
-        return _DerivedType(this->X / B, this->Y / B);
-    }
+    constexpr bool operator==(const _DerivedType& B) const;
+    constexpr bool operator!=(const _DerivedType& B) const;
 
-    constexpr void operator/=(const _DerivedType& B) { *this = *this / B; }
-    constexpr void operator/=(ComponentType B) { *this = *this / B; }
+    constexpr ComponentType Dot(const _DerivedType& B) const;
 
-    constexpr _DerivedType operator%(const _DerivedType& B) const {
-        return _DerivedType(Math::Mod<ComponentType>(this->X, B.X),
-                            Math::Mod<ComponentType>(this->Y, B.Y));
-    }
-    constexpr _DerivedType operator%(ComponentType B) const {
-        return _DerivedType(Math::Mod<ComponentType>(this->X, B),
-                            Math::Mod<ComponentType>(this->Y, B));
-    }
+    constexpr ComponentType Magnitude() const;
 
-    constexpr void operator%=(const _DerivedType& B) {
-        *this = this->operator%(B);
-    }
-    constexpr void operator%=(ComponentType B) { *this = *this % B; }
-
-    constexpr bool operator==(const _DerivedType& B) const {
-        return this->X == B.X && this->Y == B.Y;
-    }
-    constexpr bool operator!=(const _DerivedType& B) const {
-        return this->X != B.X || this->Y != B.Y;
-    }
-
-    constexpr ComponentType Dot(const _DerivedType& B) const {
-        return (this->X * B.X) + (this->Y * B.Y);
-    }
-
-    constexpr ComponentType Magnitude() const {
-        if CONSTEXPR_IF (std::is_floating_point_v<ComponentType>) {
-            return std::sqrt((this->X * this->X) + (this->Y * this->Y));
-        } else {
-            return static_cast<ComponentType>(
-                std::sqrtl(static_cast<long double>((this->X * this->X) +
-                                                    (this->Y * this->Y))));
-        }
-    }
-
-    constexpr _DerivedType Lerp(const _DerivedType& B, float Alpha) const {
-        return *(_DerivedType*)this + (B - *(_DerivedType*)this) * Alpha;
-    }
-
+    constexpr _DerivedType Lerp(const _DerivedType& B, float Alpha) const;
     constexpr _DerivedType Lerp(const _DerivedType& B,
-                                const _DerivedType& Alpha) const {
-        return *(_DerivedType*)this + (B - *(_DerivedType*)this) * Alpha;
-    }
+                                const _DerivedType& Alpha) const;
 };
 
 struct Math::Vector2 : Math::etc::_base_vector2<float, Math::Vector2> {
@@ -151,47 +89,14 @@ struct Math::Vector2 : Math::etc::_base_vector2<float, Math::Vector2> {
     constexpr operator Math::IVector2() const;
     constexpr operator Math::UVector2() const;
 
-    constexpr Math::Vector2 Floor() const {
-        return Math::Vector2(std::floor(this->X), std::floor(this->Y));
-    }
-
-    constexpr Math::Vector2 Round() const {
-        return Math::Vector2(std::round(this->X), std::round(this->Y));
-    }
-
-    constexpr Math::Vector2 Ceil() const {
-        return Math::Vector2(std::ceil(this->X), std::ceil(this->Y));
-    }
+    constexpr Math::Vector2 Floor() const;
+    constexpr Math::Vector2 Round() const;
+    constexpr Math::Vector2 Ceil() const;
 
     constexpr Math::Vector2 Normalize() const {
         return *this * (1.f / std::sqrt(this->Dot(*this)));
     }
 };
-/*
-constexpr Math::Vector2 operator+(Math::Vector2::ComponentType A,
-                                  const Math::Vector2& B) {
-    return Math::Vector2(A) + B;
-}
-
-constexpr Math::Vector2 operator-(Math::Vector2::ComponentType A,
-                                  const Math::Vector2& B) {
-    return Math::Vector2(A) - B;
-}
-
-constexpr Math::Vector2 operator*(Math::Vector2::ComponentType A,
-                                  const Math::Vector2& B) {
-    return Math::Vector2(A) * B;
-}
-
-constexpr Math::Vector2 operator/(Math::Vector2::ComponentType A,
-                                  const Math::Vector2& B) {
-    return Math::Vector2(A) / B;
-}
-
-constexpr Math::Vector2 operator%(Math::Vector2::ComponentType A,
-                                  const Math::Vector2& B) {
-    return Math::Vector2(A) % B;
-}*/
 
 struct Math::IVector2 : Math::etc::_base_vector2<Sint32, Math::IVector2> {
     using _base_vector2::_base_vector2;
@@ -199,31 +104,6 @@ struct Math::IVector2 : Math::etc::_base_vector2<Sint32, Math::IVector2> {
     constexpr operator Math::Vector2() const;
     constexpr operator Math::UVector2() const;
 };
-/*
-constexpr Math::IVector2 operator+(Math::IVector2::ComponentType A,
-                                   const Math::IVector2& B) {
-    return Math::IVector2(A) + B;
-}
-
-constexpr Math::IVector2 operator-(Math::IVector2::ComponentType A,
-                                   const Math::IVector2& B) {
-    return Math::IVector2(A) - B;
-}
-
-constexpr Math::IVector2 operator*(Math::IVector2::ComponentType A,
-                                   const Math::IVector2& B) {
-    return Math::IVector2(A) * B;
-}
-
-constexpr Math::IVector2 operator/(Math::IVector2::ComponentType A,
-                                   const Math::IVector2& B) {
-    return Math::IVector2(A) / B;
-}
-
-constexpr Math::IVector2 operator%(Math::IVector2::ComponentType A,
-                                   const Math::IVector2& B) {
-    return Math::IVector2(A) % B;
-}*/
 
 struct Math::UVector2 : Math::etc::_base_vector2<Uint32, Math::UVector2> {
     using _base_vector2::_base_vector2;
@@ -231,59 +111,5 @@ struct Math::UVector2 : Math::etc::_base_vector2<Uint32, Math::UVector2> {
     constexpr operator Math::Vector2() const;
     constexpr operator Math::IVector2() const;
 };
-/*
-constexpr Math::UVector2 operator+(Math::UVector2::ComponentType A,
-                                   const Math::UVector2& B) {
-    return Math::UVector2(A) + B;
-}
 
-constexpr Math::UVector2 operator-(Math::UVector2::ComponentType A,
-                                   const Math::UVector2& B) {
-    return Math::UVector2(A) - B;
-}
-
-constexpr Math::UVector2 operator*(Math::UVector2::ComponentType A,
-                                   const Math::UVector2& B) {
-    return Math::UVector2(A) * B;
-}
-
-constexpr Math::UVector2 operator/(Math::UVector2::ComponentType A,
-                                   const Math::UVector2& B) {
-    return Math::UVector2(A) / B;
-}
-
-constexpr Math::UVector2 operator%(Math::UVector2::ComponentType A,
-                                   const Math::UVector2& B) {
-    return Math::UVector2(A) % B;
-}*/
-
-constexpr Math::Vector2::operator Math::IVector2() const {
-    return Math::IVector2(static_cast<Math::IVector2::ComponentType>(this->X),
-                          static_cast<Math::IVector2::ComponentType>(this->Y));
-}
-
-constexpr Math::Vector2::operator Math::UVector2() const {
-    return Math::UVector2(static_cast<Math::UVector2::ComponentType>(this->X),
-                          static_cast<Math::UVector2::ComponentType>(this->Y));
-}
-
-constexpr Math::IVector2::operator Math::Vector2() const {
-    return Math::Vector2(static_cast<Math::Vector2::ComponentType>(this->X),
-                         static_cast<Math::Vector2::ComponentType>(this->Y));
-}
-
-constexpr Math::IVector2::operator Math::UVector2() const {
-    return Math::UVector2(static_cast<Math::UVector2::ComponentType>(this->X),
-                          static_cast<Math::UVector2::ComponentType>(this->Y));
-}
-
-constexpr Math::UVector2::operator Math::Vector2() const {
-    return Math::Vector2(static_cast<Math::Vector2::ComponentType>(this->X),
-                         static_cast<Math::Vector2::ComponentType>(this->Y));
-}
-
-constexpr Math::UVector2::operator Math::IVector2() const {
-    return Math::IVector2(static_cast<Math::IVector2::ComponentType>(this->X),
-                          static_cast<Math::IVector2::ComponentType>(this->Y));
-}
 #endif

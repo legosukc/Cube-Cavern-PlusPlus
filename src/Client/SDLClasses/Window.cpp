@@ -1,7 +1,6 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP 1
-
 #include "../../define.h"
+
+#include "Window.hpp"
 
 #if defined(USE_SIMD_INTRINSICS) && !defined(SDL_PLATFORM_VITA)
 #include <emmintrin.h>
@@ -10,7 +9,6 @@
 
 #include <iostream>
 
-// #include <SDL3/SDL_egl.h>
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_hints.h>
 #include <SDL3/SDL_keyboard.h>
@@ -21,80 +19,9 @@
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
 
-#ifdef SDL_PLATFORM_VITA
-#include <vitaGL.h>
-#endif
-
-#include "../../FunctionHeaders/Exceptions.hpp"
-#include "../../MathClasses/Vector2.hpp"
-
 #include "../../Time.hpp"
 
-#include "../../FunctionHeaders/Event.hpp"
-
-namespace Game::Classes {
-
-    class Window {
-        mutable Uint64 LastNS = SDL_GetTicksNS();
-
-        enum class ScancodeStatesEnum : Uint8 {
-            NotHeld,
-            Released,
-            Pressed,
-            Held,
-        };
-
-        struct ScancodeStateStruct {
-            ScancodeStatesEnum CurrentState = ScancodeStatesEnum::NotHeld;
-            float StateChangeTimestamp;  // in secs
-        };
-
-        mutable ScancodeStateStruct
-            ScancodeStates[SDL_Scancode::SDL_SCANCODE_COUNT];
-
-#ifndef SDL_PLATFORM_VITA
-        SDL_Window* SDLWindow;
-        SDL_GLContext GLContext;
-#endif
-
-        Math::IVector2 Position, Size;
-
-       public:
-        void Create(const char* WindowTitle,
-                    int Width,
-                    int Height,
-                    SDL_WindowFlags Flags = 0);
-        inline Window();
-
-        inline void Destroy();
-
-        Math::Vector2 MouseDelta;
-
-        Utils::Event<const Math::IVector2&> WindowResizedEvent;
-
-        bool HasMouseFocus = false;
-        bool Focus = false;
-
-        ScancodeStatesEnum MouseButtonStates[5];
-
-        Uint64 FrameNSFocused = 16 * 1000000;
-        Uint64 FrameNSUnfocused = FrameNSFocused * 2;
-        Uint64 FrameNS = FrameNSFocused;
-
-        void HandleEvent(const SDL_Event& Event);
-
-        inline const Math::IVector2& GetPosition() const;
-        inline const Math::IVector2& GetSize() const;
-
-        bool ScancodePressed(SDL_Scancode Scancode,
-                             float BufferTime = 0.f) const;
-        bool ScancodeHeld(SDL_Scancode Scancode, float BufferTime = 0.f) const;
-        bool ScancodeReleased(SDL_Scancode Scancode,
-                              float BufferTime = 0.f) const;
-
-        void Present();
-    };
-}
+#include "../../FunctionHeaders/Exceptions.hpp"
 
 void Game::Classes::Window::Create(const char* WindowTitle,
                                    int Width,
@@ -121,17 +48,17 @@ void Game::Classes::Window::Create(const char* WindowTitle,
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 #endif
 
-#ifndef SDL_PLATFORM_VITA
+//#ifndef SDL_PLATFORM_VITA
     this->SDLWindow =
         SDL_CreateWindow(WindowTitle, Width, Height, SDL_WINDOW_OPENGL | Flags);
     if (this->SDLWindow == NULL) {
         Exceptions::ThrowSDLError("Failed to create SDL_Window.");
     }
-#endif
+//#endif
 
     this->Size = Math::IVector2(Width, Height);
 
-#ifndef SDL_PLATFORM_VITA
+//#ifndef SDL_PLATFORM_VITA
     this->GLContext = SDL_GL_CreateContext(this->SDLWindow);
     if (this->GLContext == NULL) {
         Exceptions::ThrowSDLError("Failed to create SDL_GLContext.");
@@ -142,9 +69,9 @@ void Game::Classes::Window::Create(const char* WindowTitle,
     }
 
     SDL_SetWindowRelativeMouseMode(this->SDLWindow, true);
-#endif
+//#endif
 
-    std::memset(&this->ScancodeStates, 0, sizeof(this->ScancodeStates));
+    memset(&this->ScancodeStates, 0, sizeof(this->ScancodeStates));
 }
 Game::Classes::Window::Window() = default;
 
@@ -266,16 +193,9 @@ void Game::Classes::Window::Present() {
 
     SDL_DelayPrecise(this->FrameNS - (SDL_GetTicksNS() - this->LastNS));
 
-#ifdef SDL_PLATFORM_VITA
-// vglSwa
-#else
-
     SDL_GL_SwapWindow(this->SDLWindow);
-#endif
 
     const Uint64 TicksNS = SDL_GetTicksNS();
     Game::Time::DeltaTime = static_cast<double>(TicksNS - this->LastNS) / 1e+9;
     this->LastNS = TicksNS;
 }
-
-#endif

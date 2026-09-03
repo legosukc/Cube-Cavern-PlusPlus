@@ -3,11 +3,7 @@
 
 #include "../../define.h"
 
-#ifdef SDL_PLATFORM_VITA
-#include <vitaGL.h>
-#else
 #include <SDL3/SDL_opengl.h>
-#endif
 
 namespace Game::Graphics::Classes {
 		

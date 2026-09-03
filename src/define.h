@@ -118,17 +118,10 @@ instructions if it sees fit.)
 
 #ifndef LOAD_OPENGL_FUNCTION
 
-#ifdef SDL_PLATFORM_VITA
-#define LOAD_OPENGL_FUNCTION(FunctionName) \
-    Game::Graphics::OpenGLFunctions::FunctionName = FunctionName
-#else
-
 #define LOAD_OPENGL_FUNCTION(FunctionName)                         \
     (Game::Graphics::OpenGLFunctions::FunctionName =               \
          (decltype(Game::Graphics::OpenGLFunctions::FunctionName)) \
              SDL_GL_GetProcAddress(#FunctionName))
-#endif
-
 #endif
 
 #endif
