@@ -2,10 +2,11 @@
 
 #include "../define.h"
 
+#include "../MathClasses/Matrix.hpp"
 #include "../MathClasses/Vector2.hpp"
 #include "../MathClasses/Vector3.hpp"
 #include "../MathClasses/Vector4.hpp"
-#include "../MathClasses/Matrix.hpp"
+
 
 #include <iostream>
 
@@ -24,8 +25,7 @@
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
 
-//#include "../Collisions.hpp"
-
+// #include "../Collisions.hpp"
 
 #include "../FunctionHeaders/ConfigHandler.hpp"
 #include "../FunctionHeaders/File.hpp"
@@ -72,9 +72,9 @@ namespace {
 
         Game::Lua::Destroy();
 
-        #ifndef SDL_PLATFORM_VITA
+#ifndef SDL_PLATFORM_VITA
         Game::Sound::Destroy();
-        #endif
+#endif
 
         Game::Window.Destroy();
         SDL_Quit();
@@ -98,17 +98,17 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 
 #ifdef SDL_PLATFORM_VITA
 
-    //SDL_SetHint(SDL_HINT_VITA_ENABLE_BACK_TOUCH, "0");
+    // SDL_SetHint(SDL_HINT_VITA_ENABLE_BACK_TOUCH, "0");
 
-    //SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "1");
-    //SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
-    //SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "1");
-    if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_AUDIO |
-                  SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
+    // SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "1");
+    // SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
+    // SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "1");
+    if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_AUDIO | SDL_INIT_GAMEPAD |
+                  SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
         Exceptions::ThrowSDLError("Failed to initalize SDL.");
     }
 #else
-if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
+    if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
                   SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
         Exceptions::ThrowSDLError("Failed to initalize SDL.");
     }
@@ -129,7 +129,11 @@ if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
 
     Game::Network::Init();
 
-    Game::Window.Create("Cube Cavern++", 800, 600, SDL_WINDOW_RESIZABLE | SDL_WINDOW_FULLSCREEN);
+#ifdef SDL_PLATFORM_VITA
+    Game::Window.Create("Cube Cavern++", 960, 544, SDL_WINDOW_FULLSCREEN);
+#else
+    Game::Window.Create("Cube Cavern++", 800, 600, SDL_WINDOW_RESIZABLE);
+#endif
 
     Game::Graphics::Init();
     Game::Lua::Init();
@@ -189,7 +193,6 @@ catch (const Exceptions::Exception& Exception) {
 #endif
 
 SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* Event) {
-
     Game::Window.HandleEvent(*Event);
 
     switch (Event->type) {
@@ -215,7 +218,7 @@ SDL_AppResult SDL_AppIterate(void* appstate) {
 
     Game::Draw();
 
-    //Game::Window.MouseDelta = Math::Vector2(0.f);
+    // Game::Window.MouseDelta = Math::Vector2(0.f);
     Game::Window.Present();
     return SDL_APP_CONTINUE;
 }
@@ -223,7 +226,7 @@ SDL_AppResult SDL_AppIterate(void* appstate) {
 void SDL_AppQuit(void* appstate, SDL_AppResult result) {
     ::_CloseInitialisedItems();
 
-    #ifdef SDL_PLATFORM_VITA
+#ifdef SDL_PLATFORM_VITA
     sceKernelExitProcess(-1);
-    #endif
+#endif
 }
