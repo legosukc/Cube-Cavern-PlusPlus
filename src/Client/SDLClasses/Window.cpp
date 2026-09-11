@@ -30,10 +30,11 @@ void Game::Classes::Window::Create(const char* WindowTitle,
 #ifdef SDL_PLATFORM_VITA
     std::cout << "version 2.0 es" << std::endl;
 
-    // SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-    // SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-    // SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
-    // SDL_GL_CONTEXT_PROFILE_ES);
+#ifdef VITA_USE_PVR
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+#endif
 
     Width = 960;
     Height = 544;
@@ -48,17 +49,17 @@ void Game::Classes::Window::Create(const char* WindowTitle,
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 #endif
 
-//#ifndef SDL_PLATFORM_VITA
+#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
     this->SDLWindow =
         SDL_CreateWindow(WindowTitle, Width, Height, SDL_WINDOW_OPENGL | Flags);
     if (this->SDLWindow == NULL) {
         Exceptions::ThrowSDLError("Failed to create SDL_Window.");
     }
-//#endif
+#endif
 
     this->Size = Math::IVector2(Width, Height);
 
-//#ifndef SDL_PLATFORM_VITA
+#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
     this->GLContext = SDL_GL_CreateContext(this->SDLWindow);
     if (this->GLContext == NULL) {
         Exceptions::ThrowSDLError("Failed to create SDL_GLContext.");
@@ -69,14 +70,14 @@ void Game::Classes::Window::Create(const char* WindowTitle,
     }
 
     SDL_SetWindowRelativeMouseMode(this->SDLWindow, true);
-//#endif
+#endif
 
     memset(&this->ScancodeStates, 0, sizeof(this->ScancodeStates));
 }
 Game::Classes::Window::Window() = default;
 
 void Game::Classes::Window::Destroy() {
-#ifndef SDL_PLATFORM_VITA
+#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
     if (this->SDLWindow != NULL) {
         SDL_GL_MakeCurrent(this->SDLWindow, NULL);
         SDL_DestroyWindow(this->SDLWindow);
@@ -193,7 +194,11 @@ void Game::Classes::Window::Present() {
 
     SDL_DelayPrecise(this->FrameNS - (SDL_GetTicksNS() - this->LastNS));
 
+#if defined(SDL_PLATFORM_VITA) && !defined(VITA_USE_PVR)
+    vglSwapBuffers(GL_FALSE);
+#else
     SDL_GL_SwapWindow(this->SDLWindow);
+#endif
 
     const Uint64 TicksNS = SDL_GetTicksNS();
     Game::Time::DeltaTime = static_cast<double>(TicksNS - this->LastNS) / 1e+9;

@@ -8,9 +8,13 @@
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_video.h>
 
+#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
+#else
+#include <vitaGL.h>
+#endif
 
 #include "../Game.hpp"
 
@@ -366,6 +370,8 @@ void Game::Graphics::Init() {
 
             Game::Window.WindowResizedEvent.Connect(
                 ::_graphics_WindowResizedEvent_updateGLViewport);
+
+            Graphics::OpenGLFunctions::glEnable(GL_DEPTH_TEST);
 
             break;
 

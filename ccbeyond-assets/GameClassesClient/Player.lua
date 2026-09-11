@@ -1,7 +1,8 @@
-local Inventory = Game.Inventory
 local Camera = Game.Camera
 local Graphics = Game.Graphics
 local Input = Game.Input
+
+local Texture = Graphics.Texture
 
 local SyncedModifierCollection = Assets.MiscClassesGlobal.SyncedModifierCollection
 
@@ -67,9 +68,13 @@ local Player = {
 	RightViewportArmVisible = true;
 	RightViewportArmOffset = Vector3.new(-0.15, -0.175, -0.3);
 	RightViewportArmTransform = Mat4.new(1);
+
+	ViewarmRenderObject = Assets.RenderObjectsClient.rendViewarm;
 }
 print(Player.LeftViewportArmOffset)
 
+
+--[[
 local ViewArmIndexCount: number
 do
 	local ViewportArmVAO = Graphics.VertexArray.new()
@@ -134,10 +139,25 @@ do
 
 	ViewportArmProgram:Use()
 
+	local ViewportArmTextureUniform = ViewportArmProgram:GetUniformIndex("ArmTexture")
+	Graphics.Program.SetUniformSint32(ViewportArmTextureUniform, 0);
+
+
 	local ViewportArmOffsetUniform = ViewportArmProgram:GetUniformIndex("Offset")
 	local ViewportArmProjectionUniform = ViewportArmProgram:GetUniformIndex("Projection")
 
 	print("uniform indexes: ", ViewportArmOffsetUniform, ViewportArmProjectionUniform)
+
+	local ViewportArmTexture = Texture.new()
+	ViewportArmTexture:Bind()
+
+	Texture.Load2DImageFromFile("Textures/viewarm_palette.bmp")
+
+	Texture.SetFilteringUpscale(Graphics.TextureFiltering.Nearest)
+    Texture.SetFilteringDownscale(Graphics.TextureFiltering.Nearest)
+
+    Texture.SetWrappingHorizontal(Graphics.TextureWrapping.Repeat)
+    Texture.SetWrappingVertical(Graphics.TextureWrapping.Repeat)
 
 	Player.GraphicsObjects = {
 		ViewportLeftArmVAO = ViewportArmVAO;
@@ -149,14 +169,19 @@ do
 		ViewportRightArmEBO = ViewportArmEBO;
 
 		ViewportLeftArmProgram = ViewportArmProgram;
+		ViewportLeftArmTextureUniform = ViewportArmTextureUniform;
 		ViewportLeftArmOffsetUniform = ViewportArmOffsetUniform;
 		ViewportLeftArmProjectionUniform = ViewportArmProjectionUniform;
 
 		ViewportRightArmProgram = ViewportArmProgram;
+		ViewportRightArmTextureUniform = ViewportArmTextureUniform;
 		ViewportRightArmOffsetUniform = ViewportArmOffsetUniform;
 		ViewportRightArmProjectionUniform = ViewportArmProjectionUniform;
+
+		ViewportLeftArmTexture = ViewportArmTexture;
+		ViewportRightArmTexture = ViewportArmTexture;
 	}
-end
+end]]
 
 Player.Bindings = {
 	ForwardInput = Input.GetBinding("Forward", Enums.Scancode.W);
@@ -177,7 +202,7 @@ Player.Bindings = {
 
 
 function Player:UsePrimary()
-	local HeldItem = Inventory.HeldItem
+	local HeldItem = Game.Inventory.HeldItem
 	if not HeldItem then
 		return
 	end
@@ -186,7 +211,7 @@ function Player:UsePrimary()
 end
 
 function Player:UseSecondary()
-	local HeldItem = Inventory.HeldItem
+	local HeldItem = Game.Inventory.HeldItem
 	if not HeldItem then
 		return
 	end
@@ -206,10 +231,7 @@ function Player:Move(MoveDirection)
     if addspeed <= 0 then
         return
     end
-    local accelspeed = accel * Game.DeltaTime * wishspeed
-    if accelspeed > addspeed then
-        accelspeed = addspeed
-    end
+    local accelspeed = math.min(accel * Game.DeltaTime * wishspeed, addspeed)
     
     self.Velocity += MoveDirection * accelspeed
 end
@@ -317,42 +339,59 @@ function Player:Update()
 end
 
 
-local SetUniformVec3 = Graphics.Program.SetUniformVec3
-local SetUniformMat4 = Graphics.Program.SetUniformMat4
+--local SetUniformVec3 = Graphics.Program.SetUniformVec3
+--local SetUniformMat4 = Graphics.Program.SetUniformMat4
 
-local YVelocityLerp = Player.Velocity.Y
 local VelocityLerp = Player.Velocity
 function Player:Draw()
 
-	--YVelocityLerp = math.clamp(math.lerp(YVelocityLerp, Player.Velocity.Y * -0.015, 0.3), -0.15, 0.2)
-	VelocityLerp = VelocityLerp:Lerp(self.Velocity * -0.015, 0.2)
-	--LastPosition = LastPosition:Lerp()
+	VelocityLerp = VelocityLerp:Lerp(self.Velocity * 0.0125, 0.2)
 
 	local GraphicsObjects = self.GraphicsObjects
 	
 	if self.ThirdPerson then
 
 	else
+		local ArmVelocityOffset = Vector3.new(
+			-VelocityLerp:Dot(Camera.RightVector),
+        	-VelocityLerp:Dot(Camera.UpVector),
+        	VelocityLerp:Dot(Camera.LookDirection)
+		)
+		local LeftArmOffset = self.LeftViewportArmOffset + ArmVelocityOffset
+		local RightArmOffset = self.RightViewportArmOffset + ArmVelocityOffset
+
 		if self.LeftViewportArmVisible then
+			--[[
 			GraphicsObjects.ViewportLeftArmVAO:Bind()
 			GraphicsObjects.ViewportLeftArmProgram:Use()
+
+			GraphicsObjects.ViewportLeftArmTexture:Bind()
+			Graphics.Texture.SetActiveTexture(0)
 		
-			SetUniformVec3(GraphicsObjects.ViewportLeftArmOffsetUniform, self.LeftViewportArmOffset + (VelocityLerp * Camera.LookDirection))
+			SetUniformVec3(GraphicsObjects.ViewportLeftArmOffsetUniform, LeftArmOffset)
 			SetUniformMat4(GraphicsObjects.ViewportLeftArmProjectionUniform, false, Camera.ProjectionMatrix)
 
-			Graphics.DrawElements(Graphics.DrawModes.Triangles, ViewArmIndexCount, Graphics.Types.Uint32)
+			Graphics.DrawElements(Graphics.DrawModes.Triangles, ViewArmIndexCount, Graphics.Types.Uint32)]]
+			self.ViewarmRenderObject:Draw(nil, LeftArmOffset)
 		end
 
 		if self.RightViewportArmVisible then
+			--[[
 			GraphicsObjects.ViewportRightArmVAO:Bind()
 			GraphicsObjects.ViewportRightArmProgram:Use()
+
+			GraphicsObjects.ViewportRightArmTexture:Bind()
+			Graphics.Texture.SetActiveTexture(0)
 			
-			SetUniformVec3(GraphicsObjects.ViewportRightArmOffsetUniform, self.RightViewportArmOffset + (VelocityLerp * Camera.LookDirection))
+			SetUniformVec3(GraphicsObjects.ViewportRightArmOffsetUniform, RightArmOffset)
 			SetUniformMat4(GraphicsObjects.ViewportRightArmProjectionUniform, false, Camera.ProjectionMatrix)
 
-			Graphics.DrawElements(Graphics.DrawModes.Triangles, ViewArmIndexCount, Graphics.Types.Uint32)
+			Graphics.DrawElements(Graphics.DrawModes.Triangles, ViewArmIndexCount, Graphics.Types.Uint32)]]
+			self.ViewarmRenderObject:Draw(nil, RightArmOffset)
 		end
 		Graphics.VertexArray.Unbind()
+
+		Game.Inventory.HeldItem:DrawViewmodel(LeftArmOffset, RightArmOffset)
 	end
 end
 

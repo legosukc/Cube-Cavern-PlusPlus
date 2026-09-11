@@ -1,4 +1,3 @@
-
 local class = {}
 
 class.Name = "ItemBase"
@@ -28,6 +27,9 @@ function class:Update()
 end
 
 function class:Draw()
+end
+
+function class:DrawViewmodel()
 end
 
 

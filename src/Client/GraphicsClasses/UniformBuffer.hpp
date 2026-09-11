@@ -5,8 +5,13 @@
 
 #include "BufferBase.hpp"
 
+#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#else
+#include <vitaGL.h>
+#endif
+
 namespace Game::Graphics::OpenGLFunctions {
     PFNGLBINDBUFFERBASEPROC glBindBufferBase;
     PFNGLBINDBUFFERRANGEPROC glBindBufferRange;

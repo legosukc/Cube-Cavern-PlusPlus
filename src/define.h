@@ -1,6 +1,10 @@
 #ifndef DEFINE_H
 #define DEFINE_H 1
 
+// if defined, uses the PVR library for OpenGL.
+// if not defined, uses vitaGL.
+// #define VITA_USE_PVR
+
 // for linting
 #if !defined(BUILD_CLIENT) && !defined(BUILD_SERVER)
 #define BUILD_CLIENT
@@ -118,10 +122,17 @@ instructions if it sees fit.)
 
 #ifndef LOAD_OPENGL_FUNCTION
 
+#ifndef VITA_USE_PVR
 #define LOAD_OPENGL_FUNCTION(FunctionName)                         \
     (Game::Graphics::OpenGLFunctions::FunctionName =               \
          (decltype(Game::Graphics::OpenGLFunctions::FunctionName)) \
              SDL_GL_GetProcAddress(#FunctionName))
+#else
+#define LOAD_OPENGL_FUNCTION(FunctionName)                         \
+    (Game::Graphics::OpenGLFunctions::FunctionName =               \
+         (decltype(Game::Graphics::OpenGLFunctions::FunctionName)) \
+             SDL_GL_GetProcAddress(#FunctionName))
+#endif
 #endif
 
 #endif

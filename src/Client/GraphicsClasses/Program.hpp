@@ -5,8 +5,13 @@
 
 #include <iostream>
 
+#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#else
+#include <vitaGL.h>
+#endif
+
 #include <SDL3/SDL_video.h>
 
 #include "../../MathClasses/Matrix.hpp"

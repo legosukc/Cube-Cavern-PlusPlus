@@ -27,6 +27,9 @@ namespace Game::Lua::CLibraries::Graphics {
             static int DetachShader(lua_State* State);
             static int DetachAllShaders(lua_State* State);
 
+            static int LoadVertexShaderFile(lua_State* State);
+            static int LoadFragmentShaderFile(lua_State* State);
+
             static int Link(lua_State* State);
             static int Use(lua_State* State);
 
@@ -374,10 +377,10 @@ int Game::Lua::CLibraries::Graphics::Program::SetUniformFvec3(
 
             const Math::Vector3* VecUD =
                 static_cast<const Math::Vector3*>(lua_touserdata(State, 2));
-            //std::cout << "fvec3 uniform " << VecUD->X << ", " << VecUD->Y << ", " << VecUD->Z << std::endl;
+            // std::cout << "fvec3 uniform " << VecUD->X << ", " << VecUD->Y <<
+            // ", " << VecUD->Z << std::endl;
 
-            Game::Graphics::Program::SetUniformFvec3(
-                UniformIndex, *VecUD);
+            Game::Graphics::Program::SetUniformFvec3(UniformIndex, *VecUD);
             break;
     }
 
@@ -564,6 +567,39 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::DetachAllShaders(
     }
     return 0;
 }
+
+int Game::Lua::CLibraries::Graphics::Classes::Program::LoadVertexShaderFile(
+    lua_State* State) {
+/*
+        Graphics::Cl asses::Shader::
+      
+VertexShader:
+    SetShaderSource([[
+
+		attribute vec3 aPos;
+		attribute vec3 aNormal;
+		attribute vec2 aTexcoord;
+
+		//uniform mat4 Model;
+		uniform mat4 View;
+		uniform mat4 Projection;
+		
+		void main() {
+			gl_Position = Projection * View * mat4(1.0) * vec4(aPos, 1.0);
+			//gl_Position = vec4(aPos, 1.0);
+		}
+	]])
+
+	local CompileError = VertexShader:Compile()
+	if CompileError then
+		print("Failed to compile VertexShader. ", CompileError)
+    end *///
+    return 1;
+}
+int Game::Lua::CLibraries::Graphics::Classes::Program::LoadFragmentShaderFile(
+    lua_State* State) {
+        return 1;
+    }
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::Link(lua_State* State) {
     const Classes::Program* ProgramUD =

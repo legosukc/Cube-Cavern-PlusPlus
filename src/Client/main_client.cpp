@@ -7,7 +7,6 @@
 #include "../MathClasses/Vector3.hpp"
 #include "../MathClasses/Vector4.hpp"
 
-
 #include <iostream>
 
 #include <string>
@@ -21,9 +20,13 @@
 #include <vitasdk.h>
 #endif
 
+#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
+#else
+#include <vitaGL.h>
+#endif
 
 // #include "../Collisions.hpp"
 
@@ -96,17 +99,30 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 #endif
 {
 
+    SDL_SetAppMetadata("cc++", "0.0000000001a", "com.dribbleco.cc");
+    SDL_SetAppMetadataProperty(SDL_PROP_APP_METADATA_CREATOR_STRING, "Savoury");
+    SDL_SetAppMetadataProperty(SDL_PROP_APP_METADATA_TYPE_STRING, "game");
+
 #ifdef SDL_PLATFORM_VITA
 
     // SDL_SetHint(SDL_HINT_VITA_ENABLE_BACK_TOUCH, "0");
 
     // SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "1");
-    // SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
+    SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
     // SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "1");
-    if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_AUDIO | SDL_INIT_GAMEPAD |
-                  SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
+
+    SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "0");
+    //SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "0"); /* GLES, not desktop GL */
+    //SDL_SetHint(SDL_HINT_VITA_MODULE_PATH, "app0:module");
+
+    if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
+                  SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
         Exceptions::ThrowSDLError("Failed to initalize SDL.");
     }
+    /*
+    if (!SDL_GL_LoadLibrary("app0:module/libGLESv2.suprx")) {
+        Exceptions::ThrowSDLError("Failed to load module libGLESv2.suprx");
+    }*/
 #else
     if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
                   SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
@@ -130,7 +146,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     Game::Network::Init();
 
 #ifdef SDL_PLATFORM_VITA
-    Game::Window.Create("Cube Cavern++", 960, 544, SDL_WINDOW_FULLSCREEN);
+    Game::Window.Create("Cube Cavern", 960, 544, SDL_WINDOW_FULLSCREEN);
 #else
     Game::Window.Create("Cube Cavern++", 800, 600, SDL_WINDOW_RESIZABLE);
 #endif

@@ -7,8 +7,13 @@
 #include <iostream>
 #include <map>
 
+#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#else
+#include <vitaGL.h>
+#endif
+
 #include <SDL3/SDL_video.h>
 
 #include "BaseClassDefinitions.hpp"
@@ -288,6 +293,7 @@ void Game::Graphics::VertexArray::Init_OpenGL() {
             std::cout << "OpenGL version isn't 3.0+, but your GPU "
                          "supports the extension "
                       << VAOExtensionName << ". (you're all good!)" << std::endl;
+
 
             Game::Graphics::OpenGLFunctions::glGenVertexArrays =
                 (PFNGLGENVERTEXARRAYSPROC)SDL_GL_GetProcAddress(

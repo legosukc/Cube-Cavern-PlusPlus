@@ -35,10 +35,10 @@ namespace Game::Classes {
         mutable ScancodeStateStruct
             ScancodeStates[SDL_Scancode::SDL_SCANCODE_COUNT];
 
-//#ifndef SDL_PLATFORM_VITA
+#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
         SDL_Window* SDLWindow;
         SDL_GLContext GLContext;
-//#endif
+#endif
 
         Math::IVector2 Position, Size;
 

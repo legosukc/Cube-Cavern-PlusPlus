@@ -84,8 +84,19 @@ target_sources(${PROJECT_NAME} PRIVATE
 
   src/MathClasses/Vector2.cpp
 
+  src/FunctionHeaders/MathTransform.cpp
+  src/FunctionHeaders/File.cpp
+  src/FunctionHeaders/LuaHelper.cpp
+
   src/Statistics.cpp
   src/Time.cpp
+
+  src/LuaLibraries/LuaConsole.cpp
+  src/LuaLibraries/LuaEnums.cpp
+  #src/LuaLibraries/LuaFont.cpp
+  src/LuaLibraries/LuaGraphics.cpp
+
+  src/Lua.cpp
 )
 
 if(BUILD_TARGET STREQUAL "client")
@@ -147,12 +158,9 @@ target_link_libraries(${PROJECT_NAME}
 if(PLATFORM STREQUAL "vita")
   target_link_libraries(${PROJECT_NAME} PRIVATE
 
-    vitaGL
     stdc++ mathneon
     c m
     zip vitashark SceShaccCgExt taihen_stub
-
-    vitashark
 
     minizip
     ppmd
@@ -163,7 +171,6 @@ if(PLATFORM STREQUAL "vita")
     bz2
     z # zlib
     crypto
-    libpib.a
 
     -Wl,--whole-archive pthread -Wl,--no-whole-archive
 

@@ -21,15 +21,8 @@ local Inventory = {
     Items = {};
 }
 
-print("printing itemclasses")
-for Name, Object in pairs(Assets.ItemClassesClient) do
-    print(Name, typeof(Object))
-end
-
-print(pcall(function()
-Inventory.Items[1] = Assets.ItemClassesClient.Dagger.new();
-end))
-Inventory.HeldItem = Inventory.Items[1];
+Inventory.Items[1] = Assets.ItemClassesClient.Dagger.new()
+Inventory.HeldItem = Inventory.Items[1]
 
 do
     local SlotTexture = Texture.new()
@@ -100,7 +93,7 @@ do
     local TexcoordScaleUniform = SlotProgram:GetUniformIndex("TexcoordScale")
 
     Program.SetUniformVec2(TexcoordScaleUniform, 2.0, 2.0)
-    Program.SetUniformSint32(SlotTextureUniform, 0);
+    Program.SetUniformSint32(SlotTextureUniform, 0)
 
     Inventory.GraphicsObjects = {
         SlotVAO = SlotVAO;

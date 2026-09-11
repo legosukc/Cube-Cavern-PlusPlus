@@ -151,7 +151,7 @@ function Camera:Draw()
 	Graphics.Program.SetUniformMat4(ProjectionUniformID, false, self.ProjectionMatrix)
 	Graphics.Program.SetUniformMat4(ViewUniformID, false, self.ViewMatrix)
 
-	Graphics.DrawElements(Graphics.DrawModes.Triangles, BombfieldIndexCount / 3, Graphics.Types.Uint32)
+	Graphics.DrawElements(Graphics.DrawModes.Triangles, BombfieldIndexCount, Graphics.Types.Uint32)
 
 	--Graphics.VertexArray.Unbind()
 end
