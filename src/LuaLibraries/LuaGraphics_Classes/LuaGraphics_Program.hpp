@@ -605,6 +605,8 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::Link(lua_State* State) {
     const Classes::Program* ProgramUD =
         static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"));
     Game::Graphics::OpenGLFunctions::glLinkProgram(ProgramUD->GLObject);
+
+    // TODO: return errors
     return 0;
 }
 

@@ -1,4 +1,8 @@
+
+// TODO: seperate - remove this after seperation
+#ifndef LUALIBRARIES_LUAENUMS_HPP
 #include "LuaEnums.hpp"
+#endif
 
 #include "../../include/VM/lua.h"
 #include "../../include/VM/lualib.h"

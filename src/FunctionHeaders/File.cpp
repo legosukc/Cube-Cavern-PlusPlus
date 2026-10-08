@@ -8,6 +8,5 @@
 void Utils::File::Init(const char* OrganisationName, const char* AppName) {
     char* PreferredPath = SDL_GetPrefPath(OrganisationName, AppName);
     Utils::File::PreferredPath = PreferredPath;
-    std::cout << "Preferred path for writing: " << PreferredPath << std::endl;
     SDL_free(PreferredPath);
 }

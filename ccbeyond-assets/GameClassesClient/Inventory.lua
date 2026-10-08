@@ -61,28 +61,16 @@ do
     do
         local VertexShader = Shader.new(Graphics.ShaderTypes.VertexShader)
         VertexShader:LoadShaderSourceFromFile("Shaders/InventorySlot.vrt")
-
-        local CompileError = VertexShader:Compile()
-		if CompileError then
-            error("Failed to compile VertexShader. "..CompileError)
-		end
-
+        VertexShader:Compile()
 
         local FragmentShader = Shader.new(Graphics.ShaderTypes.FragmentShader)
         FragmentShader:LoadShaderSourceFromFile("Shaders/InventorySlot.frg")
-
-        CompileError = FragmentShader:Compile()
-		if CompileError then
-            error("Failed to compile FragmentShader. "..CompileError)
-		end
+        FragmentShader:Compile()
 
         SlotProgram:AttachShader(VertexShader)
 		SlotProgram:AttachShader(FragmentShader)
 	
-		local ErrorLog = SlotProgram:Link()
-		if ErrorLog then
-			error("Failed to link SlotProgram, OpenGL info log:\n"..ErrorLog)
-		end
+		SlotProgram:Link()
 
 		SlotProgram:DetachAllShaders()
     end
@@ -125,10 +113,11 @@ local SlotBindings = {
 
 function Inventory:Update()
     
-    for Index, Binding in ipairs(SlotBindings) do
+    for Index, Binding in SlotBindings do
         if Binding:Pressed() then
-            self.SelectedHotbarSlot = Index - 1
-            print("selected hotbar slot ", self.SelectedHotbarSlot)
+            self.SelectedHotbarSlot = Index
+            self.HeldItem = self.Items[Index]
+            print("selected hotbar slot ", Index)
             break
         end
     end

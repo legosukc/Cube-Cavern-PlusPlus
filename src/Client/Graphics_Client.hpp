@@ -1,5 +1,4 @@
-#ifndef GRAPHICS_CLIENT_H
-#define GRAPHICS_CLIENT_H
+#pragma once
 
 #include "../define.h"
 
@@ -8,13 +7,9 @@
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_video.h>
 
-#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
-#else
-#include <vitaGL.h>
-#endif
 
 #include "../Game.hpp"
 
@@ -231,24 +226,24 @@ namespace Game::Graphics {
 
 namespace Game::Graphics::OpenGLFunctions {
 
-    PFNGLVIEWPORTPROC glViewport = NULL;
+    inline PFNGLVIEWPORTPROC glViewport = NULL;
 
-    PFNGLENABLEPROC glEnable = NULL;
-    PFNGLDISABLEPROC glDisable = NULL;
+    inline PFNGLENABLEPROC glEnable = NULL;
+    inline PFNGLDISABLEPROC glDisable = NULL;
 
-    PFNGLCLEARCOLORPROC glClearColor = NULL;
-    PFNGLCLEARPROC glClear = NULL;
+    inline PFNGLCLEARCOLORPROC glClearColor = NULL;
+    inline PFNGLCLEARPROC glClear = NULL;
 
-    PFNGLBLENDFUNCPROC glBlendFunc = NULL;
+    inline PFNGLBLENDFUNCPROC glBlendFunc = NULL;
 
-    PFNGLGETINTEGERVPROC glGetIntegerv = NULL;
-    PFNGLISENABLEDPROC glIsEnabled = NULL;
+    inline PFNGLGETINTEGERVPROC glGetIntegerv = NULL;
+    inline PFNGLISENABLEDPROC glIsEnabled = NULL;
 
-    PFNGLDRAWARRAYSPROC glDrawArrays = NULL;
-    PFNGLDRAWARRAYSINSTANCEDPROC glDrawArraysInstanced = NULL;
+    inline PFNGLDRAWARRAYSPROC glDrawArrays = NULL;
+    inline PFNGLDRAWARRAYSINSTANCEDPROC glDrawArraysInstanced = NULL;
 
-    PFNGLDRAWELEMENTSPROC glDrawElements = NULL;
-    PFNGLDRAWELEMENTSINSTANCEDPROC glDrawElementsInstanced = NULL;
+    inline PFNGLDRAWELEMENTSPROC glDrawElements = NULL;
+    inline PFNGLDRAWELEMENTSINSTANCEDPROC glDrawElementsInstanced = NULL;
 }
 
 static void _SetClearColor_OpenGL(float R, float G, float B, float A) {
@@ -475,5 +470,3 @@ void Game::Graphics::Init() {
 void Game::Graphics::Update() {}
 
 void Game::Graphics::Draw() {}
-
-#endif

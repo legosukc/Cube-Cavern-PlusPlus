@@ -1,14 +1,9 @@
-#ifndef GRAPHICS_VERTEXBUFFER_H
-#define GRAPHICS_VERTEXBUFFER_H
+#pragma once
 
 #include "../../define.h"
 
-#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
-#else
-#include <vitaGL.h>
-#endif
 
 #include "BufferBase.hpp"
 
@@ -62,5 +57,3 @@ void Game::Graphics::VertexBuffer::Init_Metal() {}
 void Game::Graphics::VertexBuffer::Init_DirectX11() {}
 
 void Game::Graphics::VertexBuffer::Init_DirectX12() {}
-
-#endif

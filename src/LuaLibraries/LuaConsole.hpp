@@ -18,4 +18,6 @@ namespace Game::Lua::CLibraries::Console {
 	inline constexpr const char* LibraryName = "Console";
 }
 
+#include "LuaConsole.cpp"
+
 #endif

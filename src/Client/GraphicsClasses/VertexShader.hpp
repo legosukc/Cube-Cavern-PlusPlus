@@ -1,14 +1,9 @@
-#ifndef GRAPHICS_VERTEXSHADER_H
-#define GRAPHICS_VERTEXSHADER_H
+#pragma once
 
 #include "../../define.h"
 
-#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
-#else
-#include <vitaGL.h>
-#endif
 
 #include "ShaderBase.hpp"
 
@@ -50,5 +45,3 @@ void Game::Graphics::VertexShader::Init_Metal() {}
 void Game::Graphics::VertexShader::Init_DirectX11() {}
 
 void Game::Graphics::VertexShader::Init_DirectX12() {}
-
-#endif

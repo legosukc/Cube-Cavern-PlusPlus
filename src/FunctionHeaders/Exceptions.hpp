@@ -11,12 +11,7 @@
 #include <stdexcept>
 #include <ios>
 
-#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
-#else
-#include <vitaGL.h>
-#endif
-
 #include <SDL3/SDL_error.h>
 
 #include "StringHelper.hpp"

@@ -1,5 +1,4 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP 1
+#pragma once
 
 #include "../../define.h"
 
@@ -35,10 +34,8 @@ namespace Game::Classes {
         mutable ScancodeStateStruct
             ScancodeStates[SDL_Scancode::SDL_SCANCODE_COUNT];
 
-#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
         SDL_Window* SDLWindow;
         SDL_GLContext GLContext;
-#endif
 
         Math::IVector2 Position, Size;
 
@@ -78,5 +75,3 @@ namespace Game::Classes {
         void Present();
     };
 }
-
-#endif

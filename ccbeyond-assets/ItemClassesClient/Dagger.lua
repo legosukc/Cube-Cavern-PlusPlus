@@ -1,10 +1,3 @@
-
-local Graphics = Game.Graphics
-local VertexArray = Graphics.VertexArray
-local VertexBuffer = Graphics.VertexBuffer
-local ElementBuffer = Graphics.ElementBuffer
-local Program = Graphics.Program
-
 local ParentClass = Assets.BaseClassesClient.ItemBase
 local class = setmetatable({}, ParentClass)
 
@@ -12,9 +5,11 @@ class.Name = "Dagger"
 class.Description = "chuddy forgot to set the description"
 class.BookEntry = "chuddy forgot to set the book description"
 
+class.RenderObject = Assets.RenderObjectsClient.rendDagger
+
 class.__index = class
 
-
+--[[
 local DaggerIndexCount: number
 do
 	local Model = ModelLoader.LoadFile("Models/Dagger.obj")
@@ -26,11 +21,10 @@ do
 	local ModelEBO = ElementBuffer.new()
 
 	ModelVAO:Bind()
-
 	ModelVBO:Bind()
-	Graphics.VertexBuffer.CopyFromBuffer(Model.VertexData)
-
 	ModelEBO:Bind()
+
+	Graphics.VertexBuffer.CopyFromBuffer(Model.VertexData)
 	Graphics.ElementBuffer.CopyFromBuffer(Model.IndexData)
 
 	Graphics.VertexArray.SetAttributePointer(0, 3, Graphics.Types.Float, false, Model.StrideSize, 0)
@@ -48,27 +42,16 @@ do
 	do
 		local VertexShader = Graphics.Shader.new(Graphics.ShaderTypes.VertexShader)
 		VertexShader:LoadShaderSourceFromFile("Shaders/Viewarm.vrt")
-
-		local CompileError = VertexShader:Compile()
-		if CompileError then
-			print("Failed to compile VertexShader. ", CompileError)
-		end
+		VertexShader:Compile()
 
 		local FragmentShader = Graphics.Shader.new(Graphics.ShaderTypes.FragmentShader)
 		FragmentShader:LoadShaderSourceFromFile("Shaders/Viewarm.frg")
-
-		CompileError = FragmentShader:Compile()
-		if CompileError then
-			print("Failed to compile FragmentShader.\n", CompileError)
-		end
+		FragmentShader:Compile()
 
 		ModelProgram:AttachShader(VertexShader)
 		ModelProgram:AttachShader(FragmentShader)
 	
-		local ErrorLog = ModelProgram:Link()
-		if ErrorLog then
-			print("Failed to link DaggerProgram, OpenGL info log:\n", ErrorLog)
-		end
+		ModelProgram:Link()
 
 		ModelProgram:DetachAllShaders()
 	end
@@ -89,7 +72,7 @@ do
 
 	DaggerProgram = ModelProgram;
 }
-end
+end]]
 
 
 function class.new()
@@ -113,7 +96,8 @@ end
 function class:Update()
 end
 
-function class:Draw()
+function class:DrawViewmodel(LeftArmOffset, RightArmOffset)
+	self.RenderObject:Draw(nil, RightArmOffset + Vector3.new(0, 0, -0.25))
 end
 
 

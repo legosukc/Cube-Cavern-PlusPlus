@@ -32,4 +32,8 @@ namespace Game::Lua::CLibraries::Enums {
 
     Classes::EnumValue* PushNewEnum(lua_State* State, int Uservalue = 0);
 }
+
+// TODO: seperate
+#include "LuaEnums.cpp"
+
 #endif

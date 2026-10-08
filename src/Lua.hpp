@@ -8,13 +8,7 @@
 #include <SDL3/SDL_stdinc.h>
 
 #ifdef BUILD_CLIENT
-
-#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
-#else
-#include <vitaGL.h>
-#endif
-
 #endif
 
 #include "FunctionHeaders/LuaHelper.hpp"
@@ -78,6 +72,9 @@ namespace Game::Lua {
     void Draw();
 #endif
 }
+
+// TODO: seperate
+#include "Lua.cpp"
 
 // uhh keep this for "ClientDownloadsLuaBytecode" config comment
 // If true, sends pre-compiled byte code for the client, no compilation on the

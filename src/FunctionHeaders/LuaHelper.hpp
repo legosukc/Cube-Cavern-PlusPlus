@@ -275,4 +275,7 @@ namespace LuaHelper {
 
 }
 
+// TODO: seperate
+#include "LuaHelper.cpp"
+
 #endif

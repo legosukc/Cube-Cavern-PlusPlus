@@ -4,11 +4,7 @@
 
 #include "../../include/VM/lua.h"
 
-#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
-#else
-#include <vitaGL.h>
-#endif
 
 #include "LuaGraphics_MiscHeaders/LuaGraphics_SampleModels.hpp"
 

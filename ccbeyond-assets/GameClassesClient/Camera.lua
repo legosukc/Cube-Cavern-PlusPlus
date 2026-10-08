@@ -1,15 +1,12 @@
-
-print("loading camera")
-
 local Graphics = Game.Graphics
-local Input = Game.Input
-
 
 local Camera = {
 	Position = Vector3.new(0, 0, 0);
 	LookDirection = Vector3.new(0, 0, 0);
 	RightVector = Vector3.new(0, 0, 0);
 	UpVector = Vector3.new(0, 1, 0);
+
+	WorldUpVector = Vector3.new(0, 1, 0);
 
 	ProjectionMatrix = Mat4.new(1);
 	ViewMatrix = Mat4.new(1);
@@ -20,6 +17,7 @@ local Camera = {
 
 	FOV = 70;
 
+	-- implemented in Player.lua
 	CameraHandlerFunc = nil;
 }
 
@@ -98,11 +96,7 @@ do
 			//gl_Position = vec4(aPos, 1.0);
 		}
 	]])
-
-	local CompileError = VertexShader:Compile()
-	if CompileError then
-		print("Failed to compile VertexShader. ", CompileError)
-	end
+	VertexShader:Compile()
 
 	FragmentShader:SetShaderSource([[
 		void main() {
@@ -110,18 +104,12 @@ do
 		}
 	]])
 
-	CompileError = FragmentShader:Compile()
-	if CompileError then
-		print("Failed to compile FragmentShader. ", CompileError)
-	end
+	FragmentShader:Compile()
 
 	QuadProgram:AttachShader(VertexShader)
 	QuadProgram:AttachShader(FragmentShader)
 
-	local ErrorLog = QuadProgram:Link()
-	if ErrorLog then
-		print("Failed to link QuadProgram, OpenGL info log:\n", ErrorLog)
-	end
+	QuadProgram:Link()
 
 	QuadProgram:DetachAllShaders()
 

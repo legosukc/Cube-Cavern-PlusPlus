@@ -13,13 +13,9 @@
 
 #ifdef BUILD_CLIENT
 
-#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
-#else
-#include <vitaGL.h>
-#endif
 
 #include "Client/Graphics_Client.hpp"
 #endif
@@ -455,17 +451,17 @@ lua_setmetatable(Game::Lua::State, -2);*/
         Game::Lua::LuaDirectories::RenderObjects, ParentTableIDX);
 
     MiscClasses.Load();
+    Lua::CLibraries::Console::PostMiscClassInit(Game::Lua::State);
 
     ::_LoadLuaAssetDirectoryInTable(Game::Lua::LuaDirectories::GameClasses,
                                     Game::Lua::GameTable.GetStackIndex());
 
+    BaseClasses.Load();
+    RenderObjects.Load();
+
     // lua_pushnil(Game::Lua::State);
     // lua_setmetatable(Game::Lua::State, Game::Lua::GameTable.GetStackIndex());
 
-    Lua::CLibraries::Console::PostMiscClassInit(Game::Lua::State);
-
-    BaseClasses.Load();
-    RenderObjects.Load();
     EnemyClasses.Load();
     ItemClasses.Load();
 

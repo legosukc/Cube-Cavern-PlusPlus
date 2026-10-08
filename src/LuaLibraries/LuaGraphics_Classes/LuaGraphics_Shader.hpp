@@ -3,13 +3,10 @@
 #include "../../define.h"
 
 #include <stdlib.h>
+#include <fstream>
 
-#if !defined(SDL_PLATFORM_VITA) || defined(VITA_USE_PVR)
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
-#else
-#include <vitaGL.h>
-#endif
 
 #include <SDL3/SDL_timer.h>
 
@@ -45,7 +42,7 @@ namespace Game::Lua::CLibraries::Graphics {
 
         static inline void Init(lua_State* State,
                                 LuaHelper::StackTableReference& GraphicsTable);
-        
+
         // not safe to directly c call
         static int __new(lua_State* State);
     }
@@ -136,8 +133,8 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::LoadShaderSourceFromFile(
         return 0;
     }
 
-    Classes::Shader* ShaderUD = (Classes::Shader*)LuaHelper::TestMetatable(State, 1,
-                             CLibraries::Graphics::Shader::MetatableName);
+    Classes::Shader* ShaderUD = (Classes::Shader*)LuaHelper::TestMetatable(
+        State, 1, CLibraries::Graphics::Shader::MetatableName);
     if (ShaderUD == NULL) {
         SDL_free(ShaderSource);
         luaL_typeerrorL(State, 1, CLibraries::Graphics::Shader::MetatableName);
@@ -209,18 +206,23 @@ int Game::Lua::CLibraries::Graphics::Classes::Shader::Compile(
         Game::Graphics::OpenGLFunctions::glGetShaderiv(
             ShaderObject, GL_INFO_LOG_LENGTH, &InfoLogSize);
 
-        InfoLog = new char[InfoLogSize];
+        static const char InfoMessage[] =
+            "Failed to compile shader, errors (new line):\n";
+        InfoLog = new char[sizeof(InfoMessage) + InfoLogSize - 1];
+        memcpy(InfoLog, InfoMessage, sizeof(InfoMessage) - 1);
+
         ++Game::Statistics::Memory::EngineAllocationsPerFrame;
 
         Game::Graphics::OpenGLFunctions::glGetShaderInfoLog(
-            ShaderObject, InfoLogSize, NULL, InfoLog);
+            ShaderObject, InfoLogSize, NULL, InfoLog + sizeof(InfoMessage));
 
-        lua_pushlstring(State, InfoLog, InfoLogSize);
+        lua_pushlstring(State, InfoLog, InfoLogSize + sizeof(InfoMessage) - 1);
         delete[] InfoLog;
-        return 1;
+        lua_error(State);
+        return 0;
     }
-
-    return 0;
+    lua_pushboolean(State, (int)true);
+    return 1;
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Shader::__gc(lua_State* State) {
