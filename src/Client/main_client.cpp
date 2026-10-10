@@ -140,7 +140,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 
     SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "1");
     // SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
-    SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "0");
+    SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "1");
     SDL_SetHint(SDL_HINT_VITA_MODULE_PATH, "app0:module");
 
     if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
