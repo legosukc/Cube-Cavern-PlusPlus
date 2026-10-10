@@ -43,7 +43,7 @@ namespace Game::Classes {
         void Create(const char* WindowTitle,
                     int Width,
                     int Height,
-                    SDL_WindowFlags Flags = 0);
+                    SDL_WindowFlags Flags = (SDL_WindowFlags)0);
         Window();
 
         void Destroy();

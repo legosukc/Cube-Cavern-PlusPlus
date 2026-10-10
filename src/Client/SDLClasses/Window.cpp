@@ -13,7 +13,7 @@
 #include <SDL3/SDL_hints.h>
 #include <SDL3/SDL_keyboard.h>
 #include <SDL3/SDL_mouse.h>
-#include <SDL3/SDL_oldnames.h>
+// #include <SDL3/SDL_oldnames.h>
 #include <SDL3/SDL_scancode.h>
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_timer.h>
@@ -44,7 +44,12 @@ void Game::Classes::Window::Create(const char* WindowTitle,
                         SDL_GL_CONTEXT_PROFILE_CORE);
 #endif
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 0);
 
     this->SDLWindow =
         SDL_CreateWindow(WindowTitle, Width, Height, SDL_WINDOW_OPENGL | Flags);
@@ -63,7 +68,11 @@ void Game::Classes::Window::Create(const char* WindowTitle,
         Exceptions::ThrowSDLError("Error while calling SDL_GL_MakeCurrent.");
     }
 
+    // SDL3:
     SDL_SetWindowRelativeMouseMode(this->SDLWindow, true);
+
+    // SDL2:
+    // SDL_SetRelativeMouseMode(this->SDLWindow, true);
 
     memset(&this->ScancodeStates, 0, sizeof(this->ScancodeStates));
 }
@@ -102,6 +111,7 @@ void Game::Classes::Window::HandleEvent(const SDL_Event& Event) {
     #else
     #endif
     */
+
     switch (Event.type) {
         case SDL_EventType::SDL_EVENT_WINDOW_RESIZED:
         case SDL_EventType::SDL_EVENT_WINDOW_MAXIMIZED:
@@ -164,14 +174,14 @@ bool Game::Classes::Window::ScancodePressed(SDL_Scancode Scancode,
 bool Game::Classes::Window::ScancodeHeld(SDL_Scancode Scancode,
                                          float BufferTime) const {
     return SDL_GetKeyboardState(NULL)[Scancode];
-
+    /*
     ScancodeStateStruct& ScancodeState = this->ScancodeStates[Scancode];
     if (ScancodeState.CurrentState == ScancodeStatesEnum::Released) {
         return false;
     }
     ScancodeState.CurrentState = ScancodeStatesEnum::Held;
 
-    return ScancodeState.CurrentState == ScancodeStatesEnum::Released;
+    return ScancodeState.CurrentState == ScancodeStatesEnum::Released;*/
 }
 
 bool Game::Classes::Window::ScancodeReleased(SDL_Scancode Scancode,

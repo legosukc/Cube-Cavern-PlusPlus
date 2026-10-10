@@ -8,6 +8,8 @@ if(PLATFORM STREQUAL "vita" AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
   else()
     message(FATAL_ERROR "Please define VITASDK to point to your SDK path!")
   endif()
+
+  set(VITA_MEMENTRY_MEMSIZE "49152000" CACHE STRING "Memory size option")
 endif()
 
 
@@ -20,9 +22,9 @@ if(PLATFORM STREQUAL "vita")
   include("$ENV{VITASDK}/share/vita.cmake" REQUIRED)
 
   set(VITA_APP_NAME "Cube Cavern Beyond")
-  set(VITA_TITLEID  "WORM02011")
-  set(VITA_VPKNAME  "CUBECAVER")
-  set(VITA_VERSION  "01.00")
+  set(VITA_TITLEID "WORM02011")
+  set(VITA_VPKNAME "CUBECAVER")
+  set(VITA_VERSION "01.00")
 
   set(VITA_MKSFOEX_FLAGS "-d ATTRIBUTE2=12")
 
@@ -43,7 +45,7 @@ else()
   FetchContent_Declare(
     luau
     GIT_REPOSITORY https://github.com/luau-lang/luau.git
-    GIT_TAG 0.739
+    GIT_TAG 0.741
   )
 endif()
 
@@ -53,9 +55,11 @@ set(LUAU_BUILD_CLI OFF CACHE INTERNAL "")
 set(LUAU_BUILD_TESTS OFF CACHE INTERNAL "")
 
 if(PLATFORM STREQUAL "vita")
+  set(LUAU_EXTERN_C OFF CACHE INTERNAL "")
   set(LUAU_BUILD_SHARED OFF CACHE INTERNAL "")
   set(LUAU_BUILD_STATIC ON CACHE INTERNAL "")
 else()
+  set(LUAU_EXTERN_C ON CACHE INTERNAL "")
   set(LUAU_BUILD_SHARED ON CACHE INTERNAL "")
   set(LUAU_BUILD_STATIC OFF CACHE INTERNAL "")
 endif()
@@ -73,7 +77,7 @@ find_package(SDL3_ttf REQUIRED)
 
 if(NOT PLATFORM STREQUAL "vita")
   find_package(SDL3_mixer REQUIRED)
-  find_package(SDL3_net REQUIRED)
+  #find_package(SDL3_net REQUIRED)
 endif()
 
 find_package(OpenAL REQUIRED)
@@ -114,7 +118,7 @@ if(BUILD_TARGET STREQUAL "client")
     src/Client/main_client.cpp
 
   )
-  
+
   target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_CLIENT)
   #[[
   set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -136,7 +140,10 @@ else()
 endif()
 
 if(NOT PLATFORM STREQUAL "vita")
-  target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_net::SDL3_net SDL3_mixer::SDL3_mixer)
+  target_link_libraries(${PROJECT_NAME} PRIVATE
+    SDL3_net::SDL3_net
+    SDL3_mixer::SDL3_mixer
+  )
 
   target_link_libraries(${PROJECT_NAME} PRIVATE OpenAL::OpenAL)
 endif()
@@ -201,16 +208,14 @@ endif()
 
 if(PLATFORM STREQUAL "vita")
 
+  message(STATUS ${CMAKE_CURRENT_SOURCE_DIR})
+
   vita_create_self(eboot.bin ${PROJECT_NAME} UNSAFE)
   vita_create_vpk(${VITA_VPKNAME}.vpk ${VITA_TITLEID} eboot.bin
     NAME ${VITA_APP_NAME}
     VERSION ${VITA_VERSION}
 
-    FILE ${CMAKE_CURRENT_SOURCE_DIR}/vita-assets/ ./
-    FILE ${CMAKE_CURRENT_SOURCE_DIR}/ccbeyond-assets/ ./
-
-    #FILE ${CMAKE_CURRENT_SOURCE_DIR}/vita-assets/module/libgpu_es4_ext.suprx module/libgpu_es4_ext.suprx
-    #FILE ${CMAKE_CURRENT_SOURCE_DIR}/vita-assets/module/libIMGEGL.suprx module/libIMGEGL.suprx
-    #FILE ${CMAKE_CURRENT_SOURCE_DIR}/vita-assets/module/libGLESv2.suprx module/libGLESv2.suprx
+    FILE vita-assets/ .
+    FILE ccbeyond-assets/ .
   )
 endif()

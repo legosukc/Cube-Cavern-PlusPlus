@@ -1,6 +1,13 @@
 #ifndef DEFINE_H
 #define DEFINE_H 1
 
+
+//#define SDL_DelayPrecise(NS)(SDL_Delay(NS / 1000))
+//#define SDL_GetTicksNS()(SDL_GetTicks64() * 1000)
+
+//#define SDL_GL_DestroyContext SDL_GL_DeleteContext
+
+
 // for linting
 #if !defined(BUILD_CLIENT) && !defined(BUILD_SERVER)
 #define BUILD_CLIENT

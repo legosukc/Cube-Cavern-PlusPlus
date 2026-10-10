@@ -15,7 +15,7 @@
 #include <string>
 
 #include <SDL3/SDL.h>
-#include <SDL3/SDL_init.h>
+// #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_main.h>
 
 #ifdef SDL_PLATFORM_VITA
@@ -27,10 +27,10 @@
 #include <psp2/power.h>
 #include <psp2/vshbridge.h>
 
-//#include "gpu_es4/psp2_pvr_hint.h"
+// #include "gpu_es4/psp2_pvr_hint.h"
 
-//#include <GLES2/gl2.h>
-//#include <GLES2/gl2ext.h>
+// #include <GLES2/gl2.h>
+// #include <GLES2/gl2ext.h>
 #endif
 
 #include <SDL3/SDL_opengl.h>
@@ -135,30 +135,13 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 #ifdef SDL_PLATFORM_VITA
 
     // SDL_SetHint(SDL_HINT_VITA_ENABLE_BACK_TOUCH, "0");
-    /*
-    int ret;
-    ret = sceKernelLoadStartModule("vs0:sys/external/libfios2.suprx", 0, NULL,
-                                   0, NULL, NULL);
-    std::cout << "libfios2.suprx ret " << ret << '\n';
 
-    ret = sceKernelLoadStartModule("vs0:sys/external/libc.suprx", 0, NULL, 0,
-                                   NULL, NULL);
-    std::cout << "libc.suprx ret " << ret << '\n';
-
-    ret = sceKernelLoadStartModule("app0:module/libgpu_es4_ext.suprx", 0, NULL,
-                                   0, NULL, NULL);
-    std::cout << "libgpu_es4_ext.suprx ret " << ret << '\n';
-
-    ret = sceKernelLoadStartModule("app0:module/libIMGEGL.suprx", 0, NULL, 0,
-                                   NULL, NULL);
-    std::cout << "libIMGEGL.suprx ret " << ret << std::endl;*/
+    SDL_SetHint(SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK, "1");
 
     SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "1");
     // SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
     SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "0");
-
-    // SDL_SetHint(SDL_HINT_VITA_MODULE_PATH,
-    // "app0:module/libgpu_es4_ext.suprx");
+    SDL_SetHint(SDL_HINT_VITA_MODULE_PATH, "app0:module");
 
     if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
                   SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
