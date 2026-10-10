@@ -30,9 +30,16 @@ void Game::Classes::Window::Create(const char* WindowTitle,
 #ifdef SDL_PLATFORM_VITA
     std::cout << "version 2.0 es" << std::endl;
 
+    // The PowerVR SGX543MP4+ on the PS Vita only supports OpenGL ES 1.x and
+    // 2.0. Requesting a version the PVR/EGL driver cannot provide makes
+    // eglCreateContext fail with EGL_BAD_ALLOC, so keep this at 2.0 + ES
+    // (never 3.x / GLESv2-with-GLES3-context).
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+    // Do not request a debug or forward-compatible context: the PVR backend
+    // does not support those flags and would also fail with EGL_BAD_ALLOC.
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
 
     Width = 960;
     Height = 544;

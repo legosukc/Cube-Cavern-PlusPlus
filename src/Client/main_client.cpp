@@ -140,7 +140,12 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 
     SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "1");
     // SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
-    SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "0");
+
+    // The PVR backend (libGLESv2.suprx + libIMGEGL.suprx) is being used here,
+    // so this MUST be "1". When it is "0", SDL uses the native vita2d/GXM
+    // video driver, whose EGL implementation cannot create a GL context for
+    // an OpenGL window and eglCreateContext fails with EGL_BAD_ALLOC.
+    SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "1");
     SDL_SetHint(SDL_HINT_VITA_MODULE_PATH, "app0:module");
 
     if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
