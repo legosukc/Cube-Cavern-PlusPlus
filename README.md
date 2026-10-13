@@ -24,7 +24,6 @@ Luau API for modding, OpenGL knowledge is recommended. (You could probably get a
 ## TODO:
 
 - networkinggggggg
-- fix model loadinggg
 - [port luau to the ps vita](https://github.com/legosukc/luau-psvita)
 - everything :(
 
