@@ -12,25 +12,23 @@ This engine aims to have a flexible Lua modding api, with multiplayer.
 
 ***maybe someday this will be used for other cc fangames...*** *wink wink*
 
-Engine being used for the game Cube Cavern++ (i need a name for the game, so it is the same as the engine for now)
+Engine being used for my game: Cube Cavern & Beyond
 
 Engine written in C++, Luau for all the game logic and scripting.
 
 OpenAL and SDL_mixer for sound.
 
-Luau API for modding, OpenGL knowledge is recommended. (You could probably get away with copy and pasting rendering code from the base Lua scripts.)
-
+Luau API for modding, OpenGL knowledge is recommended, but you could probably slip by through copying rendering code from the base scripts.
 
 ## TODO:
 
 - networkinggggggg
-- fix model loadinggg
 - [port luau to the ps vita](https://github.com/legosukc/luau-psvita)
 - everything :(
 
 ## BUILDING:
 
-You will need CMake and a C++ compiler installed. (i use clang, so maybe use that)
+You will need CMake and a C++ compiler installed.
 
 ### Windows:
 
