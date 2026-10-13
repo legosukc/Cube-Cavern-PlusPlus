@@ -10,7 +10,7 @@ trust me bro this engine is in goodddd hands
 
 This engine aims to have a flexible Lua modding api, with multiplayer.
 
-***maybe someday this will be used for other cc fangames...***
+***maybe someday this will be used for other cc fangames...*** *wink wink*
 
 Engine being used for the game Cube Cavern++ (i need a name for the game, so it is the same as the engine for now)
 
