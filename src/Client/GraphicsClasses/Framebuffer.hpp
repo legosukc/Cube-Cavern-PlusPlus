@@ -5,8 +5,12 @@
 
 #include <cstddef>
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_video.h>
@@ -14,10 +18,10 @@
 #include "BaseClassDefinitions.hpp"
 
 namespace Game::Graphics::OpenGLFunctions {
-    PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
-    PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers;
+    inline PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers = NULL;
+    inline PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers = NULL;
 
-    PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
+    inline PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer = NULL;
 }
 
 namespace Game::Graphics::Classes {
@@ -41,10 +45,10 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::Framebuffer {
 
-    Game::Graphics::Classes::Framebuffer* (*Create)();
-    void (*CreateBulk)(size_t CreateAmount,
+    inline Game::Graphics::Classes::Framebuffer* (*Create)();
+    inline void (*CreateBulk)(size_t CreateAmount,
                        Game::Graphics::Classes::Framebuffer* Textures[]);
-    void (*Unbind)();
+    inline void (*Unbind)();
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();

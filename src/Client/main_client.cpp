@@ -27,15 +27,18 @@
 #include <psp2/power.h>
 #include <psp2/vshbridge.h>
 
-// #include "gpu_es4/psp2_pvr_hint.h"
+#include <gpu_es4/psp2_pvr_hint.h>
 
-// #include <GLES2/gl2.h>
-// #include <GLES2/gl2ext.h>
-#endif
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+
+#else
 
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
+
+#endif
 
 // #include "../Collisions.hpp"
 

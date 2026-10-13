@@ -1,6 +1,8 @@
 #ifndef DEFINE_H
 #define DEFINE_H 1
 
+#define SDL_PLATFORM_VITA
+
 
 //#define SDL_DelayPrecise(NS)(SDL_Delay(NS / 1000))
 //#define SDL_GetTicksNS()(SDL_GetTicks64() * 1000)

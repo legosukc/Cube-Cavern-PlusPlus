@@ -7,9 +7,14 @@
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_video.h>
 
+#ifdef SDL_PLATFORM_VITA
+#include <EGL/egl.h>
+#include <GLES2/gl2.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
+#endif
 
 #include "../Game.hpp"
 
@@ -18,15 +23,16 @@ namespace Game::Graphics {
 
     enum class WindowMode : Uint8 { Windowed, Borderless, Fullscreen };
 
-    Uint8 AnisotropicFilteringLevel = 1;
+    inline Uint8 AnisotropicFilteringLevel = 1;
 
     namespace OpenGL {
-        int MajorVersion;
-        int MinorVersion;
-        int Profile;
+        inline int MajorVersion = -1;
+        inline int MinorVersion = -1;
+        inline int Profile = -1;
     }
 
     enum class GraphicsAPIEnum : Uint8 {
+        None,
         OpenGL,
         Vulkan,
         Metal,
@@ -34,7 +40,7 @@ namespace Game::Graphics {
         Direct3D12
     };
 
-    GraphicsAPIEnum ActiveAPI;
+    inline GraphicsAPIEnum ActiveAPI = GraphicsAPIEnum::None;
 
     inline void SetClearColor(float R, float G, float B, float A);
     inline void ClearBitfields(unsigned int Bitfields);
@@ -107,38 +113,38 @@ namespace Game::Graphics::_misc {
     };
 }
 
-namespace Game::Graphics {
-    extern Game::Graphics::_misc::_Enums_BindTargets BindTargets;
-    extern Game::Graphics::_misc::_Enums_AllocationTypes AllocationTypes;
-    extern Game::Graphics::_misc::_Enums_BufferBitfields BufferBitfields;
-}
-
 namespace Game::Graphics::OpenGLFunctions {
-    extern PFNGLVIEWPORTPROC glViewport;
 
-    extern PFNGLENABLEPROC glEnable;
-    extern PFNGLDISABLEPROC glDisable;
+    inline PFNGLVIEWPORTPROC glViewport = NULL;
 
-    extern PFNGLCLEARCOLORPROC glClearColor;
-    extern PFNGLCLEARPROC glClear;
+    inline PFNGLENABLEPROC glEnable = NULL;
+    inline PFNGLDISABLEPROC glDisable = NULL;
 
-    extern PFNGLBLENDFUNCPROC glBlendFunc;
+    inline PFNGLCLEARCOLORPROC glClearColor = NULL;
+    inline PFNGLCLEARPROC glClear = NULL;
 
-    extern PFNGLGETINTEGERVPROC glGetIntegerv;
-    extern PFNGLISENABLEDPROC glIsEnabled;
+    inline PFNGLBLENDFUNCPROC glBlendFunc = NULL;
 
-    extern PFNGLDRAWARRAYSPROC glDrawArrays;
-    extern PFNGLDRAWARRAYSINSTANCEDPROC glDrawArraysInstanced;
+    inline PFNGLGETINTEGERVPROC glGetIntegerv = NULL;
+    inline PFNGLISENABLEDPROC glIsEnabled = NULL;
 
-    extern PFNGLDRAWELEMENTSPROC glDrawElements;
-    extern PFNGLDRAWELEMENTSINSTANCEDPROC glDrawElementsInstanced;
+    inline PFNGLDRAWARRAYSPROC glDrawArrays = NULL;
+    inline PFNGLDRAWELEMENTSPROC glDrawElements = NULL;
+
+#ifndef SDL_PLATFORM_VITA
+    inline PFNGLDRAWARRAYSINSTANCEDPROC glDrawArraysInstanced = NULL;
+    inline PFNGLDRAWELEMENTSINSTANCEDPROC glDrawElementsInstanced = NULL;
+#endif
 }
 
 #include "GraphicsClasses/IndexBuffer.hpp"
 #include "GraphicsClasses/VertexArray.hpp"
 #include "GraphicsClasses/VertexBuffer.hpp"
 
+// TODO: make abstraction so uniform buffers work in gles 2.0
+#ifndef SDL_PLATFORM_VITA
 #include "GraphicsClasses/UniformBuffer.hpp"
+#endif
 
 #include "GraphicsClasses/Program.hpp"
 
@@ -164,8 +170,8 @@ namespace Game::Graphics {
     extern GBufferStruct GBuffer;
 }
 
-static void (*_SetClearColor)(float R, float G, float B, float A);
-static void (*_ClearBitfields)(unsigned int Bitfields);
+static inline void (*_SetClearColor)(float R, float G, float B, float A);
+static inline void (*_ClearBitfields)(unsigned int Bitfields);
 
 void Game::Graphics::SetClearColor(float R, float G, float B, float A) {
     _SetClearColor(R, G, B, A);
@@ -219,31 +225,12 @@ void Game::Graphics::_misc::_Namespace_Buffer::AllocateBuffer(
     _Enums_AllocationTypes::IntType AllocateFor) {}
 
 namespace Game::Graphics {
-    Game::Graphics::_misc::_Enums_BindTargets BindTargets;
-    Game::Graphics::_misc::_Enums_AllocationTypes AllocationTypes;
-    Game::Graphics::_misc::_Enums_BufferBitfields BufferBitfields;
-}
+    inline Game::Graphics::_misc::_Enums_BindTargets BindTargets;
+    inline Game::Graphics::_misc::_Enums_AllocationTypes AllocationTypes;
+    inline Game::Graphics::_misc::_Enums_BufferBitfields BufferBitfields;
 
-namespace Game::Graphics::OpenGLFunctions {
-
-    inline PFNGLVIEWPORTPROC glViewport = NULL;
-
-    inline PFNGLENABLEPROC glEnable = NULL;
-    inline PFNGLDISABLEPROC glDisable = NULL;
-
-    inline PFNGLCLEARCOLORPROC glClearColor = NULL;
-    inline PFNGLCLEARPROC glClear = NULL;
-
-    inline PFNGLBLENDFUNCPROC glBlendFunc = NULL;
-
-    inline PFNGLGETINTEGERVPROC glGetIntegerv = NULL;
-    inline PFNGLISENABLEDPROC glIsEnabled = NULL;
-
-    inline PFNGLDRAWARRAYSPROC glDrawArrays = NULL;
-    inline PFNGLDRAWARRAYSINSTANCEDPROC glDrawArraysInstanced = NULL;
-
-    inline PFNGLDRAWELEMENTSPROC glDrawElements = NULL;
-    inline PFNGLDRAWELEMENTSINSTANCEDPROC glDrawElementsInstanced = NULL;
+    inline Game::Graphics::BoundObjectsStruct BoundObjects;
+    inline Game::Graphics::GBufferStruct GBuffer;
 }
 
 static void _SetClearColor_OpenGL(float R, float G, float B, float A) {
@@ -271,11 +258,6 @@ static void _ClearBitfields_OpenGL(unsigned int Bitfields) {
 #include "GraphicsClasses/Framebuffer.hpp"
 
 #include "GraphicsClasses/Texture.hpp"
-
-namespace Game::Graphics {
-    Game::Graphics::BoundObjectsStruct BoundObjects;
-    Game::Graphics::GBufferStruct GBuffer;
-}
 
 namespace {
     static void _graphics_WindowResizedEvent_updateGLViewport(
@@ -320,10 +302,12 @@ void Game::Graphics::Init() {
             LOAD_OPENGL_FUNCTION(glBlendFunc);
 
             LOAD_OPENGL_FUNCTION(glDrawArrays);
-            LOAD_OPENGL_FUNCTION(glDrawArraysInstanced);
-
             LOAD_OPENGL_FUNCTION(glDrawElements);
+
+#ifndef SDL_PLATFORM_VITA
+            LOAD_OPENGL_FUNCTION(glDrawArraysInstanced);
             LOAD_OPENGL_FUNCTION(glDrawElementsInstanced);
+#endif
 
             LOAD_OPENGL_FUNCTION(glGetIntegerv);
             LOAD_OPENGL_FUNCTION(glIsEnabled);
@@ -334,6 +318,15 @@ void Game::Graphics::Init() {
             _SetClearColor = _SetClearColor_OpenGL;
             _ClearBitfields = _ClearBitfields_OpenGL;
 
+#ifdef SDL_PLATFORM_VITA
+            Game::Graphics::BindTargets =
+                Game::Graphics::_misc::_Enums_BindTargets(
+                    GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER, -1);
+
+            Game::Graphics::AllocationTypes =
+                Game::Graphics::_misc::_Enums_AllocationTypes(
+                    GL_STREAM_DRAW, GL_STATIC_DRAW, -1);
+#else
             Game::Graphics::BindTargets =
                 Game::Graphics::_misc::_Enums_BindTargets(
                     GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
@@ -342,6 +335,8 @@ void Game::Graphics::Init() {
             Game::Graphics::AllocationTypes =
                 Game::Graphics::_misc::_Enums_AllocationTypes(
                     GL_STREAM_DRAW, GL_STATIC_DRAW, GL_STATIC_READ);
+#endif
+
             Game::Graphics::BufferBitfields =
                 Game::Graphics::_misc::_Enums_BufferBitfields(
                     GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT,

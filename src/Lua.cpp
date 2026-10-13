@@ -13,9 +13,13 @@
 
 #ifdef BUILD_CLIENT
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_opengles2_gl2ext.h>
+#endif
 
 #include "Client/Graphics_Client.hpp"
 #endif

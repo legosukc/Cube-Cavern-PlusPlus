@@ -3,8 +3,12 @@
 
 #include "../../define.h"
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include "ShaderBase.hpp"
 
@@ -23,8 +27,8 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::FragmentShader {
 
-    extern Game::Graphics::Classes::FragmentShader* (*Create)();
-    extern void (*CreateBulk)(
+    inline Game::Graphics::Classes::FragmentShader* (*Create)();
+    inline void (*CreateBulk)(
         size_t CreateAmount,
         Game::Graphics::Classes::FragmentShader* FragmentShaders[]);
 
@@ -76,16 +80,9 @@ bool Game::Graphics::Classes::FragmentShader_OpenGL::SetShaderSource(
 
 bool Game::Graphics::Classes::FragmentShader_OpenGL::Compile() {
     Game::Graphics::OpenGLFunctions::glCompileShader(this->GLObject);
-
     return true;
 }
 
-namespace Game::Graphics::FragmentShader {
-    Game::Graphics::Classes::FragmentShader* (*Create)();
-    void (*CreateBulk)(
-        size_t CreateAmount,
-        Game::Graphics::Classes::FragmentShader* FragmentShaders[]);
-}
 
 void Game::Graphics::FragmentShader::Init_OpenGL() {
     using namespace Game::Graphics::ShaderBase;
