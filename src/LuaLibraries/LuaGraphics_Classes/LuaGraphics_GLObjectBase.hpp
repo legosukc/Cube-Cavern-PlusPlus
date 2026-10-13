@@ -2,7 +2,11 @@
 
 #include "../../define.h"
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#else
 #include <SDL3/SDL_opengl.h>
+#endif
 
 #include "../../../include/VM/lua.h"
 

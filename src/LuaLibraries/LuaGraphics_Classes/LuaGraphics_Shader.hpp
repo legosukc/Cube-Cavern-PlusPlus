@@ -5,8 +5,12 @@
 #include <stdlib.h>
 #include <fstream>
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include <SDL3/SDL_timer.h>
 

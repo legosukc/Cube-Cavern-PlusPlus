@@ -5,24 +5,28 @@
 
 #include <type_traits>
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include <SDL3/SDL_video.h>
 
 #include "BaseClassDefinitions.hpp"
 
 namespace Game::Graphics::OpenGLFunctions {
-    PFNGLCREATESHADERPROC glCreateShader;
-    PFNGLDELETESHADERPROC glDeleteShader;
+    inline PFNGLCREATESHADERPROC glCreateShader = NULL;
+    inline PFNGLDELETESHADERPROC glDeleteShader = NULL;
 
-    PFNGLSHADERSOURCEPROC glShaderSource;
-    PFNGLGETSHADERSOURCEPROC glGetShaderSource;
+    inline PFNGLSHADERSOURCEPROC glShaderSource = NULL;
+    inline PFNGLGETSHADERSOURCEPROC glGetShaderSource = NULL;
 
-    PFNGLCOMPILESHADERPROC glCompileShader;
+    inline PFNGLCOMPILESHADERPROC glCompileShader = NULL;
 
-    PFNGLGETSHADERIVPROC glGetShaderiv;
-    PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
+    inline PFNGLGETSHADERIVPROC glGetShaderiv = NULL;
+    inline PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog = NULL;
 }
 
 namespace Game::Graphics::Classes {

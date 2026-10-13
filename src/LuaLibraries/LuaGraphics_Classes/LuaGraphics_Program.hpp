@@ -6,8 +6,13 @@
 #include "LuaGraphics_Shader.hpp"
 
 #include <SDL3/SDL_joystick.h>
+
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #ifdef BUILD_CLIENT
 #include "../../Client/GraphicsClasses/Program.hpp"
@@ -570,36 +575,37 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::DetachAllShaders(
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::LoadVertexShaderFile(
     lua_State* State) {
-/*
-        Graphics::Cl asses::Shader::
-      
-VertexShader:
-    SetShaderSource([[
+    /*
+            Graphics::Cl asses::Shader::
 
-		attribute vec3 aPos;
-		attribute vec3 aNormal;
-		attribute vec2 aTexcoord;
+    VertexShader:
+        SetShaderSource([[
 
-		//uniform mat4 Model;
-		uniform mat4 View;
-		uniform mat4 Projection;
-		
-		void main() {
-			gl_Position = Projection * View * mat4(1.0) * vec4(aPos, 1.0);
-			//gl_Position = vec4(aPos, 1.0);
-		}
-	]])
+                    attribute vec3 aPos;
+                    attribute vec3 aNormal;
+                    attribute vec2 aTexcoord;
 
-	local CompileError = VertexShader:Compile()
-	if CompileError then
-		print("Failed to compile VertexShader. ", CompileError)
-    end *///
+                    //uniform mat4 Model;
+                    uniform mat4 View;
+                    uniform mat4 Projection;
+
+                    void main() {
+                            gl_Position = Projection * View * mat4(1.0) *
+    vec4(aPos, 1.0);
+                            //gl_Position = vec4(aPos, 1.0);
+                    }
+            ]])
+
+            local CompileError = VertexShader:Compile()
+            if CompileError then
+                    print("Failed to compile VertexShader. ", CompileError)
+        end *///
     return 1;
 }
 int Game::Lua::CLibraries::Graphics::Classes::Program::LoadFragmentShaderFile(
     lua_State* State) {
-        return 1;
-    }
+    return 1;
+}
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::Link(lua_State* State) {
     const Classes::Program* ProgramUD =
@@ -632,6 +638,7 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::GetUniformIndex(
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::GetUniformBlockIndex(
     lua_State* State) {
+#ifndef SDL_PLATFORM_VITA
     lua_pushinteger(State,
                     static_cast<lua_Integer>(
                         Game::Graphics::OpenGLFunctions::glGetUniformBlockIndex(
@@ -639,17 +646,28 @@ int Game::Lua::CLibraries::Graphics::Classes::Program::GetUniformBlockIndex(
                                 luaL_checkudata(State, 1, "Program"))
                                 ->GLObject,
                             luaL_checkstring(State, 2))));
+#else
+    luaL_error(State,
+               "Function 'Game.Graphics.Program:GetUniformBlockIndex' is not "
+               "implemented on this platform.");
+#endif
     return 1;
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::Program::SetUniformBlockBinding(
     lua_State* State) {
+#ifndef SDL_PLATFORM_VITA
     Game::Graphics::OpenGLFunctions::glUniformBlockBinding(
         static_cast<Classes::Program*>(luaL_checkudata(State, 1, "Program"))
             ->GLObject,
         luaL_checkinteger(State, 2),  // UniformBlock Index
         luaL_checkinteger(State, 3)   // Bind To Index
     );
+    #else
+    luaL_error(State,
+               "Function 'Game.Graphics.Program:SetUniformBlockBinding' is not "
+               "implemented on this platform.");
+#endif
     return 0;
 }
 

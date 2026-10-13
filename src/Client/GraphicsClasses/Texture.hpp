@@ -7,22 +7,26 @@
 
 #include <SDL3/SDL_video.h>
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include "BaseClassDefinitions.hpp"
 
 namespace Game::Graphics::OpenGLFunctions {
-    PFNGLGENTEXTURESPROC glGenTextures;
-    PFNGLDELETETEXTURESPROC glDeleteTextures;
+    inline PFNGLGENTEXTURESPROC glGenTextures = NULL;
+    inline PFNGLDELETETEXTURESPROC glDeleteTextures = NULL;
 
-    PFNGLACTIVETEXTUREPROC glActiveTexture;
-    PFNGLBINDTEXTUREPROC glBindTexture;
+    inline PFNGLACTIVETEXTUREPROC glActiveTexture = NULL;
+    inline PFNGLBINDTEXTUREPROC glBindTexture = NULL;
 
-    PFNGLTEXIMAGE2DPROC glTexImage2D;
-    PFNGLTEXPARAMETERIPROC glTexParameteri;
+    inline PFNGLTEXIMAGE2DPROC glTexImage2D = NULL;
+    inline PFNGLTEXPARAMETERIPROC glTexParameteri = NULL;
 
-    PFNGLFRAMEBUFFERTEXTURE2DPROC glFramebufferTexture2D;
+    inline PFNGLFRAMEBUFFERTEXTURE2DPROC glFramebufferTexture2D = NULL;
 }
 
 namespace Game::Graphics::Classes {
@@ -46,22 +50,24 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::Texture {
 
-    extern Game::Graphics::Classes::Texture* (*Create)();
-    extern void (*CreateBulk)(size_t CreateAmount,
-                             Game::Graphics::Classes::Texture* Textures[]);
-    extern void (*Unbind)();
+    inline Game::Graphics::Classes::Texture* (*Create)() = NULL;
+    inline void (*CreateBulk)(size_t CreateAmount,
+                              Game::Graphics::Classes::Texture* Textures[]) =
+        NULL;
+    inline void (*Unbind)() = NULL;
 
-    extern void (*UploadPixelData)(size_t Width,
-                                  size_t Height,
-                                  unsigned int Format,
-                                  unsigned int PixelFormat,
-                                  const void* PixelData);
-    extern void (*SetFilteringMode)(unsigned int FilteringMode);
+    inline void (*UploadPixelData)(size_t Width,
+                                   size_t Height,
+                                   unsigned int Format,
+                                   unsigned int PixelFormat,
+                                   const void* PixelData) = NULL;
+    inline void (*SetFilteringMode)(unsigned int FilteringMode) = NULL;
 
-    extern void (*AttachToFramebuffer)(unsigned int AttachmentType,
-                                Game::Graphics::Classes::Texture* Texture);
+    inline void (*AttachToFramebuffer)(
+        unsigned int AttachmentType,
+        Game::Graphics::Classes::Texture* Texture) = NULL;
 
-	inline void Init_OpenGL();
+    inline void Init_OpenGL();
     inline void Init_Vulkan();
     inline void Init_Metal();
     inline void Init_DirectX11();
@@ -151,24 +157,6 @@ static void _Texture_AttachToFramebuffer(
         reinterpret_cast<Game::Graphics::Classes::Texture_OpenGL*>(Texture)
             ->GLObject,
         0);
-}
-
-namespace Game::Graphics::Texture {
-
-    Game::Graphics::Classes::Texture* (*Create)();
-    void (*CreateBulk)(size_t CreateAmount,
-                       Game::Graphics::Classes::Texture* Textures[]);
-    void (*Unbind)();
-
-    void (*UploadPixelData)(size_t Width,
-                            size_t Height,
-                            unsigned int Format,
-                            unsigned int PixelFormat,
-                            const void* PixelData);
-    void (*SetFilteringMode)(unsigned int FilteringMode);
-
-    void (*AttachToFramebuffer)(unsigned int AttachmentType,
-                                Game::Graphics::Classes::Texture* Texture);
 }
 
 void Game::Graphics::Texture::Init_OpenGL() {

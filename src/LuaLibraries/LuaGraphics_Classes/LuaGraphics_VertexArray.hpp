@@ -2,8 +2,12 @@
 
 #include "LuaGraphics_GLObjectBase.hpp"
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include "../../../include/VM/lua.h"
 #include "../../../include/VM/lualib.h"

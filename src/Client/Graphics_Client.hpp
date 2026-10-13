@@ -141,10 +141,7 @@ namespace Game::Graphics::OpenGLFunctions {
 #include "GraphicsClasses/VertexArray.hpp"
 #include "GraphicsClasses/VertexBuffer.hpp"
 
-// TODO: make abstraction so uniform buffers work in gles 2.0
-#ifndef SDL_PLATFORM_VITA
 #include "GraphicsClasses/UniformBuffer.hpp"
-#endif
 
 #include "GraphicsClasses/Program.hpp"
 
