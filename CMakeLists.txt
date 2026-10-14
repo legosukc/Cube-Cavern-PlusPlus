@@ -45,7 +45,7 @@ else()
   FetchContent_Declare(
     luau
     GIT_REPOSITORY https://github.com/luau-lang/luau.git
-    GIT_TAG 0.741
+    GIT_TAG 0.742
   )
 endif()
 
@@ -77,7 +77,7 @@ find_package(SDL3_ttf REQUIRED)
 
 if(NOT PLATFORM STREQUAL "vita")
   find_package(SDL3_mixer REQUIRED)
-  #find_package(SDL3_net REQUIRED)
+  find_package(SDL3_net REQUIRED)
 endif()
 
 find_package(OpenAL REQUIRED)
@@ -95,10 +95,10 @@ target_sources(${PROJECT_NAME} PRIVATE
   src/MathClasses/Vector2.cpp
 
   src/FunctionHeaders/File.cpp
+  src/FunctionHeaders/ConfigHandler.cpp
 
   src/Statistics.cpp
-  src/Time.cpp
-
+  src/ConsoleVars.cpp
   #src/Lua.cpp
 
   #src/LuaLibraries/LuaConsole.cpp
@@ -115,15 +115,11 @@ if(BUILD_TARGET STREQUAL "client")
 
   target_sources(${PROJECT_NAME} PRIVATE
     src/Client/SDLClasses/Window.cpp
+    src/Client/Network_Client.cpp
     src/Client/main_client.cpp
-
   )
 
   target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_CLIENT)
-  #[[
-  set_target_properties(${PROJECT_NAME} PROPERTIES
-    OUTPUT_NAME "CubeCavern"
-  )]]
 
 elseif(BUILD_TARGET STREQUAL "server")
 
@@ -131,21 +127,25 @@ elseif(BUILD_TARGET STREQUAL "server")
 
   target_sources(${PROJECT_NAME} PRIVATE src/Server/main_server.cpp)
   target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SERVER)
-  #[[
+  
   set_target_properties(${PROJECT_NAME} PROPERTIES
     OUTPUT_NAME "CubeCavern-DedicatedServer"
-  )]]
+  )
 else()
   message(FATAL_ERROR, "'BUILD_TARGET' unspecified! Add '-DBUILD_TARGET=client|server'.")
 endif()
 
 if(NOT PLATFORM STREQUAL "vita")
-  target_link_libraries(${PROJECT_NAME} PRIVATE
-    SDL3_net::SDL3_net
-    SDL3_mixer::SDL3_mixer
-  )
 
-  target_link_libraries(${PROJECT_NAME} PRIVATE OpenAL::OpenAL)
+  target_link_libraries(${PROJECT_NAME} PRIVATE
+    #SDL3_net::SDL3_net
+    SDL3_mixer::SDL3_mixer
+
+    OpenAL::OpenAL
+  )
+  target_compile_definitions(${PROJECT_NAME} PRIVATE NETWORKING_DISABLED)
+else()
+  target_compile_definitions(${PROJECT_NAME} PRIVATE NETWORKING_DISABLED)
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -154,21 +154,13 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   SDL3::SDL3
 )
 
-target_link_libraries(${PROJECT_NAME}
-  PRIVATE
-
+target_link_libraries(${PROJECT_NAME} PRIVATE
   Luau.VM Luau.Compiler
-
-  #-Wl,--start-group
-
   assimp
-
-  #-Wl,--end-group
 )
 
 if(PLATFORM STREQUAL "vita")
   target_link_libraries(${PROJECT_NAME} PRIVATE
-
     stdc++ mathneon
     c m
     zip vitashark SceShaccCgExt taihen_stub
@@ -183,13 +175,11 @@ if(PLATFORM STREQUAL "vita")
     z # zlib
     crypto
 
-    #-Wl,--whole-archive pthread -Wl,--no-whole-archive
-    pthread
+    -Wl,--whole-archive pthread -Wl,--no-whole-archive
 
     libgpu_es4_ext_stub_weak
     libIMGEGL_stub_weak
     libGLESv2_stub_weak
-
 
     SceKernelDmacMgr_stub
     SceCtrl_stub

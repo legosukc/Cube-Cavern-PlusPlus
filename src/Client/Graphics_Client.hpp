@@ -10,6 +10,7 @@
 #ifdef SDL_PLATFORM_VITA
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
+#include "../GLES2_typedefs.h"
 #else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
@@ -159,12 +160,12 @@ namespace Game::Graphics {
         Classes::Program* Program;
         Classes::Texture* Texture;
     };
-    extern BoundObjectsStruct BoundObjects;
+    inline BoundObjectsStruct BoundObjects;
 
     struct GBufferStruct {
         Classes::Texture *Position, *Normal, *Albedo, *Specular;
     };
-    extern GBufferStruct GBuffer;
+    inline GBufferStruct GBuffer;
 }
 
 static inline void (*_SetClearColor)(float R, float G, float B, float A);
@@ -225,9 +226,6 @@ namespace Game::Graphics {
     inline Game::Graphics::_misc::_Enums_BindTargets BindTargets;
     inline Game::Graphics::_misc::_Enums_AllocationTypes AllocationTypes;
     inline Game::Graphics::_misc::_Enums_BufferBitfields BufferBitfields;
-
-    inline Game::Graphics::BoundObjectsStruct BoundObjects;
-    inline Game::Graphics::GBufferStruct GBuffer;
 }
 
 static void _SetClearColor_OpenGL(float R, float G, float B, float A) {

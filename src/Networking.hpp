@@ -7,7 +7,7 @@
 
 
 namespace Game::Networking {
-	inline void Init();
+	void Init();
 }
 
 

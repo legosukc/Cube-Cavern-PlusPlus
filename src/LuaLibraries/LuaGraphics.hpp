@@ -4,7 +4,13 @@
 
 #include "../../include/VM/lua.h"
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+#include "../GLES2_typedefs.h"
+#else
 #include <SDL3/SDL_opengl.h>
+#endif
 
 #include "LuaGraphics_MiscHeaders/LuaGraphics_SampleModels.hpp"
 
@@ -69,16 +75,19 @@ static int DrawElements(lua_State* State) {
 }
 
 static int DrawArraysInstanced(lua_State* State) {
+#ifndef SDL_PLATFORM_VITA
     Game::Graphics::OpenGLFunctions::glDrawArraysInstanced(
         static_cast<GLenum>(luaL_checkinteger(State, 1)),   // Mode
         static_cast<GLint>(luaL_optinteger(State, 2, 0)),   // First
         static_cast<GLsizei>(luaL_checkinteger(State, 3)),  // Count
         static_cast<GLsizei>(luaL_checkinteger(State, 4))   // Instance Count
     );
+#endif
     return 0;
 }
 
 static int DrawElementsInstanced(lua_State* State) {
+#ifndef SDL_PLATFORM_VITA
     Game::Graphics::OpenGLFunctions::glDrawElementsInstanced(
         static_cast<GLenum>(luaL_checkinteger(State, 1)),   // Mode
         static_cast<GLsizei>(luaL_checkinteger(State, 2)),  // Count
@@ -87,6 +96,7 @@ static int DrawElementsInstanced(lua_State* State) {
             luaL_optinteger(State, 4, 0)),
         static_cast<GLsizei>(luaL_checkinteger(State, 5))  // Instance Count
     );
+#endif
     return 0;
 }
 
@@ -199,39 +209,51 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_LINE_STRIP, "LineStrip");
     SubtableCache.SetKey<lua_Integer>(State, GL_LINE_LOOP, "LineLoop");
     SubtableCache.SetKey<lua_Integer>(State, GL_LINES, "Lines");
+
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_LINE_STRIP_ADJACENCY,
                                       "LineStripAdjacency");
     SubtableCache.SetKey<lua_Integer>(State, GL_LINES_ADJACENCY,
                                       "LinesAdjacency");
+#endif
 
     SubtableCache.SetKey<lua_Integer>(State, GL_TRIANGLE_STRIP,
                                       "TriangleStrip");
     SubtableCache.SetKey<lua_Integer>(State, GL_TRIANGLE_FAN, "TriangleFan");
     SubtableCache.SetKey<lua_Integer>(State, GL_TRIANGLES, "Triangles");
+
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_TRIANGLE_STRIP_ADJACENCY,
                                       "TriangleStripAdjacency");
     SubtableCache.SetKey<lua_Integer>(State, GL_TRIANGLES_ADJACENCY,
                                       "TrianglesAdjacency");
-
     SubtableCache.SetKey<lua_Integer>(State, GL_PATCHES, "Patches");
+#endif
 
     lua_setfield(State, GraphicsTable.GetStackIndex(), "DrawModes");
 
     // ShaderTypes
     SubtableCache = LuaHelper::StackTableReference(State, 0, 6);
 
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_COMPUTE_SHADER,
                                       "ComputeShader");
+#endif
 
     SubtableCache.SetKey<lua_Integer>(State, GL_VERTEX_SHADER, "VertexShader");
 
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_TESS_CONTROL_SHADER,
                                       "TessControlShader");
     SubtableCache.SetKey<lua_Integer>(State, GL_TESS_EVALUATION_SHADER,
                                       "TessEvalShader");
+#endif
 
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_GEOMETRY_SHADER,
                                       "GeometryShader");
+#endif
+
     SubtableCache.SetKey<lua_Integer>(State, GL_FRAGMENT_SHADER,
                                       "FragmentShader");
 
@@ -248,30 +270,37 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_SHORT, "Int16");
     SubtableCache.SetKey<lua_Integer>(State, GL_INT, "Int32");
 
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_HALF_FLOAT, "F16");
     SubtableCache.SetKey<lua_Integer>(State, GL_HALF_FLOAT, "HalfFloat");
+#endif
 
     SubtableCache.SetKey<lua_Integer>(State, GL_FLOAT, "F32");
     SubtableCache.SetKey<lua_Integer>(State, GL_FLOAT, "Float");
 
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_DOUBLE, "F64");
     SubtableCache.SetKey<lua_Integer>(State, GL_DOUBLE, "Double");
+#endif
 
     lua_setfield(State, GraphicsTable.GetStackIndex(), "Types");
 
     // Texture Bindings
     SubtableCache = LuaHelper::StackTableReference(State, 0, 4);
 
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_TEXTURE_1D, "Texture1D");
-    SubtableCache.SetKey<lua_Integer>(State, GL_TEXTURE_2D, "Texture2D");
     SubtableCache.SetKey<lua_Integer>(State, GL_TEXTURE_3D, "Texture3D");
-    // SubtableCache.SetKey<lua_Integer>(State, GL_TEXTURE_3D, "Texture3D");
+#endif
+
+    SubtableCache.SetKey<lua_Integer>(State, GL_TEXTURE_2D, "Texture2D");
 
     lua_setfield(State, GraphicsTable.GetStackIndex(), "TexBindings");
 
     // Texture Internal Formats
     SubtableCache = LuaHelper::StackTableReference(State, 0, 64);
 
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_RED, "Red");
     SubtableCache.SetKey<lua_Integer>(State, GL_R8, "Red8");
     SubtableCache.SetKey<lua_Integer>(State, GL_R8I, "Red8I");
@@ -299,8 +328,11 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_RG32I, "RG32I");
     SubtableCache.SetKey<lua_Integer>(State, GL_RG32UI, "RG32UI");
     SubtableCache.SetKey<lua_Integer>(State, GL_RG32F, "RG32F");
+#endif
 
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB, "RGB");
+
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB4, "RGB4");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB5, "RGB5");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB8, "RGB8");
@@ -320,11 +352,14 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB32F, "RGB32F");
 
     SubtableCache.SetKey<lua_Integer>(State, GL_SRGB8, "SRGB8");
+#endif
 
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA, "RGBA");
-    SubtableCache.SetKey<lua_Integer>(State, GL_RGBA2, "RGBA2");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA4, "RGBA4");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB5_A1, "RGB5A1");
+
+#ifndef SDL_PLATFORM_VITA
+    SubtableCache.SetKey<lua_Integer>(State, GL_RGBA2, "RGBA2");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA8, "RGBA8");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA8I, "RGBA8I");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA8UI, "RGBA8UI");
@@ -340,15 +375,19 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA32UI, "RGBA32UI");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA32F, "RGBA32F");
     SubtableCache.SetKey<lua_Integer>(State, GL_SRGB8_ALPHA8, "SRGB8A8");
+#endif
 
-    SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_COMPONENT, "Depth");
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_STENCIL, "DepthStencil");
+#endif
+    SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_COMPONENT, "Depth");
 
     lua_setfield(State, GraphicsTable.GetStackIndex(), "TexInternalFormats");
 
     // Texture Formats
     SubtableCache = LuaHelper::StackTableReference(State, 0, 15);
 
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_RED, "Red");
     SubtableCache.SetKey<lua_Integer>(State, GL_RED_INTEGER, "RedInt");
 
@@ -368,8 +407,10 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_BGRA_INTEGER, "BGRAInt");
 
     SubtableCache.SetKey<lua_Integer>(State, GL_STENCIL_INDEX, "Stencil");
-    SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_COMPONENT, "Depth");
     SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_STENCIL, "DepthStencil");
+
+#endif
+    SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_COMPONENT, "Depth");
 
     lua_setfield(State, GraphicsTable.GetStackIndex(), "TexFormats");
 
@@ -380,8 +421,10 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_MIRRORED_REPEAT,
                                       "MirroredRepeat");
 
+#ifndef SDL_PLATFORM_VITA
     SubtableCache.SetKey<lua_Integer>(State, GL_CLAMP_TO_BORDER,
                                       "ClampToBorder");
+#endif
     SubtableCache.SetKey<lua_Integer>(State, GL_CLAMP_TO_EDGE, "ClampToEdge");
 
     lua_setfield(State, GraphicsTable.GetStackIndex(), "TextureWrapping");
@@ -448,8 +491,10 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     ElementBuffer::Init<GL_ELEMENT_ARRAY_BUFFER>(State, "ElementBuffer",
                                                  GraphicsTable);
 
+#ifndef SDL_PLATFORM_VITA
     UniformBuffer::Init<GL_UNIFORM_BUFFER>(State, "UniformBuffer",
                                            GraphicsTable);
+#endif
 
     Program::Init(State, GraphicsTable);
     Shader::Init(State, GraphicsTable);
@@ -462,4 +507,4 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
 }
 
 // TODO: seperate
-//#include "LuaGraphics.cpp"
+// #include "LuaGraphics.cpp"

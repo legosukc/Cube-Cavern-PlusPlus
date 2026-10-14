@@ -1,14 +1,13 @@
 #ifndef DEFINE_H
 #define DEFINE_H 1
 
-#define SDL_PLATFORM_VITA
+#include <SDL3/SDL_platform_defines.h>
 
+// for SDL2 compat with SDL3 functions
+// #define SDL_DelayPrecise(NS)(SDL_Delay(NS / 1000))
+// #define SDL_GetTicksNS()(SDL_GetTicks64() * 1000)
 
-//#define SDL_DelayPrecise(NS)(SDL_Delay(NS / 1000))
-//#define SDL_GetTicksNS()(SDL_GetTicks64() * 1000)
-
-//#define SDL_GL_DestroyContext SDL_GL_DeleteContext
-
+// #define SDL_GL_DestroyContext SDL_GL_DeleteContext
 
 // for linting
 #if !defined(BUILD_CLIENT) && !defined(BUILD_SERVER)
@@ -129,10 +128,17 @@ instructions if it sees fit.)
 
 #ifndef LOAD_OPENGL_FUNCTION
 
+#ifdef SDL_PLATFORM_VITA
+#define LOAD_OPENGL_FUNCTION(FunctionName)                         \
+    (Game::Graphics::OpenGLFunctions::FunctionName =               \
+         (decltype(Game::Graphics::OpenGLFunctions::FunctionName)) \
+             FunctionName)
+#else
 #define LOAD_OPENGL_FUNCTION(FunctionName)                         \
     (Game::Graphics::OpenGLFunctions::FunctionName =               \
          (decltype(Game::Graphics::OpenGLFunctions::FunctionName)) \
              SDL_GL_GetProcAddress(#FunctionName))
+#endif
 #endif
 
 #endif

@@ -45,10 +45,10 @@ namespace Math {
 	};
 
 	template<typename IntType>
-	static constexpr unsigned long long IntMinimumValue_v = IntMinimumValue<IntType>::Value;
+	constexpr unsigned long long IntMinimumValue_v = IntMinimumValue<IntType>::Value;
 
 	template<typename IntType>
-	static constexpr unsigned long long IntMaximumValue_v = IntMaximumValue<IntType>::Value;
+	constexpr unsigned long long IntMaximumValue_v = IntMaximumValue<IntType>::Value;
 
 
 

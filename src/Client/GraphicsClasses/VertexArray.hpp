@@ -6,8 +6,9 @@
 #include <iostream>
 #include <map>
 
-#ifndef SDL_PLATFORM_VITA
+#ifdef SDL_PLATFORM_VITA
 #include <GLES2/gl2.h>
+#include "../../GLES2_typedefs.h"
 #else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
@@ -27,7 +28,7 @@ namespace Game::Graphics::OpenGLFunctions {
     inline PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray = NULL;
     inline PFNGLDISABLEVERTEXATTRIBARRAYPROC glDisableVertexAttribArray = NULL;
 
-    inline PFNGLVERTEXATTRIBPOINTERARBPROC glVertexAttribPointer = NULL;
+    inline PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer = NULL;
 }
 
 namespace Game::Graphics::Classes {
@@ -141,7 +142,7 @@ namespace {
 
     GLuint BoundVAO = 0;
 
-    static PFNGLVERTEXATTRIBPOINTERARBPROC _old_VertexAttribPointer;
+    static PFNGLVERTEXATTRIBPOINTERPROC _old_VertexAttribPointer;
     static PFNGLBINDBUFFERPROC _old_BindBuffer;
 
     static PFNGLENABLEVERTEXATTRIBARRAYPROC _old_EnableVertexAttribArray;
@@ -267,10 +268,14 @@ void Game::Graphics::VertexArray::Init_OpenGL() {
     int MajorVersion;
     SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &MajorVersion);
     if (MajorVersion >= 3) {
+#ifdef SDL_PLATFORM_VITA
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+#else
         LOAD_OPENGL_FUNCTION(glGenVertexArrays);
         LOAD_OPENGL_FUNCTION(glDeleteVertexArrays);
 
         LOAD_OPENGL_FUNCTION(glBindVertexArray);
+#endif
 
     } else {
         int ProfileIsES;
