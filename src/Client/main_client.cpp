@@ -160,14 +160,6 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 
     SDL_SetHint(SDL_HINT_VITA_ENABLE_BACK_TOUCH, "0");
 
-    /*
-    SDL_SetHint(SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK, "1");
-
-    SDL_SetHint(SDL_HINT_VITA_PVR_INIT, "1");
-    // SDL_SetHint(SDL_HINT_VITA_RESOLUTION, "720");
-    SDL_SetHint(SDL_HINT_VITA_PVR_OPENGL, "1");
-    SDL_SetHint(SDL_HINT_VITA_MODULE_PATH, "app0:module");*/
-
     PVRSRV_PSP2_APPHINT hint;
 
     PVRSRVInitializeAppHint(&hint);
@@ -179,10 +171,6 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
                   SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
         Exceptions::ThrowSDLError("Failed to initalize SDL.");
     }
-    /*
-    if (!SDL_GL_LoadLibrary("app0:module/libGLESv2.suprx")) {
-        Exceptions::ThrowSDLError("Failed to load module libGLESv2.suprx");
-    }*/
 #else
     if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO |
                   SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
