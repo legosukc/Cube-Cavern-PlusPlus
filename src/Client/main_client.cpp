@@ -4,14 +4,10 @@
 
 #ifdef SDL_PLATFORM_VITA
 
-#include <kernel.h>
-
+int _newlib_heap_size_user = 16 * 1024 * 1024;
 unsigned int sceLibcHeapSize = 16 * 1024 * 1024;
 
-SCE_USER_MODULE_LIST("app0:libgpu_es4_ext.suprx", "app0:libIMGEGL.suprx");
-
-#include <services.h>
-
+extern "C" {
 #include <psp2/kernel/processmgr.h>
 #include <vitasdk.h>
 
@@ -25,6 +21,7 @@ SCE_USER_MODULE_LIST("app0:libgpu_es4_ext.suprx", "app0:libIMGEGL.suprx");
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
 #include "../GLES2_typedefs.h"
+}
 
 #endif
 
@@ -111,6 +108,10 @@ namespace {
         Game::Window.Destroy();
         SDL_Quit();
 
+#ifdef SDL_PLATFORM_VITA
+        EGLEnd();
+#endif
+
         std::cout.rdbuf(::coutBuffer);
         std::cerr.rdbuf(::cerrBuffer);
 
@@ -149,6 +150,15 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 
 #ifdef SDL_PLATFORM_VITA
 
+    sceKernelLoadStartModule("vs0:sys/external/libfios2.suprx", 0, NULL, 0,
+                             NULL, NULL);
+    sceKernelLoadStartModule("vs0:sys/external/libc.suprx", 0, NULL, 0, NULL,
+                             NULL);
+    sceKernelLoadStartModule("app0:module/libgpu_es4_ext.suprx", 0, NULL, 0,
+                             NULL, NULL);
+    sceKernelLoadStartModule("app0:module/libIMGEGL.suprx", 0, NULL, 0, NULL,
+                             NULL);
+
     SDL_SetHint(SDL_HINT_VITA_ENABLE_BACK_TOUCH, "0");
 
     /*
@@ -163,6 +173,8 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 
     PVRSRVInitializeAppHint(&hint);
     PVRSRVCreateVirtualAppHint(&hint);
+
+    //sceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG);
 
     if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_AUDIO | SDL_INIT_GAMEPAD |
                   SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {

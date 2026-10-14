@@ -10,6 +10,10 @@
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
 
+#ifdef SDL_PLATFORM_VITA
+#include <EGL/egl.h>
+#endif
+
 #include "../../MathClasses/Vector2.hpp"
 
 #include "../../FunctionHeaders/Event.hpp"
