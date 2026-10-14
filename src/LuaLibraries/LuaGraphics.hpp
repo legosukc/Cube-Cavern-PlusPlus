@@ -41,7 +41,7 @@
 namespace Game::ConsoleVars::ReferenceVars::Lua::Graphics {
 
     struct ChangeErrorCheckingCVar : Game::ConsoleVars::BaseCVar {
-        virtual void Set(const char* Argument) override;
+        virtual void SetWithString(const char* NewValue) override;
 
         using VarType = void;
     };
@@ -52,7 +52,7 @@ namespace Game::Lua::CLibraries::Graphics {
 }
 
 void Game::ConsoleVars::ReferenceVars::Lua::Graphics::ChangeErrorCheckingCVar::
-    Set(const char* Argument) {}
+    SetWithString(const char* NewValue) {}
 
 #ifdef BUILD_CLIENT
 static int DrawArrays(lua_State* State) {

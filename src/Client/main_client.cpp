@@ -2,6 +2,32 @@
 
 #include "../define.h"
 
+#ifdef SDL_PLATFORM_VITA
+
+#include <kernel.h>
+
+unsigned int sceLibcHeapSize = 16 * 1024 * 1024;
+
+SCE_USER_MODULE_LIST("app0:libgpu_es4_ext.suprx", "app0:libIMGEGL.suprx");
+
+#include <services.h>
+
+#include <psp2/kernel/processmgr.h>
+#include <vitasdk.h>
+
+#include <psp2/appmgr.h>
+#include <psp2/kernel/processmgr.h>
+#include <psp2/power.h>
+#include <psp2/vshbridge.h>
+
+#include <gpu_es4/psp2_pvr_hint.h>
+
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+#include "../GLES2_typedefs.h"
+
+#endif
+
 #include "../MathClasses/Matrix.hpp"
 #include "../MathClasses/Vector2.hpp"
 #include "../MathClasses/Vector3.hpp"
@@ -18,22 +44,7 @@
 // #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_main.h>
 
-#ifdef SDL_PLATFORM_VITA
-#include <psp2/kernel/processmgr.h>
-#include <vitasdk.h>
-
-#include <psp2/appmgr.h>
-#include <psp2/kernel/processmgr.h>
-#include <psp2/power.h>
-#include <psp2/vshbridge.h>
-
-#include <gpu_es4/psp2_pvr_hint.h>
-
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
-#include "../GLES2_typedefs.h"
-
-#else
+#ifndef SDL_PLATFORM_VITA
 
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
@@ -153,8 +164,8 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     PVRSRVInitializeAppHint(&hint);
     PVRSRVCreateVirtualAppHint(&hint);
 
-    if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_AUDIO |
-                  SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
+    if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_AUDIO | SDL_INIT_GAMEPAD |
+                  SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
         Exceptions::ThrowSDLError("Failed to initalize SDL.");
     }
     /*

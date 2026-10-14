@@ -240,12 +240,14 @@ const Math::IVector2& Game::Classes::Window::GetSize() const {
 
 bool Game::Classes::Window::ScancodePressed(SDL_Scancode Scancode,
                                             float BufferTime) const {
+    // TODO: properly implement cause i'm a lazy bum
     // return this->ScancodeStates[Scancode] == ScancodeStatesEnum::Pressed;
     return SDL_GetKeyboardState(NULL)[Scancode];
 }
 
 bool Game::Classes::Window::ScancodeHeld(SDL_Scancode Scancode,
                                          float BufferTime) const {
+    // TODO: properly implement cause i'm a lazy bum
     return SDL_GetKeyboardState(NULL)[Scancode];
     /*
     ScancodeStateStruct& ScancodeState = this->ScancodeStates[Scancode];
