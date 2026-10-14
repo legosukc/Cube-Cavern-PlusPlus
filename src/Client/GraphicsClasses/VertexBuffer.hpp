@@ -1,10 +1,14 @@
-#ifndef GRAPHICS_VERTEXBUFFER_H
-#define GRAPHICS_VERTEXBUFFER_H
+#pragma once
 
 #include "../../define.h"
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#include "../../GLES2_typedefs.h"
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include "BufferBase.hpp"
 
@@ -20,10 +24,11 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::VertexBuffer {
 
-    Game::Graphics::Classes::VertexBuffer* (*Create)();
-    void (*CreateBulk)(size_t CreateAmount,
-                       Game::Graphics::Classes::VertexBuffer* VertexBuffers[]);
-    void (*Unbind)();
+    inline Game::Graphics::Classes::VertexBuffer* (*Create)() = NULL;
+    inline void (*CreateBulk)(
+        size_t CreateAmount,
+        Game::Graphics::Classes::VertexBuffer* VertexBuffers[]) = NULL;
+    inline void (*Unbind)() = NULL;
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();
@@ -58,5 +63,3 @@ void Game::Graphics::VertexBuffer::Init_Metal() {}
 void Game::Graphics::VertexBuffer::Init_DirectX11() {}
 
 void Game::Graphics::VertexBuffer::Init_DirectX12() {}
-
-#endif

@@ -3,10 +3,18 @@
 
 // TODO: make the SetUniformBvec_ functions use a Bvec_ struct.
 
+#include "../../define.h"
+
 #include <iostream>
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#include "../../GLES2_typedefs.h"
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
+
 #include <SDL3/SDL_video.h>
 
 #include "../../MathClasses/Matrix.hpp"
@@ -14,49 +22,54 @@
 #include "../../MathClasses/Vector3.hpp"
 #include "../../MathClasses/Vector4.hpp"
 
+#include "../../FunctionHeaders/Exceptions.hpp"
+
 #include "BaseClassDefinitions.hpp"
 
 namespace Game::Graphics::OpenGLFunctions {
 
-    PFNGLCREATEPROGRAMPROC glCreateProgram = NULL;
-    PFNGLDELETEPROGRAMPROC glDeleteProgram = NULL;
+    inline PFNGLCREATEPROGRAMPROC glCreateProgram = NULL;
+    inline PFNGLDELETEPROGRAMPROC glDeleteProgram = NULL;
 
-    PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation = NULL;
-    PFNGLGETUNIFORMBLOCKINDEXPROC glGetUniformBlockIndex = NULL;
-    PFNGLUNIFORMBLOCKBINDINGPROC glUniformBlockBinding = NULL;
+    inline PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation = NULL;
 
-    PFNGLATTACHSHADERPROC glAttachShader = NULL;
-    PFNGLGETATTACHEDSHADERSPROC glGetAttachedShaders = NULL;
-    PFNGLDETACHSHADERPROC glDetachShader = NULL;
+#ifndef SDL_PLATFORM_VITA
+    inline PFNGLGETUNIFORMBLOCKINDEXPROC glGetUniformBlockIndex = NULL;
+    inline PFNGLUNIFORMBLOCKBINDINGPROC glUniformBlockBinding = NULL;
+#endif
 
-    PFNGLLINKPROGRAMPROC glLinkProgram = NULL;
-    PFNGLUSEPROGRAMPROC glUseProgram = NULL;
+    inline PFNGLATTACHSHADERPROC glAttachShader = NULL;
+    inline PFNGLGETATTACHEDSHADERSPROC glGetAttachedShaders = NULL;
+    inline PFNGLDETACHSHADERPROC glDetachShader = NULL;
 
-    PFNGLGETPROGRAMIVPROC glGetProgramiv = NULL;
+    inline PFNGLLINKPROGRAMPROC glLinkProgram = NULL;
+    inline PFNGLUSEPROGRAMPROC glUseProgram = NULL;
 
-    PFNGLUNIFORM1IPROC glUniform1i = NULL;
-    PFNGLUNIFORM1UIPROC glUniform1ui = NULL;
-    PFNGLUNIFORM1FPROC glUniform1f = NULL;
+    inline PFNGLGETPROGRAMIVPROC glGetProgramiv = NULL;
 
-    // PFNGLUNIFORM2IVPROC glUniform1iv = NULL;
-    // PFNGLUNIFORM2UIVPROC glUniform1uiv = NULL;
-    // PFNGLUNIFORM2FVPROC glUniform1fv = NULL;
+    inline PFNGLUNIFORM1IPROC glUniform1i = NULL;
+    // inline PFNGLUNIFORM2IVPROC glUniform1iv = NULL;
+    inline PFNGLUNIFORM2IVPROC glUniform2iv = NULL;
+    inline PFNGLUNIFORM2IVPROC glUniform3iv = NULL;
+    inline PFNGLUNIFORM2IVPROC glUniform4iv = NULL;
 
-    PFNGLUNIFORM2IVPROC glUniform2iv = NULL;
-    PFNGLUNIFORM2UIVPROC glUniform2uiv = NULL;
-    PFNGLUNIFORM2FVPROC glUniform2fv = NULL;
+#ifndef SDL_PLATFORM_VITA
+    inline PFNGLUNIFORM1UIPROC glUniform1ui = NULL;
+    // inline PFNGLUNIFORM2UIVPROC glUniform1uiv = NULL;
+    inline PFNGLUNIFORM2UIVPROC glUniform2uiv = NULL;
+    inline PFNGLUNIFORM2UIVPROC glUniform3uiv = NULL;
+    inline PFNGLUNIFORM2UIVPROC glUniform4uiv = NULL;
+#endif
 
-    PFNGLUNIFORM2IVPROC glUniform3iv = NULL;
-    PFNGLUNIFORM2UIVPROC glUniform3uiv = NULL;
-    PFNGLUNIFORM2FVPROC glUniform3fv = NULL;
+    inline PFNGLUNIFORM1FPROC glUniform1f = NULL;
+    // inline PFNGLUNIFORM2FVPROC glUniform1fv = NULL;
+    inline PFNGLUNIFORM2FVPROC glUniform2fv = NULL;
+    inline PFNGLUNIFORM2FVPROC glUniform3fv = NULL;
+    inline PFNGLUNIFORM2FVPROC glUniform4fv = NULL;
 
-    PFNGLUNIFORM2IVPROC glUniform4iv = NULL;
-    PFNGLUNIFORM2UIVPROC glUniform4uiv = NULL;
-    PFNGLUNIFORM2FVPROC glUniform4fv = NULL;
-
-    PFNGLUNIFORMMATRIX2FVPROC glUniformMatrix2fv = NULL;
-    PFNGLUNIFORMMATRIX3FVPROC glUniformMatrix3fv = NULL;
-    PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv = NULL;
+    inline PFNGLUNIFORMMATRIX2FVPROC glUniformMatrix2fv = NULL;
+    inline PFNGLUNIFORMMATRIX3FVPROC glUniformMatrix3fv = NULL;
+    inline PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv = NULL;
 }
 
 namespace Game::Graphics::Classes {
@@ -117,46 +130,48 @@ namespace Game::Graphics::Program::Wrappers::OpenGL {
 namespace Game::Graphics::Program {
 
     namespace FuncPtrs {
-        Game::Graphics::Classes::Program* (*Create)() = NULL;
+        inline Game::Graphics::Classes::Program* (*Create)() = NULL;
 
-        void (*SetUniformSint32)(Sint32 UniformIndex, Sint32 Value) = NULL;
-        void (*SetUniformUint32)(Sint32 UniformIndex, Uint32 Value) = NULL;
-        void (*SetUniformBool)(Sint32 UniformIndex, bool Value) = NULL;
-        void (*SetUniformFloat)(Sint32 UniformIndex, float Value) = NULL;
+        inline void (*SetUniformSint32)(Sint32 UniformIndex,
+                                        Sint32 Value) = NULL;
+        inline void (*SetUniformUint32)(Sint32 UniformIndex,
+                                        Uint32 Value) = NULL;
+        inline void (*SetUniformBool)(Sint32 UniformIndex, bool Value) = NULL;
+        inline void (*SetUniformFloat)(Sint32 UniformIndex, float Value) = NULL;
 
-        void (*SetUniformIvec2)(Sint32 UniformIndex,
-                                const Math::IVector2& Ivec2) = NULL;
-        void (*SetUniformUvec2)(Sint32 UniformIndex,
-                                const Math::UVector2& Uvec2) = NULL;
-        void (*SetUniformBvec2)(Sint32 UniformIndex,
-                                const Math::IVector2& Bvec2) = NULL;
-        void (*SetUniformFvec2)(Sint32 UniformIndex,
-                                const Math::Vector2& Fvec2) = NULL;
+        inline void (*SetUniformIvec2)(Sint32 UniformIndex,
+                                       const Math::IVector2& Ivec2) = NULL;
+        inline void (*SetUniformUvec2)(Sint32 UniformIndex,
+                                       const Math::UVector2& Uvec2) = NULL;
+        inline void (*SetUniformBvec2)(Sint32 UniformIndex,
+                                       const Math::IVector2& Bvec2) = NULL;
+        inline void (*SetUniformFvec2)(Sint32 UniformIndex,
+                                       const Math::Vector2& Fvec2) = NULL;
 
-        void (*SetUniformIvec3)(Sint32 UniformIndex,
-                                const Math::IVector3& Ivec3) = NULL;
-        void (*SetUniformUvec3)(Sint32 UniformIndex,
-                                const Math::UVector3& Uvec3) = NULL;
-        void (*SetUniformBvec3)(Sint32 UniformIndex,
-                                const Math::IVector3& Bvec3) = NULL;
-        void (*SetUniformFvec3)(Sint32 UniformIndex,
-                                const Math::Vector3& Fvec3) = NULL;
+        inline void (*SetUniformIvec3)(Sint32 UniformIndex,
+                                       const Math::IVector3& Ivec3) = NULL;
+        inline void (*SetUniformUvec3)(Sint32 UniformIndex,
+                                       const Math::UVector3& Uvec3) = NULL;
+        inline void (*SetUniformBvec3)(Sint32 UniformIndex,
+                                       const Math::IVector3& Bvec3) = NULL;
+        inline void (*SetUniformFvec3)(Sint32 UniformIndex,
+                                       const Math::Vector3& Fvec3) = NULL;
 
-        void (*SetUniformIvec4)(Sint32 UniformIndex,
-                                const Math::IVector4& Ivec4) = NULL;
-        void (*SetUniformUvec4)(Sint32 UniformIndex,
-                                const Math::UVector4& Uvec4) = NULL;
-        void (*SetUniformBvec4)(Sint32 UniformIndex,
-                                const Math::IVector4& Bvec4) = NULL;
-        void (*SetUniformFvec4)(Sint32 UniformIndex,
-                                const Math::Vector4& Fvec4) = NULL;
+        inline void (*SetUniformIvec4)(Sint32 UniformIndex,
+                                       const Math::IVector4& Ivec4) = NULL;
+        inline void (*SetUniformUvec4)(Sint32 UniformIndex,
+                                       const Math::UVector4& Uvec4) = NULL;
+        inline void (*SetUniformBvec4)(Sint32 UniformIndex,
+                                       const Math::IVector4& Bvec4) = NULL;
+        inline void (*SetUniformFvec4)(Sint32 UniformIndex,
+                                       const Math::Vector4& Fvec4) = NULL;
 
-        void (*SetUniformMat2)(Sint32 UniformIndex,
-                               const Math::Mat2& Mat2) = NULL;
-        void (*SetUniformMat3)(Sint32 UniformIndex,
-                               const Math::Mat3& Mat3) = NULL;
-        void (*SetUniformMat4)(Sint32 UniformIndex,
-                               const Math::Mat4& Mat4) = NULL;
+        inline void (*SetUniformMat2)(Sint32 UniformIndex,
+                                      const Math::Mat2& Mat2) = NULL;
+        inline void (*SetUniformMat3)(Sint32 UniformIndex,
+                                      const Math::Mat3& Mat3) = NULL;
+        inline void (*SetUniformMat4)(Sint32 UniformIndex,
+                                      const Math::Mat4& Mat4) = NULL;
     }
 
     inline Game::Graphics::Classes::Program* Create();
@@ -256,13 +271,20 @@ void Game::Graphics::Program::Wrappers::OpenGL::SetUniformSint32(
 void Game::Graphics::Program::Wrappers::OpenGL::SetUniformUint32(
     Sint32 UniformIndex,
     Uint32 Value) {
+#ifdef SDL_PLATFORM_VITA
+    Exceptions::ThrowException<Exceptions::RuntimeError>(
+        "Function "
+        "'Game::Graphics::Program::Wrappers::OpenGL::SetUniformUint32' is not "
+        "implemented on this platform.");
+#else
     Game::Graphics::OpenGLFunctions::glUniform1ui(UniformIndex, Value);
+#endif
 }
 
 void Game::Graphics::Program::Wrappers::OpenGL::SetUniformBool(
     Sint32 UniformIndex,
     bool Value) {
-    Game::Graphics::OpenGLFunctions::glUniform1ui(UniformIndex, Value);
+    Game::Graphics::OpenGLFunctions::glUniform1i(UniformIndex, Value);
 }
 
 void Game::Graphics::Program::Wrappers::OpenGL::SetUniformFloat(
@@ -276,14 +298,14 @@ void Game::Graphics::Program::Wrappers::OpenGL::SetUniformBvec_(
     Sint32 UniformIndex,
     const BoolVectorType BVector) {
     if constexpr (BoolVectorType::ComponentCount == 2) {
-        Game::Graphics::OpenGLFunctions::glUniform2iv(
-            UniformIndex, 1, &BVector);
+        Game::Graphics::OpenGLFunctions::glUniform2iv(UniformIndex, 1,
+                                                      &BVector);
     } else if constexpr (BoolVectorType::ComponentCount == 3) {
-        Game::Graphics::OpenGLFunctions::glUniform3iv(
-            UniformIndex, 1, &BVector);
+        Game::Graphics::OpenGLFunctions::glUniform3iv(UniformIndex, 1,
+                                                      &BVector);
     } else if constexpr (BoolVectorType::ComponentCount == 4) {
-        Game::Graphics::OpenGLFunctions::glUniform4iv(
-            UniformIndex, 1, &BVector);
+        Game::Graphics::OpenGLFunctions::glUniform4iv(UniformIndex, 1,
+                                                      &BVector);
     }
 }
 
@@ -304,8 +326,17 @@ void Game::Graphics::Program::Wrappers::OpenGL::SetUniform_vec2(
 
     } else if constexpr (std::is_unsigned_v<
                              typename VectorType::ComponentType>) {
+#ifdef SDL_PLATFORM_VITA
+        Exceptions::ThrowException<Exceptions::RuntimeError>(
+            "Function "
+            "'Game::Graphics::Program::Wrappers::OpenGL::SetUniform_vec2<Math::"
+            "UVector2>' is "
+            "not "
+            "implemented on this platform.");
+#else
         Game::Graphics::OpenGLFunctions::glUniform2uiv(UniformIndex, 1,
                                                        &Vector.X);
+#endif
     }
 }
 
@@ -327,8 +358,17 @@ void Game::Graphics::Program::Wrappers::OpenGL::SetUniform_vec3(
 
     } else if constexpr (std::is_unsigned_v<
                              typename VectorType::ComponentType>) {
+#ifdef SDL_PLATFORM_VITA
+        Exceptions::ThrowException<Exceptions::RuntimeError>(
+            "Function "
+            "'Game::Graphics::Program::Wrappers::OpenGL::SetUniform_vec2<Math::"
+            "UVector3>' is "
+            "not "
+            "implemented on this platform.");
+#else
         Game::Graphics::OpenGLFunctions::glUniform3uiv(UniformIndex, 1,
                                                        &Vector.X);
+#endif
     }
 }
 
@@ -349,8 +389,17 @@ void Game::Graphics::Program::Wrappers::OpenGL::SetUniform_vec4(
 
     } else if constexpr (std::is_unsigned_v<
                              typename VectorType::ComponentType>) {
+#ifdef SDL_PLATFORM_VITA
+        Exceptions::ThrowException<Exceptions::RuntimeError>(
+            "Function "
+            "'Game::Graphics::Program::Wrappers::OpenGL::SetUniform_vec2<Math::"
+            "UVector4>' is "
+            "not "
+            "implemented on this platform.");
+#else
         Game::Graphics::OpenGLFunctions::glUniform4uiv(UniformIndex, 1,
                                                        &Vector.X);
+#endif
     }
 }
 
@@ -380,9 +429,11 @@ void Game::Graphics::Program::Init_OpenGL() {
     LOAD_OPENGL_FUNCTION(glDeleteProgram);
 
     LOAD_OPENGL_FUNCTION(glGetUniformLocation);
-    LOAD_OPENGL_FUNCTION(glGetUniformBlockIndex);
 
+#ifndef SDL_PLATFORM_VITA
+    LOAD_OPENGL_FUNCTION(glGetUniformBlockIndex);
     LOAD_OPENGL_FUNCTION(glUniformBlockBinding);
+#endif
 
     LOAD_OPENGL_FUNCTION(glAttachShader);
     LOAD_OPENGL_FUNCTION(glGetAttachedShaders);
@@ -394,19 +445,20 @@ void Game::Graphics::Program::Init_OpenGL() {
     LOAD_OPENGL_FUNCTION(glGetProgramiv);
 
     LOAD_OPENGL_FUNCTION(glUniform1i);
-    LOAD_OPENGL_FUNCTION(glUniform1ui);
-    LOAD_OPENGL_FUNCTION(glUniform1f);
-
     LOAD_OPENGL_FUNCTION(glUniform2iv);
-    LOAD_OPENGL_FUNCTION(glUniform2uiv);
-    LOAD_OPENGL_FUNCTION(glUniform2fv);
-
     LOAD_OPENGL_FUNCTION(glUniform3iv);
-    LOAD_OPENGL_FUNCTION(glUniform3uiv);
-    LOAD_OPENGL_FUNCTION(glUniform3fv);
-
     LOAD_OPENGL_FUNCTION(glUniform4iv);
+
+#ifndef SDL_PLATFORM_VITA
+    LOAD_OPENGL_FUNCTION(glUniform1ui);
+    LOAD_OPENGL_FUNCTION(glUniform2uiv);
+    LOAD_OPENGL_FUNCTION(glUniform3uiv);
     LOAD_OPENGL_FUNCTION(glUniform4uiv);
+#endif
+
+    LOAD_OPENGL_FUNCTION(glUniform1f);
+    LOAD_OPENGL_FUNCTION(glUniform2fv);
+    LOAD_OPENGL_FUNCTION(glUniform3fv);
     LOAD_OPENGL_FUNCTION(glUniform4fv);
 
     LOAD_OPENGL_FUNCTION(glUniformMatrix2fv);

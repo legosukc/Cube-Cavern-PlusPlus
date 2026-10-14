@@ -1,10 +1,16 @@
-#ifndef GRAPHICS_VERTEXSHADER_H
-#define GRAPHICS_VERTEXSHADER_H
+#pragma once
 
 #include "../../define.h"
 
+#include <cstddef>
+
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#include "../../GLES2_typedefs.h"
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include "ShaderBase.hpp"
 
@@ -15,9 +21,9 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::VertexShader {
 
-    Game::Graphics::Classes::VertexShader* (*Create)();
-    void (*CreateBulk)(size_t CreateAmount,
-                       Game::Graphics::Classes::VertexShader* VertexShaders[]);
+    inline Game::Graphics::Classes::VertexShader* (*Create)() = NULL;
+    inline void (*CreateBulk)(size_t CreateAmount,
+                       Game::Graphics::Classes::VertexShader* VertexShaders[]) = NULL;
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();
@@ -46,5 +52,3 @@ void Game::Graphics::VertexShader::Init_Metal() {}
 void Game::Graphics::VertexShader::Init_DirectX11() {}
 
 void Game::Graphics::VertexShader::Init_DirectX12() {}
-
-#endif

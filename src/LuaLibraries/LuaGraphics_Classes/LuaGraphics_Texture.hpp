@@ -2,11 +2,17 @@
 
 #include "../../define.h"
 
-#include <SDL3/SDL_opengl.h>
-#include <SDL3/SDL_opengl_glext.h>
 #include <SDL3/SDL_pixels.h>
 #include <SDL3/SDL_surface.h>
 #include <SDL3_image/SDL_image.h>
+
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#include "../../GLES2_typedefs.h"
+#else
+#include <SDL3/SDL_opengl.h>
+#include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include "../../Client/Graphics_Client.hpp"
 
@@ -157,7 +163,7 @@ int Game::Lua::CLibraries::Graphics::Texture::Load2DImageFromFile(
     SDL_DestroySurface(UnconvertedSurface);
 
     Game::Graphics::OpenGLFunctions::glTexImage2D(
-        GL_TEXTURE_2D, 0, GL_RGBA8, static_cast<GLint>(ConvertedSurface->w),
+        GL_TEXTURE_2D, 0, GL_RGBA, static_cast<GLint>(ConvertedSurface->w),
         static_cast<GLint>(ConvertedSurface->h), 0, GL_RGBA, GL_UNSIGNED_BYTE,
         ConvertedSurface->pixels);
     SDL_DestroySurface(ConvertedSurface);

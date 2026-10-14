@@ -10,9 +10,7 @@ uniform vec3 Offset;
 uniform mat4 Projection;
 		
 void main() {
-
     FragPos = aPos + Offset;
-
     gl_Position = Projection * vec4(FragPos, 1.0);
     Normal = aNormal;
     Texcoord = aTexcoord;

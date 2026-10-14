@@ -2,24 +2,22 @@
 
 #include <SDL3/SDL_mouse.h>
 #include <SDL3/SDL_keyboard.h>
+#include <SDL3/SDL_oldnames.h>
 
 #include "../MathClasses/Vector2.hpp"
 
 
 namespace {
-	static Uint32 _MouseButtonMask;
-	static Math::IVector2 _MousePosition;
+	Uint32 _MouseButtonMask;
+	Math::Vector2 _MousePosition;
 }
-
 
 namespace Game {
 	namespace Input {
 
 		inline void Update();
 
-
 		namespace Keyboard {
-
 			inline bool KeyPressed(SDL_Scancode Key);
 		}
 
@@ -51,13 +49,13 @@ bool Game::Input::Keyboard::KeyPressed(SDL_Scancode Key) {
 
 
 inline bool Game::Input::Mouse::GetLeftPressed() {
-	return SDL_BUTTON(::_MouseButtonMask, SDL_BUTTON_LEFT);
+	return SDL_BUTTON_MASK(::_MouseButtonMask, SDL_BUTTON_LEFT);
 }
 inline bool Game::Input::Mouse::GetRightPressed() {
-	return SDL_BUTTON(::_MouseButtonMask, SDL_BUTTON_RIGHT);
+    return SDL_BUTTON_MASK(::_MouseButtonMask, SDL_BUTTON_RIGHT);
 }
 inline bool Game::Input::Mouse::GetMiddlePressed() {
-	return SDL_BUTTON(::_MouseButtonMask, SDL_BUTTON_MIDDLE);
+    return SDL_BUTTON_MASK(::_MouseButtonMask, SDL_BUTTON_MIDDLE);
 }
 
 const Math::IVector2& Game::Input::Mouse::GetPosition() {

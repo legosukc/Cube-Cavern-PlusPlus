@@ -1,5 +1,4 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP 1
+#pragma once
 
 #include "../../define.h"
 
@@ -10,6 +9,10 @@
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
+
+#ifdef SDL_PLATFORM_VITA
+#include <EGL/egl.h>
+#endif
 
 #include "../../MathClasses/Vector2.hpp"
 
@@ -35,10 +38,14 @@ namespace Game::Classes {
         mutable ScancodeStateStruct
             ScancodeStates[SDL_Scancode::SDL_SCANCODE_COUNT];
 
-//#ifndef SDL_PLATFORM_VITA
+#ifdef SDL_PLATFORM_VITA
+        EGLDisplay dpy;
+        EGLSurface surface;
+        EGLContext context;
+#else
         SDL_Window* SDLWindow;
         SDL_GLContext GLContext;
-//#endif
+#endif
 
         Math::IVector2 Position, Size;
 
@@ -46,7 +53,7 @@ namespace Game::Classes {
         void Create(const char* WindowTitle,
                     int Width,
                     int Height,
-                    SDL_WindowFlags Flags = 0);
+                    SDL_WindowFlags Flags = (SDL_WindowFlags)0);
         Window();
 
         void Destroy();
@@ -78,5 +85,3 @@ namespace Game::Classes {
         void Present();
     };
 }
-
-#endif

@@ -3,8 +3,13 @@
 
 #include "../../define.h"
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#include "../../GLES2_typedefs.h"
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
 
 #include "BufferBase.hpp"
 
@@ -22,11 +27,11 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::IndexBuffer {
 
-    extern Game::Graphics::Classes::IndexBuffer* (*Create)();
-    extern void (*CreateBulk)(
+    inline Game::Graphics::Classes::IndexBuffer* (*Create)() = NULL;
+    inline void (*CreateBulk)(
         size_t CreateAmount,
-        Game::Graphics::Classes::IndexBuffer* IndexBuffers[]);
-    extern void (*Unbind)();
+        Game::Graphics::Classes::IndexBuffer* IndexBuffers[]) = NULL;
+    inline void (*Unbind)() = NULL;
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();
@@ -38,14 +43,6 @@ namespace Game::Graphics::IndexBuffer {
 bool Game::Graphics::Classes::IndexBuffer_OpenGL::IsBound() const {
     // TODO: FIX THIS!!!!
     return true;
-}
-
-namespace Game::Graphics::IndexBuffer {
-
-    Game::Graphics::Classes::IndexBuffer* (*Create)();
-    void (*CreateBulk)(size_t CreateAmount,
-                       Game::Graphics::Classes::IndexBuffer* IndexBuffers[]);
-    void (*Unbind)();
 }
 
 void Game::Graphics::IndexBuffer::Init_OpenGL() {

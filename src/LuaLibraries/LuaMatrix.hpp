@@ -8,6 +8,7 @@
 #include "../FunctionHeaders/MathTransform.hpp"
 #include "../MathClasses/Matrix.hpp"
 
+
 namespace Game::Lua::CLibraries::Matrix {
 
     inline void Init(lua_State* State);
@@ -276,6 +277,20 @@ namespace Game::Lua::CLibraries::Matrix {
 
         return 1;
     }
+
+    static int __Translate(lua_State* State) {
+        Math::Mat4* Result = static_cast<Math::Mat4*>(
+            lua_newuserdata(State, sizeof(Math::Mat4)));
+
+        luaL_getmetatable(State, "Mat4");
+        lua_setmetatable(State, -2);
+
+        *Result = Math::Transform::Translate(
+            *static_cast<Math::Mat4*>(luaL_checkudata(State, 1, "Mat4")),
+            *static_cast<Math::Vector3*>(luaL_checkudata(State, 2, "Vector3")));
+
+        return 1;
+    }
 }
 
 void Game::Lua::CLibraries::Matrix::Init(lua_State* State) {
@@ -298,6 +313,10 @@ void Game::Lua::CLibraries::Matrix::Init(lua_State* State) {
     lua_pushcfunction(State, Game::Lua::CLibraries::Matrix::_Orthographic,
                       "Mat4.Orthographic");
     lua_setfield(State, -2, "Orthographic");
+
+    lua_pushcfunction(State, Game::Lua::CLibraries::Matrix::__Translate,
+                      "Mat4.Translate");
+    lua_setfield(State, -2, "Translate");
 
     lua_pop(State, 1);
 }

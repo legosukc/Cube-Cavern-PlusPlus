@@ -2,7 +2,7 @@
 #define TIME_HPP
 
 namespace Game::Time {
-    extern double DeltaTime;
+    inline double DeltaTime = 1.0;
 }
 
 #endif

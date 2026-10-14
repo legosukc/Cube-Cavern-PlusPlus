@@ -1,15 +1,26 @@
 #ifndef GRAPHICS_UNIFORMBUFFER_H
 #define GRAPHICS_UNIFORMBUFFER_H
 
+// TODO: make abstraction so uniform buffers work in gles 2.0
+
 #include "../../define.h"
 
 #include "BufferBase.hpp"
 
+#include <SDL3/SDL_platform_defines.h>
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#include "../../GLES2_typedefs.h"
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
+
 namespace Game::Graphics::OpenGLFunctions {
-    PFNGLBINDBUFFERBASEPROC glBindBufferBase;
-    PFNGLBINDBUFFERRANGEPROC glBindBufferRange;
+#ifndef SDL_PLATFORM_VITA
+    inline PFNGLBINDBUFFERBASEPROC glBindBufferBase = NULL;
+    inline PFNGLBINDBUFFERRANGEPROC glBindBufferRange = NULL;
+#endif
 }
 
 namespace Game::Graphics::Classes {
@@ -23,6 +34,7 @@ namespace Game::Graphics::Classes {
         virtual void BindBase(GLuint Index);
     };
 
+#ifndef SDL_PLATFORM_VITA
     class UniformBuffer_OpenGL
         : public UniformBuffer,
           public Game::Graphics::Classes::BufferBase_OpenGL<GL_UNIFORM_BUFFER> {
@@ -31,15 +43,16 @@ namespace Game::Graphics::Classes {
 
         virtual bool IsBound() const override;
     };
+#endif
 }
 
 namespace Game::Graphics::UniformBuffer {
 
-    extern Game::Graphics::Classes::UniformBuffer* (*Create)();
-    extern void (*CreateBulk)(
+    inline Game::Graphics::Classes::UniformBuffer* (*Create)() = NULL;
+    inline void (*CreateBulk)(
         size_t CreateAmount,
-        Game::Graphics::Classes::UniformBuffer* UniformBuffers[]);
-    extern void (*Unbind)();
+        Game::Graphics::Classes::UniformBuffer* UniformBuffers[]) = NULL;
+    inline void (*Unbind)() = NULL;
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();
@@ -51,6 +64,7 @@ namespace Game::Graphics::UniformBuffer {
 Game::Graphics::Classes::UniformBuffer::UniformBuffer() = default;
 void Game::Graphics::Classes::UniformBuffer::BindBase(GLuint Index) {}
 
+#ifndef SDL_PLATFORM_VITA
 void Game::Graphics::Classes::UniformBuffer_OpenGL::BindBase(GLuint Index) {
     Game::Graphics::OpenGLFunctions::glBindBufferBase(GL_UNIFORM_BUFFER, Index,
                                                       this->GLObject);
@@ -60,17 +74,10 @@ bool Game::Graphics::Classes::UniformBuffer_OpenGL::IsBound() const {
     // TODO: FIX THIS!!!!
     return true;
 }
-
-namespace Game::Graphics::UniformBuffer {
-
-    Game::Graphics::Classes::UniformBuffer* (*Create)();
-    void (*CreateBulk)(
-        size_t CreateAmount,
-        Game::Graphics::Classes::UniformBuffer* UniformBuffers[]);
-    void (*Unbind)();
-}
+#endif
 
 void Game::Graphics::UniformBuffer::Init_OpenGL() {
+#ifndef SDL_PLATFORM_VITA
     LOAD_OPENGL_FUNCTION(glBindBufferBase);
     LOAD_OPENGL_FUNCTION(glBindBufferRange);
 
@@ -86,6 +93,7 @@ void Game::Graphics::UniformBuffer::Init_OpenGL() {
 
     Game::Graphics::UniformBuffer::Unbind =
         WrapperTemplates::Unbind_OpenGL<UniformBuffer_OpenGL>;
+#endif
 }
 
 void Game::Graphics::UniformBuffer::Init_Vulkan() {}

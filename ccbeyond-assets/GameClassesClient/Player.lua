@@ -1,7 +1,8 @@
-local Inventory = Game.Inventory
 local Camera = Game.Camera
 local Graphics = Game.Graphics
 local Input = Game.Input
+
+local Texture = Graphics.Texture
 
 local SyncedModifierCollection = Assets.MiscClassesGlobal.SyncedModifierCollection
 
@@ -61,102 +62,15 @@ local Player = {
 	BaseMaxMana = 2;
 
 	LeftViewportArmVisible = true;
-	LeftViewportArmOffset = Vector3.new(0.15, -0.175, -0.3);
-	LeftViewportArmTransform = Mat4.new(1);
+	LeftViewportArmOffset = Vector3.new(-0.15, -0.175, -0.3);
+	LeftViewportArmAngle = Vector3.new(0, 0, 0);
 
 	RightViewportArmVisible = true;
-	RightViewportArmOffset = Vector3.new(-0.15, -0.175, -0.3);
-	RightViewportArmTransform = Mat4.new(1);
+	RightViewportArmOffset = Vector3.new(0.15, -0.175, -0.3);
+	RightViewportArmAngle = Vector3.new(0, 0, 0);
+
+	ViewarmRenderObject = Assets.RenderObjectsClient.rendViewarm;
 }
-print(Player.LeftViewportArmOffset)
-
-local ViewArmIndexCount: number
-do
-	local ViewportArmVAO = Graphics.VertexArray.new()
-	local ViewportArmVBO = Graphics.VertexBuffer.new()
-	local ViewportArmEBO = Graphics.ElementBuffer.new()
-
-	ViewportArmVAO:Bind()
-	ViewportArmVBO:Bind()
-	ViewportArmEBO:Bind()
-
-	local ViewportArmModel = ModelLoader.LoadFile("Models/ViewArm.obj")
-
-	ViewArmIndexCount = ViewportArmModel.IndexCount
-
-	Graphics.VertexBuffer.CopyFromBuffer(ViewportArmModel.VertexData)
-	Graphics.ElementBuffer.CopyFromBuffer(ViewportArmModel.IndexData)
-
-	Graphics.VertexArray.EnableAttribute(0)
-	Graphics.VertexArray.SetAttributePointer(0, 3, Graphics.Types.Float, false, ViewportArmModel.StrideSize, 0)
-
-	Graphics.VertexArray.EnableAttribute(1)
-	Graphics.VertexArray.SetAttributePointer(1, 3, Graphics.Types.Float, false, ViewportArmModel.StrideSize, 4 * 3)
-
-	Graphics.VertexArray.EnableAttribute(2)
-	Graphics.VertexArray.SetAttributePointer(2, 2, Graphics.Types.Float, false, ViewportArmModel.StrideSize, 4 * 3 * 2)
-
-	Graphics.VertexArray.Unbind()
-
-
-	local ViewportArmProgram = Graphics.Program.new()
-
-	do
-		local VertexShader = Graphics.Shader.new(Graphics.ShaderTypes.VertexShader)
-		VertexShader:LoadShaderSourceFromFile("Shaders/Viewarm.vrt")
-
-		local CompileError = VertexShader:Compile()
-		if CompileError then
-			print("Failed to compile VertexShader. ", CompileError)
-			Player.Draw = function() end
-		end
-
-		local FragmentShader = Graphics.Shader.new(Graphics.ShaderTypes.FragmentShader)
-		FragmentShader:LoadShaderSourceFromFile("Shaders/Viewarm.frg")
-
-		CompileError = FragmentShader:Compile()
-		if CompileError then
-			print("Failed to compile FragmentShader.\n", CompileError)
-			Player.Draw = function() end
-		end
-
-		ViewportArmProgram:AttachShader(VertexShader)
-		ViewportArmProgram:AttachShader(FragmentShader)
-	
-		local ErrorLog = ViewportArmProgram:Link()
-		if ErrorLog then
-			print("Failed to link ViewportArmProgram, OpenGL info log:\n", ErrorLog)
-			Player.Draw = function() end
-		end
-
-		ViewportArmProgram:DetachAllShaders()
-	end
-
-	ViewportArmProgram:Use()
-
-	local ViewportArmOffsetUniform = ViewportArmProgram:GetUniformIndex("Offset")
-	local ViewportArmProjectionUniform = ViewportArmProgram:GetUniformIndex("Projection")
-
-	print("uniform indexes: ", ViewportArmOffsetUniform, ViewportArmProjectionUniform)
-
-	Player.GraphicsObjects = {
-		ViewportLeftArmVAO = ViewportArmVAO;
-		ViewportLeftArmVBO = ViewportArmVBO;
-		ViewportLeftArmEBO = ViewportArmEBO;
-
-		ViewportRightArmVAO = ViewportArmVAO;
-		ViewportRightArmVBO = ViewportArmVBO;
-		ViewportRightArmEBO = ViewportArmEBO;
-
-		ViewportLeftArmProgram = ViewportArmProgram;
-		ViewportLeftArmOffsetUniform = ViewportArmOffsetUniform;
-		ViewportLeftArmProjectionUniform = ViewportArmProjectionUniform;
-
-		ViewportRightArmProgram = ViewportArmProgram;
-		ViewportRightArmOffsetUniform = ViewportArmOffsetUniform;
-		ViewportRightArmProjectionUniform = ViewportArmProjectionUniform;
-	}
-end
 
 Player.Bindings = {
 	ForwardInput = Input.GetBinding("Forward", Enums.Scancode.W);
@@ -177,7 +91,7 @@ Player.Bindings = {
 
 
 function Player:UsePrimary()
-	local HeldItem = Inventory.HeldItem
+	local HeldItem = Game.Inventory.HeldItem
 	if not HeldItem then
 		return
 	end
@@ -186,7 +100,7 @@ function Player:UsePrimary()
 end
 
 function Player:UseSecondary()
-	local HeldItem = Inventory.HeldItem
+	local HeldItem = Game.Inventory.HeldItem
 	if not HeldItem then
 		return
 	end
@@ -206,10 +120,7 @@ function Player:Move(MoveDirection)
     if addspeed <= 0 then
         return
     end
-    local accelspeed = accel * Game.DeltaTime * wishspeed
-    if accelspeed > addspeed then
-        accelspeed = addspeed
-    end
+    local accelspeed = math.min(accel * Game.DeltaTime * wishspeed, addspeed)
     
     self.Velocity += MoveDirection * accelspeed
 end
@@ -317,42 +228,60 @@ function Player:Update()
 end
 
 
-local SetUniformVec3 = Graphics.Program.SetUniformVec3
-local SetUniformMat4 = Graphics.Program.SetUniformMat4
+--local SetUniformVec3 = Graphics.Program.SetUniformVec3
+--local SetUniformMat4 = Graphics.Program.SetUniformMat4
 
-local YVelocityLerp = Player.Velocity.Y
 local VelocityLerp = Player.Velocity
+local ZLookLerp = Camera.LookDirection:Dot(Camera.WorldUpVector) * 0.05
 function Player:Draw()
 
-	--YVelocityLerp = math.clamp(math.lerp(YVelocityLerp, Player.Velocity.Y * -0.015, 0.3), -0.15, 0.2)
-	VelocityLerp = VelocityLerp:Lerp(self.Velocity * -0.015, 0.2)
-	--LastPosition = LastPosition:Lerp()
+	VelocityLerp = VelocityLerp:Lerp(self.Velocity * 0.01, 0.2)
 
 	local GraphicsObjects = self.GraphicsObjects
 	
 	if self.ThirdPerson then
 
 	else
-		if self.LeftViewportArmVisible then
-			GraphicsObjects.ViewportLeftArmVAO:Bind()
-			GraphicsObjects.ViewportLeftArmProgram:Use()
-		
-			SetUniformVec3(GraphicsObjects.ViewportLeftArmOffsetUniform, self.LeftViewportArmOffset + (VelocityLerp * Camera.LookDirection))
-			SetUniformMat4(GraphicsObjects.ViewportLeftArmProjectionUniform, false, Camera.ProjectionMatrix)
+		ZLookLerp = math.lerp(ZLookLerp, Camera.LookDirection:Dot(Camera.WorldUpVector) * 0.05, 0.15)
+		local ArmOffset = Vector3.new(
+			-VelocityLerp:Dot(Camera.RightVector),
+        	-VelocityLerp:Dot(Camera.UpVector),
+        	VelocityLerp:Dot(Camera.LookDirection) + ZLookLerp
+		)
 
-			Graphics.DrawElements(Graphics.DrawModes.Triangles, ViewArmIndexCount, Graphics.Types.Uint32)
+		local LeftArmOffset = self.LeftViewportArmOffset + ArmOffset
+		local RightArmOffset = self.RightViewportArmOffset + ArmOffset
+	
+		do
+			local YawRad = math.rad(self.LeftViewportArmAngle.X)
+			local PitchRad = math.rad(self.LeftViewportArmAngle.Y)
+
+			local LookDirection = Vector3.new(
+				math.cos(YawRad) * math.cos(PitchRad),
+				math.sin(PitchRad),
+				math.sin(YawRad) * math.cos(PitchRad)
+			):Normalize()
+
+			local RightVector = LookDirection:Cross(Vector3.new(0, 1, 0)):Normalize()
+    		local UpVector    = RightVector:Cross(LookDirection):Normalize()
+			ViewMatrix = Mat4.LookAt(LeftArmOffset, LeftArmOffset + LookDirection, UpVector)
+		end
+
+		if self.LeftViewportArmVisible then
+			
+			self.ViewarmRenderObject:Draw(nil, LeftArmOffset)
 		end
 
 		if self.RightViewportArmVisible then
-			GraphicsObjects.ViewportRightArmVAO:Bind()
-			GraphicsObjects.ViewportRightArmProgram:Use()
 			
-			SetUniformVec3(GraphicsObjects.ViewportRightArmOffsetUniform, self.RightViewportArmOffset + (VelocityLerp * Camera.LookDirection))
-			SetUniformMat4(GraphicsObjects.ViewportRightArmProjectionUniform, false, Camera.ProjectionMatrix)
-
-			Graphics.DrawElements(Graphics.DrawModes.Triangles, ViewArmIndexCount, Graphics.Types.Uint32)
+			self.ViewarmRenderObject:Draw(nil, RightArmOffset)
 		end
 		Graphics.VertexArray.Unbind()
+
+		local HeldItem = Game.Inventory.HeldItem
+		if HeldItem then
+			HeldItem:DrawViewmodel(LeftArmOffset, RightArmOffset)
+		end
 	end
 end
 
@@ -360,8 +289,9 @@ end
 
 function Player.CameraHandlerFunc(Camera)
 
-	local Yaw = (Camera.Yaw + Input.MouseDeltaX * 0.4) % 360
-	local Pitch = math.clamp(Camera.Pitch - Input.MouseDeltaY * 0.4, -89.9, 89.9)
+	-- TODO: make it so camera input properly follows the world up vector (instead of only the y component)
+	local Yaw = (Camera.Yaw + Input.MouseDeltaX * 0.4 * Camera.WorldUpVector.Y) % 360
+	local Pitch = math.clamp(Camera.Pitch - Input.MouseDeltaY * 0.4 * Camera.WorldUpVector.Y, -89.9, 89.9)
 
 	local YawRad = math.rad(Yaw)
 	local PitchRad = math.rad(Pitch)
@@ -373,7 +303,7 @@ function Player.CameraHandlerFunc(Camera)
 	):Normalize()
 
 	-- normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
-	local RightVector = LookDirection:Cross(Vector3.new(0, 1, 0)):Normalize()
+	local RightVector = LookDirection:Cross(Camera.WorldUpVector):Normalize()
     local UpVector    = RightVector:Cross(LookDirection):Normalize()
 
 	local CameraPosition = Player.Position

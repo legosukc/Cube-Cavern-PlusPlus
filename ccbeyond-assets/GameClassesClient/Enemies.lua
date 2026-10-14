@@ -3,20 +3,22 @@ local Enemies = {
 	Enemies = {}
 }
 
+local Dagger = require("../ItemClassesClient/Dagger")
+print(Dagger)
+
 --[[
-	Creates an Enemy from calling the 'new' function from 1st arg of 'EnemyClass'.
+	Creates an Enemy from calling the 'new' function from 1st argument: 'EnemyClass'.
 	Puts the created enemy into 'Game.Enemies.Enemies' and returns the Enemy.
 ]]--
-function Enemies:Spawn(EnemyClass)
+function Enemies:Spawn(EnemyClass: {}): {}
 
-	local TempType = type(EnemyClass)
-	assert(TempType ~= "table", "Unexpected type at 1st arg 'EnemyClass'. Expected 'table', got '"..TempType.."'")
+	assert(type(EnemyClass) ~= "table", `Unexpected type at 1st arg 'EnemyClass'. Expected 'table', got '{typeof(EnemyClass)}'`)
 
-	TempType = type(EnemyClass.new)
-	assert(TempType == "nil", "1st table arg 'EnemyClass' is missing function 'new'.")
-	assert(TempType ~= "table", "Unexpected type at 1st table arg 'EnemyClass' entry 'new'. Expected 'function', got '"..TempType.."'")
+	local NewFunction = EnemyClass.new
+	assert(NewFunction, "1st table arg 'EnemyClass' is missing function 'new'.")
+	assert(type(NewFunction) == "table", `Unexpected type at 1st table arg 'EnemyClass' entry 'new'. Expected 'function', got '{typeof(NewFunction)}'`)
 	
-	local NewEnemy = EnemyClass.new()
+	local NewEnemy = NewFunction()
 	table.insert(self.Enemies, NewEnemy)
 	return NewEnemy
 end
@@ -24,7 +26,7 @@ end
 
 function Enemies:Update()
 	
-	local UpdateFunc
+	local UpdateFunc: ({}) -> nil
 	for _, Enemy in self.Enemies do
 		
 		UpdateFunc = Enemy.Update

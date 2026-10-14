@@ -80,6 +80,32 @@ namespace {
             return reinterpret_cast<const ComponentType*>(this)[Index];
         }
 
+        constexpr _MatrixBase operator+(const _MatrixBase& B) const {
+            _MatrixBase Result;
+            for (int i = 0; i < _ColumnCount; ++i) {
+                Result[i] += this->operator[](i) + B[i];
+            }
+
+            return Result;
+        }
+
+        constexpr void operator+=(const _MatrixBase& B) {
+            *this = this->operator+(B);
+        }
+
+        constexpr _MatrixBase operator-(const _MatrixBase& B) const {
+            _MatrixBase Result;
+            for (int i = 0; i < _ColumnCount; ++i) {
+                Result[i] += this->operator[](i) - B[i];
+            }
+
+            return Result;
+        }
+
+        constexpr void operator-=(const _MatrixBase& B) {
+            *this = this->operator-(B);
+        }
+
         constexpr _MatrixBase operator*(const _MatrixBase& B) const {
             _MatrixBase Result;
             for (int i = 0; i < _ColumnCount; ++i) {

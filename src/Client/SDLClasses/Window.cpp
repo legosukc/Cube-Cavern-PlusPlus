@@ -13,11 +13,12 @@
 #include <SDL3/SDL_hints.h>
 #include <SDL3/SDL_keyboard.h>
 #include <SDL3/SDL_mouse.h>
-#include <SDL3/SDL_oldnames.h>
 #include <SDL3/SDL_scancode.h>
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
+
+#include <EGL/egl.h>
 
 #include "../../Time.hpp"
 
@@ -28,15 +29,78 @@ void Game::Classes::Window::Create(const char* WindowTitle,
                                    int Height,
                                    SDL_WindowFlags Flags) {
 #ifdef SDL_PLATFORM_VITA
-    std::cout << "version 2.0 es" << std::endl;
+    std::cout << "version 2.0 es (pvr)" << std::endl;
 
-    // SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-    // SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-    // SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
-    // SDL_GL_CONTEXT_PROFILE_ES);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
 
     Width = 960;
     Height = 544;
+
+    EGLConfig configs[2];
+    EGLBoolean eRetStatus;
+    EGLint major, minor;
+    EGLint context_attribs[] = {EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE};
+
+    EGLint config_count;
+
+    EGLint cfg_attribs[] = {EGL_BUFFER_SIZE,
+                            EGL_DONT_CARE,
+                            EGL_DEPTH_SIZE,
+                            16,
+                            EGL_RED_SIZE,
+                            8,
+                            EGL_GREEN_SIZE,
+                            8,
+                            EGL_BLUE_SIZE,
+                            8,
+                            EGL_RENDERABLE_TYPE,
+                            EGL_OPENGL_ES2_BIT,
+                            EGL_NONE};
+
+    int i;
+
+    this->dpy = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+
+    eRetStatus = eglInitialize(this->dpy, &major, &minor);
+    if (eRetStatus != EGL_TRUE) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    eRetStatus = eglGetConfigs(this->dpy, configs, 2, &config_count);
+    if (eRetStatus != EGL_TRUE) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    eRetStatus =
+        eglChooseConfig(this->dpy, cfg_attribs, configs, 2, &config_count);
+    if (eRetStatus != EGL_TRUE || !config_count) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    this->surface = eglCreateWindowSurface(this->dpy, configs[0], 0, NULL);
+    if (this->surface == EGL_NO_SURFACE) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    eRetStatus = eglBindAPI(EGL_OPENGL_ES_API);
+    if (eRetStatus != EGL_TRUE) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    this->context = eglCreateContext(this->dpy, configs[0], EGL_NO_CONTEXT,
+                                     context_attribs);
+    if (this->context == EGL_NO_CONTEXT) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    eRetStatus =
+        eglMakeCurrent(this->dpy, this->surface, this->surface, this->context);
+    if (eRetStatus != EGL_TRUE) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
 #else
     std::cout << "version 3.30 core" << std::endl;
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -45,20 +109,19 @@ void Game::Classes::Window::Create(const char* WindowTitle,
                         SDL_GL_CONTEXT_PROFILE_CORE);
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-#endif
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 0);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 0);
 
-//#ifndef SDL_PLATFORM_VITA
     this->SDLWindow =
         SDL_CreateWindow(WindowTitle, Width, Height, SDL_WINDOW_OPENGL | Flags);
     if (this->SDLWindow == NULL) {
         Exceptions::ThrowSDLError("Failed to create SDL_Window.");
     }
-//#endif
 
-    this->Size = Math::IVector2(Width, Height);
-
-//#ifndef SDL_PLATFORM_VITA
     this->GLContext = SDL_GL_CreateContext(this->SDLWindow);
     if (this->GLContext == NULL) {
         Exceptions::ThrowSDLError("Failed to create SDL_GLContext.");
@@ -68,15 +131,26 @@ void Game::Classes::Window::Create(const char* WindowTitle,
         Exceptions::ThrowSDLError("Error while calling SDL_GL_MakeCurrent.");
     }
 
+    // SDL3:
     SDL_SetWindowRelativeMouseMode(this->SDLWindow, true);
-//#endif
+
+// SDL2:
+// SDL_SetRelativeMouseMode(this->SDLWindow, true);
+#endif
+
+    this->Size = Math::IVector2(Width, Height);
 
     memset(&this->ScancodeStates, 0, sizeof(this->ScancodeStates));
 }
 Game::Classes::Window::Window() = default;
 
 void Game::Classes::Window::Destroy() {
-#ifndef SDL_PLATFORM_VITA
+#ifdef SDL_PLATFORM_VITA
+    eglDestroyContext(this->dpy, this->context);
+    eglDestroySurface(this->dpy, this->surface);
+    eglMakeCurrent(this->dpy, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+    eglTerminate(this->dpy);
+#else
     if (this->SDLWindow != NULL) {
         SDL_GL_MakeCurrent(this->SDLWindow, NULL);
         SDL_DestroyWindow(this->SDLWindow);
@@ -110,6 +184,7 @@ void Game::Classes::Window::HandleEvent(const SDL_Event& Event) {
     #else
     #endif
     */
+
     switch (Event.type) {
         case SDL_EventType::SDL_EVENT_WINDOW_RESIZED:
         case SDL_EventType::SDL_EVENT_WINDOW_MAXIMIZED:
@@ -165,21 +240,23 @@ const Math::IVector2& Game::Classes::Window::GetSize() const {
 
 bool Game::Classes::Window::ScancodePressed(SDL_Scancode Scancode,
                                             float BufferTime) const {
+    // TODO: properly implement cause i'm a lazy bum
     // return this->ScancodeStates[Scancode] == ScancodeStatesEnum::Pressed;
     return SDL_GetKeyboardState(NULL)[Scancode];
 }
 
 bool Game::Classes::Window::ScancodeHeld(SDL_Scancode Scancode,
                                          float BufferTime) const {
+    // TODO: properly implement cause i'm a lazy bum
     return SDL_GetKeyboardState(NULL)[Scancode];
-
+    /*
     ScancodeStateStruct& ScancodeState = this->ScancodeStates[Scancode];
     if (ScancodeState.CurrentState == ScancodeStatesEnum::Released) {
         return false;
     }
     ScancodeState.CurrentState = ScancodeStatesEnum::Held;
 
-    return ScancodeState.CurrentState == ScancodeStatesEnum::Released;
+    return ScancodeState.CurrentState == ScancodeStatesEnum::Released;*/
 }
 
 bool Game::Classes::Window::ScancodeReleased(SDL_Scancode Scancode,
@@ -193,7 +270,11 @@ void Game::Classes::Window::Present() {
 
     SDL_DelayPrecise(this->FrameNS - (SDL_GetTicksNS() - this->LastNS));
 
+#ifdef SDL_PLATFORM_VITA
+    eglSwapBuffers(this->dpy, this->surface);
+#else
     SDL_GL_SwapWindow(this->SDLWindow);
+#endif
 
     const Uint64 TicksNS = SDL_GetTicksNS();
     Game::Time::DeltaTime = static_cast<double>(TicksNS - this->LastNS) / 1e+9;

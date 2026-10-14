@@ -1,24 +1,29 @@
-#ifndef GRAPHICS_BUFFERBASE_H
-#define GRAPHICS_BUFFERBASE_H
+#pragma once
 
 #include "../../define.h"
 
 #include <cstddef>
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#include "../../GLES2_typedefs.h"
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
+
 #include <SDL3/SDL_video.h>
 
 #include "BaseClassDefinitions.hpp"
 
 namespace Game::Graphics::OpenGLFunctions {
-    PFNGLGENBUFFERSPROC glGenBuffers;
-    PFNGLDELETEBUFFERSPROC glDeleteBuffers;
+    inline PFNGLGENBUFFERSPROC glGenBuffers = NULL;
+    inline PFNGLDELETEBUFFERSPROC glDeleteBuffers = NULL;
 
-    PFNGLBUFFERDATAPROC glBufferData;
-    PFNGLBUFFERSUBDATAPROC glBufferSubData;
+    inline PFNGLBUFFERDATAPROC glBufferData = NULL;
+    inline PFNGLBUFFERSUBDATAPROC glBufferSubData = NULL;
 
-    PFNGLBINDBUFFERPROC glBindBuffer;
+    inline PFNGLBINDBUFFERPROC glBindBuffer = NULL;
 }
 
 namespace Game::Graphics::Classes {
@@ -129,5 +134,3 @@ void Game::Graphics::BufferBase::Init_Metal() {}
 void Game::Graphics::BufferBase::Init_DirectX11() {}
 
 void Game::Graphics::BufferBase::Init_DirectX12() {}
-
-#endif

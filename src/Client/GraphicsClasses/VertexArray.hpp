@@ -1,5 +1,4 @@
-#ifndef GRAPHICS_VERTEXARRAY_H
-#define GRAPHICS_VERTEXARRAY_H
+#pragma once
 
 #include "../../define.h"
 
@@ -7,23 +6,29 @@
 #include <iostream>
 #include <map>
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#include "../../GLES2_typedefs.h"
+#else
 #include <SDL3/SDL_opengl.h>
 #include <SDL3/SDL_opengl_glext.h>
+#endif
+
 #include <SDL3/SDL_video.h>
 
 #include "BaseClassDefinitions.hpp"
 #include "BufferBase.hpp"
 
 namespace Game::Graphics::OpenGLFunctions {
-    PFNGLGENVERTEXARRAYSPROC glGenVertexArrays;
-    PFNGLDELETEVERTEXARRAYSPROC glDeleteVertexArrays;
+    inline void (*glGenVertexArrays)(GLsizei n, GLuint* arrays) = NULL;
+    inline void (*glDeleteVertexArrays)(GLsizei n, const GLuint* arrays) = NULL;
 
-    PFNGLBINDVERTEXARRAYPROC glBindVertexArray;
+    inline void (*glBindVertexArray)(GLuint array) = NULL;
 
-    PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
-    PFNGLDISABLEVERTEXATTRIBARRAYPROC glDisableVertexAttribArray;
+    inline PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray = NULL;
+    inline PFNGLDISABLEVERTEXATTRIBARRAYPROC glDisableVertexAttribArray = NULL;
 
-    PFNGLVERTEXATTRIBPOINTERARBPROC glVertexAttribPointer;
+    inline PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer = NULL;
 }
 
 namespace Game::Graphics::Classes {
@@ -47,11 +52,11 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::VertexArray {
 
-    extern Game::Graphics::Classes::VertexArray* (*Create)();
-    extern void (*CreateBulk)(
+    inline Game::Graphics::Classes::VertexArray* (*Create)() = NULL;
+    inline void (*CreateBulk)(
         size_t CreateAmount,
-        Game::Graphics::Classes::VertexArray* VertexArrays[]);
-    extern void (*Unbind)();
+        Game::Graphics::Classes::VertexArray* VertexArrays[]) = NULL;
+    inline void (*Unbind)() = NULL;
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();
@@ -137,7 +142,7 @@ namespace {
 
     GLuint BoundVAO = 0;
 
-    static PFNGLVERTEXATTRIBPOINTERARBPROC _old_VertexAttribPointer;
+    static PFNGLVERTEXATTRIBPOINTERPROC _old_VertexAttribPointer;
     static PFNGLBINDBUFFERPROC _old_BindBuffer;
 
     static PFNGLENABLEVERTEXATTRIBARRAYPROC _old_EnableVertexAttribArray;
@@ -249,14 +254,6 @@ namespace {
     }
 }
 
-namespace Game::Graphics::VertexArray {
-
-    Game::Graphics::Classes::VertexArray* (*Create)();
-    void (*CreateBulk)(size_t CreateAmount,
-                       Game::Graphics::Classes::VertexArray* VertexArrays[]);
-    void (*Unbind)();
-}
-
 void Game::Graphics::VertexArray::Init_OpenGL() {
     Game::Graphics::VertexArray::Create = ::_VertexArray_Create_OpenGL;
     Game::Graphics::VertexArray::CreateBulk = ::_VertexArray_CreateBulk_OpenGL;
@@ -271,10 +268,14 @@ void Game::Graphics::VertexArray::Init_OpenGL() {
     int MajorVersion;
     SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &MajorVersion);
     if (MajorVersion >= 3) {
+#ifdef SDL_PLATFORM_VITA
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+#else
         LOAD_OPENGL_FUNCTION(glGenVertexArrays);
         LOAD_OPENGL_FUNCTION(glDeleteVertexArrays);
 
         LOAD_OPENGL_FUNCTION(glBindVertexArray);
+#endif
 
     } else {
         int ProfileIsES;
@@ -287,20 +288,23 @@ void Game::Graphics::VertexArray::Init_OpenGL() {
         if (SDL_GL_ExtensionSupported(VAOExtensionName)) {
             std::cout << "OpenGL version isn't 3.0+, but your GPU "
                          "supports the extension "
-                      << VAOExtensionName << ". (you're all good!)" << std::endl;
+                      << VAOExtensionName << ". (you're all good!)"
+                      << std::endl;
 
             Game::Graphics::OpenGLFunctions::glGenVertexArrays =
-                (PFNGLGENVERTEXARRAYSPROC)SDL_GL_GetProcAddress(
-                    ProfileIsES ? "glGenVertexArraysOES"
-                                : "glGenVertexArraysARB");
+                (decltype(Game::Graphics::OpenGLFunctions::glGenVertexArrays))
+                    SDL_GL_GetProcAddress(ProfileIsES ? "glGenVertexArraysOES"
+                                                      : "glGenVertexArraysARB");
             Game::Graphics::OpenGLFunctions::glDeleteVertexArrays =
-                (PFNGLDELETEVERTEXARRAYSPROC)SDL_GL_GetProcAddress(
-                    ProfileIsES ? "glDeleteVertexArraysOES"
-                                : "glDeleteVertexArraysARB");
+                (decltype(Game::Graphics::OpenGLFunctions::
+                              glDeleteVertexArrays))
+                    SDL_GL_GetProcAddress(ProfileIsES
+                                              ? "glDeleteVertexArraysOES"
+                                              : "glDeleteVertexArraysARB");
             Game::Graphics::OpenGLFunctions::glBindVertexArray =
-                (PFNGLBINDVERTEXARRAYPROC)SDL_GL_GetProcAddress(
-                    ProfileIsES ? "glBindVertexArrayOES"
-                                : "glBindVertexArrayARB");
+                (decltype(Game::Graphics::OpenGLFunctions::glBindVertexArray))
+                    SDL_GL_GetProcAddress(ProfileIsES ? "glBindVertexArrayOES"
+                                                      : "glBindVertexArrayARB");
 
         } else {
             std::cerr << "Your GPU doesn't support OpenGL 3.0+ and "
@@ -346,5 +350,3 @@ void Game::Graphics::VertexArray::Init_Metal() {}
 void Game::Graphics::VertexArray::Init_DirectX11() {}
 
 void Game::Graphics::VertexArray::Init_DirectX12() {}
-
-#endif

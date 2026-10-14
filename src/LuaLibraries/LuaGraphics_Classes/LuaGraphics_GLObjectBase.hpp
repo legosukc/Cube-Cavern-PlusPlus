@@ -1,9 +1,13 @@
-#ifndef GLOBJECTBASE_H
-#define GLOBJECTBASE_H
+#pragma once
 
 #include "../../define.h"
 
+#ifdef SDL_PLATFORM_VITA
+#include <GLES2/gl2.h>
+#include "../../GLES2_typedefs.h"
+#else
 #include <SDL3/SDL_opengl.h>
+#endif
 
 #include "../../../include/VM/lua.h"
 
@@ -40,5 +44,3 @@ int Game::Lua::CLibraries::Graphics::Classes::GLObjectBase::__gc(
     lua_State* State) {
     return 0;
 }
-
-#endif

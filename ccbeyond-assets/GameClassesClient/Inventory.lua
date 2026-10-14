@@ -21,15 +21,8 @@ local Inventory = {
     Items = {};
 }
 
-print("printing itemclasses")
-for Name, Object in pairs(Assets.ItemClassesClient) do
-    print(Name, typeof(Object))
-end
-
-print(pcall(function()
-Inventory.Items[1] = Assets.ItemClassesClient.Dagger.new();
-end))
-Inventory.HeldItem = Inventory.Items[1];
+Inventory.Items[1] = Assets.ItemClassesClient.Dagger.new()
+Inventory.HeldItem = Inventory.Items[1]
 
 do
     local SlotTexture = Texture.new()
@@ -68,28 +61,16 @@ do
     do
         local VertexShader = Shader.new(Graphics.ShaderTypes.VertexShader)
         VertexShader:LoadShaderSourceFromFile("Shaders/InventorySlot.vrt")
-
-        local CompileError = VertexShader:Compile()
-		if CompileError then
-            error("Failed to compile VertexShader. "..CompileError)
-		end
-
+        VertexShader:Compile()
 
         local FragmentShader = Shader.new(Graphics.ShaderTypes.FragmentShader)
         FragmentShader:LoadShaderSourceFromFile("Shaders/InventorySlot.frg")
-
-        CompileError = FragmentShader:Compile()
-		if CompileError then
-            error("Failed to compile FragmentShader. "..CompileError)
-		end
+        FragmentShader:Compile()
 
         SlotProgram:AttachShader(VertexShader)
 		SlotProgram:AttachShader(FragmentShader)
 	
-		local ErrorLog = SlotProgram:Link()
-		if ErrorLog then
-			error("Failed to link SlotProgram, OpenGL info log:\n"..ErrorLog)
-		end
+		SlotProgram:Link()
 
 		SlotProgram:DetachAllShaders()
     end
@@ -100,7 +81,7 @@ do
     local TexcoordScaleUniform = SlotProgram:GetUniformIndex("TexcoordScale")
 
     Program.SetUniformVec2(TexcoordScaleUniform, 2.0, 2.0)
-    Program.SetUniformSint32(SlotTextureUniform, 0);
+    Program.SetUniformSint32(SlotTextureUniform, 0)
 
     Inventory.GraphicsObjects = {
         SlotVAO = SlotVAO;
@@ -132,10 +113,11 @@ local SlotBindings = {
 
 function Inventory:Update()
     
-    for Index, Binding in ipairs(SlotBindings) do
+    for Index, Binding in SlotBindings do
         if Binding:Pressed() then
-            self.SelectedHotbarSlot = Index - 1
-            print("selected hotbar slot ", self.SelectedHotbarSlot)
+            self.SelectedHotbarSlot = Index
+            self.HeldItem = self.Items[Index]
+            print("selected hotbar slot ", Index)
             break
         end
     end

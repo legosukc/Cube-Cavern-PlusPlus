@@ -13,7 +13,7 @@ namespace Game {
     inline Game::Classes::Window Window;
 #endif
 
-    inline void Update();
+    void Update();
     void Draw();
 }
 

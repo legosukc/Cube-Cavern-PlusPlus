@@ -6,40 +6,39 @@
 namespace Game::Statistics {
 
     namespace Memory {
+        inline Uint64 EngineAllocationsPerFrame = 0;
+        inline Uint64 LuaAllocationsPerFrame = 0;
 
-        extern Uint64 EngineAllocationsPerFrame;
-        extern Uint64 LuaAllocationsPerFrame;
+        inline Uint64 EngineAllocationBytesPerFrame = 0;
+        inline Uint64 LuaAllocationsBytesPerFrame = 0;
 
-        extern Uint64 EngineAllocationBytesPerFrame;
-        extern Uint64 LuaAllocationsBytesPerFrame;
+        inline Uint64 EngineDeallocationsPerFrame = 0;
+        inline Uint64 LuaDeallocationsPerFrame = 0;
 
-        extern Uint64 EngineDeallocationsPerFrame;
-        extern Uint64 LuaDeallocationsPerFrame;
+        inline Uint64 EngineAllocations = 0;
+        inline Uint64 LuaAllocations = 0;
 
-        extern Uint64 EngineAllocations;
-        extern Uint64 LuaAllocations;
-
-        extern Uint64 EngineAllocatedBytes;
-        extern Uint64 LuaAllocatedBytes;
+        inline Uint64 EngineAllocatedBytes = 0;
+        inline Uint64 LuaAllocatedBytes = 0;
 
         // Nanoseconds spent on allocations/deallocations.
-        extern Uint64 EngineNSSpentOnHeapPerFrame;
-        extern Uint64 LuaNSSpentOnHeapPerFrame;
+        inline Uint64 EngineNSSpentOnHeapPerFrame = 0;
+        inline Uint64 LuaNSSpentOnHeapPerFrame = 0;
 
-        void UpdateLuaStatsAllocation(Uint64 Bytes);
+        void UpdateLuaStatsAllocation(Uint64 Bytes) noexcept;
 
-        void UpdateLuaStatsDeallocation(Uint64 Bytes);
+        void UpdateLuaStatsDeallocation(Uint64 Bytes) noexcept;
     }
 
     namespace Lua {
-        extern Uint64 CppCallsOnLuaFunctionsPerSecond;
+        inline Uint64 CppCallsOnLuaFunctionsPerSecond = 0;
     }
 
     namespace Rendering {
-        extern Uint64 DrawCallsPerFrame;
+        inline Uint64 DrawCallsPerFrame = 0;
     }
 
-    void Update();
+    void Update() noexcept;
 }
 
 #endif
