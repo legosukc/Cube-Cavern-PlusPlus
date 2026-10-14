@@ -2,6 +2,8 @@
 
 #include "../define.h"
 
+#include <SDL3/SDL_platform_defines.h>
+
 #ifdef SDL_PLATFORM_VITA
 
 int _newlib_heap_size_user = 16 * 1024 * 1024;
