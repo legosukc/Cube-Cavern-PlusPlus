@@ -5,13 +5,9 @@
 
 #include <SDL3/SDL_stdinc.h>
 
-// #include "Memory.hpp"
-
 #include "FunctionHeaders/Math.hpp"
 
 namespace Game::ConsoleVars {
-
-    namespace ReferenceVars {}
 
     void BaseCVar::RaiseRangeWarning(const char* CVarClassName) const {
         std::clog << "Range error while parsing argument to " << CVarClassName
@@ -25,132 +21,96 @@ namespace Game::ConsoleVars {
 
 namespace Game::ConsoleVars::CVarClasses {
 
-    struct FloatCVar : BaseCVar {
-        virtual void Set(const char* Argument) override {
-            errno = 0;
-            const float Value = std::strtof(Argument, NULL);
+    void FloatCVar::SetWithString(const char* NewValue) {
+        errno = 0;
+        const float Value = std::strtof(NewValue, NULL);
 
-            if (errno == ERANGE) {
-                this->RaiseRangeWarning("FloatCVar");
-                return;
-            }
-
-            *static_cast<float*>(this->ReferenceVar) = Value;
+        if (errno == ERANGE) {
+            this->RaiseRangeWarning("FloatCVar");
+            return;
         }
 
-        using VarType = float;
-    };
+        *static_cast<float*>(this->ReferenceVar) = Value;
+    }
 
-    struct DoubleCVar : BaseCVar {
-        virtual void Set(const char* Argument) override {
-            errno = 0;
-            const double Value = std::strtod(Argument, NULL);
+    void DoubleCVar::SetWithString(const char* NewValue) {
+        errno = 0;
+        const double Value = std::strtod(NewValue, NULL);
 
-            if (errno == ERANGE) {
-                this->RaiseRangeWarning("DoubleCVar");
-                return;
-            }
-
-            *static_cast<double*>(this->ReferenceVar) = Value;
+        if (errno == ERANGE) {
+            this->RaiseRangeWarning("DoubleCVar");
+            return;
         }
 
-        using VarType = double;
-    };
+        *static_cast<double*>(this->ReferenceVar) = Value;
+    }
 
     template <typename IntType>
-    struct IntCVar : BaseCVar {
-        virtual void Set(const char* Argument) override {
-            errno = 0;
+    void IntCVar<IntType>::SetWithString(const char* NewValue) {
+        errno = 0;
 
-            constexpr long long IntMinimumValue =
-                ((2 ^ sizeof(IntType) * 8) / -2) + 1;
+        constexpr long long IntMinimumValue =
+            ((2 ^ sizeof(IntType) * 8) / -2) + 1;
 
-            IntType Value;
-            if CONSTEXPR_IF (sizeof(IntType) <= sizeof(long)) {
-                Value = static_cast<IntType>(
-                    Math::Clamp<long>(std::strtol(Argument, NULL, 10),
-                                      ((2 ^ sizeof(IntType) * 8) / -2) + 1,
-                                      ((2 ^ sizeof(IntType) * 8) / 2) + 1));
-            } else {
-                Value = static_cast<IntType>(Math::Clamp<long long>(
-                    std::strtoll(Argument, NULL, 10),
-                    ((2 ^ sizeof(IntType) * 8) / -2) + 1,
-                    ((2 ^ sizeof(IntType) * 8) / 2) + 1));
-            }
-
-            if (errno == ERANGE) {
-                this->RaiseRangeWarning("FloatCVar");
-                return;
-            }
-
-            *static_cast<Sint8*>(this->ReferenceVar) = static_cast<Sint8>(
-                Math::Clamp<long>(Value, INT8_MIN, INT8_MAX));
+        IntType Value;
+        if CONSTEXPR_IF (sizeof(IntType) <= sizeof(long)) {
+            Value = static_cast<IntType>(
+                Math::Clamp<long>(std::strtol(NewValue, NULL, 10),
+                                  ((2 ^ sizeof(IntType) * 8) / -2) + 1,
+                                  ((2 ^ sizeof(IntType) * 8) / 2) + 1));
+        } else {
+            Value = static_cast<IntType>(
+                Math::Clamp<long long>(std::strtoll(NewValue, NULL, 10),
+                                       ((2 ^ sizeof(IntType) * 8) / -2) + 1,
+                                       ((2 ^ sizeof(IntType) * 8) / 2) + 1));
         }
 
-        using VarType = IntType;
-    };
+        if (errno == ERANGE) {
+            this->RaiseRangeWarning("FloatCVar");
+            return;
+        }
+
+        *static_cast<Sint8*>(this->ReferenceVar) =
+            static_cast<Sint8>(Math::Clamp<long>(Value, INT8_MIN, INT8_MAX));
+    }
 
     template <typename UintType>
-    struct UintCVar : BaseCVar {
-        virtual void Set(const char* Argument) override;
-        using VarType = UintType;
-    };
+    void UintCVar<UintType>::SetWithString(const char* NewValue) {}
 
-    using Int8CVar = IntCVar<Sint8>;
-    using Int16CVar = IntCVar<Sint16>;
-    using Int32CVar = IntCVar<Sint32>;
-    using Int64CVar = IntCVar<Sint64>;
+    void BoolCVar::SetWithString(const char* NewValue) {
+        int i = 1;
+        switch (NewValue[0]) {
+            case 't':
 
-    using Uint8CVar = UintCVar<Uint8>;
-    using Uint16CVar = UintCVar<Uint16>;
-    using Uint32CVar = UintCVar<Uint32>;
-    using Uint64CVar = UintCVar<Uint64>;
-
-    struct BoolCVar : BaseCVar {
-        virtual void Set(const char* Argument) override {
-            int i = 1;
-            switch (*Argument) {
-                case 't':
-
-                    while ("true"[i] != '\0') {
-                        if ("true"[i] != Argument[i]) {
-                            return;
-                        }
+                while ("true"[i] != '\0') {
+                    if ("true"[i] != NewValue[i]) {
+                        return;
                     }
-
-                    *static_cast<bool*>(this->ReferenceVar) = true;
-                    break;
-
-                case 'f':
-
-                    while ("false"[i] != '\0') {
-                        if ("false"[i] != Argument[i]) {
-                            return;
-                        }
-                    }
-
-                    *static_cast<bool*>(this->ReferenceVar) = false;
-                    break;
-            }
-        }
-
-        virtual const char* Get() override {
-            return *static_cast<bool*>(this->ReferenceVar) ? "true" : "false";
-        }
-
-        using VarType = bool;
-    };
-
-    struct StringCVar : BaseCVar {
-        virtual void Set(const char* Argument) override {
-            const char* Index = Argument;
-            while (true) {
-                if (*Index == ' ') {
                 }
 
-                ++Index;
-            }
+                *static_cast<bool*>(this->ReferenceVar) = true;
+                break;
+
+            case 'f':
+
+                while ("false"[i] != '\0') {
+                    if ("false"[i] != NewValue[i]) {
+                        return;
+                    }
+                }
+
+                *static_cast<bool*>(this->ReferenceVar) = false;
+                break;
         }
-        using VarType = const char*;
-    };
+    }
+
+    void StringCVar::SetWithString(const char* NewValue) {
+        const char* Index = NewValue;
+        while (true) {
+            if (*Index == ' ') {
+            }
+
+            ++Index;
+        }
+    }
 }

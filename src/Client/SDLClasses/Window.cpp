@@ -18,6 +18,8 @@
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
 
+#include <EGL/egl.h>
+
 #include "../../Time.hpp"
 
 #include "../../FunctionHeaders/Exceptions.hpp"
