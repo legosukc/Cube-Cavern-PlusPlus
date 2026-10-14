@@ -29,7 +29,7 @@ void Game::Classes::Window::Create(const char* WindowTitle,
                                    int Height,
                                    SDL_WindowFlags Flags) {
 #ifdef SDL_PLATFORM_VITA
-    std::cout << "version 2.0 es" << std::endl;
+    std::cout << "version 2.0 es (pvr)" << std::endl;
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
@@ -38,13 +38,76 @@ void Game::Classes::Window::Create(const char* WindowTitle,
 
     Width = 960;
     Height = 544;
+
+    EGLConfig configs[2];
+    EGLBoolean eRetStatus;
+    EGLint major, minor;
+    EGLint context_attribs[] = {EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE};
+
+    EGLint config_count;
+
+    EGLint cfg_attribs[] = {EGL_BUFFER_SIZE,
+                            EGL_DONT_CARE,
+                            EGL_DEPTH_SIZE,
+                            16,
+                            EGL_RED_SIZE,
+                            8,
+                            EGL_GREEN_SIZE,
+                            8,
+                            EGL_BLUE_SIZE,
+                            8,
+                            EGL_RENDERABLE_TYPE,
+                            EGL_OPENGL_ES2_BIT,
+                            EGL_NONE};
+
+    int i;
+
+    this->dpy = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+
+    eRetStatus = eglInitialize(this->dpy, &major, &minor);
+    if (eRetStatus != EGL_TRUE) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    eRetStatus = eglGetConfigs(this->dpy, configs, 2, &config_count);
+    if (eRetStatus != EGL_TRUE) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    eRetStatus =
+        eglChooseConfig(this->dpy, cfg_attribs, configs, 2, &config_count);
+    if (eRetStatus != EGL_TRUE || !config_count) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    this->surface = eglCreateWindowSurface(this->dpy, configs[0], 0, NULL);
+    if (this->surface == EGL_NO_SURFACE) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    eRetStatus = eglBindAPI(EGL_OPENGL_ES_API);
+    if (eRetStatus != EGL_TRUE) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    this->context = eglCreateContext(this->dpy, configs[0], EGL_NO_CONTEXT,
+                                     context_attribs);
+    if (this->context == EGL_NO_CONTEXT) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
+
+    eRetStatus =
+        eglMakeCurrent(this->dpy, this->surface, this->surface, this->context);
+    if (eRetStatus != EGL_TRUE) {
+        Exceptions::ThrowException<Exceptions::RuntimeError>("FUCK.");
+    }
 #else
     std::cout << "version 3.30 core" << std::endl;
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
                         SDL_GL_CONTEXT_PROFILE_CORE);
-#endif
+
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -59,8 +122,6 @@ void Game::Classes::Window::Create(const char* WindowTitle,
         Exceptions::ThrowSDLError("Failed to create SDL_Window.");
     }
 
-    this->Size = Math::IVector2(Width, Height);
-
     this->GLContext = SDL_GL_CreateContext(this->SDLWindow);
     if (this->GLContext == NULL) {
         Exceptions::ThrowSDLError("Failed to create SDL_GLContext.");
@@ -73,14 +134,23 @@ void Game::Classes::Window::Create(const char* WindowTitle,
     // SDL3:
     SDL_SetWindowRelativeMouseMode(this->SDLWindow, true);
 
-    // SDL2:
-    // SDL_SetRelativeMouseMode(this->SDLWindow, true);
+// SDL2:
+// SDL_SetRelativeMouseMode(this->SDLWindow, true);
+#endif
+
+    this->Size = Math::IVector2(Width, Height);
 
     memset(&this->ScancodeStates, 0, sizeof(this->ScancodeStates));
 }
 Game::Classes::Window::Window() = default;
 
 void Game::Classes::Window::Destroy() {
+#ifdef SDL_PLATFORM_VITA
+    eglDestroyContext(this->dpy, this->context);
+    eglDestroySurface(this->dpy, this->surface);
+    eglMakeCurrent(this->dpy, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+    eglTerminate(this->dpy);
+#else
     if (this->SDLWindow != NULL) {
         SDL_GL_MakeCurrent(this->SDLWindow, NULL);
         SDL_DestroyWindow(this->SDLWindow);
@@ -94,6 +164,7 @@ void Game::Classes::Window::Destroy() {
             std::clog << "Failed to destroy the OpenGL context." << std::endl;
         }
     }
+#endif
 }
 
 void Game::Classes::Window::HandleEvent(const SDL_Event& Event) {
@@ -197,7 +268,11 @@ void Game::Classes::Window::Present() {
 
     SDL_DelayPrecise(this->FrameNS - (SDL_GetTicksNS() - this->LastNS));
 
+#ifdef SDL_PLATFORM_VITA
+    eglSwapBuffers(this->dpy, this->surface);
+#else
     SDL_GL_SwapWindow(this->SDLWindow);
+#endif
 
     const Uint64 TicksNS = SDL_GetTicksNS();
     Game::Time::DeltaTime = static_cast<double>(TicksNS - this->LastNS) / 1e+9;

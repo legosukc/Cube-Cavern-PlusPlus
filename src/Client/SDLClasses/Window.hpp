@@ -34,8 +34,14 @@ namespace Game::Classes {
         mutable ScancodeStateStruct
             ScancodeStates[SDL_Scancode::SDL_SCANCODE_COUNT];
 
+#ifdef SDL_PLATFORM_VITA
+        EGLDisplay dpy;
+        EGLSurface surface;
+        EGLContext context;
+#else
         SDL_Window* SDLWindow;
         SDL_GLContext GLContext;
+#endif
 
         Math::IVector2 Position, Size;
 
