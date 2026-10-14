@@ -20,6 +20,7 @@ extern "C" {
 
 #include <gpu_es4/psp2_pvr_hint.h>
 
+#include <EGL/egl.h>
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
 #include "../GLES2_typedefs.h"
@@ -109,10 +110,6 @@ namespace {
 
         Game::Window.Destroy();
         SDL_Quit();
-
-#ifdef SDL_PLATFORM_VITA
-        EGLEnd();
-#endif
 
         std::cout.rdbuf(::coutBuffer);
         std::cerr.rdbuf(::cerrBuffer);

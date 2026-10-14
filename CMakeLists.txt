@@ -177,10 +177,6 @@ if(PLATFORM STREQUAL "vita")
 
     -Wl,--whole-archive pthread -Wl,--no-whole-archive
 
-    liblibgpu_es4_ext_stub.a
-    liblibIMGEGL_stub.a
-    liblibGLESv2_stub.a
-
     SceKernelDmacMgr_stub
     SceCtrl_stub
     SceShaccCg_stub
@@ -192,6 +188,10 @@ if(PLATFORM STREQUAL "vita")
     SceLibKernel_stub
     SceDisplay_stub
     SceGxm_stub
+
+    libIMGEGL_stub_weak
+    libgpu_es4_ext_stub_weak
+    libGLESv2_stub_weak
   )
 endif()
 
