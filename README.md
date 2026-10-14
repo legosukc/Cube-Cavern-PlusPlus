@@ -1,12 +1,6 @@
 # Cube Cavern++
 
-Mr Washee Washee's Super Cowboy USA Hot Dog Rocket Ship American Cleaners Number One Cube Cavern engine.
-
-made by the same guy who made Mr Washee Washee's Cube Cavern on roblo-
-
-![](/GithubAssets/imout.png)
-
-trust me bro this engine is in goodddd hands
+originally (not) Mr Washee Washee's Super Cowboy USA Hot Dog Rocket Ship American Cleaners Number One Cube Cavern engine
 
 This engine aims to have a flexible Lua modding api, with multiplayer.
 
