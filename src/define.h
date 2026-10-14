@@ -21,6 +21,7 @@
 
 #define GL_APIENTRYP *
 
+/*
 #if defined(DEBUG) && !defined(_DEBUG)
 #define _DEBUG
 #define DEBUG_BUILD
@@ -29,7 +30,7 @@
 #define DEBUG
 #define DEBUG_BUILD
 
-#endif
+#endif*/
 
 #ifdef _MSVC_LANG
 
