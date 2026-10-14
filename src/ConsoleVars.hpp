@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <string>
 
 #include <SDL3/SDL_stdinc.h>
 
@@ -15,12 +16,11 @@ namespace Game::ConsoleVars {
        public:
         BaseCVar() noexcept;
         const char* const Name;
-        void* ReferenceVar;
 
         virtual void SetWithString(const char* NewValue) = 0;
         virtual void SetValue(const void* PtrToCVarType) = 0;
+        virtual std::string GetAsString() = 0;
         virtual void GetValue(void* DestinationForCVarType) = 0;
-        virtual const char* GetAsString() = 0;
     };
 
     inline std::map<const char*, BaseCVar*> CVars;
@@ -30,40 +30,48 @@ namespace Game::ConsoleVars {
 
 namespace Game::ConsoleVars::CVarClasses {
 
-    struct FloatCVar : BaseCVar {
+    class FloatCVar : BaseCVar {
+		float CVarValue = 0.f;
+       public:
         virtual void SetWithString(const char* NewValue) override;
         virtual void SetValue(const void* PtrToCVarType) override;
+        virtual std::string GetAsString() override;
         virtual void GetValue(void* DestinationForCVarType) override;
-        virtual const char* GetAsString() override;
 
         using VarType = float;
     };
 
-    struct DoubleCVar : BaseCVar {
+    class DoubleCVar : BaseCVar {
+		double CVarValue = 0.0;
+       public:
         virtual void SetWithString(const char* NewValue) override;
         virtual void SetValue(const void* PtrToCVarType) override;
+        virtual std::string GetAsString() override;
         virtual void GetValue(void* DestinationForCVarType) override;
-        virtual const char* GetAsString() override;
 
         using VarType = double;
     };
 
     template <typename IntType>
-    struct IntCVar : BaseCVar {
+    class IntCVar : BaseCVar {
+		IntType CVarValue = static_cast<IntType>(0);
+       public:
         virtual void SetWithString(const char* NewValue) override;
         virtual void SetValue(const void* PtrToCVarType) override;
+        virtual std::string GetAsString() override;
         virtual void GetValue(void* DestinationForCVarType) override;
-        virtual const char* GetAsString() override;
 
         using VarType = IntType;
     };
 
     template <typename UintType>
-    struct UintCVar : BaseCVar {
+    class UintCVar : BaseCVar {
+		UintType CVarValue = static_cast<UintType>(0);
+       public:
         virtual void SetWithString(const char* NewValue) override;
         virtual void SetValue(const void* PtrToCVarType) override;
+        virtual std::string GetAsString() override;
         virtual void GetValue(void* DestinationForCVarType) override;
-        virtual const char* GetAsString() override;
 
         using VarType = UintType;
     };
@@ -78,20 +86,24 @@ namespace Game::ConsoleVars::CVarClasses {
     using Uint32CVar = UintCVar<Uint32>;
     using Uint64CVar = UintCVar<Uint64>;
 
-    struct BoolCVar : BaseCVar {
+    class BoolCVar : BaseCVar {
+		bool CVarValue = false;
+       public:
         virtual void SetWithString(const char* NewValue) override;
         virtual void SetValue(const void* PtrToCVarType) override;
+        virtual std::string GetAsString() override;
         virtual void GetValue(void* DestinationForCVarType) override;
-        virtual const char* GetAsString() override;
 
         using VarType = bool;
     };
 
-    struct StringCVar : BaseCVar {
+    class StringCVar : BaseCVar {
+		char* CVarValue = NULL;
+       public:
         virtual void SetWithString(const char* NewValue) override;
         virtual void SetValue(const void* PtrToCVarType) override;
+        virtual std::string GetAsString() override;
         virtual void GetValue(void* DestinationForCVarType) override;
-        virtual const char* GetAsString() override;
 
         using VarType = const char*;
     };

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <map>
+#include <string>
 
 #include <SDL3/SDL_stdinc.h>
 
@@ -30,7 +31,19 @@ namespace Game::ConsoleVars::CVarClasses {
             return;
         }
 
-        *static_cast<float*>(this->ReferenceVar) = Value;
+        this->CVarValue = Value;
+    }
+
+    void FloatCVar::SetValue(const void* PtrToCVarType) {
+        this->CVarValue = *static_cast<const float*>(PtrToCVarType);
+    }
+
+    std::string FloatCVar::GetAsString() {
+        return std::to_string(this->CVarValue);
+    }
+
+    void FloatCVar::GetValue(void* DestinationForCVarType) {
+        *static_cast<float*>(DestinationForCVarType) = this->CVarValue;
     }
 
     void DoubleCVar::SetWithString(const char* NewValue) {
@@ -42,7 +55,19 @@ namespace Game::ConsoleVars::CVarClasses {
             return;
         }
 
-        *static_cast<double*>(this->ReferenceVar) = Value;
+        this->CVarValue = Value;
+    }
+
+    void DoubleCVar::SetValue(const void* PtrToCVarType) {
+        this->CVarValue = *static_cast<const double*>(PtrToCVarType);
+    }
+
+    std::string DoubleCVar::GetAsString() {
+        return std::to_string(this->CVarValue);
+    }
+
+    void DoubleCVar::GetValue(void* DestinationForCVarType) {
+        *static_cast<double*>(DestinationForCVarType) = this->CVarValue;
     }
 
     template <typename IntType>
@@ -70,12 +95,54 @@ namespace Game::ConsoleVars::CVarClasses {
             return;
         }
 
-        *static_cast<Sint8*>(this->ReferenceVar) =
+        this->CVarValue =
             static_cast<Sint8>(Math::Clamp<long>(Value, INT8_MIN, INT8_MAX));
     }
 
+    template <typename IntType>
+    void IntCVar<IntType>::SetValue(const void* PtrToCVarType) {
+        this->CVarValue = *static_cast<const IntType*>(PtrToCVarType);
+    }
+
+    template <typename IntType>
+    std::string IntCVar<IntType>::GetAsString() {
+        return std::to_string(this->CVarValue);
+    }
+
+    template <typename IntType>
+    void IntCVar<IntType>::GetValue(void* DestinationForCVarType) {
+        *static_cast<IntType*>(DestinationForCVarType) = this->CVarValue;
+    }
+
+    template class IntCVar<Sint8>;
+    template class IntCVar<Sint16>;
+    template class IntCVar<Sint32>;
+    template class IntCVar<Sint64>;
+
     template <typename UintType>
-    void UintCVar<UintType>::SetWithString(const char* NewValue) {}
+    void UintCVar<UintType>::SetWithString(const char* NewValue) {
+        // TODO: implement
+    }
+
+    template <typename UintType>
+    void UintCVar<UintType>::SetValue(const void* PtrToCVarType) {
+        this->CVarValue = *static_cast<const UintType*>(PtrToCVarType);
+    }
+
+    template <typename UintType>
+    std::string UintCVar<UintType>::GetAsString() {
+        return std::to_string(this->CVarValue);
+    }
+
+    template<typename UintType>
+    void UintCVar<UintType>::GetValue(void* DestinationForCVarType) {
+        *static_cast<UintType*>(DestinationForCVarType) = this->CVarValue;
+    }
+
+    template class UintCVar<Uint8>;
+    template class UintCVar<Uint16>;
+    template class UintCVar<Uint32>;
+    template class UintCVar<Uint64>;
 
     void BoolCVar::SetWithString(const char* NewValue) {
         int i = 1;
@@ -88,7 +155,7 @@ namespace Game::ConsoleVars::CVarClasses {
                     }
                 }
 
-                *static_cast<bool*>(this->ReferenceVar) = true;
+                this->CVarValue = true;
                 break;
 
             case 'f':
@@ -99,18 +166,41 @@ namespace Game::ConsoleVars::CVarClasses {
                     }
                 }
 
-                *static_cast<bool*>(this->ReferenceVar) = false;
+                this->CVarValue = false;
                 break;
         }
     }
 
-    void StringCVar::SetWithString(const char* NewValue) {
-        const char* Index = NewValue;
-        while (true) {
-            if (*Index == ' ') {
-            }
+    void BoolCVar::SetValue(const void* PtrToCVarType) {
+        this->CVarValue = *static_cast<const bool*>(PtrToCVarType);
+    }
 
-            ++Index;
-        }
+    std::string BoolCVar::GetAsString() {
+        return std::to_string(this->CVarValue);
+    }
+
+    void BoolCVar::GetValue(void* DestinationForCVarType) {
+        *static_cast<bool*>(DestinationForCVarType) = this->CVarValue;
+    }
+
+    void StringCVar::SetWithString(const char* NewValue) {
+        this->SetValue(NewValue);
+    }
+
+    void StringCVar::SetValue(const void* PtrToCVarType) {
+        const size_t NewValueLen =
+            strlen(static_cast<const char*>(PtrToCVarType)) + 1;
+        delete[] this->CVarValue;
+        this->CVarValue = new char[NewValueLen];
+        memcpy(this->CVarValue, static_cast<const char*>(PtrToCVarType),
+               NewValueLen);
+    }
+
+    std::string StringCVar::GetAsString() {
+        return this->CVarValue;
+    }
+
+    void StringCVar::GetValue(void* DestinationForCVarType) {
+        *static_cast<char**>(DestinationForCVarType) = this->CVarValue;
     }
 }
