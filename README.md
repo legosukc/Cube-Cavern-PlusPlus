@@ -50,7 +50,7 @@ It how long it takes depends on your internet connection and your CPU strength, 
 idk 🖕
 
 
-## COMPILING FOR PLATFORMS:
+## BUILDING FOR MISC. PLATFORMS:
 
 ### PS VITA:
 
