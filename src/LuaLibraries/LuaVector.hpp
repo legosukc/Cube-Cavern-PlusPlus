@@ -10,6 +10,8 @@
 #include "../MathClasses/Vector3.hpp"
 #include "../MathClasses/Vector4.hpp"
 
+//hi
+
 namespace Game::Lua::CLibraries::Vector {
 
     template <class VectorType>
