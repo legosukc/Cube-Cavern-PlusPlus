@@ -487,6 +487,9 @@ int Game::Lua::CLibraries::Vector::__StripY(lua_State* State) {
     return 1;
 }
 
+
+// C++ is a SHIT language - see below
+
 /////////////
 /* VECTOR2 */
 /////////////
