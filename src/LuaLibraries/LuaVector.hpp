@@ -11,7 +11,7 @@
 #include "../MathClasses/Vector4.hpp"
 
 //hi
-
+//a
 namespace Game::Lua::CLibraries::Vector {
 
     template <class VectorType>
