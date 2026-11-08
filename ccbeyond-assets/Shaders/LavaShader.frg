@@ -1,10 +1,13 @@
+#version 100
+
+precision highp float;
+
+varying vec2 Texcoord;
 
 uniform sampler2D LavaTexture;
 uniform sampler2D CurrentFrame;
 
 uniform float Time;
-
-varying vec2 Texcoord;
 
 void main() {
 	vec2 SampleCoord = Texcoord + vec2(sin(gl_FragCoord.x + Time), cos(gl_FragCoord.y - Time));

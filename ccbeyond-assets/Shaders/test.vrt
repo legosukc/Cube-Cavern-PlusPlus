@@ -1,0 +1,19 @@
+#version 100
+
+attribute vec3 aPos;
+attribute vec3 aNormal;
+attribute vec2 aTexcoord;
+
+uniform mat4 View;
+uniform mat4 Projection;
+
+varying vec3 Normal;
+varying vec2 Texcoord;
+varying vec3 FragPos;
+		
+void main() {
+    gl_Position = Projection * View * vec4(aPos, 1.0);
+    Normal = aNormal;
+    Texcoord = aTexcoord;
+    FragPos = aPos;
+}

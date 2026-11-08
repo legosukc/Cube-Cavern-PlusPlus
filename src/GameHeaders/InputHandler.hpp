@@ -48,13 +48,13 @@ bool Game::Input::Keyboard::KeyPressed(SDL_Scancode Key) {
 }
 
 
-inline bool Game::Input::Mouse::GetLeftPressed() {
+bool Game::Input::Mouse::GetLeftPressed() {
 	return SDL_BUTTON_MASK(::_MouseButtonMask, SDL_BUTTON_LEFT);
 }
-inline bool Game::Input::Mouse::GetRightPressed() {
+bool Game::Input::Mouse::GetRightPressed() {
     return SDL_BUTTON_MASK(::_MouseButtonMask, SDL_BUTTON_RIGHT);
 }
-inline bool Game::Input::Mouse::GetMiddlePressed() {
+bool Game::Input::Mouse::GetMiddlePressed() {
     return SDL_BUTTON_MASK(::_MouseButtonMask, SDL_BUTTON_MIDDLE);
 }
 

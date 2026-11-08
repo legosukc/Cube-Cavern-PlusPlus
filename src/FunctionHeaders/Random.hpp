@@ -25,7 +25,7 @@ namespace {
 	}
 
 	template<typename T>
-	constexpr static inline T GenerateInt(T Minimum, T Maximum) {
+	constexpr static T GenerateInt(T Minimum, T Maximum) {
 
 		unlikely_branch
 		if (Minimum == static_cast<T>(0) && Maximum == static_cast<T>(0)) {
@@ -36,7 +36,7 @@ namespace {
 	}
 
 	template<typename T>
-	constexpr static inline T GenerateUint(T Minimum, T Maximum) {
+	constexpr static T GenerateUint(T Minimum, T Maximum) {
 
 		unlikely_branch
 		if (Minimum == static_cast<T>(0) && Maximum == static_cast<T>(0)) {

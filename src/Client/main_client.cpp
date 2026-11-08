@@ -10,7 +10,6 @@ int _newlib_heap_size_user = 16 * 1024 * 1024;
 unsigned int sceLibcHeapSize = 16 * 1024 * 1024;
 
 extern "C" {
-#include <psp2/kernel/processmgr.h>
 #include <vitasdk.h>
 
 #include <psp2/appmgr.h>
@@ -25,7 +24,6 @@ extern "C" {
 #include <GLES2/gl2ext.h>
 #include "../GLES2_typedefs.h"
 }
-
 #endif
 
 #include "../MathClasses/Matrix.hpp"
@@ -34,14 +32,12 @@ extern "C" {
 #include "../MathClasses/Vector4.hpp"
 
 #include <fstream>
-#include <iomanip>
 #include <iostream>
 #include <streambuf>
 
 #include <string>
 
 #include <SDL3/SDL.h>
-// #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_main.h>
 
 #ifndef SDL_PLATFORM_VITA
@@ -79,7 +75,7 @@ void Game::Update() {
 }
 
 void Game::Draw() {
-    Game::Graphics::SetClearColor(0.f, 0.f, 0.f, 1.f);
+    Game::Graphics::SetClearColor(1.f, 0.f, 0.f, 1.f);
     Game::Graphics::ClearBitfields(Game::Graphics::BufferBitfields.ColorBit |
                                    Game::Graphics::BufferBitfields.DepthBit |
                                    Game::Graphics::BufferBitfields.StencilBit);
@@ -111,10 +107,12 @@ namespace {
         Game::Window.Destroy();
         SDL_Quit();
 
+#ifdef SDL_PLATFORM_VITA
         std::cout.rdbuf(::coutBuffer);
         std::cerr.rdbuf(::cerrBuffer);
 
         logFile.close();
+#endif
 
     } catch (const Exceptions::Exception& Exception) {
         std::clog << "Caught a unhandled exception while closing libraries. "
@@ -132,16 +130,28 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     try
 #endif
 {
+
+#ifdef SDL_PLATFORM_VITA
+
+    // temporarily clock up the vita for loading
+    scePowerSetArmClockFrequency(444);
+    scePowerSetBusClockFrequency(222);
+    scePowerSetGpuClockFrequency(222);
+    scePowerSetGpuXbarClockFrequency(166);
+
     ::coutBuffer = std::cout.rdbuf();
     ::cerrBuffer = std::cerr.rdbuf();
+#endif
 
     Utils::File::Init("DribbleCo", "CubeCavernPlus");
 
+#ifdef SDL_PLATFORM_VITA
     ::logFile.open(Utils::File::PreferredPath + "/latestLog.txt");
     ::logFile.clear();
 
     std::cout.rdbuf(logFile.rdbuf());
     std::cerr.rdbuf(logFile.rdbuf());
+#endif
 
     SDL_SetAppMetadata("cc++", "0.0000000001a", "com.dribbleco.cc");
     SDL_SetAppMetadataProperty(SDL_PROP_APP_METADATA_CREATOR_STRING, "Savoury");
@@ -165,7 +175,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     PVRSRVInitializeAppHint(&hint);
     PVRSRVCreateVirtualAppHint(&hint);
 
-    //sceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG);
+    sceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG);
 
     if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_AUDIO | SDL_INIT_GAMEPAD |
                   SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK)) {
@@ -196,6 +206,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 #else
     Game::Window.Create("CC++", 800, 600, SDL_WINDOW_RESIZABLE);
 #endif
+    std::cout << "created window" << std::endl;
 
     Game::Graphics::Init();
     Game::Lua::Init();
@@ -207,6 +218,16 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     // AudioSource->LoadFile("SFX/Kick.ogg");
     // Speaker->SetAudioSource(AudioSource);
     // Speaker->Play();
+
+#ifdef SDL_PLATFORM_VITA
+
+    // clock down the vita after loading
+    scePowerSetArmClockFrequency(333);
+    // scePowerSetBusClockFrequency(222); already set to 222
+    scePowerSetGpuClockFrequency(166);
+    scePowerSetGpuXbarClockFrequency(166);
+
+#endif
 
     return SDL_APP_CONTINUE;
 }
@@ -289,6 +310,6 @@ void SDL_AppQuit(void* appstate, SDL_AppResult result) {
     ::_CloseInitialisedItems();
 
 #ifdef SDL_PLATFORM_VITA
-    sceKernelExitProcess(-1);
+    sceKernelExitProcess(0);
 #endif
 }

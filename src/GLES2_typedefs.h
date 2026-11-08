@@ -398,3 +398,7 @@ typedef void(GL_APIENTRYP PFNGLVIEWPORTPROC)(GLint x,
                                           GLint y,
                                           GLsizei width,
                                           GLsizei height);
+
+
+
+                                          typedef void (GL_APIENTRYP PFNGLGETPROGRAMBINARYOESPROC) (GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, void *binary);

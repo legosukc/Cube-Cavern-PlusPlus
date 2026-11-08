@@ -235,6 +235,9 @@ local VelocityLerp = Player.Velocity
 local ZLookLerp = Camera.LookDirection:Dot(Camera.WorldUpVector) * 0.05
 function Player:Draw()
 
+	--Graphics.SetClearColor(1, 0, 3, 1)
+	--Graphics.Clear()
+
 	VelocityLerp = VelocityLerp:Lerp(self.Velocity * 0.01, 0.2)
 
 	local GraphicsObjects = self.GraphicsObjects

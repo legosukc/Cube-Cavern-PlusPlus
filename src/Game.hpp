@@ -1,5 +1,4 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 
 #include "define.h"
 
@@ -10,11 +9,9 @@
 
 namespace Game {
 #ifdef BUILD_CLIENT
-    inline Game::Classes::Window Window;
+    extern Game::Classes::Window Window;
 #endif
 
     void Update();
     void Draw();
 }
-
-#endif

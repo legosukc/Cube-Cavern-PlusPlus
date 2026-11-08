@@ -89,7 +89,7 @@ function RenderObject:Draw(NewArmTexture, ArmOffset, ArmRotation, ArmMatrix)
     self.VAO:Bind()
 	self.Program:Use();
 
-	(NewArmTexture or self.Texture):Bind()
+	(NewArmTexture or self.Texture):Bind();
 	Texture.SetActiveTexture(0)
 		
 	SetUniformVec3(self.ArmOffsetUniform, ArmOffset)

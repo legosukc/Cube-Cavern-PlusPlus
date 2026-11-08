@@ -1,12 +1,14 @@
 #version 140
 
+attribute vec3 aPos;
+attribute vec3 aNormal;
+
+uniform mat4 Model;
+
 layout (std140) uniform Matrices {
 	mat4 Projection, View;
 }
 
-uniform mat4 Model;
-
-attribute vec3 aPos, aNormal;
 varying vec3 Normal;
 
 void main() {

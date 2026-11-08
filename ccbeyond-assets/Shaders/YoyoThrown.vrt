@@ -1,8 +1,9 @@
-
-uniform mat4 Model;
+#version 100
 
 attribute vec3 aPos;
 attribute vec2 aTexcoord;
+
+uniform mat4 Model;
 
 varying vec2 Texcoord;
 

@@ -3,8 +3,8 @@ local Enemies = {
 	Enemies = {}
 }
 
-local Dagger = require("../ItemClassesClient/Dagger")
-print(Dagger)
+--local Dagger = require("../ItemClassesClient/Dagger")
+--print(Dagger)
 
 --[[
 	Creates an Enemy from calling the 'new' function from 1st argument: 'EnemyClass'.

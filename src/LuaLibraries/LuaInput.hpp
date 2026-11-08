@@ -3,12 +3,8 @@
 #include "../define.h"
 
 #include "../../include/VM/lua.h"
-#include "../../include/VM/lualib.h"
 
 #include "../FunctionHeaders/LuaHelper.hpp"
-
-#include <algorithm>
-#include <iostream>
 
 #include <SDL3/SDL_gamepad.h>
 #include <SDL3/SDL_keyboard.h>
@@ -17,217 +13,55 @@
 #include <SDL3/SDL_scancode.h>
 #include <SDL3/SDL_stdinc.h>
 
-#include <cstring>
 #include <vector>
-
-#include "LuaVector.hpp"
 
 #include "../MathClasses/Vector2.hpp"
 
 #include "../Game.hpp"
-#include "../Lua.hpp"
+//#include "../Lua.hpp"
+
+namespace Game::Lua {
+    extern LuaHelper::StackTableReference GameTable;
+}
 
 namespace Game::Lua::CLibraries::Input {
 
     inline void Init(lua_State* State);
 
-#ifndef BUILD_SERVER
+#ifdef BUILD_CLIENT
     inline void Update(lua_State* State);
-#endif
 
-    static inline const char* const LibraryName = "Input";
-
-#ifndef BUILD_SERVER
     struct Binding {
-        static inline const char* const MetatableName = "Binding";
+        static constexpr char MetatableName[] = "Binding";
 
         std::vector<SDL_Scancode> SDLScancodes;
         char BindingName[];
 
-        static int GetBindingName(lua_State* State) {
-            lua_pushstring(
-                State, static_cast<Binding*>(LuaHelper::CheckMetatable(
-                                                 State, 1, lua_upvalueindex(1)))
-                           ->BindingName);
-            return 1;
-        }
+        static int GetBindingName(lua_State* State);
 
-        static int Pressed(lua_State* State) {
-            int Result = false;
-            Uint8 i;
+        static int Pressed(lua_State* State);
+        static int Held(lua_State* State);
+        static int Released(lua_State* State);
 
-            std::vector<SDL_Scancode>& SDLScancodes =
-                static_cast<Binding*>(
-                    LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
-                    ->SDLScancodes;
+        static int GetScancodes(lua_State* State);
 
-            for (const auto& Scancode : SDLScancodes) {
-                if (Scancode == SDL_SCANCODE_UNKNOWN) {
-                    continue;
-                }
-
-                if (Game::Window.ScancodePressed(Scancode)) {
-                    Result = true;
-                    break;
-                }
-            }
-
-            lua_pushboolean(State, Result);
-            return 1;
-        }
-
-        static int Held(lua_State* State) {
-            Uint8 i;
-
-            std::vector<SDL_Scancode>& SDLScancodes =
-                static_cast<Binding*>(
-                    LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
-                    ->SDLScancodes;
-
-            for (const SDL_Scancode Scancode : SDLScancodes) {
-                if (Scancode > (int)SDL_SCANCODE_COUNT) {
-                    if (SDL_GetMouseState(NULL, NULL) &
-                        SDL_BUTTON_MASK(1 + Scancode - SDL_SCANCODE_COUNT)) {
-                        goto ReturnTrue;
-                    }
-                    continue;
-                }
-
-                if (Game::Window.ScancodeHeld(Scancode)) {
-                    ReturnTrue:
-                    lua_pushboolean(State, true);
-                    return 1;
-                }
-            }
-
-            lua_pushboolean(State, false);
-            return 1;
-        }
-
-        static int Released(lua_State* State) {
-            int Result = false;
-
-            const std::vector<SDL_Scancode>& SDLScancodes =
-                static_cast<Binding*>(
-                    LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
-                    ->SDLScancodes;
-
-            for (const auto& Scancode : SDLScancodes) {
-                if (Scancode == SDL_SCANCODE_UNKNOWN) {
-                    continue;
-                }
-
-                if (Game::Window.ScancodeReleased(Scancode)) {
-                    Result = true;
-                    break;
-                }
-            }
-
-            lua_pushboolean(State, Result);
-            return 1;
-        }
-
-        static int GetScancodes(lua_State* State) {
-            int TableIndex = 0;
-
-            const std::vector<SDL_Scancode>& SDLScancodes =
-                static_cast<Binding*>(
-                    LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
-                    ->SDLScancodes;
-
-            lua_createtable(State, 0, SDLScancodes.size());
-            for (const auto Scancode : SDLScancodes) {
-                if (Scancode != SDL_SCANCODE_UNKNOWN) {
-                    // sub by one bc function doesn't account for pseudo indexes
-                    LuaHelper::SetIndex<lua_Integer>(
-                        State, -2 - 1, static_cast<lua_Integer>(Scancode),
-                        ++TableIndex);
-                }
-            }
-
-            return 1;
-        }
-
-        static int AddScancode(lua_State* State) {
-            Uint8 ScancodeIndex = 0;
-            std::vector<SDL_Scancode>& SDLScancodes =
-                static_cast<Binding*>(
-                    LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
-                    ->SDLScancodes;
-
-            SDL_Scancode Scancode =
-                static_cast<SDL_Scancode>(luaL_checkinteger(State, 2));
-
-            while (true) {
-                if (ScancodeIndex >= SDLScancodes.size()) {
-                    SDLScancodes.push_back(Scancode);
-                    break;
-                }
-
-                if (SDLScancodes[ScancodeIndex] == SDL_SCANCODE_UNKNOWN) {
-                    for (; ScancodeIndex < SDLScancodes.size();
-                         ++ScancodeIndex) {
-                        unlikely_branch if (SDLScancodes[ScancodeIndex] ==
-                                            Scancode) {
-                            std::cout << "Attempted to add a scancode: '"
-                                      << SDL_GetScancodeName(Scancode)
-                                      << "' to class "
-                                         "'Binding' despite it already being "
-                                         "added."
-                                      << std::endl;
-                            return 0;
-                        }
-                    }
-
-                    SDLScancodes[ScancodeIndex] = Scancode;
-                    break;
-                }
-                ++ScancodeIndex;
-            }
-            return 0;
-        }
-
-        static int RemoveScancode(lua_State* State) {
-            Uint8 ScancodeIndex;
-            SDL_Scancode RemoveScancode =
-                static_cast<SDL_Scancode>(luaL_checkinteger(State, 2));
-
-            std::vector<SDL_Scancode>& SDLScancodes =
-                static_cast<Binding*>(
-                    LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
-                    ->SDLScancodes;
-
-            for (SDL_Scancode& Scancode : SDLScancodes) {
-                if (Scancode == RemoveScancode) {
-                    *(&Scancode) = SDL_SCANCODE_UNKNOWN;
-                }
-            }
-            return 0;
-        }
-
-        static int ClearScancodes(lua_State* State) {
-            static_cast<Binding*>(
-                luaL_checkudata(State, 1, Binding::MetatableName))
-                ->SDLScancodes.clear();
-            return 0;
-        }
+        static int AddScancode(lua_State* State);
+        static int RemoveScancode(lua_State* State);
+        static int ClearScancodes(lua_State* State);
 
         [[noreturn]]
-        static int __newindex(lua_State* State) {
-            luaL_error(State,
-                       "Attempted to write to a Binding object. Binding is "
-                       "read-only.");
-        }
+        static int __newindex(lua_State* State);
     };
 
-    static int GetBinding(lua_State* State);
+    int GetBinding(lua_State* State);
+
+    static const char* const LibraryName = "Input";
 #endif
 }
 
 void Game::Lua::CLibraries::Input::Init(lua_State* State) {
     LuaHelper::StackTableReference EnumScancode, BindingsTable,
         BindingMetatable;
-    // const char* KeyName;
 
     lua_getglobal(State, "Enums");
     lua_pushliteral(State, "Scancode");
@@ -235,41 +69,11 @@ void Game::Lua::CLibraries::Input::Init(lua_State* State) {
     EnumScancode = LuaHelper::StackTableReference(
         State, 0, static_cast<int>(SDL_Scancode::SDL_SCANCODE_COUNT));
 
-    // cursed fuckery to make a constant static buffer of "A\0B\0..."
-    /*constexpr const static struct _AllCharactersStruct {
-            constexpr _AllCharactersStruct() {
-
-                    char Letter = 'A', i = 0;
-
-                    for (; Letter <= 'Z'; ++Letter) {
-                            this->Characters[i] = Letter;
-                            this->Characters[i + 1] = '\0';
-                            i += 2;
-                    }
-            }
-            char Characters[2 + ('Z' - 'A') * 2]{};
-
-    } _AllCharacters;
-
-    int LetterIndex = 0;
-    for (int i = 0; i < 'Z' - 'A'; ++i) {
-
-            lua_pushlstring(State, &_AllCharacters.Characters[LetterIndex], 1);
-            //lua_pushexternalstring(State,
-    &_AllCharacters.Characters[LetterIndex], 1, NULL, NULL);
-            //lua_pushlstring(State, &_AllCharacters.Characters[LetterIndex],
-    2); CLibraries::Enums::PushNewEnum(State, i + SDL_SCANCODE_A);
-            lua_rawset(State, EnumScancode.GetStackIndex());
-            //lua_setfield(State, EnumScancode.GetStackIndex(),
-    &_AllCharacters.Characters[LetterIndex]);
-
-            LetterIndex += 2;
-    }*/
-
     struct ScancodeEnumStruct {
         const char* Name;
         SDL_Scancode Scancode;
     };
+
     constexpr static ScancodeEnumStruct ScancodeEnums[] = {
 
         {"One", SDL_SCANCODE_1},
@@ -335,7 +139,7 @@ void Game::Lua::CLibraries::Input::Init(lua_State* State) {
 
     lua_rawset(State, EnumScancode.GetStackIndex() - 2);
 
-#ifndef BUILD_SERVER
+#ifdef BUILD_CLIENT
     BindingMetatable = LuaHelper::StackTableReference(
         State, CLibraries::Input::Binding::MetatableName);
 
@@ -403,7 +207,7 @@ void Game::Lua::CLibraries::Input::Init(lua_State* State) {
 #endif
 }
 
-#ifndef BUILD_SERVER
+#ifdef BUILD_CLIENT
 
 void Game::Lua::CLibraries::Input::Update(lua_State* State) {
     int InputTableIndex;
@@ -430,53 +234,5 @@ void Game::Lua::CLibraries::Input::Update(lua_State* State) {
     lua_rawset(State, InputTableIndex);
 
     lua_settop(State, InputTableIndex - 1);
-}
-
-int Game::Lua::CLibraries::Input::GetBinding(lua_State* State) {
-    Input::Binding* BindingUD;
-    size_t BindingNameLen;
-    const char* BindingName;
-
-    BindingName = luaL_checklstring(State, 1, &BindingNameLen);
-    if (lua_getfield(State, lua_upvalueindex(1), BindingName) !=
-        LUA_TUSERDATA) {
-        BindingUD = static_cast<Input::Binding*>(
-            lua_newuserdata(State, sizeof(Input::Binding) + BindingNameLen));
-
-        unlikely_branch if (lua_gettop(State) < 3) {
-            luaL_error(
-                State,
-                "Not enough arguments for 'Game.Input.GetBinding'. Need "
-                "atleast 3 arguments to create a new binding. (only passed ",
-                lua_gettop(State), "!)");
-            return 0;
-        }
-
-        BindingUD->SDLScancodes = std::vector<SDL_Scancode>(
-            lua_gettop(State) - 3, SDL_Scancode::SDL_SCANCODE_UNKNOWN);
-
-        int i;
-        for (i = 0; i < lua_gettop(State) - 3; ++i) {
-            BindingUD->SDLScancodes[i] =
-                static_cast<SDL_Scancode>(luaL_checkinteger(State, i + 2));
-        } /*
-         std::memset(
-             &BindingUD->SDLScancodes[i], 0,
-             sizeof(Input::Binding::SDLScancodes) - (sizeof(SDL_Scancode)) *
-         i);*/
-        std::memcpy(&BindingUD->BindingName, BindingName, BindingNameLen);
-
-        luaL_getmetatable(State, CLibraries::Input::Binding::MetatableName);
-        lua_setmetatable(State, -2);
-
-        lua_pushvalue(State, -1);
-        lua_setfield(State, lua_upvalueindex(1), BindingName);
-    }
-    /*
-    std::cout << "stack top: " << luaL_typename(State, -1) << std::endl;
-    lua_rotate(State, 1, 1);
-
-    std::cout << "returning: " << luaL_typename(State, 1) << std::endl;*/
-    return 1;
 }
 #endif
