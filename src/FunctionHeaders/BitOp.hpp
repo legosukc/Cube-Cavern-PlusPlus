@@ -45,7 +45,7 @@ namespace {
 namespace BitOp {
 
 	template<typename To_T, typename From_T>
-	constexpr inline To_T Bitcast(From_T CastValue) noexcept {
+	constexpr To_T Bitcast(From_T CastValue) noexcept {
 		return *reinterpret_cast<To_T*>(&CastValue);
 	}
 
@@ -55,12 +55,12 @@ namespace BitOp {
 
 
 	template<typename T>
-	constexpr inline bool CheckBit(T Value, T BitIndex) {
+	constexpr bool CheckBit(T Value, T BitIndex) {
 		return static_cast<bool>((Bitcast<ToBitBuffer<T>>(Value) >> BitIndex) & 1);
 	}
 
 	template<typename T>
-	constexpr inline T SetBit(T Value, T BitIndex, bool Flipped) {
+	constexpr T SetBit(T Value, T BitIndex, bool Flipped) {
 
 		if (Flipped) {
 			return Value | (1 << BitIndex);

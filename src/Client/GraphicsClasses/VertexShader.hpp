@@ -1,15 +1,9 @@
 #pragma once
 
-#include "../../define.h"
-
-#include <cstddef>
-
 #ifdef SDL_PLATFORM_VITA
 #include <GLES2/gl2.h>
-#include "../../GLES2_typedefs.h"
 #else
 #include <SDL3/SDL_opengl.h>
-#include <SDL3/SDL_opengl_glext.h>
 #endif
 
 #include "ShaderBase.hpp"
@@ -21,9 +15,9 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::VertexShader {
 
-    inline Game::Graphics::Classes::VertexShader* (*Create)() = NULL;
-    inline void (*CreateBulk)(size_t CreateAmount,
-                       Game::Graphics::Classes::VertexShader* VertexShaders[]) = NULL;
+    extern Game::Graphics::Classes::VertexShader* (*Create)();
+    extern void (*CreateBulk)(size_t CreateAmount,
+                       Game::Graphics::Classes::VertexShader* VertexShaders[]);
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();

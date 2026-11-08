@@ -1,5 +1,4 @@
-#ifndef GRAPHICS_SHADERBASE_H
-#define GRAPHICS_SHADERBASE_H
+#pragma once
 
 #include "../../define.h"
 
@@ -18,16 +17,16 @@
 #include "BaseClassDefinitions.hpp"
 
 namespace Game::Graphics::OpenGLFunctions {
-    inline PFNGLCREATESHADERPROC glCreateShader = NULL;
-    inline PFNGLDELETESHADERPROC glDeleteShader = NULL;
+    extern PFNGLCREATESHADERPROC glCreateShader;
+    extern PFNGLDELETESHADERPROC glDeleteShader;
 
-    inline PFNGLSHADERSOURCEPROC glShaderSource = NULL;
-    inline PFNGLGETSHADERSOURCEPROC glGetShaderSource = NULL;
+    extern PFNGLSHADERSOURCEPROC glShaderSource;
+    extern PFNGLGETSHADERSOURCEPROC glGetShaderSource;
 
-    inline PFNGLCOMPILESHADERPROC glCompileShader = NULL;
+    extern PFNGLCOMPILESHADERPROC glCompileShader;
 
-    inline PFNGLGETSHADERIVPROC glGetShaderiv = NULL;
-    inline PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog = NULL;
+    extern PFNGLGETSHADERIVPROC glGetShaderiv;
+    extern PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
 }
 
 namespace Game::Graphics::Classes {
@@ -68,50 +67,6 @@ namespace Game::Graphics::ShaderBase {
     inline void Init_Metal();
     inline void Init_DirectX11();
     inline void Init_DirectX12();
-}
-
-namespace Game::Graphics::Classes {
-
-    Game::Graphics::Classes::ShaderBase::~ShaderBase() = default;
-
-    bool Game::Graphics::Classes::ShaderBase::SetShaderSource(
-        const char* Source) {
-        return false;
-    }
-
-    bool Game::Graphics::Classes::ShaderBase::Compile() {
-        return false;
-    }
-
-    template <GLenum ShaderType>
-    Game::Graphics::Classes::ShaderBase_OpenGL<
-        ShaderType>::~ShaderBase_OpenGL() {
-        if (this->GLObject == 0) {
-#ifdef DEBUG_BUILD
-            std::cerr << "Attempted to free a unallocated OpenGL Shader."
-                      << std::endl;
-            __debugbreak();
-#endif
-            return;
-        }
-        Game::Graphics::OpenGLFunctions::glDeleteShader(this->GLObject);
-    }
-
-    template <GLenum ShaderType>
-    bool
-        Game::Graphics::Classes::ShaderBase_OpenGL<ShaderType>::SetShaderSource(
-            const char* Source) {
-        Game::Graphics::OpenGLFunctions::glShaderSource(this->GLObject, 1,
-                                                        &Source, NULL);
-
-        return true;
-    }
-
-    template <GLenum ShaderType>
-    bool Game::Graphics::Classes::ShaderBase_OpenGL<ShaderType>::Compile() {
-        Game::Graphics::OpenGLFunctions::glCompileShader(this->GLObject);
-        return true;
-    }
 }
 
 template <class ShaderClass, class OpenGLShaderClass>
@@ -168,5 +123,3 @@ void Game::Graphics::ShaderBase::Init_Metal() {}
 void Game::Graphics::ShaderBase::Init_DirectX11() {}
 
 void Game::Graphics::ShaderBase::Init_DirectX12() {}
-
-#endif

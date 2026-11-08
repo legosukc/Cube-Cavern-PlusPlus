@@ -21,6 +21,8 @@ local Camera = {
 	CameraHandlerFunc = nil;
 }
 
+local TestRoomRenderObject = Assets.RenderObjectsClient.rendTestRoom
+
 --local CameraTransformationUniformBuffer = Graphics.UniformBuffer.new()
 --Camera.TransformationUniformBuffer = CameraTransformationUniformBuffer
 
@@ -140,6 +142,8 @@ function Camera:Draw()
 	Graphics.Program.SetUniformMat4(ViewUniformID, false, self.ViewMatrix)
 
 	Graphics.DrawElements(Graphics.DrawModes.Triangles, BombfieldIndexCount, Graphics.Types.Uint32)
+
+	TestRoomRenderObject:Draw()
 
 	--Graphics.VertexArray.Unbind()
 end

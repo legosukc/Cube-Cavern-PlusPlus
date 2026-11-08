@@ -2,8 +2,6 @@
 
 #include "../../define.h"
 
-#include <cstddef>
-
 #ifdef SDL_PLATFORM_VITA
 #include <GLES2/gl2.h>
 #include "../../GLES2_typedefs.h"
@@ -17,13 +15,13 @@
 #include "BaseClassDefinitions.hpp"
 
 namespace Game::Graphics::OpenGLFunctions {
-    inline PFNGLGENBUFFERSPROC glGenBuffers = NULL;
-    inline PFNGLDELETEBUFFERSPROC glDeleteBuffers = NULL;
+    extern PFNGLGENBUFFERSPROC glGenBuffers;
+    extern PFNGLDELETEBUFFERSPROC glDeleteBuffers;
 
-    inline PFNGLBUFFERDATAPROC glBufferData = NULL;
-    inline PFNGLBUFFERSUBDATAPROC glBufferSubData = NULL;
+    extern PFNGLBUFFERDATAPROC glBufferData;
+    extern PFNGLBUFFERSUBDATAPROC glBufferSubData;
 
-    inline PFNGLBINDBUFFERPROC glBindBuffer = NULL;
+    extern PFNGLBINDBUFFERPROC glBindBuffer;
 }
 
 namespace Game::Graphics::Classes {
@@ -43,7 +41,7 @@ namespace Game::Graphics::Classes {
 
         virtual void Bind() override;
 
-        constexpr static inline GLenum OpenGLBufferEnum = BufferTarget;
+        constexpr static GLenum OpenGLBufferEnum = BufferTarget;
     };
 }
 
@@ -58,7 +56,7 @@ namespace Game::Graphics::BufferBase {
         void CreateBulk_OpenGL(size_t CreateAmount, BufferClass* Buffers[]);
 
         template <class BufferOpenGLClass>
-        inline void Unbind_OpenGL();
+        void Unbind_OpenGL();
     }
 
     inline void Init_OpenGL();
@@ -66,31 +64,6 @@ namespace Game::Graphics::BufferBase {
     inline void Init_Metal();
     inline void Init_DirectX11();
     inline void Init_DirectX12();
-}
-
-Game::Graphics::Classes::BufferBase::~BufferBase() = default;
-
-void Game::Graphics::Classes::BufferBase::Bind() {}
-bool Game::Graphics::Classes::BufferBase::IsBound() const {
-    return false;
-}
-
-template <GLenum BufferTarget>
-Game::Graphics::Classes::BufferBase_OpenGL<BufferTarget>::~BufferBase_OpenGL() {
-    unlikely_branch if (this->GLObject == 0) {
-#ifdef DEBUG_BUILD
-        std::cerr << "Attempted to free an unallocated OpenGL buffer."
-                  << std::endl;
-        __debugbreak();
-#endif
-        return;
-    }
-    Game::Graphics::OpenGLFunctions::glDeleteBuffers(1, &this->GLObject);
-}
-
-template <GLenum BufferTarget>
-void Game::Graphics::Classes::BufferBase_OpenGL<BufferTarget>::Bind() {
-    Game::Graphics::OpenGLFunctions::glBindBuffer(BufferTarget, this->GLObject);
 }
 
 template <class BufferClass, class BufferOpenGLClass>

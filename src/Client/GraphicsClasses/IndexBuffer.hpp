@@ -1,14 +1,12 @@
-#ifndef GRAPHICS_INDEXBUFFER_H
-#define GRAPHICS_INDEXBUFFER_H
+#pragma once
 
-#include "../../define.h"
+#include <SDL3/SDL_platform_defines.h>
 
 #ifdef SDL_PLATFORM_VITA
 #include <GLES2/gl2.h>
 #include "../../GLES2_typedefs.h"
 #else
 #include <SDL3/SDL_opengl.h>
-#include <SDL3/SDL_opengl_glext.h>
 #endif
 
 #include "BufferBase.hpp"
@@ -27,22 +25,17 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::IndexBuffer {
 
-    inline Game::Graphics::Classes::IndexBuffer* (*Create)() = NULL;
-    inline void (*CreateBulk)(
+    extern Game::Graphics::Classes::IndexBuffer* (*Create)();
+    extern void (*CreateBulk)(
         size_t CreateAmount,
-        Game::Graphics::Classes::IndexBuffer* IndexBuffers[]) = NULL;
-    inline void (*Unbind)() = NULL;
+        Game::Graphics::Classes::IndexBuffer* IndexBuffers[]);
+    extern void (*Unbind)();
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();
     inline void Init_Metal();
     inline void Init_DirectX11();
     inline void Init_DirectX12();
-}
-
-bool Game::Graphics::Classes::IndexBuffer_OpenGL::IsBound() const {
-    // TODO: FIX THIS!!!!
-    return true;
 }
 
 void Game::Graphics::IndexBuffer::Init_OpenGL() {
@@ -69,5 +62,3 @@ void Game::Graphics::IndexBuffer::Init_Metal() {}
 void Game::Graphics::IndexBuffer::Init_DirectX11() {}
 
 void Game::Graphics::IndexBuffer::Init_DirectX12() {}
-
-#endif

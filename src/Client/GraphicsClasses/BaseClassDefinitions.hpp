@@ -1,11 +1,9 @@
-#ifndef GRAPHICS_BASECLASSDEFINITIONS_H
-#define GRAPHICS_BASECLASSDEFINITIONS_H
+#pragma once
 
-#include "../../define.h"
+#include <SDL3/SDL_platform_defines.h>
 
 #ifdef SDL_PLATFORM_VITA
 #include <GLES2/gl2.h>
-#include "../../GLES2_typedefs.h"
 #else
 #include <SDL3/SDL_opengl.h>
 #endif
@@ -24,4 +22,3 @@ constexpr bool Game::Graphics::Classes::OpenGLClassBase::operator==(
     const Game::Graphics::Classes::OpenGLClassBase B) const {
     return this->GLObject == B.GLObject;
 }
-#endif

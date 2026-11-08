@@ -1,8 +1,4 @@
-
-// TODO: seperate - remove this after seperation
-#ifndef LUALIBRARIES_LUAENUMS_HPP
 #include "LuaEnums.hpp"
-#endif
 
 #include "../../include/VM/lua.h"
 #include "../../include/VM/lualib.h"
@@ -16,7 +12,9 @@
 
 static lua_Integer _NextEnumID = INT32_MIN;
 
-static int _EnumIDsReference;
+namespace Game::Lua::CLibraries::Enums::etc {
+    int _EnumIDsReference;
+}
 
 int Game::Lua::CLibraries::Enums::Classes::EnumValue::__index(
     lua_State* State) {
@@ -35,7 +33,7 @@ int Game::Lua::CLibraries::Enums::Classes::EnumValue::__index(
 
 int Game::Lua::CLibraries::Enums::FromID(lua_State* State) {
     lua_pushinteger(State, luaL_checkinteger(State, 1));
-    lua_gettable(State, ::_EnumIDsReference);
+    lua_gettable(State, etc::_EnumIDsReference);
     // lua_geti(State, ::_EnumIDsReference, luaL_checkinteger(State,
     // 1));
     return 1;
@@ -67,35 +65,10 @@ Game::Lua::CLibraries::Enums::Classes::EnumValue*
 
     lua_pushvalue(State, -1);
     NewEnum->Uservalue = Uservalue;
-    NewEnum->ID = lua_ref(State, ::_EnumIDsReference);
+    NewEnum->ID = lua_ref(State, etc::_EnumIDsReference);
 
     luaL_getmetatable(State, Classes::EnumValue::MetatableName);
     lua_setmetatable(State, -2);
 
     return NewEnum;
-}
-
-void Game::Lua::CLibraries::Enums::Init(lua_State* State) {
-
-    lua_createtable(State, 0, 2);
-    luaL_newmetatable(State,
-                      CLibraries::Enums::Classes::EnumValue::MetatableName);
-
-    lua_pushvalue(State, -1);
-    lua_pushcclosure(State, Classes::EnumValue::__index, "EnumValue.__index", 1);
-    lua_setfield(State, -2, "__index");
-    
-    lua_pop(State, 1);
-
-    lua_createtable(State, 64, 0);
-    ::_EnumIDsReference = lua_ref(State, -1);
-
-    lua_createtable(State, 0, 32);
-
-    lua_pushcfunction(State, Enums::FromID, "Enums.FromID");
-    lua_setfield(State, -2, "FromID");
-
-    LuaHelper::LockTable(State, -2);
-
-    lua_setglobal(State, CLibraries::Enums::LibraryName);
 }

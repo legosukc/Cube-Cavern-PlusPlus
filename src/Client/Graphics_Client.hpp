@@ -4,18 +4,9 @@
 
 #include <iostream>
 
+#include <SDL3/SDL_platform_defines.h>
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_video.h>
-
-#ifdef SDL_PLATFORM_VITA
-#include <EGL/egl.h>
-#include <GLES2/gl2.h>
-#include "../GLES2_typedefs.h"
-#else
-#include <SDL3/SDL_opengl.h>
-#include <SDL3/SDL_opengl_glext.h>
-#include <SDL3/SDL_opengles2_gl2ext.h>
-#endif
 
 #include "../Game.hpp"
 
@@ -24,13 +15,7 @@ namespace Game::Graphics {
 
     enum class WindowMode : Uint8 { Windowed, Borderless, Fullscreen };
 
-    inline Uint8 AnisotropicFilteringLevel = 1;
-
-    namespace OpenGL {
-        inline int MajorVersion = -1;
-        inline int MinorVersion = -1;
-        inline int Profile = -1;
-    }
+    extern Uint8 AnisotropicFilteringLevel;
 
     enum class GraphicsAPIEnum : Uint8 {
         None,
@@ -41,7 +26,7 @@ namespace Game::Graphics {
         Direct3D12
     };
 
-    inline GraphicsAPIEnum ActiveAPI = GraphicsAPIEnum::None;
+    extern GraphicsAPIEnum ActiveAPI;
 
     inline void SetClearColor(float R, float G, float B, float A);
     inline void ClearBitfields(unsigned int Bitfields);
@@ -49,6 +34,8 @@ namespace Game::Graphics {
     inline void Update();
     void Draw();
 }
+
+#include "GraphicsOpenGL_Client.hpp"
 
 namespace Game::Graphics::_misc {
 
@@ -114,29 +101,7 @@ namespace Game::Graphics::_misc {
     };
 }
 
-namespace Game::Graphics::OpenGLFunctions {
-
-    inline PFNGLVIEWPORTPROC glViewport = NULL;
-
-    inline PFNGLENABLEPROC glEnable = NULL;
-    inline PFNGLDISABLEPROC glDisable = NULL;
-
-    inline PFNGLCLEARCOLORPROC glClearColor = NULL;
-    inline PFNGLCLEARPROC glClear = NULL;
-
-    inline PFNGLBLENDFUNCPROC glBlendFunc = NULL;
-
-    inline PFNGLGETINTEGERVPROC glGetIntegerv = NULL;
-    inline PFNGLISENABLEDPROC glIsEnabled = NULL;
-
-    inline PFNGLDRAWARRAYSPROC glDrawArrays = NULL;
-    inline PFNGLDRAWELEMENTSPROC glDrawElements = NULL;
-
-#ifndef SDL_PLATFORM_VITA
-    inline PFNGLDRAWARRAYSINSTANCEDPROC glDrawArraysInstanced = NULL;
-    inline PFNGLDRAWELEMENTSINSTANCEDPROC glDrawElementsInstanced = NULL;
-#endif
-}
+#include "GraphicsClasses/BufferBase.hpp"
 
 #include "GraphicsClasses/IndexBuffer.hpp"
 #include "GraphicsClasses/VertexArray.hpp"
@@ -144,6 +109,9 @@ namespace Game::Graphics::OpenGLFunctions {
 
 #include "GraphicsClasses/UniformBuffer.hpp"
 
+#include "GraphicsClasses/ShaderBase.hpp"
+#include "GraphicsClasses/VertexShader.hpp"
+#include "GraphicsClasses/FragmentShader.hpp"
 #include "GraphicsClasses/Program.hpp"
 
 #include "GraphicsClasses/Framebuffer.hpp"
@@ -160,16 +128,16 @@ namespace Game::Graphics {
         Classes::Program* Program;
         Classes::Texture* Texture;
     };
-    inline BoundObjectsStruct BoundObjects;
+    extern BoundObjectsStruct BoundObjects;
 
     struct GBufferStruct {
         Classes::Texture *Position, *Normal, *Albedo, *Specular;
     };
-    inline GBufferStruct GBuffer;
-}
+    extern GBufferStruct GBuffer;
 
-static inline void (*_SetClearColor)(float R, float G, float B, float A);
-static inline void (*_ClearBitfields)(unsigned int Bitfields);
+    extern void (*_SetClearColor)(float R, float G, float B, float A);
+    extern void (*_ClearBitfields)(unsigned int Bitfields);
+}
 
 void Game::Graphics::SetClearColor(float R, float G, float B, float A) {
     _SetClearColor(R, G, B, A);
@@ -205,27 +173,10 @@ constexpr Game::Graphics::_misc::_Enums_BufferBitfields::_Enums_BufferBitfields(
     IntType _StencilBit)
     : ColorBit(_ColorBit), DepthBit(_DepthBit), StencilBit(_StencilBit) {}
 
-void Game::Graphics::_misc::_Namespace_Buffer::CopyToBuffer(
-    _Enums_BindTargets::IntType BindTarget,
-    size_t Size,
-    const void* Data,
-    _Enums_AllocationTypes::IntType AllocateFor) {}
-
-void Game::Graphics::_misc::_Namespace_Buffer::CopyToBufferPointer(
-    _Enums_BindTargets::IntType BindTarget,
-    int Offset,
-    size_t Size,
-    const void* Data) {}
-
-void Game::Graphics::_misc::_Namespace_Buffer::AllocateBuffer(
-    _Enums_BindTargets::IntType BindTarget,
-    size_t Size,
-    _Enums_AllocationTypes::IntType AllocateFor) {}
-
 namespace Game::Graphics {
-    inline Game::Graphics::_misc::_Enums_BindTargets BindTargets;
-    inline Game::Graphics::_misc::_Enums_AllocationTypes AllocationTypes;
-    inline Game::Graphics::_misc::_Enums_BufferBitfields BufferBitfields;
+    extern Game::Graphics::_misc::_Enums_BindTargets BindTargets;
+    extern Game::Graphics::_misc::_Enums_AllocationTypes AllocationTypes;
+    extern Game::Graphics::_misc::_Enums_BufferBitfields BufferBitfields;
 }
 
 static void _SetClearColor_OpenGL(float R, float G, float B, float A) {
@@ -236,32 +187,13 @@ static void _ClearBitfields_OpenGL(unsigned int Bitfields) {
     Game::Graphics::OpenGLFunctions::glClear(Bitfields);
 }
 
-#include "GraphicsClasses/BufferBase.hpp"
-
-#include "GraphicsClasses/IndexBuffer.hpp"
-#include "GraphicsClasses/VertexArray.hpp"
-#include "GraphicsClasses/VertexBuffer.hpp"
-
-#include "GraphicsClasses/UniformBuffer.hpp"
-
-#include "GraphicsClasses/FragmentShader.hpp"
-#include "GraphicsClasses/ShaderBase.hpp"
-#include "GraphicsClasses/VertexShader.hpp"
-
-#include "GraphicsClasses/Program.hpp"
-
-#include "GraphicsClasses/Framebuffer.hpp"
-
-#include "GraphicsClasses/Texture.hpp"
-
-namespace {
-    static void _graphics_WindowResizedEvent_updateGLViewport(
-        const Math::IVector2& Size) {
-        Game::Graphics::OpenGLFunctions::glViewport(0, 0, Size.X, Size.Y);
-    }
+static void _graphics_WindowResizedEvent_updateGLViewport(
+    const Math::IVector2& Size) {
+    Game::Graphics::OpenGLFunctions::glViewport(0, 0, Size.X, Size.Y);
 }
 
 void Game::Graphics::Init() {
+    // temp
     Graphics::ActiveAPI = Game::Graphics::GraphicsAPIEnum::OpenGL;
 
     switch (Graphics::ActiveAPI) {
@@ -269,22 +201,22 @@ void Game::Graphics::Init() {
         OpenGLSetup:
 
             SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION,
-                                &Graphics::OpenGL::MajorVersion);
+                                &Game::Graphics::OpenGL::MajorVersion);
             SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION,
-                                &Graphics::OpenGL::MinorVersion);
+                                &Game::Graphics::OpenGL::MinorVersion);
             SDL_GL_GetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
-                                &Graphics::OpenGL::Profile);
+                                &Game::Graphics::OpenGL::Profile);
 
-            if (Graphics::OpenGL::MajorVersion < 3) {
-                static const char* Extensions[] = {"GL_EXT_draw_buffers"};
-
-                // PFNGLGENVERTEXARRAYSOESPROC
-                for (const char* Extension : Extensions) {
-                    if (!SDL_GL_ExtensionSupported(Extension)) {
-                        std::cerr << "" << std::endl;
-                    }
-                }
-            }
+            /*
+if (Graphics::OpenGL::MajorVersion < 3) {
+static const char* Extensions[] = {"GL_EXT_draw_buffers"};
+for (const char* Extension : Extensions) {
+if (!Game::Graphics::OpenGL::ExtensionSupported(
+        Extension)) {
+    std::cerr << "" << std::endl;
+}
+}
+}*/
 
             LOAD_OPENGL_FUNCTION(glViewport);
 
@@ -305,6 +237,12 @@ void Game::Graphics::Init() {
 #endif
 
             LOAD_OPENGL_FUNCTION(glGetIntegerv);
+            LOAD_OPENGL_FUNCTION(glGetString);
+
+#ifndef SDL_PLATFORM_VITA
+            LOAD_OPENGL_FUNCTION(glGetStringi);
+#endif
+
             LOAD_OPENGL_FUNCTION(glIsEnabled);
 
             Game::Graphics::OpenGLFunctions::glBlendFunc(
@@ -337,27 +275,44 @@ void Game::Graphics::Init() {
                     GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT,
                     GL_STENCIL_BUFFER_BIT);
 
+            std::cout << "init buffer base" << std::endl;
             Graphics::BufferBase::Init_OpenGL();
+            std::cout << "Initialized BufferBase" << std::endl;
 
             Graphics::VertexArray::Init_OpenGL();
+            std::cout << "Initialized VertexArray" << std::endl;
+
             Graphics::VertexBuffer::Init_OpenGL();
+            std::cout << "Initialized VertexBuffer" << std::endl;
+
             Graphics::IndexBuffer::Init_OpenGL();
+            std::cout << "Initialized IndexBuffer" << std::endl;
 
             Graphics::UniformBuffer::Init_OpenGL();
+            std::cout << "Initialized UniformBuffer" << std::endl;
 
             Graphics::ShaderBase::Init_OpenGL();
+            std::cout << "Initialized ShaderBase" << std::endl;
+
             Graphics::VertexShader::Init_OpenGL();
+            std::cout << "Initialized VertexShader" << std::endl;
+
             Graphics::FragmentShader::Init_OpenGL();
+            std::cout << "Initialized FragmentShader" << std::endl;
 
             Graphics::Program::Init_OpenGL();
+            std::cout << "Initialized Program" << std::endl;
 
             Graphics::Texture::Init_OpenGL();
+            std::cout << "Initialized Texture" << std::endl;
+
+            Graphics::Framebuffer::Init_OpenGL();
+            std::cout << "Initialized Framebuffer" << std::endl;
 
             Game::Window.WindowResizedEvent.Connect(
                 ::_graphics_WindowResizedEvent_updateGLViewport);
 
             Graphics::OpenGLFunctions::glEnable(GL_DEPTH_TEST);
-
             break;
 
         case GraphicsAPIEnum::Vulkan:
@@ -458,5 +413,3 @@ void Game::Graphics::Init() {
 }
 
 void Game::Graphics::Update() {}
-
-void Game::Graphics::Draw() {}

@@ -2,7 +2,11 @@
 
 #include "../define.h"
 
+extern "C" {
 #include "../../include/VM/lua.h"
+}
+
+#include <SDL3/SDL_platform_defines.h>
 
 #ifdef SDL_PLATFORM_VITA
 #include <GLES2/gl2.h>
@@ -12,11 +16,7 @@
 #include <SDL3/SDL_opengl.h>
 #endif
 
-#include "LuaGraphics_MiscHeaders/LuaGraphics_SampleModels.hpp"
-
 #ifdef BUILD_CLIENT
-
-#include "../FunctionHeaders/MathTransform.hpp"
 
 #include "LuaGraphics_Classes/LuaGraphics_BufferBase.hpp"
 
@@ -31,12 +31,20 @@
 
 #include "LuaGraphics_Classes/LuaGraphics_Texture.hpp"
 
+
+#include "LuaGraphics_MiscHeaders/LuaGraphics_SampleModels.hpp"
+
 #endif
 
 #include "../FunctionHeaders/LuaHelper.hpp"
-#include "../Lua.hpp"
+//#include "../Lua.hpp"
 
 #include "../ConsoleVars.hpp"
+
+
+namespace Game::Lua {
+    extern LuaHelper::StackTableReference GameTable;
+}
 
 namespace Game::ConsoleVars::ReferenceVars::Lua::Graphics {
 
@@ -48,125 +56,40 @@ namespace Game::ConsoleVars::ReferenceVars::Lua::Graphics {
 }
 
 namespace Game::Lua::CLibraries::Graphics {
-    void Init(lua_State* State);
-}
-
-void Game::ConsoleVars::ReferenceVars::Lua::Graphics::ChangeErrorCheckingCVar::
-    SetWithString(const char* NewValue) {}
+    namespace etc {
 
 #ifdef BUILD_CLIENT
-static int DrawArrays(lua_State* State) {
-    Game::Graphics::OpenGLFunctions::glDrawArrays(
-        static_cast<GLenum>(luaL_checkinteger(State, 1)),  // Mode
-        static_cast<GLint>(luaL_optinteger(State, 2, 0)),  // First
-        static_cast<GLsizei>(luaL_checkinteger(State, 3))  // Count
-    );
-    return 0;
-}
+        int DrawArrays(lua_State* State);
+        int DrawElements(lua_State* State);
 
-static int DrawElements(lua_State* State) {
-    Game::Graphics::OpenGLFunctions::glDrawElements(
-        static_cast<GLenum>(luaL_checkinteger(State, 1)),   // Mode
-        static_cast<GLsizei>(luaL_checkinteger(State, 2)),  // Count
-        static_cast<GLenum>(luaL_checkinteger(State, 3)),   // Type
-        reinterpret_cast<const void*>(                      // Offset
-            luaL_optinteger(State, 4, 0)));
-    return 0;
-}
+        int DrawArraysInstanced(lua_State* State);
 
-static int DrawArraysInstanced(lua_State* State) {
-#ifndef SDL_PLATFORM_VITA
-    Game::Graphics::OpenGLFunctions::glDrawArraysInstanced(
-        static_cast<GLenum>(luaL_checkinteger(State, 1)),   // Mode
-        static_cast<GLint>(luaL_optinteger(State, 2, 0)),   // First
-        static_cast<GLsizei>(luaL_checkinteger(State, 3)),  // Count
-        static_cast<GLsizei>(luaL_checkinteger(State, 4))   // Instance Count
-    );
-#endif
-    return 0;
-}
+        int DrawElementsInstanced(lua_State* State);
 
-static int DrawElementsInstanced(lua_State* State) {
-#ifndef SDL_PLATFORM_VITA
-    Game::Graphics::OpenGLFunctions::glDrawElementsInstanced(
-        static_cast<GLenum>(luaL_checkinteger(State, 1)),   // Mode
-        static_cast<GLsizei>(luaL_checkinteger(State, 2)),  // Count
-        static_cast<GLenum>(luaL_checkinteger(State, 3)),   // Type
-        reinterpret_cast<const void*>(                      // Offset
-            luaL_optinteger(State, 4, 0)),
-        static_cast<GLsizei>(luaL_checkinteger(State, 5))  // Instance Count
-    );
-#endif
-    return 0;
-}
+        int SetClearColor(lua_State* State);
 
-static int SetClearColor(lua_State* State) {
-    Game::Graphics::SetClearColor(
-        static_cast<float>(luaL_optnumber(State, 1, 0.0)),
-        static_cast<float>(luaL_optnumber(State, 2, 0.0)),
-        static_cast<float>(luaL_optnumber(State, 3, 0.0)),
-        static_cast<float>(luaL_optnumber(State, 4, 0.0)));
-    return 0;
-}
+        int Clear(lua_State* State);
 
-static int Clear(lua_State* State) {
-    Game::Graphics::ClearBitfields(Game::Graphics::BufferBitfields.ColorBit |
-                                   Game::Graphics::BufferBitfields.DepthBit |
-                                   Game::Graphics::BufferBitfields.StencilBit);
-    return 0;
-}
+        template <GLenum Feature>
+        int Enable_feature(lua_State* State);
 
-template <GLenum Feature>
-static int Enable_feature(lua_State* State) {
-    Game::Graphics::OpenGLFunctions::glEnable(Feature);
-    return 0;
-}
+        template <GLenum Feature>
+        int Disable_feature(lua_State* State);
 
-template <GLenum Feature>
-static int Disable_feature(lua_State* State) {
-    Game::Graphics::OpenGLFunctions::glDisable(Feature);
-    return 0;
-}
+        void _lua_graphics_updateScreenSize(int TableIndex,
+                                            const Math::IVector2& Size);
 
-static void _lua_graphics_updateScreenSize(int TableIndex,
-                                           const Math::IVector2& Size) {
-    lua_pushinteger(Game::Lua::State, Size.X);
-    lua_setfield(Game::Lua::State, TableIndex, "ResolutionX");
-
-    lua_pushinteger(Game::Lua::State, Size.Y);
-    lua_setfield(Game::Lua::State, TableIndex, "ResolutionY");
-
-    const lua_Number AspectRatio =
-        static_cast<lua_Number>(Size.X) / static_cast<lua_Number>(Size.Y);
-
-    lua_pushnumber(Game::Lua::State, AspectRatio);
-    lua_setfield(Game::Lua::State, TableIndex, "AspectRatio");
-
-    lua_pushnumber(Game::Lua::State, static_cast<lua_Number>(1) / AspectRatio);
-    lua_setfield(Game::Lua::State, TableIndex, "AspectRatioReciprocal");
-
-    Math::Mat4* OrthographicProjection = static_cast<Math::Mat4*>(
-        lua_newuserdata(Game::Lua::State, sizeof(Math::Mat4)));
-
-    luaL_getmetatable(Game::Lua::State, "Mat4");
-    lua_setmetatable(Game::Lua::State, -2);
-
-    *OrthographicProjection = Math::Transform::Orthographic(
-        -AspectRatio, AspectRatio, -1.f, 1.f);  //, -1.f, 1.f)
-}
-
-static void _lua_graphics_WindowResizedEvent_updateLuaSize(
-    const Math::IVector2& Size) {
-    Game::Lua::GameTable.PushKey(Game::Lua::State, "Graphics");
-
-    _lua_graphics_updateScreenSize(-2, Size);
-
-    lua_pop(Game::Lua::State, 1);
-}
+        void _lua_graphics_WindowResizedEvent_updateLuaSize(
+            const Math::IVector2& Size);
 
 #endif
+    }
+
+    inline void Init(lua_State* State);
+}
 
 void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
+    using namespace Game::Lua::CLibraries::Graphics::etc;
     LuaHelper::StackTableReference GraphicsTable, SubtableCache;
 
     // Graphics
@@ -270,7 +193,15 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_SHORT, "Int16");
     SubtableCache.SetKey<lua_Integer>(State, GL_INT, "Int32");
 
-#ifndef SDL_PLATFORM_VITA
+#ifdef SDL_PLATFORM_VITA
+    SubtableCache.SetKey<lua_Integer>(State, GL_UNSIGNED_INT_24_8_OES,
+                                      "Int24_8");
+
+    SubtableCache.SetKey<lua_Integer>(State, GL_HALF_FLOAT_OES, "F16");
+    SubtableCache.SetKey<lua_Integer>(State, GL_HALF_FLOAT_OES, "HalfFloat");
+#else
+    SubtableCache.SetKey<lua_Integer>(State, GL_UNSIGNED_INT_24_8, "Int24_8");
+
     SubtableCache.SetKey<lua_Integer>(State, GL_HALF_FLOAT, "F16");
     SubtableCache.SetKey<lua_Integer>(State, GL_HALF_FLOAT, "HalfFloat");
 #endif
@@ -332,7 +263,9 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
 
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB, "RGB");
 
-#ifndef SDL_PLATFORM_VITA
+#ifdef SDL_PLATFORM_VITA
+    SubtableCache.SetKey<lua_Integer>(State, GL_RGB8_OES, "RGB8");
+#else
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB4, "RGB4");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB5, "RGB5");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB8, "RGB8");
@@ -358,7 +291,9 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA4, "RGBA4");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGB5_A1, "RGB5A1");
 
-#ifndef SDL_PLATFORM_VITA
+#ifdef SDL_PLATFORM_VITA
+    SubtableCache.SetKey<lua_Integer>(State, GL_RGBA8_OES, "RGBA8");
+#else
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA2, "RGBA2");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA8, "RGBA8");
     SubtableCache.SetKey<lua_Integer>(State, GL_RGBA8I, "RGBA8I");
@@ -377,10 +312,19 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     SubtableCache.SetKey<lua_Integer>(State, GL_SRGB8_ALPHA8, "SRGB8A8");
 #endif
 
-#ifndef SDL_PLATFORM_VITA
+    SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_COMPONENT, "Depth");
+
+#ifdef SDL_PLATFORM_VITA
+
+    SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_COMPONENT24_OES,
+                                      "Depth24");
+
+    SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_STENCIL_OES,
+                                      "DepthStencil");
+#else
+    SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_COMPONENT24, "Depth24");
     SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_STENCIL, "DepthStencil");
 #endif
-    SubtableCache.SetKey<lua_Integer>(State, GL_DEPTH_COMPONENT, "Depth");
 
     lua_setfield(State, GraphicsTable.GetStackIndex(), "TexInternalFormats");
 
@@ -452,10 +396,10 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
 #ifdef BUILD_CLIENT
 
     Game::Window.WindowResizedEvent.Connect(
-        ::_lua_graphics_WindowResizedEvent_updateLuaSize);
+        _lua_graphics_WindowResizedEvent_updateLuaSize);
 
-    ::_lua_graphics_updateScreenSize(GraphicsTable.GetStackIndex(),
-                                     Game::Window.GetSize());
+    _lua_graphics_updateScreenSize(GraphicsTable.GetStackIndex(),
+                                   Game::Window.GetSize());
 
     lua_createtable(State, 0, 4);
 
@@ -505,6 +449,3 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     lua_settop(State, GraphicsTable.GetStackIndex());
     lua_setfield(State, Game::Lua::GameTable.GetStackIndex(), "Graphics");
 }
-
-// TODO: seperate
-// #include "LuaGraphics.cpp"

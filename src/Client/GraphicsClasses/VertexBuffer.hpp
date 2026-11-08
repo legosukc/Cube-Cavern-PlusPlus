@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../define.h"
+#include <SDL3/SDL_platform_defines.h>
 
 #ifdef SDL_PLATFORM_VITA
 #include <GLES2/gl2.h>
@@ -24,22 +24,17 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::VertexBuffer {
 
-    inline Game::Graphics::Classes::VertexBuffer* (*Create)() = NULL;
-    inline void (*CreateBulk)(
+    extern Game::Graphics::Classes::VertexBuffer* (*Create)();
+    extern void (*CreateBulk)(
         size_t CreateAmount,
-        Game::Graphics::Classes::VertexBuffer* VertexBuffers[]) = NULL;
-    inline void (*Unbind)() = NULL;
+        Game::Graphics::Classes::VertexBuffer* VertexBuffers[]);
+    extern void (*Unbind)();
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();
     inline void Init_Metal();
     inline void Init_DirectX11();
     inline void Init_DirectX12();
-}
-
-bool Game::Graphics::Classes::VertexBuffer_OpenGL::IsBound() const {
-    // TODO: FIX THIS!!!!
-    return true;
 }
 
 void Game::Graphics::VertexBuffer::Init_OpenGL() {

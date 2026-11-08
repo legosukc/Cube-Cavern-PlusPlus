@@ -1,5 +1,4 @@
-#ifndef COLLISIONS_HPP
-#define COLLISIONS_HPP 1
+#pragma once
 
 #include <SDL3/SDL_stdinc.h>
 
@@ -14,12 +13,11 @@ namespace Game::Collision {
 
     inline void Init();
     inline void Quit();
-    Game::Collision::CollisionContainer DefaultContainer;
+
+    extern Game::Collision::CollisionContainer DefaultContainer;
 }
 
 
 void Game::Collision::Init() {}
 
 void Game::Collision::Quit() {}
-
-#endif

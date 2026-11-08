@@ -2,11 +2,16 @@
 
 #include "../define.h"
 
+#include <algorithm>
 #include <cstdlib>
+#include <filesystem>
+#include <fstream>
 #include <iostream>
+#include <memory>
 
 #include <SDL3/SDL_filesystem.h>
 #include <SDL3/SDL_iostream.h>
+#include <SDL3/SDL_stdinc.h>
 
 #include "../../include/VM/lua.h"
 #include "../../include/VM/lualib.h"
@@ -15,6 +20,41 @@
 
 #include "File.hpp"
 
+const char* const _excludedFastcalls[] = {"print"};
+
+// TODO: reminder to change this to non debugging settings
+static lua_CompileOptions CompileOptions = {
+    0, 2, 0, 2,
+
+    // alternative global builtin to construct vectors, in addition to
+    // default builtin 'vector.create'
+    "Vector3", "Vector3.new",
+
+    // alternative vector type name for type tables, in addition to default
+    // type 'vector'
+    "Vector3",
+
+    // 0 - 32-bit float vector components
+    // 1 - 64-bit double vector components
+    // CompileOptions.vectorPrecision = 0;
+
+    // null-terminated array of globals that are mutable; disables the
+    // import optimization for fields accessed through these
+    NULL,
+
+    // null-terminated array of userdata types that will be included in the
+    // type information
+    NULL,
+
+    // null-terminated array of globals which act as libraries and have
+    // members with known type and/or constant value when an import of one
+    // of these libraries is accessed, callbacks below will be called to
+    // receive that information
+    NULL, NULL, NULL,
+
+    // null-terminated array of library functions that should not be
+    // compiled into a built-in fastcall ("name" "lib.name")
+    _excludedFastcalls};
 
 static int __readonly_metatable_newindex(lua_State* State) {
     luaL_error(State, "Cannot modify table because it is read-only.");
@@ -23,167 +63,147 @@ static int __readonly_metatable_newindex(lua_State* State) {
 
 lua_Status LuaHelper::CompileToLuaFunction(lua_State* State,
                                            const char* SourcePath) {
-    struct BytecodeCacheStruct {
-        char Header[14] = "BYTECODECACHE";
-        Uint32 SourceCRC;
+    static constexpr const char BytecodeCacheHeader[] = "bYTEcODEcACHE";
+    struct BytecodeCacheInfoStruct {
+        char Header[sizeof(BytecodeCacheHeader)];
+        Uint32 SourceHash;
         size_t SourceSize;
-        char Bytecode[];
     };
 
     SDL_PathInfo PathInfo;
 
     Uint32 SourceCodeCRC;
     size_t SourceCodeSize;
+
+    char* Bytecode;
+    size_t BytecodeSize;
     char* SourceCode =
         static_cast<char*>(SDL_LoadFile(SourcePath, &SourceCodeSize));
     if (SourceCode == NULL) {
         return LUA_ERRERR;
     }
-    /*
-    bool DoCache;
-    {
-            if (Game::Lua::CacheLuaBytecode) {
-                    SDL_GetPathInfo((Utils::File::PreferredPath +
-    "LuaCache\\").c_str(), &PathInfo);
 
-            }
-    }*/
+    std::filesystem::path BytecodeCachePath;
 
-    std::string BytecodeCachePath;
-    // TODO: fix this and also load and save proper chunk names rather than just
-    // using the source path.
-    if (false) {  //(Game::Lua::CacheLuaBytecode) {
+    // load cache file
+    if (true) {  //(Game::Lua::CacheLuaBytecode) {
+
+        std::ifstream BytecodeCacheIO;
+
+        BytecodeCacheInfoStruct BytecodeCacheInfo;
         SourceCodeCRC = SDL_murmur3_32(SourceCode, SourceCodeSize, 420);
 
-        BytecodeCachePath = Utils::File::PreferredPath;
-        BytecodeCachePath.append("LuaCache\\");
+        BytecodeCachePath = Utils::File::PreferredPath + "LuaCache";
 
-        if (!SDL_GetPathInfo(BytecodeCachePath.c_str(), &PathInfo) ||
-            PathInfo.type != SDL_PathType::SDL_PATHTYPE_DIRECTORY) {
-            SDL_CreateDirectory(BytecodeCachePath.c_str());
+        // check if LuaCache directory exists and create it if it doesn't
+        if (!std::filesystem::is_directory(BytecodeCachePath)) {
+            std::filesystem::create_directory(BytecodeCachePath);
+            BytecodeCachePath.append(SourcePath);
             goto CheckForCacheBytecodeFail;
         }
-
         BytecodeCachePath.append(SourcePath);
 
-        char* TempPath = NULL;
-        size_t PathStringSize = BytecodeCachePath.size();
-        for (; PathStringSize > 0; --PathStringSize) {
-            if (TempPath[PathStringSize] == '\\') {
-                TempPath = new char[PathStringSize + 1];
-                break;
-            }
-        }
-
-        if (TempPath == NULL) {
+        // add source file parent directory to cache if it doesn't exist
+        if (const std::filesystem::path SourcePathDirectory =
+                BytecodeCachePath.parent_path();
+            !std::filesystem::is_directory(SourcePathDirectory)) {
+            std::filesystem::create_directory(SourcePathDirectory);
             goto CheckForCacheBytecodeFail;
         }
 
-        memcpy(TempPath, BytecodeCachePath.c_str(), PathStringSize - 1);
-        TempPath[PathStringSize] = '\0';
-        /*
-        TempPath =
-        std::filesystem::path(BytecodeCachePath).remove_filename().u8string();*/
-        std::cout << TempPath << std::endl;
-        if (!SDL_GetPathInfo(TempPath, &PathInfo) ||
-            PathInfo.type != SDL_PathType::SDL_PATHTYPE_FILE) {
-            SDL_CreateDirectory(TempPath);
-            delete[] TempPath;
-            goto CheckForCacheBytecodeFail;
-        }
-        delete[] TempPath;
-
-        size_t BytecodeCacheSize;
-        BytecodeCacheStruct* BytecodeCache = static_cast<BytecodeCacheStruct*>(
-            SDL_LoadFile(SourcePath, &BytecodeCacheSize));
-
-        if (BytecodeCache == NULL) {
+        // check for cache file
+        if (!std::filesystem::exists(BytecodeCachePath)) {
+            std::clog << "No " << BytecodeCachePath << " cache file."
+                      << std::endl;
             goto CheckForCacheBytecodeFail;
         }
 
-        if (strncmp(BytecodeCache->Header, "BYTECODECACHE",
-                    sizeof("BYTECODECACHE")) != 0 ||
-            SourceCodeCRC != BytecodeCache->SourceCRC) {
-            goto CheckForCacheBytecodeFail_FreeBytecodeCache;
+        // now load cache
+        BytecodeCacheIO.open(BytecodeCachePath);
+        if (!BytecodeCacheIO.is_open()) {
+            std::clog << "Failed to open cache file for reading: "
+                      << BytecodeCachePath << std::endl;
+            goto CheckForCacheBytecodeFail;
         }
+
+        BytecodeCacheIO.read((char*)&BytecodeCacheInfo,
+                             sizeof(BytecodeCacheInfoStruct));
+
+        if (SourceCodeCRC != BytecodeCacheInfo.SourceHash ||
+            SourceCodeSize != BytecodeCacheInfo.SourceSize) {
+            std::clog << "Hash or source size doesn't match." << std::endl;
+            goto CheckForCacheBytecodeFail;
+        }
+
+        if (strncmp(BytecodeCacheInfo.Header, BytecodeCacheHeader,
+                    sizeof(BytecodeCacheHeader)) != 0) {
+            std::clog << "Mismatched header." << std::endl;
+            goto CheckForCacheBytecodeFail;
+        }
+
         SDL_free(SourceCode);
 
-        luau_load(State, SourcePath, BytecodeCache->Bytecode,
-                  BytecodeCacheSize - sizeof(Uint32), 0);
-        /*
-luaL_loadbuffer(State, BytecodeCache->Bytecode,
-              BytecodeCacheSize - sizeof(Uint32), SourcePath);*/
-        SDL_free(BytecodeCache);
+        BytecodeCacheIO.seekg(0, std::ios::end);
+        BytecodeSize =
+            BytecodeCacheIO.tellg() -
+            static_cast<std::streamsize>(sizeof(BytecodeCacheInfoStruct));
+        BytecodeCacheIO.seekg(sizeof(BytecodeCacheInfoStruct), std::ios::beg);
 
+        Bytecode = new char[BytecodeSize];
+        BytecodeCacheIO.read(Bytecode, BytecodeSize);
+
+        luau_load(State, SourcePath, Bytecode, BytecodeSize, 0);
+
+        delete[] Bytecode;
+
+        std::cout << "loaded cache file" << std::endl;
         return LUA_OK;
-
-    CheckForCacheBytecodeFail_FreeBytecodeCache:
-        SDL_free(BytecodeCache);
     }
 CheckForCacheBytecodeFail:
 
-    // luaL_loadstring(State, SourceCode);
-
-    size_t LuaSourceSize;
-    char* LuaSource =
-        static_cast<char*>(SDL_LoadFile(SourcePath, &LuaSourceSize));
-
-    size_t BytecodeSize;
-    char* Bytecode =
-        luau_compile(LuaSource, LuaSourceSize, NULL, &BytecodeSize);
-    SDL_free(LuaSource);
+    Bytecode = luau_compile(SourceCode, SourceCodeSize, &CompileOptions,
+                            &BytecodeSize);
+    SDL_free(SourceCode);
 
     const lua_Status CompileStatus =
         (lua_Status)luau_load(State, SourcePath, Bytecode, BytecodeSize, 0);
-    free(Bytecode);
 
-    // lua_getinfo(lua_State *L, int level, const char *what, lua_Debug *ar)
-
-    // const int CompileStatus = luaL_loadfile(State, SourcePath);
     if (CompileStatus != LUA_OK) {
+        free(Bytecode);
         return CompileStatus;
     }
 
-    SDL_free(SourceCode);
-
-    /*
-    // TODO: fix this
+    // write cache file
     if (true) {  //(Game::Lua::CacheLuaBytecode) {
-        SDL_IOStream* BytecodeCacheIO =
-            SDL_IOFromFile(BytecodeCachePath.c_str(), "wb");
-        if (BytecodeCacheIO == NULL) {
+
+        if (const std::filesystem::path ParentPath =
+                BytecodeCachePath.parent_path();
+            !std::filesystem::exists(ParentPath)) {
+            std::filesystem::create_directory(ParentPath);
+        }
+
+        std::ofstream BytecodeCacheIO(BytecodeCachePath);
+        if (!BytecodeCacheIO.is_open()) {
             std::clog << "Failed to open lua bytecode cache file: "
                       << BytecodeCachePath << " for writing." << std::endl;
-            return LUA_OK;
+            goto WriteCacheFileFail;
         }
-        BytecodeCacheStruct CacheInfo;
-        CacheInfo.SourceCRC = SourceCodeCRC;
+
+        BytecodeCacheInfoStruct CacheInfo;
+        memcpy(CacheInfo.Header, BytecodeCacheHeader,
+               sizeof(BytecodeCacheHeader));
+        CacheInfo.SourceHash = SourceCodeCRC;
         CacheInfo.SourceSize = SourceCodeSize;
-        SDL_WriteIO(BytecodeCacheIO, &CacheInfo,
-                    sizeof(CacheInfo.Header) + sizeof(CacheInfo.SourceCRC) +
-                        sizeof(CacheInfo.SourceSize));
-        SDL_SeekIO(BytecodeCacheIO,
-                   sizeof(CacheInfo.Header) + sizeof(CacheInfo.SourceCRC) +
-                       sizeof(CacheInfo.SourceSize),
-                   SDL_IOWhence::SDL_IO_SEEK_SET);
 
+        BytecodeCacheIO.write((char*)&CacheInfo,
+                              sizeof(BytecodeCacheInfoStruct));
 
+        BytecodeCacheIO.seekp(sizeof(BytecodeCacheInfoStruct), std::ios::beg);
 
-                   //lua_getinfo(lua_State *L, int level, const char *what,
-    lua_Debug *ar); lua_dump( State,
-            [](lua_State* State, const void* Chunk, size_t ChunkSize,
-               void* BytecodeCacheIO) -> int {
-                SDL_WriteIO(static_cast<SDL_IOStream*>(BytecodeCacheIO), Chunk,
-                            ChunkSize);
-                SDL_SeekIO(static_cast<SDL_IOStream*>(BytecodeCacheIO),
-                           ChunkSize, SDL_IOWhence::SDL_IO_SEEK_CUR);
-                return 0;
-            },
-            BytecodeCacheIO, false);
-
-        SDL_CloseIO(BytecodeCacheIO);
-    }*/
-
+        BytecodeCacheIO.write(Bytecode, BytecodeSize);
+    }
+    WriteCacheFileFail:
+    free(Bytecode);
     return LUA_OK;
 }
 
@@ -358,16 +378,6 @@ LuaHelper::StackTableReference::StackTableReference(lua_State* State,
                                                     int AllocateKeys) {
     lua_createtable(State, AllocateArrays, AllocateKeys);
     this->TableIndex = lua_gettop(State);
-}
-
-// Uses the passed 'Index' parameter as the table reference (TableIndex).
-constexpr LuaHelper::StackTableReference::StackTableReference(
-    int Index) noexcept
-    : TableIndex(Index) {}
-LuaHelper::StackTableReference::StackTableReference() noexcept = default;
-
-constexpr int LuaHelper::StackTableReference::GetStackIndex() noexcept {
-    return this->TableIndex;
 }
 
 void LuaHelper::StackTableReference::PushReference(lua_State* State) {

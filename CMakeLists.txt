@@ -49,8 +49,6 @@ else()
   )
 endif()
 
-# ai told me to put this here...
-# Prevent Luau from compiling its standalone CLI binaries and test suites
 set(LUAU_BUILD_CLI OFF CACHE INTERNAL "")
 set(LUAU_BUILD_TESTS OFF CACHE INTERNAL "")
 
@@ -58,13 +56,13 @@ if(PLATFORM STREQUAL "vita")
   set(LUAU_EXTERN_C OFF CACHE INTERNAL "")
   set(LUAU_BUILD_SHARED OFF CACHE INTERNAL "")
   set(LUAU_BUILD_STATIC ON CACHE INTERNAL "")
+
+  add_compile_definitions(VM_HAS_NATIVE=0)
 else()
   set(LUAU_EXTERN_C ON CACHE INTERNAL "")
   set(LUAU_BUILD_SHARED ON CACHE INTERNAL "")
   set(LUAU_BUILD_STATIC OFF CACHE INTERNAL "")
 endif()
-
-set(LUAU_BUILD_CODEGEN OFF CACHE BOOL "Disable Luau native codegen" FORCE)
 
 FetchContent_MakeAvailable(luau)
 message("Fetched luau!")
@@ -90,32 +88,33 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 add_executable(${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME} PRIVATE
-
-  src/MathClasses/Vector2.cpp
-
-  src/FunctionHeaders/File.cpp
-  src/FunctionHeaders/ConfigHandler.cpp
-
-  src/Statistics.cpp
-  src/ConsoleVars.cpp
-  #src/Lua.cpp
-
-  #src/LuaLibraries/LuaConsole.cpp
-  #src/LuaLibraries/LuaEnums.cpp
-  #src/LuaLibraries/LuaFont.cpp
-  #src/LuaLibraries/LuaGraphics.cpp
-
-  #src/FunctionHeaders/LuaHelper.cpp
-)
-
 if(BUILD_TARGET STREQUAL "client")
 
   message("building for client")
 
   target_sources(${PROJECT_NAME} PRIVATE
+
     src/Client/SDLClasses/Window.cpp
     src/Client/Network_Client.cpp
+
+    src/Client/GraphicsClasses/BufferBase.cpp
+    src/Client/GraphicsClasses/VertexArray.cpp
+    src/Client/GraphicsClasses/VertexBuffer.cpp
+    src/Client/GraphicsClasses/IndexBuffer.cpp
+    src/Client/GraphicsClasses/UniformBuffer.cpp
+
+    src/Client/GraphicsClasses/ShaderBase.cpp
+    src/Client/GraphicsClasses/VertexShader.cpp
+    src/Client/GraphicsClasses/FragmentShader.cpp
+
+    src/Client/GraphicsClasses/Program.cpp
+
+    src/Client/GraphicsClasses/Texture.cpp
+    src/Client/GraphicsClasses/Framebuffer.cpp
+
+    src/Client/Graphics_Client.cpp
+    src/Client/GraphicsOpenGL_Client.cpp
+
     src/Client/main_client.cpp
   )
 
@@ -127,13 +126,55 @@ elseif(BUILD_TARGET STREQUAL "server")
 
   target_sources(${PROJECT_NAME} PRIVATE src/Server/main_server.cpp)
   target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SERVER)
-  
+
   set_target_properties(${PROJECT_NAME} PROPERTIES
     OUTPUT_NAME "CubeCavern-DedicatedServer"
   )
 else()
   message(FATAL_ERROR, "'BUILD_TARGET' unspecified! Add '-DBUILD_TARGET=client|server'.")
 endif()
+
+target_sources(${PROJECT_NAME} PRIVATE
+
+  src/FunctionHeaders/File.cpp
+  src/FunctionHeaders/ConfigHandler.cpp
+  src/FunctionHeaders/LuaHelper.cpp
+
+  src/Collisions.cpp
+  src/Statistics.cpp
+  src/ConsoleVars.cpp
+  src/Game.cpp
+  src/Time.cpp
+
+  src/LuaLibraries/LuaConsole.cpp
+  src/LuaLibraries/LuaEnums.cpp
+  src/LuaLibraries/LuaFont.cpp
+  src/LuaLibraries/LuaGraphics.cpp
+  src/LuaLibraries/LuaHostUtil.cpp
+  src/LuaLibraries/LuaInput.cpp
+  src/LuaLibraries/LuaMatrix.cpp
+  src/LuaLibraries/LuaModelLoader.cpp
+  src/LuaLibraries/LuaNetwork.cpp
+  src/LuaLibraries/LuaPatching.cpp
+  src/LuaLibraries/LuaSurface.cpp
+  src/LuaLibraries/LuaTask.cpp
+  src/LuaLibraries/LuaTypeHelper.cpp
+  src/LuaLibraries/LuaVector.cpp
+
+  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_BufferBase.cpp
+  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_GLObjectBase.cpp
+  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Program.cpp
+  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Shader.cpp
+  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.cpp
+  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_UniformBuffer.cpp
+  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexArray.cpp
+  
+  src/LuaLibraries/LuaGraphics_MiscHeaders/LuaGraphics_SampleModel.cpp
+
+  src/Lua.cpp
+
+  #src/FunctionHeaders/LuaHelper.cpp
+)
 
 if(NOT PLATFORM STREQUAL "vita")
 
@@ -197,8 +238,6 @@ endif()
 
 
 if(PLATFORM STREQUAL "vita")
-
-  message(STATUS ${CMAKE_CURRENT_SOURCE_DIR})
 
   vita_create_self(eboot.bin ${PROJECT_NAME} UNSAFE)
   vita_create_vpk(${VITA_VPKNAME}.vpk ${VITA_TITLEID} eboot.bin

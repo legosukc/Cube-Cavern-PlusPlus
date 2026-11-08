@@ -1,3 +1,7 @@
+#version 100
+
+precision highp float;
+
 varying vec3 Normal;
 varying vec2 Texcoord;
 varying vec3 FragPos;

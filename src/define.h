@@ -1,5 +1,4 @@
-#ifndef DEFINE_H
-#define DEFINE_H 1
+#pragma once
 
 #include <SDL3/SDL_platform_defines.h>
 
@@ -17,9 +16,14 @@
 #define GL_GLES_PROTOTYPES 0
 
 #define SDL_OPENGL_1_NO_PROTOTYPES 0
-#define SDL_OPENGL_1_FUNCTION_TYPEDEFS 0
+#define SDL_OPENGL_1_FUNCTION_TYPEDEFS 1
 
 #define GL_APIENTRYP *
+#define APIENTRYP *
+
+#ifdef SDL_PLATFORM_VITA
+#define GL_GLEXT_PROTOTYPES 1
+#endif
 
 /*
 #if defined(DEBUG) && !defined(_DEBUG)
@@ -134,12 +138,13 @@ instructions if it sees fit.)
     (Game::Graphics::OpenGLFunctions::FunctionName =               \
          (decltype(Game::Graphics::OpenGLFunctions::FunctionName)) \
              FunctionName)
+
 #else
+
 #define LOAD_OPENGL_FUNCTION(FunctionName)                         \
     (Game::Graphics::OpenGLFunctions::FunctionName =               \
          (decltype(Game::Graphics::OpenGLFunctions::FunctionName)) \
              SDL_GL_GetProcAddress(#FunctionName))
-#endif
-#endif
 
+#endif
 #endif

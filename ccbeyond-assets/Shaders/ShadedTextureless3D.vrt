@@ -1,12 +1,13 @@
-
-layout (std140) uniform Matrices {
-	mat4 Projection, View;
-}
-
-uniform mat4 Model;
+#version 140
 
 attribute vec3 aPos;
 attribute vec3 aNormal;
+
+layout (std140) uniform Matrices {
+	mat4 Projection;
+	mat4 View;
+}
+uniform mat4 Model;
 
 varying vec3 Normal;
 

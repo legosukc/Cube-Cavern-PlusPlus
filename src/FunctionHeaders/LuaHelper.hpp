@@ -1,5 +1,4 @@
-#ifndef LUAHELPER_H
-#define LUAHELPER_H
+#pragma once
 
 #include "../define.h"
 
@@ -202,11 +201,13 @@ namespace LuaHelper {
 
         // Uses the passed 'Index' parameter as the table reference
         // (TableIndex).
-        constexpr StackTableReference(int Index) noexcept;
-        StackTableReference() noexcept;
+        constexpr StackTableReference(int Index) noexcept : TableIndex(Index) {}
+        StackTableReference() noexcept = default;
 
         [[nodiscard]]
-        constexpr int GetStackIndex() noexcept;
+        constexpr int GetStackIndex() noexcept {
+            return this->TableIndex;
+        }
 
         void PushReference(lua_State* State);
 
@@ -276,6 +277,4 @@ namespace LuaHelper {
 }
 
 // TODO: seperate
-#include "LuaHelper.cpp"
-
-#endif
+//#include "LuaHelper.cpp"

@@ -1,5 +1,4 @@
-#ifndef GRAPHICS_UNIFORMBUFFER_H
-#define GRAPHICS_UNIFORMBUFFER_H
+#pragma once
 
 // TODO: make abstraction so uniform buffers work in gles 2.0
 
@@ -18,8 +17,8 @@
 
 namespace Game::Graphics::OpenGLFunctions {
 #ifndef SDL_PLATFORM_VITA
-    inline PFNGLBINDBUFFERBASEPROC glBindBufferBase = NULL;
-    inline PFNGLBINDBUFFERRANGEPROC glBindBufferRange = NULL;
+    extern PFNGLBINDBUFFERBASEPROC glBindBufferBase;
+    extern PFNGLBINDBUFFERRANGEPROC glBindBufferRange;
 #endif
 }
 
@@ -48,11 +47,11 @@ namespace Game::Graphics::Classes {
 
 namespace Game::Graphics::UniformBuffer {
 
-    inline Game::Graphics::Classes::UniformBuffer* (*Create)() = NULL;
-    inline void (*CreateBulk)(
+    extern Game::Graphics::Classes::UniformBuffer* (*Create)();
+    extern void (*CreateBulk)(
         size_t CreateAmount,
-        Game::Graphics::Classes::UniformBuffer* UniformBuffers[]) = NULL;
-    inline void (*Unbind)() = NULL;
+        Game::Graphics::Classes::UniformBuffer* UniformBuffers[]);
+    extern void (*Unbind)();
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();
@@ -60,21 +59,6 @@ namespace Game::Graphics::UniformBuffer {
     inline void Init_DirectX11();
     inline void Init_DirectX12();
 }
-
-Game::Graphics::Classes::UniformBuffer::UniformBuffer() = default;
-void Game::Graphics::Classes::UniformBuffer::BindBase(GLuint Index) {}
-
-#ifndef SDL_PLATFORM_VITA
-void Game::Graphics::Classes::UniformBuffer_OpenGL::BindBase(GLuint Index) {
-    Game::Graphics::OpenGLFunctions::glBindBufferBase(GL_UNIFORM_BUFFER, Index,
-                                                      this->GLObject);
-}
-
-bool Game::Graphics::Classes::UniformBuffer_OpenGL::IsBound() const {
-    // TODO: FIX THIS!!!!
-    return true;
-}
-#endif
 
 void Game::Graphics::UniformBuffer::Init_OpenGL() {
 #ifndef SDL_PLATFORM_VITA
@@ -103,5 +87,3 @@ void Game::Graphics::UniformBuffer::Init_Metal() {}
 void Game::Graphics::UniformBuffer::Init_DirectX11() {}
 
 void Game::Graphics::UniformBuffer::Init_DirectX12() {}
-
-#endif

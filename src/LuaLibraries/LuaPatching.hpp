@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../include/VM/lua.h"
+#include "../../include/VM/lua.h"
 
 #include <SDL3/SDL_stdinc.h>
 
@@ -8,7 +8,7 @@
 namespace Game::Lua::CLibraries::Patching {
 	inline void Init(lua_State* State);
 
-	static int PrefixPatch(lua_State* State);
+	int PrefixPatch(lua_State* State);
 }
 
 constexpr static const char* _InvokePatches_LuaSource
@@ -26,34 +26,8 @@ void Game::Lua::CLibraries::Patching::Init(lua_State* State) {
 
     lua_createtable(State, 0, 2);
     
-    lua_pushcfunction(State, CLibraries::Patching::PrefixPatch);
+    lua_pushcfunction(State, CLibraries::Patching::PrefixPatch, "PrefixPatch");
     lua_setfield(State, -2, "LoadFile");
 
     lua_setfield(State, -2, "Patching");
-}
-
-
-int Game::Lua::CLibraries::Patching::PrefixPatch(lua_State* State) {
-
-    luaL_checktype(State, 1, LUA_TFUNCTION);
-    luaL_checktype(State, 2, LUA_TFUNCTION);
-
-    if (lua_getmetatable(State, 1) == 0) {
-
-        lua_createtable(State, 0, 3);
-
-        lua_setfield(State, -2, "__call");
-
-        lua_createtable(State, 0, 1);
-
-        lua_pushvalue(State, 2);
-        lua_seti(State, -2, 1);
-
-        lua_setfield(State, -2, "_PrefixPatches");
-
-        lua_newtable(State);
-        lua_setfield(State, -2, "_SuffixPatches");
-
-        lua_setmetatable(State, 1);
-    }
 }

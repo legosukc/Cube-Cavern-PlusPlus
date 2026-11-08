@@ -1,7 +1,5 @@
 #include "ConfigHandler.hpp"
 
-#include "../define.h"
-
 #include <iostream>
 
 #include <SDL3/SDL_filesystem.h>
@@ -10,6 +8,11 @@
 #include "../nlohmann/json.hpp"
 
 #include "File.hpp"
+
+namespace Game::Config {
+    nlohmann::json ConfigJSON;
+    nlohmann::json GlobalConfigJSON;
+}
 
 static nlohmann::json _ParseConfig(const char* JSONText,
                                    bool UseDefaultConfig,
@@ -29,7 +32,7 @@ static nlohmann::json _ParseConfig(const char* JSONText,
 
             char* DefaultJSONText =
                 static_cast<char*>(SDL_LoadFile(DefaultConfigPath, NULL));
-            NewJSON = ::_ParseConfig(DefaultJSONText, true, DefaultConfigPath);
+            NewJSON = _ParseConfig(DefaultJSONText, true, DefaultConfigPath);
             SDL_free(DefaultJSONText);
 
             return NewJSON;
@@ -53,7 +56,7 @@ static nlohmann::json _OpenConfig(const char* ConfigPath,
         static_cast<char*>(SDL_LoadFile(FullConfigPath.c_str(), NULL));
 
     nlohmann::json NewJSON =
-        ::_ParseConfig(JSONText, UseDefaultConfig, DefaultConfigPath);
+        _ParseConfig(JSONText, UseDefaultConfig, DefaultConfigPath);
 
     SDL_free(JSONText);
     return NewJSON;
@@ -61,10 +64,10 @@ static nlohmann::json _OpenConfig(const char* ConfigPath,
 
 void Game::Config::OpenConfig(const char* ConfigPath,
                               const char* DefaultConfigPath) {
-    Game::Config::ConfigJSON = ::_OpenConfig(ConfigPath, DefaultConfigPath);
+    Game::Config::ConfigJSON = _OpenConfig(ConfigPath, DefaultConfigPath);
 }
 
 void Game::Config::Init() {
     Game::Config::GlobalConfigJSON =
-        ::_OpenConfig("GlobalCfg.json", "defaultGlobalCfg.json");
+        _OpenConfig("GlobalCfg.json", "defaultGlobalCfg.json");
 }

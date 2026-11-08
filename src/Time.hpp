@@ -1,8 +1,5 @@
-#ifndef TIME_HPP
-#define TIME_HPP
+#pragma once
 
 namespace Game::Time {
-    inline double DeltaTime = 1.0;
+    extern double DeltaTime;
 }
-
-#endif
