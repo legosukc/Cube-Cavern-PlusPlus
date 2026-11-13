@@ -275,6 +275,3 @@ namespace LuaHelper {
     void LockTable(lua_State* State, int TableIndex);
 
 }
-
-// TODO: seperate
-//#include "LuaHelper.cpp"

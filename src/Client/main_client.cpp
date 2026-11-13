@@ -53,12 +53,11 @@ extern "C" {
 #include "../FunctionHeaders/ConfigHandler.hpp"
 #include "../FunctionHeaders/File.hpp"
 
-#include "../pch.h"
-
 #include "SDLClasses/Window.hpp"
 
 #include "../Game.hpp"
 
+#include "../Statistics.hpp"
 #include "Graphics_Client.hpp"
 #include "Network_Client.hpp"
 

@@ -2,6 +2,13 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Make client build files for local platform",
+            "detail": "muh",
+            "type": "shell",
+            "command": "${workspaceRoot}/make-build-files-client.sh",
+            "group": "build"
+        },
+        {
             "label": "Compile Client for local platform",
             "detail": "Spits out an executable named 'CubeCavern' to /build/.",
             "type": "shell",

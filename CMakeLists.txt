@@ -23,7 +23,7 @@ if(PLATFORM STREQUAL "vita")
 
   set(VITA_APP_NAME "Cube Cavern Beyond")
   set(VITA_TITLEID "WORM02011")
-  set(VITA_VPKNAME "CUBECAVER")
+  set(VITA_VPKNAME "CUBECAVERNPLUSS")
   set(VITA_VERSION "01.00")
 
   set(VITA_MKSFOEX_FLAGS "-d ATTRIBUTE2=12")
@@ -45,7 +45,7 @@ else()
   FetchContent_Declare(
     luau
     GIT_REPOSITORY https://github.com/luau-lang/luau.git
-    GIT_TAG 0.742
+    GIT_TAG 0.746
   )
 endif()
 
@@ -88,6 +88,27 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 add_executable(${PROJECT_NAME})
 
+target_precompile_headers(${PROJECT_NAME} PRIVATE
+  src/MathClasses/Matrix.hpp
+  src/MathClasses/Vector2.hpp
+  src/MathClasses/Vector3.hpp
+  src/MathClasses/Vector4.hpp
+
+  src/FunctionHeaders/Math.hpp
+  src/FunctionHeaders/MathTransform.hpp
+  src/FunctionHeaders/BitOp.hpp
+  src/FunctionHeaders/StringHelper.hpp
+  src/FunctionHeaders/Exceptions.hpp
+
+  <vector>
+  <string>
+  <iostream>
+  <string>
+  <cstring>
+
+  <SDL3/SDL.h>
+)
+
 if(BUILD_TARGET STREQUAL "client")
 
   message("building for client")
@@ -96,6 +117,18 @@ if(BUILD_TARGET STREQUAL "client")
 
     src/Client/SDLClasses/Window.cpp
     src/Client/Network_Client.cpp
+
+    src/Client/GraphicsClasses/BufferBase/Base_BufferBase.cpp
+    src/Client/GraphicsClasses/BufferBase/OpenGL_BufferBase.cpp
+
+    src/Client/GraphicsClasses/VertexArray/Base_VertexArray.cpp
+    src/Client/GraphicsClasses/VertexArray/OpenGL_VertexArray.cpp
+
+    src/Client/GraphicsClasses/Program/Base_Program.cpp
+    src/Client/GraphicsClasses/Program/OpenGL_Program.cpp
+
+    src/Client/GraphicsClasses/Texture/Base_Texture.cpp
+    src/Client/GraphicsClasses/Texture/OpenGL_Texture.cpp
 
     src/Client/GraphicsClasses/BufferBase.cpp
     src/Client/GraphicsClasses/VertexArray.cpp
@@ -138,6 +171,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 
   src/FunctionHeaders/File.cpp
   src/FunctionHeaders/ConfigHandler.cpp
+  src/FunctionHeaders/Random.cpp
   src/FunctionHeaders/LuaHelper.cpp
 
   src/Collisions.cpp
@@ -168,12 +202,10 @@ target_sources(${PROJECT_NAME} PRIVATE
   src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.cpp
   src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_UniformBuffer.cpp
   src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexArray.cpp
-  
+
   src/LuaLibraries/LuaGraphics_MiscHeaders/LuaGraphics_SampleModel.cpp
 
   src/Lua.cpp
-
-  #src/FunctionHeaders/LuaHelper.cpp
 )
 
 if(NOT PLATFORM STREQUAL "vita")
@@ -193,9 +225,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   SDL3_image::SDL3_image
   SDL3_ttf::SDL3_ttf
   SDL3::SDL3
-)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE
   Luau.VM Luau.Compiler
   assimp
 )

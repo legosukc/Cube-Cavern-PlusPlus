@@ -9,16 +9,13 @@
 #endif
 
 namespace Game::Graphics::Classes {
-		
-	class OpenGLClassBase {
-	public:
-		GLuint GLObject = 0;
+	
+    class OpenGLClassBase {
+       public:
+        GLuint GLObject = 0;
 
-		constexpr bool operator==(const OpenGLClassBase B) const;
-	};
-}
-
-constexpr bool Game::Graphics::Classes::OpenGLClassBase::operator==(
-    const Game::Graphics::Classes::OpenGLClassBase B) const {
-    return this->GLObject == B.GLObject;
+        constexpr bool operator==(const OpenGLClassBase B) const {
+            return this->GLObject == B.GLObject;
+        }
+    };
 }

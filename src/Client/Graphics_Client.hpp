@@ -109,10 +109,11 @@ namespace Game::Graphics::_misc {
 
 #include "GraphicsClasses/UniformBuffer.hpp"
 
-#include "GraphicsClasses/ShaderBase.hpp"
-#include "GraphicsClasses/VertexShader.hpp"
 #include "GraphicsClasses/FragmentShader.hpp"
 #include "GraphicsClasses/Program.hpp"
+#include "GraphicsClasses/ShaderBase.hpp"
+#include "GraphicsClasses/VertexShader.hpp"
+
 
 #include "GraphicsClasses/Framebuffer.hpp"
 #include "GraphicsClasses/Texture.hpp"
@@ -309,8 +310,10 @@ if (!Game::Graphics::OpenGL::ExtensionSupported(
             Graphics::Framebuffer::Init_OpenGL();
             std::cout << "Initialized Framebuffer" << std::endl;
 
+#ifdef BUILD_CLIENT
             Game::Window.WindowResizedEvent.Connect(
                 ::_graphics_WindowResizedEvent_updateGLViewport);
+#endif
 
             Graphics::OpenGLFunctions::glEnable(GL_DEPTH_TEST);
             break;
@@ -403,7 +406,7 @@ if (!Game::Graphics::OpenGL::ExtensionSupported(
     const Math::IVector2 WindowSize = Game::Window.GetSize();
 
     for (int i = 0; i < 3; ++i) {
-        reinterpret_cast<Classes::Texture**>(&GBuffer)[i]->Bind();
+        reinterpret_cast<Classes::Texture**>(&GBuffer)[i]->Bind(0);
         Graphics::Texture::UploadPixelData(WindowSize.X, WindowSize.Y, GL_RGB,
                                            GL_FLOAT, NULL);
         Graphics::Texture::AttachToFramebuffer(

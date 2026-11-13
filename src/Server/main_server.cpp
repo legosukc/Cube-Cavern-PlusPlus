@@ -33,12 +33,6 @@
 
 #include "../FunctionHeaders/TypeHelper.hpp"
 
-#include "../pch.h"
-
-
-namespace Game {
-	double DeltaTime = 1.0;
-}
 
 #include "Network_Server.hpp"
 #include "Sound_Server.hpp"

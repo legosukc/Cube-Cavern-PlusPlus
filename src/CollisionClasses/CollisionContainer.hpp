@@ -1,5 +1,4 @@
-#ifndef COLLISIONCONTAINER_HPP
-#define COLLISIONCONTAINER_HPP
+#pragma once
 
 #include <vector>
 
@@ -8,26 +7,31 @@
 namespace Game::Collision {
     class CollisionContainer {
 
-        char a[256][256][256];
+        // TODO: implement sorting bound boxes into blockmaps
+        // so we don't have to check againstevery single bounding box
+        std::vector<Game::Collision::BaseCollision*> Collisions;
+
         /*
         struct BlockAxisZ {
-            BlockAxisZ* Next, *Last;
+            //BlockAxisZ *Next, *Last;
             int AxisIndex;
             std::vector<Game::Collision::BaseCollision*> OverlappingCollisions;
         };
         struct BlockAxisY {
-            BlockAxisY *Next, *Last;
+            //BlockAxisY *Next, *Last;
             int AxisIndex;
-            BlockAxisZ *ZAxis;
+            std::vector<BlockAxisZ> ZAxis;
         };
         struct BlockAxisX {
-            BlockAxisX *Next, *Last;
+            //BlockAxisX *Next, *Last;
             int AxisIndex;
-            BlockAxisY* YAxis;
+            std::vector<BlockAxisY> YAxis;
+            //BlockAxisY* YAxis;
         };
-        BlockAxisX Blockmap;
-        constexpr static const int BlockSize = 12;
-        
+       
+        std::vector<BlockAxisX> BlockmapStart;
+        constexpr static const int BlockSize = 24;
+
         inline void FreeAxis() {
             BlockAxisX* FreeBlock;
             BlockAxisZ* ZBlock;
@@ -36,10 +40,7 @@ namespace Game::Collision {
             while (XBlock != NULL) {
                 YBlock = XBlock->YAxis;
                 while (YBlock != NULL) {
-                    ZBlock = YBlock
-                    while (ZBlock != NULL) {
-
-                    }
+                    ZBlock = YBlock; //while (ZBlock != NULL) {}
                 }
                 FreeBlock = XBlock;
                 XBlock = XBlock->Last;
@@ -62,7 +63,7 @@ namespace Game::Collision {
             this->Blockmap.AxisIndex = 0;*/
         }
         ~CollisionContainer() {
-            //FreeAxis();
+            // FreeAxis();
         }
 
         inline void AddCollision(Game::Collision::BaseCollision* Collision) {
@@ -71,5 +72,3 @@ namespace Game::Collision {
         }
     };
 }
-
-#endif

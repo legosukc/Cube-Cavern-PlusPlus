@@ -6,9 +6,17 @@
 *.sln.docstates
 
 /build/**
+/build-client/
+/build-server/
 /build-vita/**
+/build-client-vita/**
+/build-server-vita/**
 /build-win64/**
+/build-client-win64/**
+/build-server-win64/**
 /build-win32/**
+/build-client-win32/**
+/build-server-win32/**
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

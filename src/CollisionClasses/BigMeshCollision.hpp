@@ -1,9 +1,11 @@
-#ifndef COLLISIONS_MESHCOLLISION_HPP
-#define COLLISIONS_MESHCOLLISION_HPP 1
+#pragma once
 
 #include "../MathClasses/Vector3.hpp"
 
 #include "BaseCollision.hpp"
+
+
+// TODO: sort triangles into blockmaps so we don't check every single triangle
 
 namespace Game::Collision {
     class MeshCollision : public Game::Collision::BaseCollision {
@@ -12,5 +14,3 @@ namespace Game::Collision {
         virtual void SetRotation() {}
     };
 }
-
-#endif

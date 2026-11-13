@@ -391,9 +391,8 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
 
     lua_setfield(State, GraphicsTable.GetStackIndex(), "TextureFiltering");
 
-    CLibraries::Graphics::SampleModels::Init(State, GraphicsTable);
-
 #ifdef BUILD_CLIENT
+    CLibraries::Graphics::SampleModels::Init(State, GraphicsTable);
 
     Game::Window.WindowResizedEvent.Connect(
         _lua_graphics_WindowResizedEvent_updateLuaSize);

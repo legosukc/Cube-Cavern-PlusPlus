@@ -4,7 +4,7 @@
 
 #include "CollisionClasses/BaseCollision.hpp"
 #include "CollisionClasses/BoxCollision.hpp"
-#include "CollisionClasses/MeshCollision.hpp"
+#include "CollisionClasses/SmallMeshCollision.hpp"
 #include "CollisionClasses/SphereCollision.hpp"
 
 #include "CollisionClasses/CollisionContainer.hpp"

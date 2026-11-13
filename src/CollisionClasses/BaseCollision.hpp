@@ -1,5 +1,4 @@
-#ifndef COLLISIONS_BASECOLLISION_HPP
-#define COLLISIONS_BASECOLLISION_HPP 1
+#pragma once
 
 #include "../MathClasses/Vector3.hpp"
 
@@ -18,7 +17,8 @@ namespace Game::Collision {
         virtual void RecalculateOccupiedBlocks() = 0;
 
        public:
-        BaseCollision(Game::Collision::CollisionContainer& ParentContainer) : _ParentContainer(&ParentContainer) {}
+        inline BaseCollision(Game::Collision::CollisionContainer& ParentContainer)
+            : _ParentContainer(&ParentContainer) {}
 
         virtual void SetPosition() = 0;
         virtual void SetRotation() = 0;
@@ -29,5 +29,3 @@ namespace Game::Collision {
         friend Game::Collision::CollisionContainer;
     };
 }
-
-#endif

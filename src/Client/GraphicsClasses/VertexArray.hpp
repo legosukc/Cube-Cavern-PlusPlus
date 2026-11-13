@@ -18,49 +18,22 @@
 #include <SDL3/SDL_opengl_glext.h>
 #endif
 
-#include "BaseClassDefinitions.hpp"
-#include "BufferBase.hpp"
-
 #include "../GraphicsOpenGL_Client.hpp"
 
-namespace Game::Graphics::OpenGLFunctions {
-    extern void (*glGenVertexArrays)(GLsizei n, GLuint* arrays);
-    extern void (*glDeleteVertexArrays)(GLsizei n, const GLuint* arrays);
-
-    extern void (*glBindVertexArray)(GLuint array);
-
-    extern PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
-    extern PFNGLDISABLEVERTEXATTRIBARRAYPROC glDisableVertexAttribArray;
-
-    extern PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
-}
-
-namespace Game::Graphics::Classes {
-
-    class VertexArray : public Game::Graphics::Classes::OpenGLClassBase {
-       public:
-        virtual ~VertexArray();
-
-        virtual void Bind();
-        virtual bool IsBound() const;
-    };
-
-    class VertexArray_OpenGL : public VertexArray {
-       public:
-        virtual ~VertexArray_OpenGL() override;
-
-        virtual void Bind() override;
-        virtual bool IsBound() const override;
-    };
-}
+#include "BufferBase/OpenGL_BufferBase.hpp"
+#include "VertexArray/Base_VertexArray.hpp"
+#include "VertexArray/OpenGL_VertexArray.hpp"
 
 namespace Game::Graphics::VertexArray {
-
+    
     extern Game::Graphics::Classes::VertexArray* (*Create)();
     extern void (*CreateBulk)(
         size_t CreateAmount,
         Game::Graphics::Classes::VertexArray* VertexArrays[]);
     extern void (*Unbind)();
+
+    extern void (*AddFloatAttribute)(int AttributeIndex, size_t Count);
+    extern void (*AddIntAttribute)(int AttributeIndex, size_t Count);
 
     inline void Init_OpenGL();
     inline void Init_Vulkan();
@@ -69,170 +42,14 @@ namespace Game::Graphics::VertexArray {
     inline void Init_DirectX12();
 }
 
-static Game::Graphics::Classes::VertexArray* _VertexArray_Create_OpenGL() {
-    Game::Graphics::Classes::VertexArray_OpenGL* NewVertexArray =
-        new Game::Graphics::Classes::VertexArray_OpenGL();
-    Game::Graphics::OpenGLFunctions::glGenVertexArrays(
-        1, &NewVertexArray->GLObject);
-
-    return reinterpret_cast<Game::Graphics::Classes::VertexArray*>(
-        NewVertexArray);
-}
-
-static void _VertexArray_CreateBulk_OpenGL(
-    size_t CreateAmount,
-    Game::Graphics::Classes::VertexArray* VertexArrays[]) {
-    for (size_t i = 0; i < CreateAmount; ++i) {
-        VertexArrays[i] =
-            reinterpret_cast<Game::Graphics::Classes::VertexArray*>(
-                new Game::Graphics::Classes::VertexArray_OpenGL());
-        Game::Graphics::OpenGLFunctions::glGenVertexArrays(
-            1, &VertexArrays[i]->GLObject);
-    }
-}
-
-static void _VertexArray_Unbind_OpenGL() {
-    Game::Graphics::OpenGLFunctions::glBindVertexArray(0);
-}
-
-struct _VAO_AttributePointerStruct {
-    bool Enabled = false;
-
-    GLint size = 0;
-    GLenum type = 0;
-    GLboolean normalized = false;
-    GLsizei stride = 0;
-    const void* pointer = NULL;
-};
-
-struct _VAO_Struct {
-    GLuint VBO, EBO;
-
-    _VAO_AttributePointerStruct Attributes[32];
-};
-static std::map<GLuint, _VAO_Struct> _VAO_Attribs;
-
-static GLuint BoundVAO = 0;
-
-static PFNGLVERTEXATTRIBPOINTERPROC _old_VertexAttribPointer;
-static PFNGLBINDBUFFERPROC _old_BindBuffer;
-
-static PFNGLENABLEVERTEXATTRIBARRAYPROC _old_EnableVertexAttribArray;
-static PFNGLDISABLEVERTEXATTRIBARRAYPROC _old_DisableVertexAttribArray;
-
-static void _glGenVertexArrays_GLes20(GLsizei count, GLuint* arrays) {
-    Game::Graphics::OpenGLFunctions::glGenBuffers(count, arrays);
-
-    for (; count > 0; --count) {
-        ::_VAO_Attribs[arrays[count]];
-    }
-}
-
-static void _glBindBuffer_GLes20(GLenum target, GLuint buffer) {
-    _old_BindBuffer(target, buffer);
-
-    if (::BoundVAO == 0) {
-        return;
-    }
-
-    _VAO_Struct& VAO = ::_VAO_Attribs[::BoundVAO];
-    switch (target) {
-        case GL_ARRAY_BUFFER:
-            VAO.VBO = buffer;
-            break;
-        case GL_ELEMENT_ARRAY_BUFFER:
-            VAO.EBO = buffer;
-            break;
-    }
-}
-
-static void _glBindVertexArray_GLes20(GLuint array) {
-    if (array == 0) {
-        ::BoundVAO = 0;
-        return;
-    }
-
-    if (array == ::BoundVAO || ::_VAO_Attribs.count(array) == 0) {
-        return;
-    }
-
-    const _VAO_Struct& VAO = ::_VAO_Attribs[array];
-    _old_BindBuffer(GL_ARRAY_BUFFER, VAO.VBO);
-    _old_BindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO.EBO);
-
-    const _VAO_AttributePointerStruct* AttribPointer;
-    for (GLuint index = 0; index < (sizeof(VAO.Attributes) /
-                                    sizeof(::_VAO_AttributePointerStruct));
-         ++index) {
-        AttribPointer = &VAO.Attributes[index];
-        if (!AttribPointer->Enabled) {
-            ::_old_DisableVertexAttribArray(index);
-            continue;
-        }
-        ::_old_EnableVertexAttribArray(index);
-
-        ::_old_VertexAttribPointer(
-            index, AttribPointer->size, AttribPointer->type,
-            AttribPointer->normalized, AttribPointer->stride,
-            AttribPointer->pointer);
-    }
-
-    ::BoundVAO = array;
-}
-
-static void _glVertexAttribPointer_GLes20(GLuint index,
-                                          GLint size,
-                                          GLenum type,
-                                          GLboolean normalized,
-                                          GLsizei stride,
-                                          const void* pointer) {
-    if (::BoundVAO == 0) {
-        //::_old_VertexAttribPointer(index, size, type, normalized, stride,
-        //: pointer);
-        return;
-    }
-
-    _VAO_AttributePointerStruct& AttribPointer =
-        ::_VAO_Attribs[::BoundVAO].Attributes[index];
-    AttribPointer.size = size;
-    AttribPointer.type = type;
-    AttribPointer.normalized = normalized;
-    AttribPointer.stride = stride;
-    AttribPointer.pointer = pointer;
-}
-
-static void _glEnableVertexAttribArray_GLes20(GLuint index) {
-    if (::BoundVAO == 0) {
-        //::_old_EnableVertexAttribArray(index);
-        return;
-    }
-    ::_VAO_Attribs[::BoundVAO].Attributes[index].Enabled = true;
-}
-
-static void _glDisableVertexAttribArray_GLes20(GLuint index) {
-    if (::BoundVAO == 0) {
-        //::_old_DisableVertexAttribArray(index);
-        return;
-    }
-    ::_VAO_Attribs[::BoundVAO].Attributes[index].Enabled = false;
-}
-
-static void _glDeleteVertexArrays_GLes20(GLsizei count, const GLuint* arrays) {
-    for (GLsizei i = 0; i < count; ++i) {
-        ::_VAO_Attribs.erase(arrays[i]);
-    }
-    ::Game::Graphics::OpenGLFunctions::glDeleteBuffers(count, arrays);
-}
-
-static void _glBindVertexArrayOES_wrapper(GLuint vao) {}
-
 void Game::Graphics::VertexArray::Init_OpenGL() {
     using namespace Game::Graphics::OpenGLFunctions;
 
-    Game::Graphics::VertexArray::Create = ::_VertexArray_Create_OpenGL;
-    Game::Graphics::VertexArray::CreateBulk = ::_VertexArray_CreateBulk_OpenGL;
+    Game::Graphics::VertexArray::Create = Wrappers::Create_OpenGL;
+    Game::Graphics::VertexArray::CreateBulk =
+        Wrappers::CreateBulk_OpenGL;
 
-    Game::Graphics::VertexArray::Unbind = ::_VertexArray_Unbind_OpenGL;
+    Game::Graphics::VertexArray::Unbind = Wrappers::Unbind_OpenGL;
 
     LOAD_OPENGL_FUNCTION(glEnableVertexAttribArray);
     LOAD_OPENGL_FUNCTION(glDisableVertexAttribArray);
@@ -377,31 +194,31 @@ void Game::Graphics::VertexArray::Init_OpenGL() {
                          "or something is bugged, idk bro)"
                       << std::endl;
 
-            ::_old_BindBuffer = Game::Graphics::OpenGLFunctions::glBindBuffer;
-            ::_old_VertexAttribPointer =
+            Wrappers::_old_BindBuffer = Game::Graphics::OpenGLFunctions::glBindBuffer;
+            Wrappers::_old_VertexAttribPointer =
                 Game::Graphics::OpenGLFunctions::glVertexAttribPointer;
 
-            ::_old_EnableVertexAttribArray =
+            Wrappers::_old_EnableVertexAttribArray =
                 Game::Graphics::OpenGLFunctions::glEnableVertexAttribArray;
-            ::_old_DisableVertexAttribArray =
+            Wrappers::_old_DisableVertexAttribArray =
                 Game::Graphics::OpenGLFunctions::glDisableVertexAttribArray;
 
             Game::Graphics::OpenGLFunctions::glGenVertexArrays =
-                _glGenVertexArrays_GLes20;
+                Wrappers::_glGenVertexArrays_GLes20;
             Game::Graphics::OpenGLFunctions::glDeleteVertexArrays =
-                _glDeleteVertexArrays_GLes20;
+                Wrappers::_glDeleteVertexArrays_GLes20;
 
             Game::Graphics::OpenGLFunctions::glBindVertexArray =
-                _glBindVertexArray_GLes20;
+                Wrappers::_glBindVertexArray_GLes20;
             Game::Graphics::OpenGLFunctions::glBindBuffer =
-                _glBindBuffer_GLes20;
+                Wrappers::_glBindBuffer_GLes20;
 
             Game::Graphics::OpenGLFunctions::glVertexAttribPointer =
-                _glVertexAttribPointer_GLes20;
+                Wrappers::_glVertexAttribPointer_GLes20;
             Game::Graphics::OpenGLFunctions::glEnableVertexAttribArray =
-                _glEnableVertexAttribArray_GLes20;
+                Wrappers::_glEnableVertexAttribArray_GLes20;
             Game::Graphics::OpenGLFunctions::glDisableVertexAttribArray =
-                _glDisableVertexAttribArray_GLes20;
+                Wrappers::_glDisableVertexAttribArray_GLes20;
         }
     }
 #endif
