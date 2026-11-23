@@ -97,7 +97,7 @@ function class:Update()
 end
 
 function class:DrawViewmodel(LeftArmOffset, RightArmOffset)
-	self.RenderObject:Draw(nil, RightArmOffset + Vector3.new(0, 0, -0.25))
+	self.RenderObject:Draw(nil, RightArmOffset + Vector3.new(0, 0, -0.25), Vector3.new(90, 0, 0))
 end
 
 

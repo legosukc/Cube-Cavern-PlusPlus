@@ -1,5 +1,4 @@
-#ifndef SOUND_CLIENT_H
-#define SOUND_CLIENT_H
+#pragma once
 
 #include "../../define.h"
 
@@ -37,9 +36,9 @@ namespace Game::Sound {
         Cubeb,
         NoAudio,
     };
-    AudioBackendEnum AudioBackend = AudioBackendEnum::NoAudio;
+    extern AudioBackendEnum AudioBackend;
 
-    bool AudioEnabled = false;
+    extern bool AudioEnabled;
 
     inline bool Init();
     inline void Destroy();
@@ -71,7 +70,11 @@ bool Game::Sound::Init() {
         case AudioBackendEnum::SDL_Mixer:
             Success = Game::Sound::SDLMixer::Init();
             break;
+        case AudioBackendEnum::Cubeb:
+            break;
 #endif
+        case AudioBackendEnum::NoAudio:
+            break;
     }
 
     Game::Sound::AudioEnabled = Success;
@@ -101,5 +104,3 @@ void Game::Sound::Destroy() {
 #endif
     }
 }
-
-#endif

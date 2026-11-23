@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef AUDIOSOURCE_SDLMIXER_H
-#define AUDIOSOURCE_SDLMIXER_H
-
 #include <AL/al.h>
 #include <AL/alext.h>
 
@@ -20,24 +17,15 @@ namespace Game::Sound::Classes {
         friend bool Game::Sound::SDLMixer::Init();
 
        public:
-        virtual ~AudioSource_SDLMixer() override {
-            MIX_DestroyAudio(this->Audio);
-        }
+        virtual ~AudioSource_SDLMixer() override;
 
-        // TODO: implement
         virtual void UploadSoundData(const void* SoundData,
                                      size_t SoundSize,
                                      ALenum SoundFormat,
-                                     ALsizei SampleRate = 441000) override {}
+                                     ALsizei SampleRate = 441000) override;
 
-        // TODO: implement
         virtual bool LoadFile(
             const char* Path,
-            ALenum Format = AL_FORMAT_STEREO_FLOAT32) override {
-            return false;
-        }
+            ALenum Format = AL_FORMAT_STEREO_FLOAT32) override;
     };
-
 }
-
-#endif

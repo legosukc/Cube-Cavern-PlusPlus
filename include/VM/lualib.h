@@ -29,14 +29,12 @@ LUALIB_API int luaL_checkboolean(lua_State* L, int narg);
 LUALIB_API int luaL_optboolean(lua_State* L, int narg, int def);
 
 LUALIB_API int luaL_checkinteger(lua_State* L, int numArg);
-LUALIB_API int64_t luaL_checkinteger64(lua_State* L, int numArg);
 LUALIB_API int luaL_optinteger(lua_State* L, int nArg, int def);
-LUALIB_API int64_t luaL_optinteger64(lua_State* L, int nArg, int64_t def);
 LUALIB_API unsigned luaL_checkunsigned(lua_State* L, int numArg);
 LUALIB_API unsigned luaL_optunsigned(lua_State* L, int numArg, unsigned def);
 
-LUALIB_API const float* luaL_checkvector(lua_State* L, int narg);
-LUALIB_API const float* luaL_optvector(lua_State* L, int narg, const float* def);
+LUALIB_API const LUA_VECTOR_TYPE* luaL_checkvector(lua_State* L, int narg);
+LUALIB_API const LUA_VECTOR_TYPE* luaL_optvector(lua_State* L, int narg, const LUA_VECTOR_TYPE* def);
 
 LUALIB_API void luaL_checkstack(lua_State* L, int sz, const char* msg);
 LUALIB_API void luaL_checktype(lua_State* L, int narg, int t);
@@ -61,10 +59,6 @@ LUALIB_API const char* luaL_findtable(lua_State* L, int idx, const char* fname, 
 
 LUALIB_API const char* luaL_typename(lua_State* L, int idx);
 
-// wrapper for making calls from yieldable C functions
-LUALIB_API int luaL_callyieldable(lua_State* L, int nargs, int nresults);
-LUALIB_API int luaL_pcallyieldable(lua_State* L, int nargs, int nresults, int errfunc);
-
 LUALIB_API void luaL_traceback(lua_State* L, lua_State* L1, const char* msg, int level);
 
 /*
@@ -82,6 +76,10 @@ LUALIB_API void luaL_traceback(lua_State* L, lua_State* L1, const char* msg, int
 #define luaL_getmetatable(L, n) (lua_getfield(L, LUA_REGISTRYINDEX, (n)))
 
 #define luaL_opt(L, f, n, d) (lua_isnoneornil(L, (n)) ? (d) : f(L, (n)))
+
+// backwards compatibility
+#define luaL_callyieldable(L, nargs, nresults) lua_callyieldable(L, nargs, nresults)
+#define luaL_pcallyieldable(L, nargs, nresults, errfunc) lua_pcallyieldable(L, nargs, nresults, errfunc)
 
 // generic buffer manipulation
 
@@ -151,8 +149,6 @@ LUALIB_API int luaopen_debug(lua_State* L);
 #define LUA_VECLIBNAME "vector"
 LUALIB_API int luaopen_vector(lua_State* L);
 
-#define LUA_INTLIBNAME "integer"
-LUALIB_API int luaopen_integer(lua_State* L);
 
 // open all builtin libraries
 LUALIB_API void luaL_openlibs(lua_State* L);

@@ -18,7 +18,7 @@
             "request": "launch",
             "program": "${workspaceRoot}/build/CubeCavern-DedicatedServer",
             "args": [],
-            "cwd": "${workspaceRoot}/build/"
+            "cwd": "${workspaceRoot}/ccbeyond-assets/"
         },
         {
             "name": "Launch Client (Vita)",

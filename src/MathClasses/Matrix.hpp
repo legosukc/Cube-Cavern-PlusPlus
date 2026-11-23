@@ -56,15 +56,15 @@ namespace Math {
 
         template <class _ColumnType, int _RowCount, int _ColumnCount>
         struct _MatrixBase
-            : _MatrixBase_ColumnMembers<_ColumnCount, _ColumnType> {
+            : Math::etc::_MatrixBase_ColumnMembers<_ColumnCount, _ColumnType> {
+            using _MatrixBase_ColumnMembers<_ColumnCount, _ColumnType>::
+                _MatrixBase_ColumnMembers;
+
             using ColumnType = _ColumnType;
             using ComponentType = typename _ColumnType::ComponentType;
 
             static constexpr int RowCount = _RowCount;
             static constexpr int ColumnCount = _ColumnCount;
-
-            using _MatrixBase_ColumnMembers<_ColumnCount, _ColumnType>::
-                _MatrixBase_ColumnMembers;
 
             constexpr ColumnType& operator[](int Index) {
                 return reinterpret_cast<ColumnType*>(this)[Index];
@@ -110,12 +110,9 @@ namespace Math {
 
             constexpr _MatrixBase operator*(const _MatrixBase& B) const {
                 _MatrixBase Result;
-                int k = 0;
-                int j = 0;
-                int i = 0;
-                for (; i < _ColumnCount; ++i) {
-                    for (j = 0; j < _RowCount; ++j) {
-                        for (k = 0; k < _ColumnCount; ++k) {
+                for (int i = 0; i < _ColumnCount; ++i) {
+                    for (int j = 0; j < _RowCount; ++j) {
+                        for (int k = 0; k < _ColumnCount; ++k) {
                             Result[i][j] += this->operator[](i)[k] * B[k][j];
                         }
                     }
@@ -141,10 +138,8 @@ namespace Math {
             constexpr _MatrixBase Lerp(const _MatrixBase& B,
                                        float Alpha) const {
                 _MatrixBase Result;
-                int j = 0;
-                int i = 0;
-                for (; i < _ColumnCount; ++i) {
-                    for (j = 0; j < _RowCount; ++j) {
+                for (int i = 0; i < _ColumnCount; ++i) {
+                    for (int j = 0; j < _RowCount; ++j) {
                         Result[i][j] =
                             this->operator[](i)[j] +
                             (B[i][j] - this->operator[](i)[j]) * Alpha;
@@ -155,6 +150,7 @@ namespace Math {
             }
         };
     }
+
     using Mat2 = etc::_MatrixBase<Math::Vector2, 2, 2>;
     using Mat3 = etc::_MatrixBase<Math::Vector3, 3, 3>;
     using Mat4 = etc::_MatrixBase<Math::Vector4, 4, 4>;

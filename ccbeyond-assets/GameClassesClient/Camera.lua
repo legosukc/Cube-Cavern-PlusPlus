@@ -49,14 +49,9 @@ do
 	Graphics.VertexBuffer.CopyFromBuffer(Model.VertexData)
 	Graphics.ElementBuffer.CopyFromBuffer(Model.IndexData)
 
-	Graphics.VertexArray.SetAttributePointer(0, 3, Graphics.Types.Float, false, Model.StrideSize, 0)
-	Graphics.VertexArray.EnableAttribute(0)
-
-	Graphics.VertexArray.SetAttributePointer(1, 3, Graphics.Types.Float, false, Model.StrideSize, 4 * 3)
-	Graphics.VertexArray.EnableAttribute(1)
-
-	Graphics.VertexArray.SetAttributePointer(2, 2, Graphics.Types.Float, false, Model.StrideSize, 4 * 3 * 2)
-	Graphics.VertexArray.EnableAttribute(2)
+	Graphics.VertexArray.AddFloatAttribute(0, 3, Model.StrideSize)
+	Graphics.VertexArray.AddFloatAttribute(1, 3, Model.StrideSize)
+	Graphics.VertexArray.AddFloatAttribute(2, 2, Model.StrideSize)
 
 	Graphics.VertexArray.Unbind()
 end

@@ -4,7 +4,7 @@ attribute vec3 aPos;
 attribute vec3 aNormal;
 attribute vec2 aTexcoord;
 
-uniform vec3 Offset;
+uniform mat4 Model;
 uniform mat4 Projection;
 
 varying vec3 Normal;
@@ -12,8 +12,8 @@ varying vec2 Texcoord;
 varying vec3 FragPos;
 		
 void main() {
-    gl_Position = Projection * vec4(aPos + Offset, 1.0);
+    gl_Position = Projection * Model * vec4(aPos, 1.0);
     Normal = aNormal;
     Texcoord = aTexcoord;
-    FragPos = aPos + Offset;
+    FragPos = aPos;
 }

@@ -69,19 +69,33 @@ int Game::Lua::CLibraries::Graphics::etc::DrawElementsInstanced(
     return 0;
 }
 
-int Game::Lua::CLibraries::Graphics::etc::SetClearColor(lua_State* State) {
-    Game::Graphics::SetClearColor(
+int Game::Lua::CLibraries::Graphics::etc::ClearColorBuffer(lua_State* State) {
+    Game::Graphics::ClearColorBuffer(
         static_cast<float>(luaL_optnumber(State, 1, 0.0)),
         static_cast<float>(luaL_optnumber(State, 2, 0.0)),
         static_cast<float>(luaL_optnumber(State, 3, 0.0)),
-        static_cast<float>(luaL_optnumber(State, 4, 0.0)));
+        static_cast<float>(luaL_optnumber(State, 4, 1.0))
+    );
     return 0;
 }
 
-int Game::Lua::CLibraries::Graphics::etc::Clear(lua_State* State) {
-    Game::Graphics::ClearBitfields(Game::Graphics::BufferBitfields.ColorBit |
-                                   Game::Graphics::BufferBitfields.DepthBit |
-                                   Game::Graphics::BufferBitfields.StencilBit);
+int Game::Lua::CLibraries::Graphics::etc::ClearDepthBuffer(lua_State* State) {
+    Game::Graphics::ClearDepthBuffer();
+    return 0;
+}
+
+int Game::Lua::CLibraries::Graphics::etc::ClearStencilBuffer(lua_State* State) {
+    Game::Graphics::ClearStencilBuffer();
+    return 0;
+}
+
+int Game::Lua::CLibraries::Graphics::etc::ClearAllBuffers(lua_State* State) {
+    Game::Graphics::ClearAllBuffers(
+        static_cast<float>(luaL_optnumber(State, 1, 0.0)),
+        static_cast<float>(luaL_optnumber(State, 2, 0.0)),
+        static_cast<float>(luaL_optnumber(State, 3, 0.0)),
+        static_cast<float>(luaL_optnumber(State, 4, 1.0))
+    );
     return 0;
 }
 
@@ -97,8 +111,8 @@ template int Game::Lua::CLibraries::Graphics::etc::Enable_feature<
 template int Game::Lua::CLibraries::Graphics::etc::Enable_feature<
     GL_STENCIL_TEST>(lua_State* State);
 
-template int Game::Lua::CLibraries::Graphics::etc::Enable_feature<
-    GL_BLEND>(lua_State* State);
+template int Game::Lua::CLibraries::Graphics::etc::Enable_feature<GL_BLEND>(
+    lua_State* State);
 
 template <GLenum Feature>
 int Game::Lua::CLibraries::Graphics::etc::Disable_feature(lua_State* State) {

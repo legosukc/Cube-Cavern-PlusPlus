@@ -10,7 +10,7 @@ namespace Game::Lua::CLibraries::Matrix {
 
     inline void Init(lua_State* State);
 
-    template<class MatrixType>
+    template <class MatrixType>
     struct TemplatedFunctions {
         static int __new(lua_State* State);
         static int __tostring(lua_State* State);
@@ -26,174 +26,13 @@ namespace Game::Lua::CLibraries::Matrix {
     int _Perspective(lua_State* State);
     int _Orthographic(lua_State* State);
     int __Translate(lua_State* State);
+    int __RotateAxis(lua_State* State);
+    int __Rotate(lua_State* State);
 
     template <class MatrixType>
-    void SetupMatrix(lua_State* State,
-                     const char* VectorName,
-                     const char* MatrixName);
-}
-
-template <class MatrixType>
-int Game::Lua::CLibraries::Matrix::TemplatedFunctions<MatrixType>::__new(
-    lua_State* State) {
-    typename MatrixType::ColumnType* Row1;
-    MatrixType* NewMatrix;
-
-    NewMatrix =
-        static_cast<MatrixType*>(lua_newuserdata(State, sizeof(MatrixType)));
-
-    lua_pushvalue(State, lua_upvalueindex(1));
-    lua_setmetatable(State, -2);
-
-    if (lua_gettop(State) == 2) {
-        *NewMatrix = MatrixType(
-            LuaHelper::ToTypename<typename MatrixType::ComponentType>(State,
-                                                                      1));
-        return 1;
-    }
-    lua_insert(State, 1);
-
-    if (Row1 = static_cast<typename MatrixType::ColumnType*>(
-            LuaHelper::TestMetatable(State, 1, lua_upvalueindex(1)));
-        Row1 == NULL) {
-        lua_settop(State, (MatrixType::RowCount * MatrixType::ColumnCount) + 1);
-
-        for (int i = 2; i <= MatrixType::RowCount * MatrixType::ColumnCount;
-             ++i) {
-            reinterpret_cast<typename MatrixType::ColumnType::ComponentType*>(
-                NewMatrix)[i - 2] = luaL_optnumber(State, i, 0.0);
-        }
-
-    } else {
-        lua_settop(State, MatrixType::ColumnCount + 1);
-
-        (*NewMatrix)[0] = *Row1;
-        for (int i = 3; i <= MatrixType::ColumnCount; ++i) {
-            (*NewMatrix)[i - 2] =
-                *static_cast<typename MatrixType::ColumnType*>(
-                    LuaHelper::TestMetatable(State, i, lua_upvalueindex(1)));
-        }
-    }
-
-    lua_settop(State, 1);
-    return 1;
-}
-
-template <class MatrixType>
-int Game::Lua::CLibraries::Matrix::TemplatedFunctions<MatrixType>::__tostring(
-    lua_State* State) {
-    const MatrixType* MatrixUD = static_cast<MatrixType*>(
-        LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)));
-
-    for (int Column = 0; Column < MatrixType::ColumnCount; ++Column) {
-        for (int Row = 0; Row < MatrixType::RowCount; ++Row) {
-            LuaHelper::Push<typename MatrixType::ComponentType>(
-                State, MatrixUD->IndexElement(Row * Column));
-        }
-        lua_pushstring(State, "\n");
-    }
-    lua_concat(State, MatrixType::RowCount * MatrixType::ColumnCount);
-    /*
-    LuaHelper::Push<typename
-    MatrixType::ColumnType::ComponentType>(State,
-    (*MatrixUD)[MatrixType::ColumnType]); for (int i =
-    VectorType::ComponentCount - 1; i > 0; --i) {
-
-            //std::cout << i << std::endl;
-            lua_pushliteral(State, ", ");
-            LuaHelper::Push<typename
-    MatrixType::ColumnType::ComponentType>(State, (*Vector)[i]);
-    }
-    lua_concat(State, VectorType::ComponentCount);
-
-    lua_rotate(State, 1, 1);*/
-
-    return 1;
-}
-
-template <class MatrixType>
-int Game::Lua::CLibraries::Matrix::TemplatedFunctions<MatrixType>::__index(
-    lua_State* State) {
-    lua_Integer Index;
-    MatrixType* MatrixUD;
-
-    MatrixUD = static_cast<MatrixType*>(
-        LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)));
-    Index = luaL_checkinteger(State, 2);
-
-    unlikely_branch if (Index < 0 || Index > MatrixType::ColumnCount - 1) {
-        lua_getfield(State, lua_upvalueindex(1), "__name");
-        luaL_error(State, "Cannot index ", lua_tostring(State, -1),
-                   ": Numerical index out of range: (", Index, ").");
-    }
-
-    LuaHelper::Push<typename MatrixType::ColumnType>(State, (*MatrixUD)[Index]);
-    return 1;
-}
-
-template <class MatrixType>
-int Game::Lua::CLibraries::Matrix::TemplatedFunctions<MatrixType>::__newindex(
-    lua_State* State) {
-    lua_Integer Index;
-    MatrixType* MatrixUD;
-
-    MatrixUD = static_cast<MatrixType*>(
-        LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)));
-    Index = luaL_checkinteger(State, 2);
-
-    unlikely_branch if (Index < 0 || Index > MatrixType::ColumnCount - 1) {
-        lua_getfield(State, lua_upvalueindex(1), "__name");
-        luaL_error(State, "Cannot index ", lua_tostring(State, -1),
-                   ": Numerical index out of range: (", Index, ").");
-    }
-
-    (*MatrixUD)[Index] = *static_cast<typename MatrixType::ColumnType*>(
-        LuaHelper::CheckMetatable(State, 3, lua_upvalueindex(2)));
-    return 0;
-}
-
-template <class MatrixType>
-int Game::Lua::CLibraries::Matrix::TemplatedFunctions<MatrixType>::__mul(
-    lua_State* State) {
-    MatrixType *Result, *B;
-
-    Result =
-        static_cast<MatrixType*>(lua_newuserdata(State, sizeof(MatrixType)));
-
-    *Result = *static_cast<MatrixType*>(
-                  LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1))) *
-              *static_cast<MatrixType*>(
-                  LuaHelper::CheckMetatable(State, 2, lua_upvalueindex(1)));
-    return 1;
-}
-
-template <class MatrixType>
-int Game::Lua::CLibraries::Matrix::TemplatedFunctions<MatrixType>::__lerp(
-    lua_State* State) {
-    MatrixType *Result, *B;
-
-    Result =
-        static_cast<MatrixType*>(lua_newuserdata(State, sizeof(MatrixType)));
-
-    *Result = static_cast<MatrixType*>(
-                  LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
-                  ->Lerp(*static_cast<MatrixType*>(LuaHelper::CheckMetatable(
-                      State, 2, lua_upvalueindex(1))));
-    return 1;
-}
-
-template <class MatrixType>
-int Game::Lua::CLibraries::Matrix::TemplatedFunctions<MatrixType>::__eq(
-    lua_State* State) {
-    const MatrixType *A, *B;
-
-    A = static_cast<MatrixType*>(
-        LuaHelper::TestMetatable(State, 1, lua_upvalueindex(1)));
-    B = static_cast<MatrixType*>(
-        LuaHelper::TestMetatable(State, 2, lua_upvalueindex(1)));
-
-    lua_pushboolean(State, !(A == NULL || B == NULL) && A->operator==(*B));
-    return 1;
+    inline void SetupMatrix(lua_State* State,
+                            const char* VectorName,
+                            const char* MatrixName);
 }
 
 template <class MatrixType>
@@ -234,8 +73,10 @@ void Game::Lua::CLibraries::Matrix::SetupMatrix(lua_State* State,
     Metatable.SetKeyClosure(State, TemplatedFunctions<MatrixType>::__eq, "__eq",
                             1);
 
+    // TODO: follow passed template
+    lua_pushliteral(State, "Vector4");
     LibraryTable.SetKeyClosure(State, TemplatedFunctions<MatrixType>::__new,
-                               "new", 1);
+                               "new", 2);
     LibraryTable.SetKey<lua_Integer>(State, sizeof(MatrixType), "ByteSize");
 
     lua_setglobal(State, MatrixName);
@@ -265,6 +106,14 @@ void Game::Lua::CLibraries::Matrix::Init(lua_State* State) {
     lua_pushcfunction(State, Game::Lua::CLibraries::Matrix::__Translate,
                       "Mat4.Translate");
     lua_setfield(State, -2, "Translate");
+
+    lua_pushcfunction(State, Game::Lua::CLibraries::Matrix::__RotateAxis,
+                      "Mat4.RotateAxis");
+    lua_setfield(State, -2, "RotateAxis");
+
+    lua_pushcfunction(State, Game::Lua::CLibraries::Matrix::__Rotate,
+                      "Mat4.Rotate");
+    lua_setfield(State, -2, "Rotate");
 
     lua_pop(State, 1);
 }

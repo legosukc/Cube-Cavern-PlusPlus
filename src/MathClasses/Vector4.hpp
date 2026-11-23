@@ -1,5 +1,4 @@
-#ifndef VECTOR4_HPP
-#define VECTOR4_HPP 1
+#pragma once
 
 #include "../define.h"
 
@@ -19,24 +18,23 @@ namespace Math {
 
 template <typename _ComponentType, class _DerivedType>
 struct Math::etc::_base_vector4 {
-
     static constexpr int ComponentCount = 4;
     using ComponentType = _ComponentType;
 
-    constexpr _base_vector4<_ComponentType, _DerivedType>()
-        : _base_vector4<_ComponentType, _DerivedType>(
-              static_cast<ComponentType>(0)) {}
-    constexpr _base_vector4<_ComponentType, _DerivedType>(_ComponentType _X,
-                                                          ComponentType _Y,
-                                                          ComponentType _Z,
-                                                          ComponentType _W)
+    static_assert(std::is_integral_v<ComponentType> ||
+                      std::is_floating_point_v<ComponentType>,
+                  "Unexpected _base_vector4 template parameter. "
+                  "Expected floating point or integral.");
+
+    constexpr _base_vector4(_ComponentType _X,
+                            _ComponentType _Y,
+                            _ComponentType _Z,
+                            _ComponentType _W)
         : X(_X), Y(_Y), Z(_Z), W(_W) {}
-    constexpr explicit _base_vector4<_ComponentType, _DerivedType>(
-        ComponentType Value)
-        : _base_vector4<_ComponentType, _DerivedType>(Value,
-                                                      Value,
-                                                      Value,
-                                                      Value) {}
+    constexpr explicit _base_vector4(_ComponentType Value)
+        : X(Value), Y(Value), Z(Value), W(Value) {}
+
+    constexpr _base_vector4() : _base_vector4(static_cast<_ComponentType>(0)) {}
 
     union {
         ComponentType X, R, S;
@@ -51,13 +49,11 @@ struct Math::etc::_base_vector4 {
         ComponentType W, A, Q;
     };
 
-    template <typename IndexType>
-    constexpr ComponentType& operator[](IndexType Index) {
+    constexpr ComponentType& operator[](int Index) {
         return reinterpret_cast<ComponentType*>(this)[Index];
     }
 
-    template <typename IndexType>
-    constexpr const ComponentType& operator[](IndexType Index) const {
+    constexpr const ComponentType& operator[](int Index) const {
         return reinterpret_cast<const ComponentType*>(this)[Index];
     }
 
@@ -78,7 +74,6 @@ struct Math::etc::_base_vector4 {
         return _DerivedType(this->X - B.X, this->Y - B.Y, this->Z - B.Z,
                             this->W - B.W);
     }
-    
 
     constexpr _DerivedType operator-(ComponentType B) const {
         return _DerivedType(this->X - B, this->Y - B, this->Z - B, this->W - B);
@@ -184,8 +179,7 @@ struct Math::etc::_base_vector4 {
     }
 };
 
-struct Math::Vector4 : public Math::etc::_base_vector4<float, Vector4> {
-
+struct Math::Vector4 : Math::etc::_base_vector4<float, Vector4> {
     using _base_vector4::_base_vector4;
 
     SSE3_FUNCTION
@@ -347,4 +341,3 @@ constexpr Math::UVector4::operator Math::IVector4() const {
                           static_cast<Math::IVector4::ComponentType>(this->Z),
                           static_cast<Math::IVector4::ComponentType>(this->W));
 }
-#endif

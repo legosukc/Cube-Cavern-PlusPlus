@@ -14,14 +14,9 @@ local ViewportArmModel = ModelLoader.LoadFile("Models/ViewArm.obj")
 Graphics.VertexBuffer.CopyFromBuffer(ViewportArmModel.VertexData)
 Graphics.ElementBuffer.CopyFromBuffer(ViewportArmModel.IndexData)
 
-Graphics.VertexArray.EnableAttribute(0)
-Graphics.VertexArray.SetAttributePointer(0, 3, Graphics.Types.Float, false, ViewportArmModel.StrideSize, 0)
-
-Graphics.VertexArray.EnableAttribute(1)
-Graphics.VertexArray.SetAttributePointer(1, 3, Graphics.Types.Float, false, ViewportArmModel.StrideSize, 4 * 3)
-
-Graphics.VertexArray.EnableAttribute(2)
-Graphics.VertexArray.SetAttributePointer(2, 2, Graphics.Types.Float, false, ViewportArmModel.StrideSize, 4 * 3 * 2)
+Graphics.VertexArray.AddFloatAttribute(0, 3, ViewportArmModel.StrideSize)
+Graphics.VertexArray.AddFloatAttribute(1, 3, ViewportArmModel.StrideSize)
+Graphics.VertexArray.AddFloatAttribute(2, 2, ViewportArmModel.StrideSize)
 
 Graphics.VertexArray.Unbind()
 
@@ -50,10 +45,11 @@ local ViewportArmTextureUniform = ViewportArmProgram:GetUniformIndex("ArmTexture
 Graphics.Program.SetUniformSint32(ViewportArmTextureUniform, 0);
 
 
-local ViewportArmOffsetUniform = ViewportArmProgram:GetUniformIndex("Offset")
+--local ViewportArmOffsetUniform = ViewportArmProgram:GetUniformIndex("Offset")
+local ModelUniform = ViewportArmProgram:GetUniformIndex("Model")
 local ViewportArmProjectionUniform = ViewportArmProgram:GetUniformIndex("Projection")
 
-print("uniform indexes: ", ViewportArmOffsetUniform, ViewportArmProjectionUniform)
+--print("uniform indexes: ", ViewportArmOffsetUniform, ViewportArmProjectionUniform)
 
 local ViewportArmTexture = Texture.new()
 ViewportArmTexture:Bind()
@@ -74,7 +70,8 @@ local RenderObject = {
 
 	Program = ViewportArmProgram;
 	ArmTextureUniform = ViewportArmTextureUniform;
-	ArmOffsetUniform = ViewportArmOffsetUniform;
+	--ArmOffsetUniform = ViewportArmOffsetUniform;
+	ModelUniform = ModelUniform;
 	ProjectionUniform = ViewportArmProjectionUniform;
 
     Texture = ViewportArmTexture;
@@ -85,15 +82,17 @@ RenderObject.__index = RenderObject
 
 local SetUniformVec3 = Graphics.Program.SetUniformVec3
 local SetUniformMat4 = Graphics.Program.SetUniformMat4
-function RenderObject:Draw(NewArmTexture, ArmOffset, ArmRotation, ArmMatrix)
+function RenderObject:Draw(NewArmTexture, ArmOffset, ArmRotation)
     self.VAO:Bind()
 	self.Program:Use();
 
-	(NewArmTexture or self.Texture):Bind();
+	(NewArmTexture or self.Texture):Bind()
 	Texture.SetActiveTexture(0)
 		
-	SetUniformVec3(self.ArmOffsetUniform, ArmOffset)
-	--Mat4.Rotate(Mat4.Translate(Mat4.new(1), ArmOffset)
+	--SetUniformVec3(self.ArmOffsetUniform, ArmOffset)
+	--Mat4.Translate(Mat4.new(1), ArmOffset)
+	--SetUniformMat4(self.ModelUniform, Mat4.RotateAxis(Mat4.new(1), 1, ArmRotation))
+	SetUniformMat4(self.ModelUniform, Mat4.new(1))
 	SetUniformMat4(self.ProjectionUniform, false, Game.Camera.ProjectionMatrix)
 
 	Graphics.DrawElements(Graphics.DrawModes.Triangles, self.IndexCount, Graphics.Types.Uint32)

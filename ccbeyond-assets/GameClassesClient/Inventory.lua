@@ -48,12 +48,15 @@ do
     VertexBuffer.CopyFromBuffer(Graphics.SampleModels.FlatQuad.Vertices)
 	ElementBuffer.CopyFromBuffer(Graphics.SampleModels.FlatQuad.Indices)
 
+    Graphics.VertexArray.AddFloatAttribute(0, 2, 4 * 4)
+	Graphics.VertexArray.AddFloatAttribute(1, 2, 4 * 4)
+	--[[
 	VertexArray.EnableAttribute(0)
 	VertexArray.SetAttributePointer(0, 2, Graphics.Types.Float, false, 4 * 4, 0)
 
 	VertexArray.EnableAttribute(1)
 	VertexArray.SetAttributePointer(1, 2, Graphics.Types.Float, false, 4 * 4, 4 * 2)
-
+    ]]
 	VertexArray.Unbind()
 
 

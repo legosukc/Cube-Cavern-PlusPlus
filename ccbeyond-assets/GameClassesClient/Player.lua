@@ -272,12 +272,12 @@ function Player:Draw()
 
 		if self.LeftViewportArmVisible then
 			
-			self.ViewarmRenderObject:Draw(nil, LeftArmOffset)
+			self.ViewarmRenderObject:Draw(nil, LeftArmOffset, Vector3.new(0, 0, 0))
 		end
 
 		if self.RightViewportArmVisible then
 			
-			self.ViewarmRenderObject:Draw(nil, RightArmOffset)
+			self.ViewarmRenderObject:Draw(nil, RightArmOffset, Vector3.new(0, 0, 0))
 		end
 		Graphics.VertexArray.Unbind()
 

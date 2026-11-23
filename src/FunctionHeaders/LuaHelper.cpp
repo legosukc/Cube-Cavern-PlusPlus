@@ -156,7 +156,7 @@ lua_Status LuaHelper::CompileToLuaFunction(lua_State* State,
 
         delete[] Bytecode;
 
-        std::cout << "loaded cache file" << std::endl;
+        //std::cout << "loaded cache file" << std::endl;
         return LUA_OK;
     }
 CheckForCacheBytecodeFail:

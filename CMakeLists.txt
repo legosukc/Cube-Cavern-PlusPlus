@@ -45,7 +45,7 @@ else()
   FetchContent_Declare(
     luau
     GIT_REPOSITORY https://github.com/luau-lang/luau.git
-    GIT_TAG 0.746
+    GIT_TAG 0.748
   )
 endif()
 
@@ -118,35 +118,85 @@ if(BUILD_TARGET STREQUAL "client")
     src/Client/SDLClasses/Window.cpp
     src/Client/Network_Client.cpp
 
-    src/Client/GraphicsClasses/BufferBase/Base_BufferBase.cpp
-    src/Client/GraphicsClasses/BufferBase/OpenGL_BufferBase.cpp
+    src/Client/Sound/SoundUtils.cpp
 
-    src/Client/GraphicsClasses/VertexArray/Base_VertexArray.cpp
-    src/Client/GraphicsClasses/VertexArray/OpenGL_VertexArray.cpp
+    src/Client/Sound/SoundAPIHandlers/OpenAL_Sound.cpp
+    src/Client/Sound/SoundAPIHandlers/SDLMixer_Sound.cpp
 
-    src/Client/GraphicsClasses/Program/Base_Program.cpp
-    src/Client/GraphicsClasses/Program/OpenGL_Program.cpp
+    src/Client/Sound/SoundClasses/AudioSource.cpp
+    src/Client/Sound/SoundClasses/AudioSource_OpenAL.cpp
+    src/Client/Sound/SoundClasses/AudioSource_SDLMixer.cpp
 
-    src/Client/GraphicsClasses/Texture/Base_Texture.cpp
-    src/Client/GraphicsClasses/Texture/OpenGL_Texture.cpp
+    src/Client/Sound/SoundClasses/Listener.cpp
 
-    src/Client/GraphicsClasses/BufferBase.cpp
-    src/Client/GraphicsClasses/VertexArray.cpp
-    src/Client/GraphicsClasses/VertexBuffer.cpp
-    src/Client/GraphicsClasses/IndexBuffer.cpp
-    src/Client/GraphicsClasses/UniformBuffer.cpp
+    src/Client/Sound/SoundClasses/Speaker.cpp
+    src/Client/Sound/SoundClasses/Speaker_OpenAL.cpp
+    src/Client/Sound/SoundClasses/Speaker_SDLMixer.cpp
 
-    src/Client/GraphicsClasses/ShaderBase.cpp
-    src/Client/GraphicsClasses/VertexShader.cpp
-    src/Client/GraphicsClasses/FragmentShader.cpp
+    src/Client/Sound/Sound.cpp
 
-    src/Client/GraphicsClasses/Program.cpp
+    src/Client/Graphics/Other/OpenGLUtil.cpp
 
-    src/Client/GraphicsClasses/Texture.cpp
-    src/Client/GraphicsClasses/Framebuffer.cpp
+    src/Client/Graphics/APIHandlers/GraphicsOpenGL_Client.cpp
+
+    src/Client/Graphics/Classes/BufferBase/Base_BufferBase.cpp
+    src/Client/Graphics/Classes/BufferBase/OpenGL_BufferBase.cpp
+
+    src/Client/Graphics/Classes/FragmentShader/Base_FragmentShader.cpp
+    src/Client/Graphics/Classes/FragmentShader/OpenGL_FragmentShader.cpp
+
+    src/Client/Graphics/Classes/Framebuffer/Base_Framebuffer.cpp
+    src/Client/Graphics/Classes/Framebuffer/OpenGL_Framebuffer.cpp
+
+    #src/Client/Graphics/Classes/IndexBuffer/Base_IndexBuffer.cpp
+    src/Client/Graphics/Classes/IndexBuffer/OpenGL_IndexBuffer.cpp
+
+    src/Client/Graphics/Classes/Program/Base_Program.cpp
+    src/Client/Graphics/Classes/Program/OpenGL_Program.cpp
+
+    src/Client/Graphics/Classes/ShaderBase/Base_ShaderBase.cpp
+    src/Client/Graphics/Classes/ShaderBase/OpenGL_ShaderBase.cpp
+
+    src/Client/Graphics/Classes/Texture/Base_Texture.cpp
+    src/Client/Graphics/Classes/Texture/OpenGL_Texture.cpp
+
+    src/Client/Graphics/Classes/UniformBuffer/Base_UniformBuffer.cpp
+    src/Client/Graphics/Classes/UniformBuffer/OpenGL_UniformBuffer.cpp
+
+    src/Client/Graphics/Classes/VertexArray/Base_VertexArray.cpp
+    src/Client/Graphics/Classes/VertexArray/OpenGL_VertexArray.cpp
+
+    src/Client/Graphics/Classes/VertexBuffer/Base_VertexBuffer.cpp
+    src/Client/Graphics/Classes/VertexBuffer/OpenGL_VertexBuffer.cpp
+
+    src/Client/Graphics/Classes/BufferBase.cpp
+    src/Client/Graphics/Classes/VertexArray.cpp
+    src/Client/Graphics/Classes/VertexBuffer.cpp
+    src/Client/Graphics/Classes/IndexBuffer.cpp
+    src/Client/Graphics/Classes/UniformBuffer.cpp
+
+    src/Client/Graphics/Classes/ShaderBase.cpp
+    src/Client/Graphics/Classes/VertexShader.cpp
+    src/Client/Graphics/Classes/FragmentShader.cpp
+
+    src/Client/Graphics/Classes/Program.cpp
+
+    src/Client/Graphics/Classes/Texture.cpp
+    src/Client/Graphics/Classes/Framebuffer.cpp
 
     src/Client/Graphics_Client.cpp
-    src/Client/GraphicsOpenGL_Client.cpp
+    src/Client/Graphics/APIHandlers/GraphicsOpenGL_Client.cpp
+
+    src/LuaLibraries/LuaGraphics.cpp
+    src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_BufferBase.cpp
+    src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_GLObjectBase.cpp
+    src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Program.cpp
+    src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Shader.cpp
+    src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.cpp
+    src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_UniformBuffer.cpp
+    src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexArray.cpp
+
+    src/LuaLibraries/LuaGraphics_MiscHeaders/LuaGraphics_SampleModel.cpp
 
     src/Client/main_client.cpp
   )
@@ -157,7 +207,12 @@ elseif(BUILD_TARGET STREQUAL "server")
 
   message("building for server")
 
-  target_sources(${PROJECT_NAME} PRIVATE src/Server/main_server.cpp)
+  target_sources(${PROJECT_NAME} PRIVATE
+
+    src/Server/Network_Server.cpp
+
+    src/Server/main_server.cpp
+  )
   target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SERVER)
 
   set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -174,6 +229,9 @@ target_sources(${PROJECT_NAME} PRIVATE
   src/FunctionHeaders/Random.cpp
   src/FunctionHeaders/LuaHelper.cpp
 
+  src/CollisionClasses/BaseCollision.cpp
+  src/CollisionClasses/BoxCollision.cpp
+
   src/Collisions.cpp
   src/Statistics.cpp
   src/ConsoleVars.cpp
@@ -183,7 +241,6 @@ target_sources(${PROJECT_NAME} PRIVATE
   src/LuaLibraries/LuaConsole.cpp
   src/LuaLibraries/LuaEnums.cpp
   src/LuaLibraries/LuaFont.cpp
-  src/LuaLibraries/LuaGraphics.cpp
   src/LuaLibraries/LuaHostUtil.cpp
   src/LuaLibraries/LuaInput.cpp
   src/LuaLibraries/LuaMatrix.cpp
@@ -195,28 +252,18 @@ target_sources(${PROJECT_NAME} PRIVATE
   src/LuaLibraries/LuaTypeHelper.cpp
   src/LuaLibraries/LuaVector.cpp
 
-  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_BufferBase.cpp
-  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_GLObjectBase.cpp
-  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Program.cpp
-  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Shader.cpp
-  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_Texture.cpp
-  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_UniformBuffer.cpp
-  src/LuaLibraries/LuaGraphics_Classes/LuaGraphics_VertexArray.cpp
-
-  src/LuaLibraries/LuaGraphics_MiscHeaders/LuaGraphics_SampleModel.cpp
-
   src/Lua.cpp
 )
 
 if(NOT PLATFORM STREQUAL "vita")
 
   target_link_libraries(${PROJECT_NAME} PRIVATE
-    #SDL3_net::SDL3_net
+    SDL3_net::SDL3_net
     SDL3_mixer::SDL3_mixer
 
     OpenAL::OpenAL
   )
-  target_compile_definitions(${PROJECT_NAME} PRIVATE NETWORKING_DISABLED)
+  #target_compile_definitions(${PROJECT_NAME} PRIVATE NETWORKING_DISABLED)
 else()
   target_compile_definitions(${PROJECT_NAME} PRIVATE NETWORKING_DISABLED)
 endif()

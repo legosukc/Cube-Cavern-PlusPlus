@@ -1,5 +1,4 @@
-#ifndef SOUND_SDLMIXER_H
-#define SOUND_SDLMIXER_H
+#pragma once
 
 #ifndef SDL_PLATFORM_VITA
 
@@ -16,8 +15,8 @@
 
 namespace Game::Sound::SDLMixer {
 
-    MIX_Track* DefaultTrack;
-    MIX_Mixer* Mixer;
+    extern MIX_Track* DefaultTrack;
+    extern MIX_Mixer* Mixer;
 
     struct Listener_SDLMixer : Game::Sound::Classes::ListenerStruct {
         virtual void SetPosition(const Math::Vector3& Position) override;
@@ -25,12 +24,6 @@ namespace Game::Sound::SDLMixer {
 
     inline bool Init();
     inline void Destroy();
-}
-
-void Game::Sound::SDLMixer::Listener_SDLMixer::SetPosition(
-    const Math::Vector3& Position) {
-    MIX_Point3D CastPosition = {Position.X, Position.Y, Position.Z};
-    MIX_SetTrack3DPosition(Game::Sound::SDLMixer::DefaultTrack, &CastPosition);
 }
 
 bool Game::Sound::SDLMixer::Init() {
@@ -55,7 +48,7 @@ void Game::Sound::SDLMixer::Destroy() {
         Game::Sound::SDLMixer::Mixer = NULL;
     }
 }
+
 #else
 #warning "Included 'SDLMixer_Sound.hpp' despite it not being supported on the targetted platform."
-#endif
 #endif

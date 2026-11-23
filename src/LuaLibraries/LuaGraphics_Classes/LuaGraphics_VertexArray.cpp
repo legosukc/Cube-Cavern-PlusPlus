@@ -13,13 +13,14 @@
 
 #include "../../FunctionHeaders/LuaHelper.hpp"
 
-#include "../../Client/GraphicsClasses/VertexArray.hpp"
+#include "../../Client/Graphics/Classes/VertexArray.hpp"
 
 int Game::Lua::CLibraries::Graphics::VertexArray::__new(lua_State* State) {
-    Classes::VertexArray* VertexArrayUD = static_cast<Classes::VertexArray*>(
-        lua_newuserdata(State, sizeof(Classes::VertexArray)));
-    Game::Graphics::OpenGLFunctions::glGenVertexArrays(
-        1, &VertexArrayUD->GLObject);
+    Game::Graphics::Classes::VertexArray** VertexArrayUD =
+        reinterpret_cast<Game::Graphics::Classes::VertexArray**>(
+            lua_newuserdata(State,
+                            sizeof(Game::Graphics::Classes::VertexArray*)));
+    *VertexArrayUD = Game::Graphics::VertexArray::Create();
     luaL_getmetatable(State, "VertexArray");
     lua_setmetatable(State, -2);
     return 1;
@@ -27,50 +28,50 @@ int Game::Lua::CLibraries::Graphics::VertexArray::__new(lua_State* State) {
 
 int Game::Lua::CLibraries::Graphics::Classes::VertexArray::Bind(
     lua_State* State) {
-    Game::Graphics::OpenGLFunctions::glBindVertexArray(
-        static_cast<Classes::VertexArray*>(
-            LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1)))
-            ->GLObject);
+    (*reinterpret_cast<Game::Graphics::Classes::VertexArray**>(
+         LuaHelper::CheckMetatable(State, 1, lua_upvalueindex(1))))
+        ->Bind();
     return 0;
 }
 
-int Game::Lua::CLibraries::Graphics::VertexArray::EnableAttribute(
+int Game::Lua::CLibraries::Graphics::VertexArray::AddFloatAttribute(
     lua_State* State) {
-    Game::Graphics::OpenGLFunctions::glEnableVertexAttribArray(
-        static_cast<GLuint>(luaL_checkinteger(State, 1)));
+    const lua_Integer Count = luaL_checkinteger(State, 2);
+    if (Count < 1 || Count > 4) {
+        luaL_error(State,
+                   "Invalid range on 2nd parameter 'Count', expected [1-4].");
+    }
+
+    Game::Graphics::VertexArray::AddFloatAttribute(
+        static_cast<int>(luaL_checkinteger(State, 1)),
+        static_cast<size_t>(Count),
+        static_cast<size_t>(luaL_checkinteger(State, 3)));
     return 0;
 }
 
-int Game::Lua::CLibraries::Graphics::VertexArray::DisableAttribute(
+int Game::Lua::CLibraries::Graphics::VertexArray::AddIntAttribute(
     lua_State* State) {
-    Game::Graphics::OpenGLFunctions::glDisableVertexAttribArray(
-        static_cast<GLuint>(luaL_checkinteger(State, 1)));
-    return 0;
-}
+    const lua_Integer Count = luaL_checkinteger(State, 2);
+    if (Count < 1 || Count > 4) {
+        luaL_error(State,
+                   "Invalid range on 2nd parameter 'Count', expected [1-4].");
+    }
 
-int Game::Lua::CLibraries::Graphics::VertexArray::SetAttributePointer(
-    lua_State* State) {
-    Game::Graphics::OpenGLFunctions::glVertexAttribPointer(
-        static_cast<GLuint>(luaL_checkinteger(State, 1)),     // Index
-        static_cast<GLint>(luaL_checkinteger(State, 2)),      // Size
-        static_cast<GLenum>(luaL_checkinteger(State, 3)),     // Type
-        static_cast<GLboolean>(lua_toboolean(State, 4)),      // Normalized
-        static_cast<GLsizei>(luaL_checkinteger(State, 5)),    // Stride Size
-        reinterpret_cast<void*>(luaL_checkinteger(State, 6))  // Offset
-    );
+    Game::Graphics::VertexArray::AddIntAttribute(
+        static_cast<int>(luaL_checkinteger(State, 1)),
+        static_cast<size_t>(Count),
+        static_cast<size_t>(luaL_checkinteger(State, 3)));
     return 0;
 }
 
 int Game::Lua::CLibraries::Graphics::VertexArray::Unbind(lua_State* State) {
-    Game::Graphics::OpenGLFunctions::glBindVertexArray(0);
+    Game::Graphics::VertexArray::Unbind();
     return 0;
 }
 
 int Game::Lua::CLibraries::Graphics::Classes::VertexArray::__gc(
     lua_State* State) {
-    Game::Graphics::OpenGLFunctions::glDeleteVertexArrays(
-        1, &static_cast<Classes::VertexArray*>(
-                luaL_checkudata(State, 1, "VertexArray"))
-                ->GLObject);
+    delete *reinterpret_cast<Classes::VertexArray**>(
+        luaL_checkudata(State, 1, "VertexArray"));
     return 0;
 }

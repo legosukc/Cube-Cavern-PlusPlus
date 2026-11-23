@@ -2,7 +2,6 @@ local RenderObject = {}
 RenderObject.__index = RenderObject
 
 local Graphics = Game.Graphics
-
 local VertexArray = Graphics.VertexArray
 
 do
@@ -19,6 +18,11 @@ local Model = ModelLoader.LoadFile("Models/Test.obj")
 Graphics.VertexBuffer.CopyFromBuffer(Model.VertexData)
 Graphics.ElementBuffer.CopyFromBuffer(Model.IndexData)
 
+VertexArray.AddFloatAttribute(0, 3, Model.StrideSize)
+VertexArray.AddFloatAttribute(1, 3, Model.StrideSize)
+VertexArray.AddFloatAttribute(2, 2, Model.StrideSize)
+
+--[[
 VertexArray.EnableAttribute(0)
 VertexArray.SetAttributePointer(0, 3, Graphics.Types.Float, false, Model.StrideSize, 0)
 
@@ -27,6 +31,8 @@ VertexArray.SetAttributePointer(1, 3, Graphics.Types.Float, false, Model.StrideS
 
 VertexArray.EnableAttribute(2)
 VertexArray.SetAttributePointer(2, 2, Graphics.Types.Float, false, Model.StrideSize, 4 * 3 * 2)
+]]
+
 
 VertexArray.Unbind()
 

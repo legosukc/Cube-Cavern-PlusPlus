@@ -21,6 +21,11 @@ local DaggerModel = ModelLoader.LoadFile("Models/Dagger.obj")
 VertexBuffer.CopyFromBuffer(DaggerModel.VertexData)
 ElementBuffer.CopyFromBuffer(DaggerModel.IndexData)
 
+VertexArray.AddFloatAttribute(0, 3, DaggerModel.StrideSize)
+VertexArray.AddFloatAttribute(1, 3, DaggerModel.StrideSize)
+VertexArray.AddFloatAttribute(2, 2, DaggerModel.StrideSize)
+
+--[[
 VertexArray.EnableAttribute(0)
 VertexArray.SetAttributePointer(0, 3, Graphics.Types.Float, false, DaggerModel.StrideSize, 0)
 
@@ -29,7 +34,7 @@ VertexArray.SetAttributePointer(1, 3, Graphics.Types.Float, false, DaggerModel.S
 
 VertexArray.EnableAttribute(2)
 VertexArray.SetAttributePointer(2, 2, Graphics.Types.Float, false, DaggerModel.StrideSize, 4 * 3 * 2)
-
+]]
 VertexArray.Unbind()
 
 DaggerRenderObject.VAO = DaggerVAO

@@ -23,6 +23,13 @@
             "group": "build"
         },
         {
+            "label": "Make server build files for local platform",
+            "detail": "muh",
+            "type": "shell",
+            "command": "${workspaceRoot}/make-build-files-server.sh",
+            "group": "build"
+        },
+        {
             "label": "Compile Both for local platform",
             "dependsOn": [
                 "Compile Client",

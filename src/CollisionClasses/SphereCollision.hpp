@@ -1,5 +1,4 @@
-#ifndef COLLISIONS_SPHERECOLLISION_HPP
-#define COLLISIONS_SPHERECOLLISION_HPP 1
+#pragma once
 
 #include "../MathClasses/Vector3.hpp"
 
@@ -16,5 +15,3 @@ namespace Game::Collision {
         }
     };
 }
-
-#endif

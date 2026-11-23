@@ -69,15 +69,13 @@ extern "C" {
 
 void Game::Update() {
     Game::Statistics::Update();
-
     Game::Lua::Update();
 }
 
 void Game::Draw() {
-    Game::Graphics::SetClearColor(1.f, 0.f, 0.f, 1.f);
-    Game::Graphics::ClearBitfields(Game::Graphics::BufferBitfields.ColorBit |
-                                   Game::Graphics::BufferBitfields.DepthBit |
-                                   Game::Graphics::BufferBitfields.StencilBit);
+    Game::Graphics::ClearColorBuffer(1.f, 0.f, 0.f, 1.f);
+    Game::Graphics::ClearDepthBuffer();
+    Game::Graphics::ClearStencilBuffer();
 
     Game::Graphics::Draw();
     Game::Lua::Draw();

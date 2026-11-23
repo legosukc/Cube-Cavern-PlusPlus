@@ -1,5 +1,4 @@
-#ifndef SOUND_SPEAKER_OPENAL_H
-#define SOUND_SPEAKER_OPENAL_H
+#pragma once
 
 #include <AL/al.h>
 
@@ -21,70 +20,31 @@ namespace Game::Sound::Classes {
 
         friend Game::Sound::Classes::Speaker*
             Game::Sound::OpenAL::Speaker::Create();
+            
         friend void Game::Sound::OpenAL::Speaker::CreateBulk(
             size_t Count,
             Game::Sound::Classes::Speaker* Speakers[]);
 
        public:
-        virtual ~Speaker_OpenAL() override {
-            alDeleteSources(1, &this->ALSource);
-        }
+        virtual ~Speaker_OpenAL() override;
 
         virtual void SetAudioSource(
-            Game::Sound::Classes::AudioSource* AudioSource) override {
-            alSourcei(this->ALSource, AL_BUFFER,
-                      *reinterpret_cast<const ALuint*>(AudioSource));
-            this->BoundAudioSource = AudioSource;
-        }
+            Game::Sound::Classes::AudioSource* AudioSource) override;
+
         virtual Game::Sound::Classes::AudioSource* GetAudioSource()
-            const override {
-            return this->BoundAudioSource;
-        }
+            const override;
 
-        virtual void Play() override { alSourcePlay(this->ALSource); }
+        virtual void Play() override;
 
-        virtual void Pause() override { alSourcePause(this->ALSource); }
+        virtual void Pause() override;
 
-        virtual void Stop() override { alSourceStop(this->ALSource); }
+        virtual void Stop() override;
 
-        virtual void SetPosition(const Math::Vector3& Position) override {
-            alSourcefv(this->ALSource, AL_POSITION,
-                       reinterpret_cast<const ALfloat*>(&Position));
-        }
+        virtual void SetPosition(const Math::Vector3& Position) override;
 
-        virtual void SetVelocity(const Math::Vector3& Velocity) override {
-            alSourcefv(this->ALSource, AL_VELOCITY,
-                       reinterpret_cast<const ALfloat*>(&Velocity));
-        }
+        virtual void SetVelocity(const Math::Vector3& Velocity) override;
 
         virtual void SetOrientation(const Math::Vector3& Look,
-                                    const Math::Vector3& Up) override {
-            const Math::Vector3 Orientation[2] = {Look, Up};
-            alSourcefv(this->ALSource, AL_ORIENTATION,
-                       reinterpret_cast<const ALfloat*>(&Orientation));
-        }
+                                    const Math::Vector3& Up) override;
     };
 }
-
-Game::Sound::Classes::Speaker* Game::Sound::OpenAL::Speaker::Create() {
-    Game::Sound::Classes::Speaker_OpenAL* NewSpeaker =
-        new Game::Sound::Classes::Speaker_OpenAL();
-    alGenSources(1, &NewSpeaker->ALSource);
-    return reinterpret_cast<Game::Sound::Classes::Speaker*>(NewSpeaker);
-}
-
-void Game::Sound::OpenAL::Speaker::CreateBulk(
-    size_t Count,
-    Game::Sound::Classes::Speaker* Speakers[]) {
-    ALuint* ALSources = SDL_stack_alloc(ALuint, Count);
-    alGenSources(Count, ALSources);
-
-    for (size_t i = 0; i < Count; ++i) {
-        Speakers[i] = new Game::Sound::Classes::Speaker_OpenAL;
-        reinterpret_cast<Game::Sound::Classes::Speaker_OpenAL*>(Speakers[i])
-            ->ALSource = ALSources[i];
-    }
-    SDL_stack_free(ALSources);
-}
-
-#endif

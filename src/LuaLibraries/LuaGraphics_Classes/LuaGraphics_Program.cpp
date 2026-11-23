@@ -15,7 +15,7 @@
 #endif
 
 #ifdef BUILD_CLIENT
-#include "../../Client/GraphicsClasses/Program.hpp"
+#include "../../Client/Graphics_Client.hpp"
 #endif
 
 #include "../../../include/VM/lua.h"

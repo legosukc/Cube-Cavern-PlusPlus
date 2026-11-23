@@ -6,8 +6,9 @@
 
 namespace Game::Collision {
     class BoxCollision : public Game::Collision::BaseCollision {
+        virtual void RecalculateOccupiedBlocks() override;
        public:
-        virtual void SetPosition() override;
-        virtual void SetRotation() override;
+        //virtual void SetPosition(const Math::Vector3& Position) override;
+        //virtual void SetScale(const Math::Vector3& Scale) override;
     };
 }

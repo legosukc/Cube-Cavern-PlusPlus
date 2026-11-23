@@ -18,7 +18,7 @@
 #include "../../FunctionHeaders/LuaHelper.hpp"
 #include "../../Statistics.hpp"
 
-#include "../../Client/GraphicsClasses/ShaderBase.hpp"
+#include "../../Client/Graphics_Client.hpp"
 
 int Game::Lua::CLibraries::Graphics::Shader::__new(lua_State* State) {
     lua_settop(State, 1);

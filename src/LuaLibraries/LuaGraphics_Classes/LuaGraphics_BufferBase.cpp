@@ -82,7 +82,7 @@ int Game::Lua::CLibraries::Graphics::BufferBase::CopyFromBufferToPointer(
 
     if (!lua_isnoneornil(State, 3)) {
         const size_t SpecifiedUploadSize =
-            static_cast<size_t>(luaL_checkinteger64(State, 3));
+            static_cast<size_t>(luaL_checkinteger(State, 3));
 
         unlikely_branch if (SpecifiedUploadSize > UploadSize) {
             luaL_error(State,

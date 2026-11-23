@@ -25,8 +25,11 @@ namespace Math::Transform {
                                       float Top);
 
     constexpr Math::Mat4 Rotate(const Math::Mat4& Matrix,
-                                float Angle,
-                                const Math::Vector3& V);
+                                const Math::Vector3& Rotate);
+
+    constexpr Math::Mat4 RotateAxis(const Math::Mat4& Matrix,
+                                    float Angle,
+                                    const Math::Vector3& V);
 }
 
 constexpr Math::Mat4 Math::Transform::Translate(
@@ -76,11 +79,11 @@ constexpr Math::Mat4 Math::Transform::Perspective(float FOV,
     Math::Mat4 Result(0.f);
     const float tanHalfFovy = std::tan(FOV / 2.f);
 
-    Result[0][0] = 1.f / (aspect * tanHalfFovy);
-    Result[1][1] = 1.f / (tanHalfFovy);
-    Result[2][2] = -(zFar + zNear) / (zFar - zNear);
-    Result[2][3] = -1.f;
-    Result[3][2] = -(2.f * zFar * zNear) / (zFar - zNear);
+    Result.R0.X = 1.f / (aspect * tanHalfFovy);
+    Result.R1.Y = 1.f / (tanHalfFovy);
+    Result.R2.Z = -(zFar + zNear) / (zFar - zNear);
+    Result.R2.W = -1.f;
+    Result.R3.Z = -(2.f * zFar * zNear) / (zFar - zNear);
 
     return Result;
 }
@@ -90,17 +93,17 @@ constexpr Math::Mat4 Math::Transform::Orthographic(float Left,
                                                    float Bottom,
                                                    float Top) {
     Math::Mat4 Result(1.f);
-    Result[0][0] = 2.f / (Right - Left);
-    Result[1][1] = 2.f / (Top - Bottom);
-    Result[2][2] = -1.f;
-    Result[3][0] = -(Right + Left) / (Right - Left);
-    Result[3][1] = -(Top + Bottom) / (Top - Bottom);
+    Result.R0.X = 2.f / (Right - Left);
+    Result.R1.Y = 2.f / (Top - Bottom);
+    Result.R2.Z = -1.f;
+    Result.R3.X = -(Right + Left) / (Right - Left);
+    Result.R3.Y = -(Top + Bottom) / (Top - Bottom);
     return Result;
 }
 
-constexpr Math::Mat4 Math::Transform::Rotate(const Math::Mat4& Matrix,
-                                             float Angle,
-                                             const Math::Vector3& V) {
+constexpr Math::Mat4 Math::Transform::RotateAxis(const Math::Mat4& Matrix,
+                                                 float Angle,
+                                                 const Math::Vector3& V) {
     Math::Mat4 Result, Rotate;
 
     const float AngleCosine = std::cos(Angle);
@@ -109,24 +112,52 @@ constexpr Math::Mat4 Math::Transform::Rotate(const Math::Mat4& Matrix,
     const Math::Vector3 Axis = V.Normalize();
     const Math::Vector3 Temp = (1.f - AngleCosine) * Axis;
 
-    Rotate[0].X = AngleCosine + Temp.X * Axis.X;
-    Rotate[0].Y = Temp.X * Axis.Y + AngleSine * Axis.Z;
-    Rotate[0].Z = Temp.X * Axis.Z - AngleSine * Axis.Y;
+    Rotate.R0.X = AngleCosine + Temp.X * Axis.X;
+    Rotate.R0.Y = Temp.X * Axis.Y + AngleSine * Axis.Z;
+    Rotate.R0.Z = Temp.X * Axis.Z - AngleSine * Axis.Y;
 
-    Rotate[1].X = Temp.Y * Axis.X - AngleSine * Axis.Z;
-    Rotate[1].Y = AngleCosine + Temp.Y * Axis.Y;
-    Rotate[1].Z = Temp.Y * Axis.Z + AngleSine * Axis.X;
+    Rotate.R1.X = Temp.Y * Axis.X - AngleSine * Axis.Z;
+    Rotate.R1.Y = AngleCosine + Temp.Y * Axis.Y;
+    Rotate.R1.Z = Temp.Y * Axis.Z + AngleSine * Axis.X;
 
-    Rotate[2].X = Temp.Z * Axis.X + AngleSine * Axis.Y;
-    Rotate[2].Y = Temp.Z * Axis.Y - AngleSine * Axis.X;
-    Rotate[2].Z = AngleCosine + Temp.Z * Axis.Z;
+    Rotate.R2.X = Temp.Z * Axis.X + AngleSine * Axis.Y;
+    Rotate.R2.Y = Temp.Z * Axis.Y - AngleSine * Axis.X;
+    Rotate.R2.Z = AngleCosine + Temp.Z * Axis.Z;
 
-    Result[0] = Matrix[0] * Rotate[0].X + Matrix[1] * Rotate[0].Y +
-                Matrix[2] * Rotate[0].Z;
-    Result[1] = Matrix[0] * Rotate[1].X + Matrix[1] * Rotate[1].Y +
-                Matrix[2] * Rotate[1].Z;
-    Result[2] = Matrix[0] * Rotate[2].X + Matrix[1] * Rotate[2].Y +
-                Matrix[2] * Rotate[2].Z;
-    Result[3] = Matrix[3];
+    Result.R0 = Matrix.R0 * Rotate.R0.X + Matrix.R1 * Rotate.R0.Y +
+                Matrix.R2 * Rotate.R0.Z;
+    Result.R1 = Matrix.R0 * Rotate.R1.X + Matrix.R1 * Rotate.R1.Y +
+                Matrix.R2 * Rotate.R1.Z;
+    Result.R2 = Matrix.R0 * Rotate.R2.X + Matrix.R1 * Rotate.R2.Y +
+                Matrix.R2 * Rotate.R2.Z;
+    Result.R3 = Matrix.R3;
     return Result;
+}
+
+constexpr Math::Mat4 Math::Transform::Rotate(const Math::Mat4& Mat4,
+                                             const Math::Vector3& Rotate) {
+    constexpr float degToRad = 3.14159265359f / 180.f;
+    const float radX = Rotate.X * degToRad;
+    const float radY = Rotate.Y * degToRad;
+    const float radZ = Rotate.Z * degToRad;
+
+    const float cx = std::cos(radX), sx = std::sin(radX);
+    const float cy = std::cos(radY), sy = std::sin(radY);
+    const float cz = std::cos(radZ), sz = std::sin(radZ);
+
+    // i have assign the columns using vectors
+    // because for some reason doing it component by component gives me an error :(
+    const Math::Mat4 rotX(
+        Math::Vector4(1.f, 0.f, 0.f, 0.f), Math::Vector4(0.f, cx, sx, 0.f),
+        Math::Vector4(0.f, -sx, cx, 0.f), Math::Vector4(0.f, 0.f, 0.f, 1.f));
+
+    const Math::Mat4 rotY(
+        Math::Vector4(cy, 0.f, -sy, 0.f), Math::Vector4(0.f, 1.f, 0.f, 0.f),
+        Math::Vector4(sy, 0.f, cy, 0.f), Math::Vector4(0.f, 0.f, 0.f, 1.f));
+
+    const Math::Mat4 rotZ(
+        Math::Vector4(cz, sz, 0.f, 0.f), Math::Vector4(-sz, cz, 0.f, 0.f),
+        Math::Vector4(0.f, 0.f, 1.f, 0.f), Math::Vector4(0.f, 0.f, 0.f, 1.f));
+
+    return Mat4 * (rotZ * rotY * rotX);
 }

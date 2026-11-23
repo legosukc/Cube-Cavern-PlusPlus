@@ -14,7 +14,7 @@
 #include <SDL3/SDL_opengl_glext.h>
 #endif
 
-#include "../../Client/GraphicsClasses/Texture.hpp"
+#include "../../Client/Graphics_Client.hpp"
 
 #include "../../../include/VM/lua.h"
 #include "../../../include/VM/lualib.h"

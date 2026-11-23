@@ -31,16 +31,14 @@ extern "C" {
 
 #include "LuaGraphics_Classes/LuaGraphics_Texture.hpp"
 
-
 #include "LuaGraphics_MiscHeaders/LuaGraphics_SampleModels.hpp"
 
 #endif
 
 #include "../FunctionHeaders/LuaHelper.hpp"
-//#include "../Lua.hpp"
+// #include "../Lua.hpp"
 
 #include "../ConsoleVars.hpp"
-
 
 namespace Game::Lua {
     extern LuaHelper::StackTableReference GameTable;
@@ -66,9 +64,10 @@ namespace Game::Lua::CLibraries::Graphics {
 
         int DrawElementsInstanced(lua_State* State);
 
-        int SetClearColor(lua_State* State);
-
-        int Clear(lua_State* State);
+        int ClearColorBuffer(lua_State* State);
+        int ClearDepthBuffer(lua_State* State);
+        int ClearStencilBuffer(lua_State* State);
+        int ClearAllBuffers(lua_State* State);
 
         template <GLenum Feature>
         int Enable_feature(lua_State* State);
@@ -105,8 +104,11 @@ void Game::Lua::CLibraries::Graphics::Init(lua_State* State) {
     GraphicsTable.SetKeyClosure(State, DrawElementsInstanced,
                                 "DrawElementsInstanced");
 
-    GraphicsTable.SetKeyClosure(State, SetClearColor, "SetClearColor");
-    GraphicsTable.SetKeyClosure(State, Clear, "Clear");
+    GraphicsTable.SetKeyClosure(State, ClearColorBuffer, "ClearColorBuffer");
+    GraphicsTable.SetKeyClosure(State, ClearDepthBuffer, "ClearDepthBuffer");
+    GraphicsTable.SetKeyClosure(State, ClearStencilBuffer,
+                                "ClearStencilBuffer");
+    GraphicsTable.SetKeyClosure(State, ClearAllBuffers, "ClearAllBuffers");
 
     GraphicsTable.SetKeyClosure(State, Enable_feature<GL_DEPTH_TEST>,
                                 "EnableDepthTest");

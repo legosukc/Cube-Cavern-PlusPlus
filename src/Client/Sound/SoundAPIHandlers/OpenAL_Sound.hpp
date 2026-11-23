@@ -1,5 +1,4 @@
-#ifndef SOUND_OPENAL_H
-#define SOUND_OPENAL_H
+#pragma once
 
 #include <iostream>
 
@@ -19,8 +18,8 @@
 
 namespace Game::Sound::OpenAL {
 
-    ALCdevice* Device = NULL;
-    ALCcontext* Context = NULL;
+    extern ALCdevice* Device;
+    extern ALCcontext* Context;
 
     struct Listener_OpenAL : Game::Sound::Classes::ListenerStruct {
         virtual void SetPosition(const Math::Vector3& Position) override;
@@ -31,24 +30,6 @@ namespace Game::Sound::OpenAL {
 
 	inline bool Init();
 	inline void Destroy();
-}
-
-void Game::Sound::OpenAL::Listener_OpenAL::SetPosition(
-    const Math::Vector3& Position) {
-    alListenerfv(AL_POSITION, reinterpret_cast<const ALfloat*>(&Position));
-}
-
-void Game::Sound::OpenAL::Listener_OpenAL::SetVelocity(
-    const Math::Vector3& Velocity) {
-    alListenerfv(AL_VELOCITY, reinterpret_cast<const ALfloat*>(&Velocity));
-}
-
-void Game::Sound::OpenAL::Listener_OpenAL::SetOrientation(
-    const Math::Vector3& Look,
-    const Math::Vector3& Up) {
-    Math::Vector3 Orientation[2] = {Look, Up};
-    alListenerfv(AL_ORIENTATION,
-                 reinterpret_cast<const ALfloat*>(&Orientation));
 }
 
 bool Game::Sound::OpenAL::Init() {
@@ -104,5 +85,3 @@ void Game::Sound::OpenAL::Destroy() {
         OpenAL::Device = NULL;
     }
 }
-
-#endif

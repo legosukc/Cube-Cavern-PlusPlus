@@ -28,7 +28,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3_net/SDL_net.h>
 
-#include "../include/VM/lua.h"
+#include "../../include/VM/lua.h"
 
 
 #include "../FunctionHeaders/TypeHelper.hpp"
@@ -60,7 +60,7 @@ int main() {
 		Game::Network::SendPacket();
 
 		Elasped = SDL_GetTicksNS() - Start;
-		Game::DeltaTime = static_cast<double>(Elasped) / 1e+9;
+		Game::Time::DeltaTime = static_cast<double>(Elasped) / 1e+9;
 
 		if (Elasped < 16 * 1000) {
 			SDL_DelayNS(Elasped);

@@ -114,7 +114,11 @@ namespace Game::Lua {
 
 #include "LuaLibraries/LuaConsole.hpp"
 #include "LuaLibraries/LuaEnums.hpp"
+
+#ifdef BUILD_CLIENT
 #include "LuaLibraries/LuaGraphics.hpp"
+#endif
+
 #include "LuaLibraries/LuaHostUtil.hpp"
 #include "LuaLibraries/LuaInput.hpp"
 #include "LuaLibraries/LuaMatrix.hpp"
@@ -159,9 +163,6 @@ void Game::Lua::Init() {
 
     luaopen_math(Game::Lua::State);
     lua_setglobal(Game::Lua::State, LUA_MATHLIBNAME);
-
-    luaopen_integer(Game::Lua::State);
-    lua_setglobal(Game::Lua::State, LUA_INTLIBNAME);
 
     luaopen_table(Game::Lua::State);
     lua_setglobal(Game::Lua::State, LUA_TABLIBNAME);
@@ -208,7 +209,9 @@ void Game::Lua::Init() {
 
     Game::Lua::CLibraries::ModelLoader::Init(Game::Lua::State);
 
+    #ifdef BUILD_CLIENT
     Game::Lua::CLibraries::Graphics::Init(Game::Lua::State);
+    #endif
     Game::Lua::CLibraries::Input::Init(Game::Lua::State);
 
     lua_createtable(Game::Lua::State, 0, 4);  // Assets
